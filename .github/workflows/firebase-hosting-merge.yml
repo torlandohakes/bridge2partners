@@ -14,8 +14,10 @@ jobs:
       - name: Install Dependencies
         run: npm ci
       - name: Authenticate with Google Cloud
+        id: auth
         uses: google-github-actions/auth@v2
         with:
+          project_id: 'bridge2partners-staging'
           workload_identity_provider: '${{ secrets.WIF_PROVIDER }}'
           service_account: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_EMAIL }}'
       - name: Install Firebase CLI
@@ -23,4 +25,5 @@ jobs:
       - name: Deploy to Firebase Live Channel
         env:
           FIREBASE_CLI_EXPERIMENTS: webframeworks
-        run: firebase deploy --only hosting --project bridge2partners-staging
+          GOOGLE_APPLICATION_CREDENTIALS: '${{ steps.auth.outputs.credentials_file_path }}'
+        run: firebase deploy --only hosting --project bridge2partners-staging --non-interactive
