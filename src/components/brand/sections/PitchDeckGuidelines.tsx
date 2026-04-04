@@ -232,53 +232,60 @@ const getPitchSlides = (slideCopies: string[], customBg: string | null) => [
     title: "The Insiders",
     concept: "The Insider Flex. You are proving that B2P is an elite strike team. By showing their faces and deep banking pedigree, you shift the dynamic from 'outside vendor' to 'experienced peer.'",
     speakerNotes: "'We don't bring junior analysts to learn on your dime. Look at this roster. We bring domain experts who have run commercial lending and technology platforms at the exact institutions you compete with every day.'",
-    visualRules: "Digital Business Card Grid. Premium layout presenting the elite task force.",
+    visualRules: "Digital Business Card Bento Grid. Premium layout presenting the elite task force using an asymmetrical masonry architecture.",
     aiPersona: "Head of Retail Banking",
     aiObjection: "Consultants are consultants. I need someone who understands my specific regulatory environment.",
     slideContent: (
-      <div className="w-full h-full bg-neutral-950 relative flex flex-col p-[6cqw] pt-[8cqw] overflow-hidden group z-30">
-         {/* The Crisp Luminous Line Anchor (From Slide 3 Spec) */}
+      <div className="w-full h-full bg-neutral-950 relative flex flex-row p-[6cqw] gap-[2cqw] overflow-hidden group z-30 items-center">
+         {/* The Crisp Luminous Line Anchor */}
          <div className="absolute bottom-[5.5cqw] left-0 w-full h-[0.15cqw] bg-primary z-20 shadow-[0_0_10px_rgba(152,204,103,0.5)]" />
 
-         {/* Typography Header */}
-         <div className="relative z-30 w-full flex flex-col gap-[1cqw] mb-[5cqw] pr-[10cqw]">
-            <h2 className="font-display font-black text-[4cqw] leading-[1.1] tracking-tight text-white drop-shadow-md">
+         {/* Left Side (40%): Typography Header */}
+         <div className="w-[38%] flex flex-col justify-center h-full z-30 gap-[1cqw]">
+            <h2 className="font-display font-black text-[4cqw] leading-[1.05] tracking-tight text-white drop-shadow-md">
                {slideCopies[3].split('\n')[0] || "Subject Matter Experts. Insiders."}
             </h2>
-            <p className="font-sans text-[1.8cqw] leading-snug text-neutral-400 font-medium max-w-[80%]">
+            <p className="font-sans text-[1.4cqw] leading-snug text-neutral-400 font-medium mt-[1cqw] max-w-[90%]">
                {slideCopies[3].split('\n').slice(1).join('\n') || "We have worked at the banks we serve. Dedicated specialists with tenure at the top 100 financial institutions."}
             </p>
          </div>
 
-         {/* The Digital Business Card Grid (The Team) */}
-         <div className="relative z-30 w-full grid grid-cols-3 gap-[2cqw]">
-            {[
-              { name: "Tony Lockhard", role: "Managing Partner", tags: ["Executive Strategy", "M&A Integration"] },
-              { name: "Jordan Brooks", role: "Director of Digital", tags: ["Digital Transformation", "Core APIs"] },
-              { name: "Sarah Chen", role: "Head of Lending", tags: ["Commercial Lending", "Risk Modeling"] }
-            ].map((person, idx) => (
-              <div key={idx} className="bg-white/5 border border-white/10 rounded-2xl p-[2cqw] transition-all hover:bg-white/10 hover:border-primary/50 flex flex-col relative group cursor-pointer">
-                 {/* Card Header (Avatar + Icon) */}
-                 <div className="flex justify-between items-start mb-[3cqw]">
-                    <div className="w-[4cqw] h-[4cqw] rounded-full bg-neutral-800 border-[0.15cqw] border-neutral-700 overflow-hidden flex items-center justify-center">
-                       <Users size="2cqw" className="text-neutral-500 opacity-50" />
+         {/* Right Side (60%): The Bento Grid */}
+         <div className="w-[62%] flex flex-col justify-center h-full z-30 pb-[2cqw]">
+            <div className="w-full grid grid-cols-12 gap-[1cqw]">
+               {[
+                 { span: "col-span-7", name: "Tony Lockhard", role: "Managing Partner", tags: ["Executive Strategy"] },
+                 { span: "col-span-5", name: "Jordan Brooks", role: "Director of Digital", tags: ["Core APIs"] },
+                 { span: "col-span-4", name: "Sarah Chen", role: "VP Lending", tags: ["Risk Modeling"] },
+                 { span: "col-span-4", name: "Marcus Wright", role: "Head of Payments", tags: ["Ledger Core"] },
+                 { span: "col-span-4", name: "Michael Thorne", role: "Lead Security", tags: ["Infosec"] },
+                 { span: "col-span-5", name: "David Vance", role: "Head of CRM", tags: ["Salesforce"] },
+                 { span: "col-span-3", name: "Elena Rostova", role: "Data Ops", tags: ["Pipelines"] },
+                 { span: "col-span-4", name: "Chloe Price", role: "Cloud Arch", tags: ["AWS/Azure"] }
+               ].map((person, idx) => (
+                 <div key={idx} className={cn(person.span, "bg-white/5 border border-white/10 rounded-[1cqw] p-[1.2cqw] transition-all hover:bg-white/10 hover:border-primary/50 flex flex-col relative group cursor-pointer overflow-hidden")}>
+                    {/* Card Header */}
+                    <div className="flex justify-between items-start mb-[1cqw]">
+                       <div className="w-[3cqw] h-[3cqw] rounded-full bg-neutral-800 border-[0.1cqw] border-neutral-700 overflow-hidden flex items-center justify-center">
+                          <Users size="1.5cqw" className="text-neutral-500 opacity-50" />
+                       </div>
+                       <QrCode size="1.2cqw" className="text-neutral-600 group-hover:text-primary transition-colors" />
                     </div>
-                    <QrCode size="1.5cqw" className="text-neutral-600 group-hover:text-primary transition-colors" />
-                 </div>
-                 {/* Card Body */}
-                 <div className="flex flex-col gap-[0.5cqw]">
-                    <h3 className="text-white font-display font-bold text-[2cqw] leading-none mb-1">{person.name}</h3>
-                    <span className="text-primary text-[1cqw] font-bold uppercase tracking-widest leading-none mb-[1cqw]">{person.role}</span>
-                    <div className="flex flex-wrap gap-[0.5cqw]">
-                      {person.tags.map(tag => (
-                        <span key={tag} className="bg-white/10 rounded-full px-[0.8cqw] py-[0.3cqw] text-[0.8cqw] text-neutral-300 font-semibold tracking-wide border border-white/5">
-                          {tag}
-                        </span>
-                      ))}
+                    {/* Card Body */}
+                    <div className="flex flex-col gap-[0.3cqw] flex-grow justify-end">
+                       <h3 className="text-white font-display font-bold text-[1.2cqw] leading-none mb-[0.2cqw] truncate">{person.name}</h3>
+                       <span className="text-primary text-[0.8cqw] font-bold uppercase tracking-widest leading-none mb-[0.5cqw] truncate">{person.role}</span>
+                       <div className="flex flex-wrap gap-[0.3cqw]">
+                         {person.tags.map(tag => (
+                           <span key={tag} className="bg-white/10 rounded-full px-[0.6cqw] py-[0.2cqw] text-[0.7cqw] text-neutral-300 font-semibold tracking-wide border border-white/5 whitespace-nowrap">
+                             {tag}
+                           </span>
+                         ))}
+                       </div>
                     </div>
                  </div>
-              </div>
-            ))}
+               ))}
+            </div>
          </div>
 
          {/* Custom Slide Anchors */}
@@ -296,6 +303,7 @@ const getPitchSlides = (slideCopies: string[], customBg: string | null) => [
       </div>
     )
   },
+
 
 
   {
