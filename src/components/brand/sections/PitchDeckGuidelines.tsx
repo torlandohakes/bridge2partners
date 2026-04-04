@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef } from "react";
+import { toPng } from 'html-to-image';
 import { 
   ChevronLeft, 
   ChevronRight, 
@@ -81,15 +82,44 @@ const pitchSlides = [
   {
     id: 2,
     title: "The Stakes",
-    concept: "Polarize the room.",
-    speakerNotes: "Frame integration friction as an existential threat to their valuation.",
-    visualRules: "Split layout. Dark/Muted vs Luminous Lime highlight.",
+    concept: "Polarizing the Room. You must create a stark contrast between their current trajectory (pain) and the Bridge2Partners trajectory (speed). If they don't feel the sting of the left side, they won't buy the right side.",
+    speakerNotes: "Point directly to the slide. 'Right now, every new integration you attempt adds quarters of tech debt. With the B2P Hub-and-Spoke architecture, we deliver functional, compliant results in weeks.'",
+    visualRules: "50/50 visual split. The negative outcome must be visually muted and heavy. The positive outcome must utilize our Luminous Lime to signal activation and relief.",
     aiPersona: "Conservative CFO",
     aiObjection: "Our current tech debt is manageable. Shifting to a new modular methodology seems like a massive capital expenditure for unproven ROI. How do you justify the initial burn?",
     slideContent: (
-      <div className="w-full h-full bg-neutral-100 flex flex-col items-center justify-center border-2 border-dashed border-neutral-300 relative z-30">
-         <span className="font-ui font-semibold text-neutral-500 uppercase tracking-widest sm:text-lg">Slide 2: The Stakes</span>
-         <span className="font-sans text-neutral-400 mt-2 text-sm italic">(Pending High-Fidelity Design)</span>
+      <div className="w-full h-full relative flex overflow-hidden z-30 bg-black">
+         {/* Left Side: Muted / Tech Debt */}
+         <div className="flex-1 bg-neutral-950 flex flex-col justify-center p-[6cqw] border-r border-white/5 relative group pb-[8cqw]">
+            <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent pointer-events-none z-0" />
+            <div className="relative z-10 w-[35cqw] flex flex-col b2p-narrative-text transition-opacity duration-300">
+               <h2 className="font-display font-black text-[4.5cqw] tracking-tight leading-[1.1] text-white/40 drop-shadow-sm">
+                 Quarters of Tech Debt.
+               </h2>
+            </div>
+         </div>
+         {/* Right Side: Activated / Results */}
+         <div className="flex-1 bg-gradient-to-br from-[#0a110f] to-[#042b26] flex flex-col justify-center p-[6cqw] relative group pb-[8cqw]">
+            <div className="absolute inset-0 bg-[#98cc67]/10 mix-blend-overlay pointer-events-none z-0" />
+            <div className="relative z-10 w-[35cqw] flex flex-col b2p-narrative-text transition-opacity duration-300">
+               <h2 className="font-display font-black text-[4.5cqw] tracking-tight leading-[1.1] text-transparent bg-clip-text bg-gradient-to-r from-[#98cc67] to-[#7bb050] drop-shadow-[0_0_20px_rgba(152,204,103,0.3)]">
+                 Results in Weeks.
+               </h2>
+            </div>
+         </div>
+
+         {/* Custom Slide Anchors */}
+         <div className="absolute bottom-[3cqw] left-[4cqw] flex items-center gap-[1cqw] z-20">
+           <img 
+             src="https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2FBridge2Partners_Favicon.png?alt=media&token=8281d312-5968-4fa1-9e37-347481934b95" 
+             alt="B2P Logo" 
+             className="w-[2.5cqw] h-[2.5cqw] rounded-[0.5cqw] opacity-40 shadow-[0_0_15px_rgba(255,255,255,0.05)] mix-blend-luminosity grayscale group-hover:grayscale-0 transition-all duration-500"
+           />
+           <span className="font-ui text-[1.2cqw] text-white/20 tracking-widest uppercase font-bold">Bridge2Partners</span>
+         </div>
+         <div className="absolute bottom-[3cqw] right-[4cqw] font-ui text-[1.2cqw] text-[#98cc67]/70 tracking-widest font-bold z-20">
+           02
+         </div>
       </div>
     )
   },
@@ -180,21 +210,27 @@ export function PitchDeckGuidelines() {
   const [hideTypography, setHideTypography] = useState(false);
   const [isExporting, setIsExporting] = useState(false);
   const [exportSuccess, setExportSuccess] = useState(false);
+  const slideRef = useRef<HTMLDivElement>(null);
 
-  // Simulated DOM-to-Image capture sequence
-  const handleExportSlide = () => {
+  // Real DOM-to-Image capture sequence
+  const handleExportSlide = async () => {
+    if (!slideRef.current) return;
     setIsExporting(true);
     setExportSuccess(false);
     
-    // Core Engine Placeholder: 
-    // In production, we drop in html-to-image here:
-    // toPng(document.getElementById('b2p-slide-capture-node')).then(downloadTrigger)
-    
-    setTimeout(() => {
-      setIsExporting(false);
+    try {
+      const dataUrl = await toPng(slideRef.current, { cacheBust: true, pixelRatio: 2 });
+      const link = document.createElement('a');
+      link.download = `b2p-slide-${currentSlide + 1}-asset.png`;
+      link.href = dataUrl;
+      link.click();
       setExportSuccess(true);
       setTimeout(() => setExportSuccess(false), 3500);
-    }, 1500);
+    } catch (err) {
+      console.error('Failed to export slide', err);
+    } finally {
+      setIsExporting(false);
+    }
   };
 
   const activeSlide = pitchSlides[currentSlide];
@@ -291,6 +327,7 @@ export function PitchDeckGuidelines() {
              {/* Aspect Ratio 16:9 Enforcer */}
              <div 
                id="b2p-slide-capture-node" 
+               ref={slideRef}
                className={cn(
                  "w-full max-w-full relative shadow-2xl ring-1 ring-black/5 overflow-hidden transition-opacity duration-300 @container",
                  hideTypography && "[&_.b2p-narrative-text]:opacity-0"
