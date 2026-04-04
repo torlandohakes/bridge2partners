@@ -98,7 +98,7 @@ export function PitchDeckGuidelines() {
     setExportSuccess(false);
     
     try {
-      const dataUrl = await toPng(slideRef.current, { cacheBust: true, pixelRatio: 2 });
+      const dataUrl = await toPng(slideRef.current, { cacheBust: false, pixelRatio: 2 });
       const link = document.createElement('a');
       link.download = `b2p-slide-${currentSlide + 1}-asset.png`;
       link.href = dataUrl;
