@@ -4,13 +4,14 @@ import Link from "next/link";
 import { useState } from "react";
 import { cn } from "@/lib/utils";
 import { useSearchParams } from "next/navigation";
-import { Compass, Palette, Globe, Component, Presentation, MapPin, PanelLeftOpen, PanelLeftClose } from "lucide-react";
+import { Compass, Palette, Globe, Component, Presentation, MapPin, PanelLeftOpen, PanelLeftClose, BrainCircuit } from "lucide-react";
 
 const navItems = [
   { id: "strategic-core", label: "Strategic Core", icon: Compass },
   { id: "visual-identity", label: "Visual Identity", icon: Palette },
   { id: "website-guidelines", label: "Website Guidelines", icon: Globe },
   { id: "ui-component-library", label: "UI Component Library", icon: Component },
+  { id: "social-leadership", label: "Thought Leadership", icon: BrainCircuit },
   { id: "pitch-deck-guidelines", label: "Pitch Deck Guidelines", icon: Presentation },
   { id: "event-presence-guidelines", label: "Event Presence Guidelines", icon: MapPin },
 ];

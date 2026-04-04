@@ -10,6 +10,7 @@ import { UIComponentLibrary } from "@/components/brand/sections/UIComponentLibra
 import { PitchDeckGuidelines } from "@/components/brand/sections/PitchDeckGuidelines";
 import { EventPresenceGuidelines } from "@/components/brand/sections/EventPresenceGuidelines";
 import { WebsiteGuidelines } from "@/components/brand/sections/WebsiteGuidelines";
+import { SocialLeadership } from "@/components/brand/sections/SocialLeadership";
 
 function TabContent() {
   const searchParams = useSearchParams();
@@ -23,6 +24,7 @@ function TabContent() {
       {tab === "pitch-deck-guidelines" && <PitchDeckGuidelines />}
       {tab === "event-presence-guidelines" && <EventPresenceGuidelines />}
       {tab === "website-guidelines" && <WebsiteGuidelines />}
+      {tab === "social-leadership" && <SocialLeadership />}
     </main>
   );
 }
