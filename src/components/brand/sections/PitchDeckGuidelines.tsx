@@ -30,11 +30,25 @@ const pitchSlides = [
     aiPersona: "Skeptical Regional Bank EVP",
     aiObjection: "Look, we've integrated three banks in the last five years using legacy methods. It's slow, but it works. Why do I need to change?",
     slideContent: (
-      <div className="w-full h-full bg-[#001b15] relative flex flex-col items-center justify-center p-12 overflow-hidden group">
-         <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent pointer-events-none" />
-         <span className="font-display font-bold text-5xl lg:text-7xl text-white tracking-tight leading-tight text-center">
-           The Era of<br/>Slow M&A is Dead.
-         </span>
+      <div className="w-full h-full bg-[#0a110f] relative flex flex-col items-center justify-center p-12 overflow-hidden group z-30">
+         {/* Subtle premium visual texture: dot-matrix mesh overlay */}
+         <div className="absolute inset-0 opacity-10 pointer-events-none mix-blend-screen" style={{ backgroundImage: "radial-gradient(circle, #ffffff 1px, transparent 1px)", backgroundSize: "32px 32px" }} />
+         <div className="absolute inset-0 bg-gradient-to-t from-[#0a110f] via-transparent to-[#0a110f] opacity-80 pointer-events-none z-0" />
+         
+         {/* Massive font-display typography with text gradients */}
+         <h2 className="font-display font-extrabold text-7xl lg:text-[100px] tracking-tighter leading-[1] text-center z-10 max-w-5xl">
+           <span className="text-transparent bg-clip-text bg-gradient-to-b from-white to-neutral-400 drop-shadow-md">The Era of</span><br/>
+           <span className="text-transparent bg-clip-text bg-gradient-to-b from-white to-neutral-400 drop-shadow-md">Slow M&A is</span> <span className="text-transparent bg-clip-text bg-gradient-to-br from-white to-[#98cc67] drop-shadow-[0_0_30px_rgba(152,204,103,0.15)] relative">Dead.<div className="absolute inset-0 bg-[#98cc67] opacity-20 blur-2xl -z-10 rounded-full" /></span>
+         </h2>
+
+         {/* Custom Slide Anchors */}
+         <div className="absolute bottom-6 left-8 flex items-center gap-2 z-20">
+           <div className="w-2 h-2 bg-[#98cc67] shadow-[0_0_10px_rgba(152,204,103,0.5)]" />
+           <span className="font-ui text-[10px] text-white/40 tracking-widest uppercase font-bold">Bridge2Partners</span>
+         </div>
+         <div className="absolute bottom-6 right-8 font-ui text-[10px] text-white/40 tracking-widest font-bold z-20">
+           01
+         </div>
       </div>
     )
   },
