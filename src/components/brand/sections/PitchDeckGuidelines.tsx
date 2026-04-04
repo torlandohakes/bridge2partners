@@ -26,6 +26,7 @@ import {
   EyeOff,
   ImagePlus,
   X,
+  QrCode,
   MonitorSmartphone,
   CreditCard,
   Database,
@@ -228,98 +229,56 @@ const getPitchSlides = (slideCopies: string[], customBg: string | null) => [
 
   {
     id: 4,
-    title: "The Proof",
-    concept: "The Competence Anchor. You reframed their thinking in Slide 3; now you must prove it. By immediately pairing a clean architectural diagram with a massive $80B bank case study, you destroy any doubt that this is just theoretical marketing.",
-    speakerNotes: "Point to the hub. 'We don't just talk about decoupled architecture; we build it. For an $80B bank, we constructed a simplified middleware layer with over 40 interfaces, isolating their legacy core while their digital experience teams built the future.'",
-    visualRules: "Maximum contrast background. Disruptive visual pattern representing technical competence and Hub-and-Spoke architecture.",
+    title: "The Insiders",
+    concept: "The Insider Flex. You are proving that B2P is an elite strike team. By showing their faces and deep banking pedigree, you shift the dynamic from 'outside vendor' to 'experienced peer.'",
+    speakerNotes: "'We don't bring junior analysts to learn on your dime. Look at this roster. We bring domain experts who have run commercial lending and technology platforms at the exact institutions you compete with every day.'",
+    visualRules: "Digital Business Card Grid. Premium layout presenting the elite task force.",
     aiPersona: "Head of Retail Banking",
-    aiObjection: "Look, 'Agile' and 'Banking' are oxymorons. Our regulators won't let us be agile. How does this promised land survive compliance?",
+    aiObjection: "Consultants are consultants. I need someone who understands my specific regulatory environment.",
     slideContent: (
-      <div className="w-full h-full bg-[#050807] relative flex flex-row p-[6cqw] gap-[2cqw] overflow-hidden group z-30">
-         {/* Left Side: Typography & Proof (40%) */}
-         <div className="w-[45%] flex flex-col justify-center h-full z-10 gap-[4cqw] pl-[2cqw]">
-            <h2 className="font-display font-black text-[4.5cqw] leading-[1.05] tracking-tight text-transparent bg-clip-text bg-gradient-to-br from-white to-neutral-400">
-               {slideCopies[3].split('\n').map((line, index, array) => {
-                 const isLastLine = index === array.length - 1 && line.trim() !== "";
-                 return (
-                   <span key={index} className={cn(isLastLine ? "text-transparent bg-clip-text bg-gradient-to-r from-secondary to-secondary/70 drop-shadow-[0_0_20px_rgba(0,150,119,0.3)] leading-normal" : "")}>
-                     {line}<br/>
-                   </span>
-                 );
-               })}
+      <div className="w-full h-full bg-neutral-950 relative flex flex-col p-[6cqw] pt-[8cqw] overflow-hidden group z-30">
+         {/* The Crisp Luminous Line Anchor (From Slide 3 Spec) */}
+         <div className="absolute bottom-[5.5cqw] left-0 w-full h-[0.15cqw] bg-primary z-20 shadow-[0_0_10px_rgba(152,204,103,0.5)]" />
+
+         {/* Typography Header */}
+         <div className="relative z-30 w-full flex flex-col gap-[1cqw] mb-[5cqw] pr-[10cqw]">
+            <h2 className="font-display font-black text-[4cqw] leading-[1.1] tracking-tight text-white drop-shadow-md">
+               {slideCopies[3].split('\n')[0] || "Subject Matter Experts. Insiders."}
             </h2>
-            
-            <div className="flex flex-col gap-[1.5cqw] border-l-[0.3cqw] border-neutral-800 pl-[2cqw]">
-              <div className="flex flex-col gap-[0.2cqw]">
-                <span className="text-primary text-[3.5cqw] font-black leading-none drop-shadow-[0_0_15px_rgba(152,204,103,0.3)]">40+</span>
-                <span className="text-neutral-400 text-[1.5cqw] font-semibold uppercase tracking-widest">Interfaces Built</span>
-              </div>
-              <div className="flex flex-col gap-[0.2cqw]">
-                <span className="text-primary text-[3.5cqw] font-black leading-none drop-shadow-[0_0_15px_rgba(152,204,103,0.3)]">$80B</span>
-                <span className="text-neutral-400 text-[1.5cqw] font-semibold uppercase tracking-widest">Bank Deployment</span>
-              </div>
-              <div className="flex flex-col gap-[0.2cqw] pt-[1cqw]">
-                <span className="text-white text-[2cqw] font-black uppercase tracking-wider leading-none">Zero Disruption.</span>
-              </div>
-            </div>
+            <p className="font-sans text-[1.8cqw] leading-snug text-neutral-400 font-medium max-w-[80%]">
+               {slideCopies[3].split('\n').slice(1).join('\n') || "We have worked at the banks we serve. Dedicated specialists with tenure at the top 100 financial institutions."}
+            </p>
          </div>
 
-         {/* Right Side: The Diagram (55%) */}
-         <div className="w-[55%] relative h-full flex items-center justify-center z-10">
-            {/* Background Diagram Grid */}
-            <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:2cqw_2cqw] [mask-image:radial-gradient(ellipse_70%_70%_at_50%_50%,#000_20%,transparent_100%)] pointer-events-none" />
-
-            {/* Central Hub */}
-            <div className="absolute w-[14cqw] h-[14cqw] rounded-full border-[0.3cqw] border-primary flex items-center justify-center bg-[#050807] z-30 shadow-[0_0_50px_rgba(152,204,103,0.15)] animate-[pulse_4s_cubic-bezier(0.4,0,0.6,1)_infinite]">
-               <div className="w-[11cqw] h-[11cqw] rounded-full bg-primary/10 flex flex-col items-center justify-center border border-primary/30">
-                  <span className="text-white font-display font-medium text-[1.1cqw] text-center leading-tight">Systems<br/>of <span className="font-bold text-primary">Record</span></span>
-               </div>
-            </div>
-
-            {/* Manual Radial Spokes Setup for 5 nodes */}
-            {/* Core Rings */}
-            <div className="absolute w-[24cqw] h-[24cqw] rounded-full border-[0.1cqw] border-primary/20 border-dashed animate-[spin_60s_linear_infinite_reverse]" />
-            <div className="absolute w-[36cqw] h-[36cqw] rounded-full border-[0.1cqw] border-white/10" />
-
-            {/* Lines radiating out (using absolute divs mapped tightly) */}
-            <svg className="absolute w-[36cqw] h-[36cqw]" viewBox="0 0 100 100">
-               <line x1="50" y1="50" x2="50" y2="0" stroke="rgba(152,204,103,0.8)" strokeWidth="0.5" className="drop-shadow-[0_0_5px_rgba(152,204,103,1)]"/> {/* Top - Digital Portal */}
-               <line x1="50" y1="50" x2="97.5" y2="34.5" stroke="rgba(255,255,255,0.4)" strokeWidth="0.5" /> {/* Top Right - Payments */}
-               <line x1="50" y1="50" x2="79.3" y2="90.4" stroke="rgba(255,255,255,0.4)" strokeWidth="0.5" /> {/* Bottom Right - Data Lake */}
-               <line x1="50" y1="50" x2="20.7" y2="90.4" stroke="rgba(255,255,255,0.4)" strokeWidth="0.5" /> {/* Bottom Left - CRM */}
-               <line x1="50" y1="50" x2="2.5" y2="34.5" stroke="rgba(152,204,103,0.8)" strokeWidth="0.5" className="drop-shadow-[0_0_5px_rgba(152,204,103,1)]"/> {/* Top Left - APIs */}
-            </svg>
-
-            {/* Nodes positioning manually using % from center */}
-            {/* Node 1 Top (Digital Portal) */}
-            <div className="absolute top-[calc(50%-18cqw)] left-[calc(50%-2.5cqw)] w-[5cqw] h-[5cqw] rounded-xl border-[0.15cqw] border-primary bg-[#050807] flex flex-col items-center justify-center shadow-[0_0_15px_rgba(152,204,103,0.3)] z-40">
-              <MonitorSmartphone size="2cqw" className="text-primary"/>
-            </div>
-            <div className="absolute top-[calc(50%-21cqw)] left-[calc(50%-5cqw)] w-[10cqw] text-center font-ui text-[1cqw] text-primary tracking-widest font-bold">DIGITAL<br/>PORTAL</div>
-
-            {/* Node 2 Top Right (Payments) */}
-            <div className="absolute top-[calc(50%-8.5cqw)] left-[calc(50%+14.5cqw)] w-[5cqw] h-[5cqw] rounded-xl border-[0.1cqw] border-neutral-700 bg-[#050807] flex flex-col items-center justify-center z-40">
-              <CreditCard size="2cqw" className="text-white"/>
-            </div>
-            <div className="absolute top-[calc(50%-10cqw)] left-[calc(50%+21cqw)] w-[10cqw] text-left font-ui text-[1cqw] text-white/70 tracking-widest font-bold">PAYMENTS</div>
-
-            {/* Node 3 Bottom Right (Data Lake) */}
-            <div className="absolute top-[calc(50%+12.5cqw)] left-[calc(50%+7.5cqw)] w-[5cqw] h-[5cqw] rounded-xl border-[0.1cqw] border-neutral-700 bg-[#050807] flex flex-col items-center justify-center z-40">
-              <Database size="2cqw" className="text-white"/>
-            </div>
-            <div className="absolute top-[calc(50%+18cqw)] left-[calc(50%+5cqw)] w-[10cqw] text-center font-ui text-[1cqw] text-white/70 tracking-widest font-bold">DATA LAKE</div>
-
-            {/* Node 4 Bottom Left (CRM) */}
-            <div className="absolute top-[calc(50%+12.5cqw)] left-[calc(50%-12.5cqw)] w-[5cqw] h-[5cqw] rounded-xl border-[0.1cqw] border-neutral-700 bg-[#050807] flex flex-col items-center justify-center z-40">
-              <Users size="2cqw" className="text-white"/>
-            </div>
-            <div className="absolute top-[calc(50%+18cqw)] left-[calc(50%-15cqw)] w-[10cqw] text-center font-ui text-[1cqw] text-white/70 tracking-widest font-bold">CRM</div>
-
-            {/* Node 5 Top Left (APIs) */}
-            <div className="absolute top-[calc(50%-8.5cqw)] left-[calc(50%-20cqw)] w-[5cqw] h-[5cqw] rounded-xl border-[0.15cqw] border-primary bg-[#050807] flex flex-col items-center justify-center shadow-[0_0_15px_rgba(152,204,103,0.3)] z-40">
-              <Network size="2cqw" className="text-primary"/>
-            </div>
-            <div className="absolute top-[calc(50%-10cqw)] left-[calc(50%-32cqw)] w-[10cqw] text-right font-ui text-[1cqw] text-primary tracking-widest font-bold">CORE APIs</div>
+         {/* The Digital Business Card Grid (The Team) */}
+         <div className="relative z-30 w-full grid grid-cols-3 gap-[2cqw]">
+            {[
+              { name: "Tony Lockhard", role: "Managing Partner", tags: ["Executive Strategy", "M&A Integration"] },
+              { name: "Jordan Brooks", role: "Director of Digital", tags: ["Digital Transformation", "Core APIs"] },
+              { name: "Sarah Chen", role: "Head of Lending", tags: ["Commercial Lending", "Risk Modeling"] }
+            ].map((person, idx) => (
+              <div key={idx} className="bg-white/5 border border-white/10 rounded-2xl p-[2cqw] transition-all hover:bg-white/10 hover:border-primary/50 flex flex-col relative group cursor-pointer">
+                 {/* Card Header (Avatar + Icon) */}
+                 <div className="flex justify-between items-start mb-[3cqw]">
+                    <div className="w-[4cqw] h-[4cqw] rounded-full bg-neutral-800 border-[0.15cqw] border-neutral-700 overflow-hidden flex items-center justify-center">
+                       <Users size="2cqw" className="text-neutral-500 opacity-50" />
+                    </div>
+                    <QrCode size="1.5cqw" className="text-neutral-600 group-hover:text-primary transition-colors" />
+                 </div>
+                 {/* Card Body */}
+                 <div className="flex flex-col gap-[0.5cqw]">
+                    <h3 className="text-white font-display font-bold text-[2cqw] leading-none mb-1">{person.name}</h3>
+                    <span className="text-primary text-[1cqw] font-bold uppercase tracking-widest leading-none mb-[1cqw]">{person.role}</span>
+                    <div className="flex flex-wrap gap-[0.5cqw]">
+                      {person.tags.map(tag => (
+                        <span key={tag} className="bg-white/10 rounded-full px-[0.8cqw] py-[0.3cqw] text-[0.8cqw] text-neutral-300 font-semibold tracking-wide border border-white/5">
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                 </div>
+              </div>
+            ))}
          </div>
 
          {/* Custom Slide Anchors */}
@@ -337,6 +296,7 @@ const getPitchSlides = (slideCopies: string[], customBg: string | null) => [
       </div>
     )
   },
+
 
   {
     id: 5,
@@ -393,7 +353,7 @@ export function PitchDeckGuidelines() {
     "Innovation is Survival.\nYour Legacy Stack is\nDead Weight.",
     "Delaying modernization\nfunds your\nCompetitors.",
     "Don't break the bank.\nBuild in parallel.",
-    "The Simplified\nMiddleware Layer.",
+    "Subject Matter Experts. Insiders.\nWe have worked at the banks we serve. Dedicated specialists with tenure at the top 100 financial institutions.",
     "Slide 5: The Magic Tools\n(Pending High-Fidelity Design)",
     "Slide 6: The Proof\n(Pending High-Fidelity Design)",
     "Slide 7: Appendix\n(Pending High-Fidelity Design)",
