@@ -502,7 +502,7 @@ export const getPitchSlides = (slideCopies: string[], customBg: string | null) =
             <p className="font-sans text-[1.8cqw] text-neutral-300 leading-relaxed font-light mb-[4cqw] max-w-[80%]">
               In 14 days, our practitioners will map your legacy constraints and deliver the parallel-build blueprint.
             </p>
-            <button className="flex items-center gap-[1cqw] bg-transparent border-2 border-white text-white px-[4cqw] py-[1.5cqw] rounded-md font-ui uppercase font-extrabold tracking-widest text-[1.2cqw] hover:bg-white/10 transition-colors shadow-2xl focus-visible:ring-2 focus-visible:ring-white/50 focus-visible:outline-none">
+            <button className="flex items-center gap-[1cqw] bg-transparent border border-white text-white px-[4cqw] py-[1.5cqw] rounded-md font-ui uppercase font-extrabold tracking-widest text-[1.2cqw] hover:bg-white/10 transition-colors shadow-2xl focus-visible:ring-2 focus-visible:ring-white/50 focus-visible:outline-none">
               Initiate Assessment
             </button>
          </div>
