@@ -43,8 +43,8 @@ export function PitchDeckGuidelines() {
     "Delaying modernization\nfunds your\nCompetitors.",
     "Don't break the bank.\nBuild in parallel.",
     "We Are Bankers, Like You.\nWe have worked at the banks we serve. Dedicated specialists with tenure at the top 100 financial institutions.",
-    "Slide 5: The Magic Tools\n(Pending High-Fidelity Design)",
-    "Slide 6: The Proof\n(Pending High-Fidelity Design)",
+    "The Simplified\nMiddleware Layer.",
+    "Execution at Scale.",
     "Slide 7: Appendix\n(Pending High-Fidelity Design)",
   ]);
   const [currentSlide, setCurrentSlide] = useState(0);

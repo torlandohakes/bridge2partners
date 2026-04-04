@@ -307,34 +307,155 @@ export const getPitchSlides = (slideCopies: string[], customBg: string | null) =
 
   {
     id: 5,
-    title: "The Magic Tools",
-    concept: "Introduce B2P Capabilities.",
-    speakerNotes: "Position our ex-banker SME experience as the required bridge to the Promised Land. We are operators, not just advisors.",
-    visualRules: "4-Column grid representing capability nodes.",
-    aiPersona: "Chief Operating Officer",
-    aiObjection: "So you're consultants? I have McKinsey telling me they can do this. What actually makes your 'tools' magic compared to standard M&A consulting frameworks?",
+    title: "The Architecture",
+    concept: "The Sonar Architecture. The Hub & Spoke.",
+    speakerNotes: "The Architecture: Walk them through the decoupling. Explain how the B2P middleware acts as the universal translator, protecting the core while enabling the edge.",
+    visualRules: "Deep dark mode with tactical sonar/radar rings centered. Center Hub: 'Systems of Record'. 5 lines radiating outward.",
+    aiPersona: "Chief Technology Officer",
+    aiObjection: "Decoupling sounds great in theory, but in reality, every abstraction layer introduces latency and points of failure. How is this 'universal translator' not just another bottleneck?",
     slideContent: (
-      <div className="w-full h-full bg-neutral-100 flex flex-col items-center justify-center border-2 border-dashed border-neutral-300 relative z-30">
-         <span className="font-ui font-semibold text-neutral-500 uppercase tracking-widest sm:text-lg">Slide 5: The Magic Tools</span>
-         <span className="font-sans text-neutral-400 mt-2 text-sm italic">(Pending High-Fidelity Design)</span>
+      <div className="w-full h-full bg-[#050807] relative flex flex-row p-[6cqw] gap-[2cqw] overflow-hidden group z-30">
+         {/* The Crisp Luminous Line Anchor */}
+         <div className="absolute bottom-[5.5cqw] left-0 w-full h-[0.15cqw] bg-primary z-20 shadow-[0_0_10px_rgba(152,204,103,0.5)]" />
+
+         {/* Left Side (35%): Typography Header */}
+         <div className="w-[35%] flex flex-col justify-start pt-[6cqw] h-full z-30 gap-[1.5cqw] pl-[2cqw]">
+            <h2 className="font-display font-black text-[4.5cqw] leading-[1.05] tracking-tight text-white drop-shadow-md pb-[0.5cqw]">
+               {slideCopies[4].split('\n')[0] || "The Simplified"}
+               <br />
+               <span className="text-transparent bg-clip-text bg-gradient-to-r from-secondary to-secondary/70 drop-shadow-[0_0_20px_rgba(0,150,119,0.3)] leading-normal">
+                 {slideCopies[4].split('\n').slice(1).join('\n') || "Middleware Layer."}
+               </span>
+            </h2>
+         </div>
+
+         {/* Right Side (65%): The Sonar Diagram */}
+         <div className="w-[65%] relative h-full flex items-center justify-center z-10 scale-[1.10] -ml-[2cqw]">
+            {/* Background Sonar Grid */}
+            <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:2cqw_2cqw] [mask-image:radial-gradient(ellipse_70%_70%_at_50%_50%,#000_20%,transparent_100%)] pointer-events-none" />
+
+            {/* Central Hub */}
+            <div className="absolute w-[18cqw] h-[18cqw] rounded-full border-[0.4cqw] border-white/20 flex items-center justify-center bg-neutral-950 z-30 shadow-[0_0_30px_rgba(255,255,255,0.05)]">
+               <div className="w-[14cqw] h-[14cqw] rounded-full bg-white/5 flex flex-col items-center justify-center border border-white/10">
+                  <span className="text-white font-display font-bold text-[1.4cqw] text-center leading-tight">Systems<br/>of Record</span>
+               </div>
+            </div>
+
+            {/* Static Rings */}
+            <div className="absolute w-[30cqw] h-[30cqw] rounded-full border-[0.15cqw] border-white/10 border-dashed" />
+            <div className="absolute w-[45cqw] h-[45cqw] rounded-full border-[0.1cqw] border-white/10" />
+
+            {/* Uniform White Lines radiating out (One highlighted primary) */}
+            <svg className="absolute w-[45cqw] h-[45cqw]" viewBox="0 0 100 100">
+               <line x1="50" y1="50" x2="50" y2="0" stroke="rgba(255,255,255,0.4)" strokeWidth="0.5" /> {/* Top */}
+               <line x1="50" y1="50" x2="97.5" y2="34.5" stroke="rgba(255,255,255,0.4)" strokeWidth="0.5" /> {/* Top Right */}
+               <line x1="50" y1="50" x2="79.3" y2="90.4" stroke="rgba(152,204,103,1)" strokeWidth="0.8" className="drop-shadow-[0_0_5px_rgba(152,204,103,0.8)]"/> {/* Bottom Right - Active Routing (Primary) */}
+               <line x1="50" y1="50" x2="20.7" y2="90.4" stroke="rgba(255,255,255,0.4)" strokeWidth="0.5" /> {/* Bottom Left */}
+               <line x1="50" y1="50" x2="2.5" y2="34.5" stroke="rgba(255,255,255,0.4)" strokeWidth="0.5" /> {/* Top Left */}
+            </svg>
+
+            {/* Glassmorphic Nodes positioning manually */}
+            {/* Node 1 Top (Online Portal & Mobile) */}
+            <div className="absolute top-[calc(50%-22cqw)] left-[calc(50%-10cqw)] w-[20cqw] h-[4cqw] rounded-xl border-[0.15cqw] border-white/30 bg-neutral-900/90 flex items-center justify-center z-40 backdrop-blur-md shadow-2xl">
+              <span className="font-ui text-[0.9cqw] text-white tracking-widest font-bold uppercase text-center w-full px-2">Online Portal & Mobile</span>
+            </div>
+
+            {/* Node 2 Top Right (Marketing & CRM) */}
+            <div className="absolute top-[calc(50%-10cqw)] left-[calc(50%+16cqw)] w-[16cqw] h-[4cqw] rounded-xl border-[0.15cqw] border-white/30 bg-neutral-900/90 flex items-center justify-center z-40 backdrop-blur-md shadow-2xl">
+              <span className="font-ui text-[0.9cqw] text-white tracking-widest font-bold uppercase text-center w-full px-2">Marketing & CRM</span>
+            </div>
+
+            {/* Node 3 Bottom Right (Payments & Cards) */}
+            <div className="absolute top-[calc(50%+18cqw)] left-[calc(50%+10cqw)] w-[18cqw] h-[4cqw] rounded-xl border-[0.2cqw] border-primary/80 bg-neutral-900/95 flex items-center justify-center z-40 backdrop-blur-md shadow-[0_0_30px_rgba(152,204,103,0.3)]">
+              <span className="font-ui text-[1cqw] text-white tracking-widest font-extrabold uppercase text-center w-full px-2">Payments & Cards</span>
+            </div>
+
+            {/* Node 4 Bottom Left (Data Lake / Warehouse) */}
+            <div className="absolute top-[calc(50%+18cqw)] left-[calc(50%-28cqw)] w-[20cqw] h-[4cqw] rounded-xl border-[0.15cqw] border-white/30 bg-neutral-900/90 flex items-center justify-center z-40 backdrop-blur-md shadow-2xl">
+              <span className="font-ui text-[0.9cqw] text-white tracking-widest font-bold uppercase text-center w-full px-2">Data Lake / Warehouse</span>
+            </div>
+
+            {/* Node 5 Top Left (APIs, Interfaces & Open Banking) */}
+            <div className="absolute top-[calc(50%-10cqw)] left-[calc(50%-32cqw)] w-[24cqw] h-[4cqw] rounded-xl border-[0.15cqw] border-white/30 bg-neutral-900/90 flex items-center justify-center z-40 backdrop-blur-md shadow-2xl">
+              <span className="font-ui text-[0.8cqw] text-white tracking-widest font-bold uppercase text-center w-full px-2">APIs, Interfaces & Open Banking</span>
+            </div>
+         </div>
+
+         {/* Custom Slide Anchors */}
+         <div className="absolute bottom-[2cqw] left-[4cqw] flex items-center gap-[1cqw] z-30">
+           <img 
+             src={`/api/proxy-image?url=${encodeURIComponent('https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2FBridge2Partners_Favicon.png?alt=media&token=8281d312-5968-4fa1-9e37-347481934b95')}`}
+             alt="B2P Logo" 
+             className="w-[2cqw] h-[2cqw] rounded-[0.4cqw] opacity-90 shadow-[0_0_15px_rgba(152,204,103,0.2)]"
+           />
+           <span className="font-ui text-[1cqw] text-white/50 tracking-widest uppercase font-bold">Bridge2Partners</span>
+         </div>
+         <div className="absolute bottom-[2cqw] right-[4cqw] font-ui text-[1cqw] text-white/50 tracking-widest font-bold z-30">
+           05
+         </div>
       </div>
     )
   },
   {
     id: 6,
     title: "The Proof",
-    concept: "Validation & Data.",
-    speakerNotes: "End with a functional Call to Action—route them to the digital Gap Analysis, not a generic 'Questions?' slide.",
-    visualRules: "Massive font-data numerics. Subtle logo anchor strip.",
+    concept: "Validation & Data. Execution at Scale.",
+    speakerNotes: "The Drop: Do not over-explain this slide. Let the numbers sit heavy in the room. This is the proof that your task force operates at the highest level of enterprise scale.",
+    visualRules: "Stark dark mode. No sonar, no diagrams. Absolute focus on the massive numerics in a 3-column masonry/flex geometry.",
     aiPersona: "Venture Capital Partner / Board Member",
     aiObjection: "Those are big numbers, but Bank of America has infinite runway. We have 18 months. Has this framework actually worked for a regional player our size?",
     slideContent: (
-      <div className="w-full h-full bg-neutral-100 flex flex-col items-center justify-center border-2 border-dashed border-neutral-300 relative z-30">
-         <span className="font-ui font-semibold text-neutral-500 uppercase tracking-widest sm:text-lg">Slide 6: The Proof</span>
-         <span className="font-sans text-neutral-400 mt-2 text-sm italic">(Pending High-Fidelity Design)</span>
+      <div className="w-full h-full bg-[#050807] relative flex flex-col items-center justify-center p-[6cqw] overflow-hidden group z-30">
+         {/* The Crisp Luminous Line Anchor */}
+         <div className="absolute bottom-[5.5cqw] left-0 w-full h-[0.15cqw] bg-primary z-20 shadow-[0_0_10px_rgba(152,204,103,0.5)]" />
+
+         {/* Absolute Center Typography Header (Single Line) */}
+         <div className="absolute top-[14cqw] w-full flex justify-center z-30">
+            <h2 className="font-display font-black text-[5cqw] leading-[1.05] tracking-tight text-transparent bg-clip-text bg-gradient-to-br from-white to-neutral-400 drop-shadow-md">
+               {slideCopies[5].split('\n')[0] || "Execution at Scale."}
+            </h2>
+         </div>
+
+         {/* The Metrics Layout (3 Columns) */}
+         <div className="relative z-30 w-[88cqw] flex flex-row items-center justify-between gap-[4cqw] mt-[6cqw]">
+            {/* Metric 1 */}
+            <div className="flex flex-col items-center justify-center flex-1 text-center bg-white/5 border border-white/10 p-[4cqw] h-[24cqw] rounded-[1cqw] hover:bg-white/10 transition-colors shadow-2xl relative overflow-hidden">
+               <div className="absolute top-0 right-0 p-[2cqw] opacity-20"><Database className="w-[4cqw] h-[4cqw] text-primary" /></div>
+               <span className="text-primary text-[8cqw] font-black leading-none drop-shadow-[0_0_20px_rgba(152,204,103,0.3)] mb-[1cqw] z-10">40+</span>
+               <span className="text-neutral-300 text-[1.4cqw] font-ui uppercase tracking-[0.2em] font-bold leading-relaxed px-[1cqw] z-10">Interfaces Built & Deployed</span>
+            </div>
+
+            {/* Metric 2 */}
+            <div className="flex flex-col items-center justify-center flex-1 text-center bg-white/5 border border-primary/30 p-[4cqw] h-[26cqw] rounded-[1cqw] bg-gradient-to-b from-white/10 to-transparent hover:bg-white/10 transition-colors shadow-[0_0_40px_rgba(152,204,103,0.1)] relative overflow-hidden -translate-y-[2cqw]">
+               <div className="absolute top-0 right-0 p-[4cqw] opacity-10"><Target className="w-[8cqw] h-[8cqw] text-primary" /></div>
+               <span className="text-white text-[9cqw] font-black leading-none drop-shadow-[0_0_30px_rgba(255,255,255,0.4)] mb-[1cqw] z-10">$80B</span>
+               <span className="text-primary text-[1.5cqw] font-ui uppercase tracking-[0.2em] font-black leading-relaxed px-[1cqw] z-10">Super-Regional Bank Transformed</span>
+            </div>
+
+            {/* Metric 3 */}
+            <div className="flex flex-col items-center justify-center flex-1 text-center bg-white/5 border border-white/10 p-[4cqw] h-[24cqw] rounded-[1cqw] hover:bg-white/10 transition-colors shadow-2xl relative overflow-hidden">
+               <div className="absolute top-0 right-0 p-[2cqw] opacity-20"><CheckCircle2 className="w-[4cqw] h-[4cqw] text-primary" /></div>
+               <span className="text-primary text-[8cqw] font-black leading-none drop-shadow-[0_0_20px_rgba(152,204,103,0.3)] mb-[1cqw] z-10">ZERO</span>
+               <span className="text-neutral-300 text-[1.4cqw] font-ui uppercase tracking-[0.2em] font-bold leading-relaxed px-[1cqw] z-10">Operational Disruption</span>
+            </div>
+         </div>
+
+         {/* Custom Slide Anchors */}
+         <div className="absolute bottom-[2cqw] left-[4cqw] flex items-center gap-[1cqw] z-30">
+           <img 
+             src={`/api/proxy-image?url=${encodeURIComponent('https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2FBridge2Partners_Favicon.png?alt=media&token=8281d312-5968-4fa1-9e37-347481934b95')}`}
+             alt="B2P Logo" 
+             className="w-[2cqw] h-[2cqw] rounded-[0.4cqw] opacity-90 shadow-[0_0_15px_rgba(152,204,103,0.2)]"
+           />
+           <span className="font-ui text-[1cqw] text-white/50 tracking-widest uppercase font-bold">Bridge2Partners</span>
+         </div>
+         <div className="absolute bottom-[2cqw] right-[4cqw] font-ui text-[1cqw] text-white/50 tracking-widest font-bold z-30">
+           06
+         </div>
       </div>
     )
   },
+
   {
     id: 7,
     title: "Appendix",
