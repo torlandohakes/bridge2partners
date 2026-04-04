@@ -189,7 +189,7 @@ const getPitchSlides = (slideCopies: string[], customBg: string | null) => [
               {slideCopies[2].split('\n').map((line, index, array) => {
                  const isLastLine = index === array.length - 1 && line.trim() !== "";
                  return (
-                   <span key={index} className={cn(isLastLine ? "text-transparent bg-clip-text bg-gradient-to-r from-[#98cc67] to-[#7bb050] drop-shadow-[0_0_20px_rgba(152,204,103,0.3)] leading-normal" : "")}>
+                   <span key={index} className={cn(isLastLine ? "text-transparent bg-clip-text bg-gradient-to-r from-secondary to-secondary/70 drop-shadow-[0_0_20px_rgba(0,150,119,0.3)] leading-normal" : "")}>
                      {line}
                    </span>
                  );
