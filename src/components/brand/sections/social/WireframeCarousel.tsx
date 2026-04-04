@@ -56,7 +56,7 @@ export function WireframeCarousel() {
 
             {/* Slide Content */}
             <div className="relative z-10 flex flex-col items-center text-center gap-6 max-w-xs transition-all duration-300">
-               <h5 className="font-display text-[#98cc67] text-xl md:text-2xl font-bold tracking-tight drop-shadow-md">
+               <h5 className="font-display text-secondary text-xl md:text-2xl font-bold tracking-tight drop-shadow-md">
                   {carouselSlides[currentSlide].title}
                </h5>
                <p className="font-sans text-neutral-200 leading-relaxed text-sm">

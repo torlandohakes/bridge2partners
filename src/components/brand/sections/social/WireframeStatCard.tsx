@@ -38,7 +38,7 @@ export function WireframeStatCard() {
                 {/* Glass Component Simulation */}
                 <div className="backdrop-blur-md bg-white/10 border border-white/20 shadow-2xl rounded-2xl p-6 mt-6 flex flex-col items-center gap-1 relative z-20">
                    <span className="font-ui text-white/80 text-[10px] tracking-widest uppercase font-bold text-center">Integration Speed</span>
-                   <span className="text-[#98cc67] font-data text-5xl font-bold tracking-tighter drop-shadow-[0_0_12px_rgba(152,204,103,0.3)]">4.2x</span>
+                   <span className="text-white font-data text-5xl font-bold tracking-tighter drop-shadow-[0_0_12px_rgba(152,204,103,1)]">4.2x</span>
                 </div>
             </div>
 

@@ -213,7 +213,7 @@ export function SocialLeadership() {
             <div className="space-y-2">
               <span className="font-ui font-bold text-neutral-900">Optimal Post Architecture</span>
               <p className="font-sans text-neutral-700 text-sm leading-relaxed">
-                While LinkedIn allows up to 3,000 characters, optimal dwell-time completion rates dictate a strict constraint of <span className="font-data text-[#98cc67] font-bold px-1.5 py-0.5 bg-[#98cc67]/10 rounded shadow-sm text-sm">1,300 - 1,900 characters</span> per text post.
+                While LinkedIn allows up to 3,000 characters, optimal dwell-time completion rates dictate a strict constraint of <span className="font-data text-primary font-bold px-1.5 py-0.5 bg-[#98cc67]/20 rounded shadow-sm text-sm">1,300 - 1,900 characters</span> per text post.
               </p>
             </div>
             <div className="space-y-2">
