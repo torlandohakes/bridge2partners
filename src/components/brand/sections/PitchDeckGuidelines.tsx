@@ -16,7 +16,10 @@ import {
   CheckCircle2,
   Wand2,
   Loader2,
-  Globe
+  Globe,
+  Target,
+  PlayCircle,
+  Layout
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -24,9 +27,9 @@ const pitchSlides = [
   {
     id: 1,
     title: "The Hook",
-    concept: "The Legacy Trap (Status Quo Bias).",
-    speakerNotes: "Every institution knows innovation is survival, but changing core systems is terrifying. Validate their fear, but force them to confront the reality of their inaction.",
-    visualRules: "Massive typography. Max 8 words. Cinematic dark mode to establish gravity.",
+    concept: "Loss Aversion. Executives are paralyzed by the operational terror of migrating legacy systems. You must make the risk of doing *nothing* feel more dangerous than the risk of changing. We are breaking their Status Quo Bias.",
+    speakerNotes: "Do not read the slide. Let it sit for 3 seconds of silence to let the visual gravity hit. Then say: 'You are squeezed between fintechs taking your deposits and megabanks outspending you on tech. You know you need to modernize, but ripping out a legacy core feels like risking the bank. So you wait. But waiting is what's actually killing your valuation.'",
+    visualRules: "Strictly 8 words. The brain cannot read and listen simultaneously. The single Luminous Lime word 'Anchor' acts as a visual trap, forcing them to finish reading in 1.5 seconds so their attention immediately returns to you.",
     aiPersona: "Skeptical Regional Bank EVP",
     aiObjection: "Look, we've integrated three banks in the last five years using legacy methods. It's slow, but it works. Why do I need to change?",
     slideContent: (
@@ -144,6 +147,24 @@ const pitchSlides = [
       <div className="w-full h-full bg-neutral-100 flex flex-col items-center justify-center border-2 border-dashed border-neutral-300 relative z-30">
          <span className="font-ui font-semibold text-neutral-500 uppercase tracking-widest sm:text-lg">Slide 6: The Proof</span>
          <span className="font-sans text-neutral-400 mt-2 text-sm italic">(Pending High-Fidelity Design)</span>
+      </div>
+    )
+  },
+  {
+    id: 7,
+    title: "Appendix",
+    concept: "The Proof Arsenal (System 2 Validation). The core 6 slides hook the emotional/strategic brain (System 1). The Appendix is strictly for the logical, risk-mitigating brain (System 2). It proves we have the receipts.",
+    speakerNotes: "Never present these slides voluntarily. Keep them in reserve. When the CIO stops you to ask how our middleware handles API rate limits, seamlessly jump to the corresponding Appendix slide. Use it to kill objections with overwhelming competence.",
+    visualRules: "Appendix slides are permitted to be highly data-dense. This is where we place complex architecture diagrams, detailed case study metrics (like the 40+ integrations), and technical timelines. Must still obey strict typography hierarchy.",
+    aiPersona: "Chief Technology Officer / Risk Officer",
+    aiObjection: "Your narrative is great, but we need to see the actual API limits, compliance workflows, and security frameworks before we sign anything.",
+    slideContent: (
+      <div className="w-full h-full bg-neutral-900/50 flex flex-col items-center justify-center border-2 border-dashed border-neutral-600 relative z-30 group">
+         <div className="absolute top-6 right-8 bg-[#dc2626]/10 border border-[#dc2626]/30 px-3 py-1.5 rounded-sm shadow-sm backdrop-blur-sm">
+            <span className="font-ui text-[10px] uppercase font-bold tracking-widest text-[#dc2626]">DO NOT PRESENT VOLUNTARILY</span>
+         </div>
+         <span className="font-ui font-semibold text-neutral-300 uppercase tracking-widest sm:text-lg text-center">Appendix:<br/>Technical Validation & Proof</span>
+         <span className="font-sans text-neutral-500 mt-3 text-sm italic">(Pending High-Fidelity Design)</span>
       </div>
     )
   }
@@ -267,37 +288,38 @@ export function PitchDeckGuidelines() {
             
             {/* Strategy Tab */}
             {sidebarTab === 'strategy' && (
-              <div className="flex flex-col gap-6 animate-in fade-in slide-in-from-right-4 duration-300">
+              <div className="flex flex-col gap-4 animate-in fade-in slide-in-from-right-4 duration-300">
                  
-                 <div className="space-y-2 relative">
-                   <div className="absolute -left-3 top-2 w-1 h-8 bg-neutral-200 rounded-r-md"></div>
-                   <span className="font-ui text-[10px] text-neutral-400 uppercase tracking-widest font-bold">The Concept</span>
-                   <p className="font-sans text-neutral-900 font-semibold text-sm leading-snug">
+                 {/* Block 1: The Psychology */}
+                 <div className="bg-neutral-50 border border-neutral-200 p-4 rounded-xl shadow-sm relative overflow-hidden group">
+                   <div className="absolute left-0 top-0 bottom-0 w-1 bg-primary/20 group-hover:bg-primary transition-colors" />
+                   <span className="font-ui text-[10px] text-neutral-500 uppercase tracking-widest font-bold flex items-center gap-1.5 mb-2">
+                     <Target className="w-3.5 h-3.5 text-primary" /> The Cognitive Goal
+                   </span>
+                   <p className="font-sans text-neutral-900 font-medium text-sm leading-relaxed">
                      {activeSlide.concept}
                    </p>
                  </div>
 
-                 <div className="space-y-3 bg-neutral-50 border border-neutral-100 p-4 rounded-xl">
-                   <span className="font-ui text-[10px] text-primary uppercase tracking-widest font-bold flex items-center gap-1.5">
-                     <MessageSquare className="w-3 h-3" /> Speaker Notes
+                 {/* Block 2: The Script */}
+                 <div className="bg-primary/5 border border-primary/20 p-4 rounded-xl shadow-sm relative overflow-hidden group">
+                   <div className="absolute left-0 top-0 bottom-0 w-1 bg-primary/40 group-hover:bg-primary transition-colors" />
+                   <span className="font-ui text-[10px] text-primary uppercase tracking-widest font-bold flex items-center gap-1.5 mb-2">
+                     <PlayCircle className="w-3.5 h-3.5" /> Execution & Speaker Notes
+                   </span>
+                   <p className="font-sans text-neutral-800 text-sm leading-relaxed italic">
+                     "{activeSlide.speakerNotes}"
+                   </p>
+                 </div>
+
+                 {/* Block 3: The Architecture */}
+                 <div className="bg-neutral-50 border border-neutral-200 p-4 rounded-xl shadow-sm relative overflow-hidden group">
+                   <div className="absolute left-0 top-0 bottom-0 w-1 bg-neutral-300 group-hover:bg-neutral-500 transition-colors" />
+                   <span className="font-ui text-[10px] text-neutral-500 uppercase tracking-widest font-bold flex items-center gap-1.5 mb-2">
+                     <Layout className="w-3.5 h-3.5 text-neutral-600" /> Visual Rules & Cognitive Load
                    </span>
                    <p className="font-sans text-neutral-700 text-sm leading-relaxed">
-                     {activeSlide.speakerNotes}
-                   </p>
-                 </div>
-
-                 <div className="space-y-3 bg-[#dc2626]/5 border border-[#dc2626]/10 p-4 rounded-xl">
-                   <span className="font-ui text-[10px] text-[#dc2626] uppercase tracking-widest font-bold flex items-center gap-1.5">
-                     <ShieldAlert className="w-3 h-3" /> Visual Rules
-                   </span>
-                   <p className="font-mono text-[#dc2626] text-xs leading-relaxed font-semibold">
                      {activeSlide.visualRules}
-                   </p>
-                 </div>
-
-                 <div className="mt-4 pt-4 border-t border-neutral/10">
-                   <p className="text-xs text-neutral-400 font-sans italic">
-                     These slides enforce the "No-Read" cognitive mandate. Do not add supplementary text boxes.
                    </p>
                  </div>
 
