@@ -76,6 +76,7 @@ export function PitchDeckGuidelines() {
   const [wordLimitWarning, setWordLimitWarning] = useState(false);
   const slideRef = useRef<HTMLDivElement>(null);
 
+  const currentSlideMaxWords = currentSlide === 3 ? 25 : 10;
   const pitchSlides = getPitchSlides(slideCopies, customBg);
 
 
@@ -364,9 +365,9 @@ export function PitchDeckGuidelines() {
              {/* Dynamic Command Center (Universally Active) */}
                <div className="select-none flex flex-col">
                  <label className="text-[11px] font-ui font-bold text-neutral-800 uppercase tracking-widest flex items-center justify-between mb-2">
-                   Customize Slide Copy (Max 10 Words)
-                   <span className={cn("text-[9px] bg-neutral-100 px-1.5 py-0.5 rounded font-mono font-bold border", slideCopies[currentSlide].split(/\s+/).filter(w=>w.trim()!=='').length >= 10 ? "text-red-500 border-red-200 bg-red-50" : "text-neutral-500 border-neutral-200/50")}>
-                     {slideCopies[currentSlide].split(/\s+/).filter(w=>w.trim()!=='').length} / 10
+                   Customize Slide Copy (Max {currentSlideMaxWords} Words)
+                   <span className={cn("text-[9px] bg-neutral-100 px-1.5 py-0.5 rounded font-mono font-bold border", slideCopies[currentSlide].split(/\s+/).filter(w=>w.trim()!=='').length >= currentSlideMaxWords ? "text-red-500 border-red-200 bg-red-50" : "text-neutral-500 border-neutral-200/50")}>
+                     {slideCopies[currentSlide].split(/\s+/).filter(w=>w.trim()!=='').length} / {currentSlideMaxWords}
                    </span>
                  </label>
                  <textarea 
@@ -374,7 +375,7 @@ export function PitchDeckGuidelines() {
                    onChange={(e) => {
                      const copy = e.target.value;
                      const words = copy.split(/\s+/).filter(w => w.trim() !== "");
-                     if (words.length <= 10) {
+                     if (words.length <= currentSlideMaxWords) {
                        const newCopies = [...slideCopies];
                        newCopies[currentSlide] = copy;
                        setSlideCopies(newCopies);
