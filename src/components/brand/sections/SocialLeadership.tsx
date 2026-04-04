@@ -210,11 +210,19 @@ export function SocialLeadership() {
                 Never ask the team to "repost" from the Bridge2Partners company page. Reposts suffer a massive algorithmic reach penalty. Instead, marketing will provide the team with the raw assets (PDFs, images) and text frameworks. The team must upload and publish these assets natively directly to their own feeds. A native personal post generates up to 10x the reach of a company page repost.
               </p>
             </div>
-            <div className="bg-white/40 border border-white/60 p-5 rounded-xl h-full flex flex-col space-y-2 shadow-sm">
+            <div className="bg-white/40 border border-white/60 p-5 rounded-xl h-full flex flex-col space-y-3 shadow-sm">
               <span className="font-ui font-bold text-neutral-900">Optimal Post Architecture</span>
-              <p className="font-sans text-neutral-700 text-sm leading-relaxed">
-                While LinkedIn allows up to 3,000 characters, optimal dwell-time completion rates dictate a strict constraint of <span className="font-data text-primary font-bold px-1.5 py-0.5 bg-[#98cc67]/20 rounded shadow-sm text-sm">1,300 - 1,900 characters</span> per text post.
-              </p>
+              <div className="space-y-4 flex-1">
+                <p className="font-sans text-neutral-700 text-sm leading-relaxed">
+                  While LinkedIn allows up to 3,000 characters, optimal dwell-time completion rates dictate a strict constraint of <span className="font-data text-primary font-bold px-1.5 py-0.5 bg-[#98cc67]/20 rounded shadow-sm text-sm">1,300 - 1,900 characters</span> per text post.
+                </p>
+                <p className="font-sans text-neutral-700 text-sm leading-relaxed">
+                  For long-form Articles and Newsletters, the executive sweet spot is <span className="font-data font-extrabold text-neutral-900">800 - 1,200 words</span>. Anything shorter should be reformatted as a native feed post to avoid algorithmic suppression.
+                </p>
+                <p className="font-sans text-neutral-700 text-sm leading-relaxed">
+                  Comment velocity dictates overall reach. The algorithm flags generic replies ('Great post!') as low-value. To trigger the engagement multiplier, comments must exceed <span className="font-data font-extrabold text-neutral-900">12 words</span>. When replying to prospects, enforce a <span className="font-data font-extrabold text-neutral-900">2-sentence minimum</span> to compound the post's algorithmic score.
+                </p>
+              </div>
             </div>
             <div className="bg-white/40 border border-white/60 p-5 rounded-xl h-full flex flex-col space-y-2 shadow-sm">
               <span className="font-ui font-bold text-neutral-900">Penalties & Spam Filtering</span>
