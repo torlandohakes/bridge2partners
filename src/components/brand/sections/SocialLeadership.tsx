@@ -205,9 +205,9 @@ export function SocialLeadership() {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <div className="space-y-2">
-              <span className="font-ui font-semibold text-neutral">Team Amplification Rule</span>
+              <span className="font-ui font-semibold text-neutral">The Native Distribution Pipeline (No Reposts)</span>
               <p className="font-sans text-neutral/70 text-sm leading-relaxed">
-                The algorithm penalizes raw reposts. When the team shares B2P content, they must use the "Insight Wrap"—adding a 2-sentence personal perspective above the shared post.
+                Never ask the team to "repost" from the Bridge2Partners company page. Reposts suffer a massive algorithmic reach penalty. Instead, marketing will provide the team with the raw assets (PDFs, images) and text frameworks. The team must upload and publish these assets natively directly to their own feeds. A native personal post generates up to 10x the reach of a company page repost.
               </p>
             </div>
             <div className="space-y-2">
