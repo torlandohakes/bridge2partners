@@ -44,7 +44,7 @@
     
     /* Hairline borders base tracking */
     --border: 163 100% 17%;
-    --input: 163 100% 17%;
+    --input: 173 7% 26%; /* Neutral */
     --ring: 163 100% 17%;
 
     --radius: 0.5rem;
@@ -84,14 +84,14 @@
     --popover-foreground: 0 0% 100%;
     
     --muted: 173 7% 26%;
-    --muted-foreground: 173 7% 26%;
+    --muted-foreground: 173 15% 75%; /* Significantly lightened for dark mode readability */
     
     --accent: 91 50% 60%;
     --accent-foreground: 167 100% 5%;
     
     /* Gray/Slate scale borders */
     --border: 91 50% 60%;
-    --input: 91 50% 60%;
+    --input: 173 7% 26%; /* Neutral */
     --ring: 91 50% 60%;
   }
 
