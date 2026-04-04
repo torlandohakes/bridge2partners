@@ -24,26 +24,25 @@ const pitchSlides = [
   {
     id: 1,
     title: "The Hook",
-    concept: "Name the undeniable reality.",
-    speakerNotes: "Do not talk about B2P. Talk about the squeeze between megabanks and agile fintechs.",
-    visualRules: "Strict Rule: Max 12 words per slide. Use font-display.",
+    concept: "The Legacy Trap (Status Quo Bias).",
+    speakerNotes: "Every institution knows innovation is survival, but changing core systems is terrifying. Validate their fear, but force them to confront the reality of their inaction.",
+    visualRules: "Massive typography. Max 8 words. Cinematic dark mode to establish gravity.",
     aiPersona: "Skeptical Regional Bank EVP",
     aiObjection: "Look, we've integrated three banks in the last five years using legacy methods. It's slow, but it works. Why do I need to change?",
     slideContent: (
-      <div className="w-full h-full bg-[#0a110f] relative flex flex-col items-center justify-center p-12 overflow-hidden group z-30">
-         {/* Subtle premium visual texture: dot-matrix mesh overlay */}
-         <div className="absolute inset-0 opacity-10 pointer-events-none mix-blend-screen" style={{ backgroundImage: "radial-gradient(circle, #ffffff 1px, transparent 1px)", backgroundSize: "32px 32px" }} />
-         <div className="absolute inset-0 bg-gradient-to-t from-[#0a110f] via-transparent to-[#0a110f] opacity-80 pointer-events-none z-0" />
+      <div className="w-full h-full bg-[#0a110f] relative flex flex-col justify-center p-16 lg:p-20 overflow-hidden group z-30">
+         {/* Cinematic Background */}
+         <div className="absolute inset-0 bg-gradient-to-r from-black/80 to-transparent pointer-events-none z-0" />
          
-         {/* Massive font-display typography with text gradients */}
-         <h2 className="font-display font-extrabold text-7xl lg:text-[100px] tracking-tighter leading-[1] text-center z-10 max-w-5xl">
-           <span className="text-transparent bg-clip-text bg-gradient-to-b from-white to-neutral-400 drop-shadow-md">The Era of</span><br/>
-           <span className="text-transparent bg-clip-text bg-gradient-to-b from-white to-neutral-400 drop-shadow-md">Slow M&A is</span> <span className="text-transparent bg-clip-text bg-gradient-to-br from-white to-[#98cc67] drop-shadow-[0_0_30px_rgba(152,204,103,0.15)] relative">Dead.<div className="absolute inset-0 bg-[#98cc67] opacity-20 blur-2xl -z-10 rounded-full" /></span>
-         </h2>
+         {/* Stacked Left-Aligned Typography */}
+         <div className="relative z-10 max-w-3xl flex flex-col gap-2">
+            <h2 className="font-display font-black text-5xl lg:text-6xl tracking-tight leading-[1.1] text-transparent bg-clip-text bg-gradient-to-br from-white to-neutral-300 drop-shadow-md">
+              Innovation is Survival.<br/>Your Legacy Stack is the <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#98cc67] to-[#7bb050] drop-shadow-[0_0_20px_rgba(152,204,103,0.3)]">Anchor.</span>
+            </h2>
+         </div>
 
          {/* Custom Slide Anchors */}
          <div className="absolute bottom-6 left-8 flex items-center gap-2 z-20">
-           <div className="w-2 h-2 bg-[#98cc67] shadow-[0_0_10px_rgba(152,204,103,0.5)]" />
            <span className="font-ui text-[10px] text-white/40 tracking-widest uppercase font-bold">Bridge2Partners</span>
          </div>
          <div className="absolute bottom-6 right-8 font-ui text-[10px] text-white/40 tracking-widest font-bold z-20">
@@ -61,14 +60,9 @@ const pitchSlides = [
     aiPersona: "Conservative CFO",
     aiObjection: "Our current tech debt is manageable. Shifting to a new modular methodology seems like a massive capital expenditure for unproven ROI. How do you justify the initial burn?",
     slideContent: (
-      <div className="w-full h-full bg-[#001b15] relative flex overflow-hidden">
-         <div className="w-1/2 flex items-center justify-center p-12 border-r border-white/10 bg-black/20">
-           <span className="font-display font-medium text-4xl lg:text-5xl text-white/50 text-center leading-tight">Quarters of<br/>Tech Debt.</span>
-         </div>
-         <div className="w-1/2 flex items-center justify-center p-12 relative overflow-hidden">
-           <div className="absolute inset-0 bg-[#98cc67]/10" />
-           <span className="font-display font-bold text-4xl lg:text-5xl text-[#98cc67] text-center leading-tight drop-shadow-md z-10">Results in<br/>Weeks.</span>
-         </div>
+      <div className="w-full h-full bg-neutral-100 flex flex-col items-center justify-center border-2 border-dashed border-neutral-300 relative z-30">
+         <span className="font-ui font-semibold text-neutral-500 uppercase tracking-widest sm:text-lg">Slide 2: The Stakes</span>
+         <span className="font-sans text-neutral-400 mt-2 text-sm italic">(Pending High-Fidelity Design)</span>
       </div>
     )
   },
@@ -81,30 +75,9 @@ const pitchSlides = [
     aiPersona: "Chief Information Officer",
     aiObjection: "You're oversimplifying. We have 40+ legacy systems tied directly into our core banking platform. A clean 'hub and spoke' is a consultant's pipe dream.",
     slideContent: (
-      <div className="w-full h-full bg-[#001b15] relative flex items-center justify-center p-12 overflow-hidden">
-         <div className="relative w-full max-w-[340px] aspect-square flex items-center justify-center">
-            {/* Center Node */}
-            <div className="w-40 h-40 rounded-full bg-white/10 border border-white/20 flex flex-col items-center justify-center z-20 backdrop-blur-md shadow-2xl">
-              <Network className="w-12 h-12 text-[#98cc67] mb-2" />
-              <span className="text-base text-white font-ui font-bold text-center leading-tight tracking-wide">Systems of<br/>Record</span>
-            </div>
-            {/* Satellites */}
-            <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-20 h-20 bg-white/5 rounded-full border border-white/10 flex items-center justify-center z-10">
-               <span className="text-xs text-white/70 uppercase tracking-widest font-semibold">Lending</span>
-            </div>
-            <div className="absolute bottom-6 left-0 -translate-x-1/4 w-20 h-20 bg-white/5 rounded-full border border-white/10 flex items-center justify-center z-10">
-               <span className="text-xs text-white/70 uppercase tracking-widest font-semibold">Wealth</span>
-            </div>
-            <div className="absolute bottom-6 right-0 translate-x-1/4 w-20 h-20 bg-white/5 rounded-full border border-white/10 flex items-center justify-center z-10">
-               <span className="text-xs text-white/70 uppercase tracking-widest font-semibold">Treasury</span>
-            </div>
-            {/* Connecting lines */}
-            <svg className="absolute inset-0 w-full h-full -z-10" viewBox="0 0 100 100">
-              <line x1="50" y1="50" x2="50" y2="10" stroke="rgba(255,255,255,0.15)" strokeWidth="0.5" strokeDasharray="2,2"/>
-              <line x1="50" y1="50" x2="15" y2="80" stroke="rgba(255,255,255,0.15)" strokeWidth="0.5" strokeDasharray="2,2"/>
-              <line x1="50" y1="50" x2="85" y2="80" stroke="rgba(255,255,255,0.15)" strokeWidth="0.5" strokeDasharray="2,2"/>
-            </svg>
-         </div>
+      <div className="w-full h-full bg-neutral-100 flex flex-col items-center justify-center border-2 border-dashed border-neutral-300 relative z-30">
+         <span className="font-ui font-semibold text-neutral-500 uppercase tracking-widest sm:text-lg">Slide 3: The Reframe</span>
+         <span className="font-sans text-neutral-400 mt-2 text-sm italic">(Pending High-Fidelity Design)</span>
       </div>
     )
   },
@@ -117,11 +90,9 @@ const pitchSlides = [
     aiPersona: "Head of Retail Banking",
     aiObjection: "Look, 'Agile' and 'Banking' are oxymorons. Our regulators won't let us be agile. How does this promised land survive compliance?",
     slideContent: (
-      <div className="w-full h-full bg-gradient-to-br from-primary to-primary-dark relative flex flex-col items-center justify-center p-12 overflow-hidden group">
-         <div className="absolute inset-0 opacity-10 mix-blend-overlay pointer-events-none" style={{ backgroundImage: "radial-gradient(circle, #ffffff 1px, transparent 1px)", backgroundSize: "30px 30px" }} />
-         <span className="font-display font-extrabold text-5xl lg:text-7xl text-white tracking-tighter leading-tight text-center drop-shadow-md">
-           The Agile<br/>Regional Institution.
-         </span>
+      <div className="w-full h-full bg-neutral-100 flex flex-col items-center justify-center border-2 border-dashed border-neutral-300 relative z-30">
+         <span className="font-ui font-semibold text-neutral-500 uppercase tracking-widest sm:text-lg">Slide 4: The Promised Land</span>
+         <span className="font-sans text-neutral-400 mt-2 text-sm italic">(Pending High-Fidelity Design)</span>
       </div>
     )
   },
@@ -134,25 +105,9 @@ const pitchSlides = [
     aiPersona: "Chief Operating Officer",
     aiObjection: "So you're consultants? I have McKinsey telling me they can do this. What actually makes your 'tools' magic compared to standard M&A consulting frameworks?",
     slideContent: (
-      <div className="w-full h-full bg-[#001b15] relative flex flex-col items-center justify-center p-16 overflow-hidden">
-         <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 w-full h-full">
-           <div className="bg-white/5 border border-white/10 rounded-xl flex flex-col items-center justify-center gap-4 relative p-6 shadow-inner">
-             <div className="w-16 h-16 rounded-full bg-white/5 border border-white/10 flex items-center justify-center"><CheckCircle2 className="w-8 h-8 text-[#98cc67]"/></div>
-             <span className="text-sm lg:text-base text-white/80 font-ui text-center leading-tight font-medium">Commercial<br/>Lending</span>
-           </div>
-           <div className="bg-white/5 border border-white/10 rounded-xl flex flex-col items-center justify-center gap-4 relative p-6 shadow-inner">
-             <div className="w-16 h-16 rounded-full bg-white/5 border border-white/10 flex items-center justify-center"><CheckCircle2 className="w-8 h-8 text-[#98cc67]"/></div>
-             <span className="text-sm lg:text-base text-white/80 font-ui text-center leading-tight font-medium">Treasury<br/>Solutions</span>
-           </div>
-           <div className="bg-white/5 border border-white/10 rounded-xl flex flex-col items-center justify-center gap-4 relative p-6 shadow-inner">
-             <div className="w-16 h-16 rounded-full bg-white/5 border border-white/10 flex items-center justify-center"><CheckCircle2 className="w-8 h-8 text-[#98cc67]"/></div>
-             <span className="text-sm lg:text-base text-white/80 font-ui text-center leading-tight font-medium">Wealth<br/>Management</span>
-           </div>
-           <div className="bg-white/5 border border-white/10 rounded-xl flex flex-col items-center justify-center gap-4 relative p-6 shadow-inner">
-             <div className="w-16 h-16 rounded-full bg-white/5 border border-white/10 flex items-center justify-center"><CheckCircle2 className="w-8 h-8 text-[#98cc67]"/></div>
-             <span className="text-sm lg:text-base text-white/80 font-ui text-center leading-tight font-medium">Digital<br/>Onboarding</span>
-           </div>
-         </div>
+      <div className="w-full h-full bg-neutral-100 flex flex-col items-center justify-center border-2 border-dashed border-neutral-300 relative z-30">
+         <span className="font-ui font-semibold text-neutral-500 uppercase tracking-widest sm:text-lg">Slide 5: The Magic Tools</span>
+         <span className="font-sans text-neutral-400 mt-2 text-sm italic">(Pending High-Fidelity Design)</span>
       </div>
     )
   },
@@ -165,22 +120,9 @@ const pitchSlides = [
     aiPersona: "Venture Capital Partner / Board Member",
     aiObjection: "Those are big numbers, but Bank of America has infinite runway. We have 18 months. Has this framework actually worked for a regional player our size?",
     slideContent: (
-      <div className="w-full h-full bg-[#001b15] relative flex flex-col items-center justify-between p-12 lg:p-20 overflow-hidden">
-         <div className="flex-1 w-full flex items-center justify-between border-b border-white/10 pb-8">
-            <div className="flex flex-col items-center flex-1 border-r border-white/10 gap-2">
-              <span className="font-data text-6xl lg:text-8xl font-semibold text-white tracking-tight drop-shadow-lg">$250B</span>
-              <span className="font-ui text-sm lg:text-base text-[#98cc67] uppercase tracking-widest font-bold drop-shadow">M&A Integration</span>
-            </div>
-            <div className="flex flex-col items-center flex-1 gap-2">
-              <span className="font-data text-6xl lg:text-8xl font-semibold text-white tracking-tight drop-shadow-lg">40+</span>
-              <span className="font-ui text-sm lg:text-base text-[#98cc67] uppercase tracking-widest font-bold drop-shadow">Integrations Delivered</span>
-            </div>
-         </div>
-         <div className="w-full h-24 flex items-center justify-center gap-16 pt-8 opacity-40">
-            <span className="font-mono text-sm lg:text-base text-white uppercase tracking-widest font-bold">Bank of America</span>
-            <span className="font-mono text-sm lg:text-base text-white uppercase tracking-widest font-bold">Wells Fargo</span>
-            <span className="font-mono text-sm lg:text-base text-white uppercase tracking-widest font-bold">Chase</span>
-         </div>
+      <div className="w-full h-full bg-neutral-100 flex flex-col items-center justify-center border-2 border-dashed border-neutral-300 relative z-30">
+         <span className="font-ui font-semibold text-neutral-500 uppercase tracking-widest sm:text-lg">Slide 6: The Proof</span>
+         <span className="font-sans text-neutral-400 mt-2 text-sm italic">(Pending High-Fidelity Design)</span>
       </div>
     )
   }
@@ -399,9 +341,9 @@ export function PitchDeckGuidelines() {
                           <div className="absolute left-0 top-0 bottom-0 w-1 bg-[#98cc67]" />
                           <p className="text-sm font-sans text-neutral-700 leading-relaxed mb-3">Perfect. Let's build the Strategic Narrative.</p>
                           <div className="bg-neutral-50 border border-neutral-200 rounded p-3 mb-3">
-                            <span className="font-ui font-bold text-xs text-neutral-800 block mb-1">Slide 1 (The Hook): "The 90-Day Wealth Drain."</span>
+                            <span className="font-ui font-bold text-xs text-neutral-800 block mb-1">Slide 1 (The Hook): "The Legacy Stack is the Anchor."</span>
                             <p className="text-xs font-sans text-neutral-600">
-                              <span className="font-semibold text-neutral-800">Instruction:</span> Use massive <code className="font-mono bg-neutral-200 px-1 py-0.5 rounded text-[10px]">font-display</code> text. Don't mention Bridge2Partners yet. Force them to acknowledge that slow onboarding is actively shrinking their AUM.
+                              <span className="font-semibold text-neutral-800">Instruction:</span> Use massive left-stacked <code className="font-mono bg-neutral-200 px-1 py-0.5 rounded text-[10px]">font-display</code> text on a cinematic overlay. Do not mention B2P. Anchor their bleeding AUM directly to their core architecture gap.
                             </p>
                           </div>
                           <p className="text-sm font-sans text-neutral-700 leading-relaxed font-semibold">Ready to map out Slide 2 (The Stakes)?</p>
