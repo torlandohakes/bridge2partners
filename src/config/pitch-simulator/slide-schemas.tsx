@@ -458,20 +458,155 @@ export const getPitchSlides = (slideCopies: string[], customBg: string | null) =
 
   {
     id: 7,
-    title: "Appendix",
-    concept: "The Proof Arsenal (System 2 Validation). The core 6 slides hook the emotional/strategic brain (System 1). The Appendix is strictly for the logical, risk-mitigating brain (System 2). It proves we have the receipts.",
-    speakerNotes: "Never present these slides voluntarily. Keep them in reserve. When the CIO stops you to ask how our middleware handles API rate limits, seamlessly jump to the corresponding Appendix slide. Use it to kill objections with overwhelming competence.",
-    visualRules: "Appendix slides are permitted to be highly data-dense. This is where we place complex architecture diagrams, detailed case study metrics (like the 40+ integrations), and technical timelines. Must still obey strict typography hierarchy.",
-    aiPersona: "Chief Technology Officer / Risk Officer",
-    aiObjection: "Your narrative is great, but we need to see the actual API limits, compliance workflows, and security frameworks before we sign anything.",
+    title: "Appendix A",
+    concept: "The Blueprint. Capabilities Matrix.",
+    speakerNotes: "Keep this in reserve for specific feature drilling.",
+    visualRules: "Light mode. 25/75 split. High density text. Minimalist lime framing.",
+    aiPersona: "VP of Operations",
+    aiObjection: "What exact capabilities do you map?",
     slideContent: (
-      <div className="w-full h-full bg-neutral-900/50 flex flex-col items-center justify-center border-2 border-dashed border-neutral-600 relative z-30 group">
-         <div className="absolute top-6 right-8 bg-[#dc2626]/10 border border-[#dc2626]/30 px-3 py-1.5 rounded-sm shadow-sm backdrop-blur-sm">
-            <span className="font-ui text-[10px] uppercase font-bold tracking-widest text-[#dc2626]">DO NOT PRESENT VOLUNTARILY</span>
+      <div className="w-full h-full bg-white relative flex flex-row group z-30 overflow-hidden text-neutral-900 border-2 border-neutral-100">
+         <div className="w-[25%] h-[90%] my-auto relative border-r border-[#98cc67]/30 flex flex-col justify-between ml-[2cqw]">
+           <div className="absolute left-[3cqw] top-[6cqw] origin-top-left -rotate-90 translate-y-[22cqw]">
+             <span className="font-ui text-[1.2cqw] uppercase tracking-[0.3em] font-bold text-neutral-400">Appendix A // Playbooks</span>
+           </div>
+           
+           {/* Custom Slide Anchors */}
+           <div className="absolute bottom-[2cqw] left-[3cqw] flex items-center gap-[1cqw]">
+             <img 
+               src={`/api/proxy-image?url=${encodeURIComponent('https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2FBridge2Partners_Favicon.png?alt=media&token=8281d312-5968-4fa1-9e37-347481934b95')}`}
+               alt="B2P Logo" 
+               className="w-[2cqw] h-[2cqw] object-contain opacity-50 contrast-200 grayscale"
+             />
+             <span className="font-ui text-[0.9cqw] text-neutral-400/80 tracking-widest uppercase font-bold">Bridge2Partners</span>
+           </div>
          </div>
-         <span className="font-ui font-semibold text-neutral-300 uppercase tracking-widest sm:text-lg text-center">Appendix:<br/>Technical Validation & Proof</span>
-         <span className="font-sans text-neutral-500 mt-3 text-sm italic">(Pending High-Fidelity Design)</span>
+         <div className="w-[75%] h-full flex flex-col p-[6cqw] pt-[8cqw] justify-start">
+           <h2 className="font-display font-black text-[3.5cqw] leading-[1.05] tracking-tight mb-[4cqw] text-neutral-900">Playbooks &<br/>Capabilities Matrix</h2>
+           <div className="columns-2 gap-[4cqw] font-sans text-[1.1cqw] leading-relaxed text-neutral-600">
+             <div className="mb-[3cqw] break-inside-avoid">
+               <h3 className="font-ui font-black text-neutral-900 mb-1 tracking-wide relative pl-[2cqw]">
+                 <span className="absolute left-0 top-[0.1cqw] text-[#98cc67] text-[1.5cqw] leading-none">•</span> Digital Account Opening
+               </h3>
+               <p className="pl-[2cqw]">End-to-end orchestration of responsive DAO workflows, optimizing drop-off rates and integrating seamless KYC boundary validations directly into legacy core processors.</p>
+             </div>
+             <div className="mb-[3cqw] break-inside-avoid">
+               <h3 className="font-ui font-black text-neutral-900 mb-1 tracking-wide relative pl-[2cqw]">
+                 <span className="absolute left-0 top-[0.1cqw] text-[#98cc67] text-[1.5cqw] leading-none">•</span> CRM Platform Mapping
+               </h3>
+               <p className="pl-[2cqw]">Deep Salesforce and Dynamics integration. Unifying disparate siloed data into a single pane of glass for frontline retail and commercial sales teams.</p>
+             </div>
+             <div className="mb-[3cqw] break-inside-avoid">
+               <h3 className="font-ui font-black text-neutral-900 mb-1 tracking-wide relative pl-[2cqw]">
+                 <span className="absolute left-0 top-[0.1cqw] text-[#98cc67] text-[1.5cqw] leading-none">•</span> Pipeline Orchestration
+               </h3>
+               <p className="pl-[2cqw]">Constructing scalable Event-Driven architectures using Kafka/MuleSoft to decouple rigid legacy cores from agile edge applications.</p>
+             </div>
+             <div className="mb-[3cqw] break-inside-avoid">
+               <h3 className="font-ui font-black text-neutral-900 mb-1 tracking-wide relative pl-[2cqw]">
+                 <span className="absolute left-0 top-[0.1cqw] text-[#98cc67] text-[1.5cqw] leading-none">•</span> Compliance Sandbox
+               </h3>
+               <p className="pl-[2cqw]">Pre-configured environments designed to automatically test continuous delivery deployments against strict OFAC, BSA, and AML thresholds.</p>
+             </div>
+           </div>
+         </div>
+         <div className="absolute bottom-[3cqw] right-[4cqw] font-ui text-[1cqw] text-neutral-300 tracking-widest font-bold z-30">
+           07
+         </div>
+      </div>
+    )
+  },
+  {
+    id: 8,
+    title: "Appendix B",
+    concept: "Seamless Migration Lifecycle",
+    speakerNotes: "Prove the 'build in parallel' concept with an actual timeline.",
+    visualRules: "Light mode layout tracking a horizontal timeline layout across columns.",
+    aiPersona: "Chief Information Officer",
+    aiObjection: "Can you guarantee zero downtime during cutover?",
+    slideContent: (
+      <div className="w-full h-full bg-white relative flex flex-row group z-30 overflow-hidden text-neutral-900 border-2 border-neutral-100">
+         <div className="w-[25%] h-[90%] my-auto relative border-r border-[#98cc67]/30 flex flex-col justify-between ml-[2cqw]">
+           <div className="absolute left-[3cqw] top-[6cqw] origin-top-left -rotate-90 translate-y-[28cqw]">
+             <span className="font-ui text-[1.2cqw] uppercase tracking-[0.3em] font-bold text-neutral-400">Appendix B // Migration Timeline</span>
+           </div>
+           <div className="absolute bottom-[2cqw] left-[3cqw] flex items-center gap-[1cqw]">
+             <img 
+               src={`/api/proxy-image?url=${encodeURIComponent('https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2FBridge2Partners_Favicon.png?alt=media&token=8281d312-5968-4fa1-9e37-347481934b95')}`}
+               alt="B2P Logo" 
+               className="w-[2cqw] h-[2cqw] object-contain opacity-50 contrast-200 grayscale"
+             />
+             <span className="font-ui text-[0.9cqw] text-neutral-400/80 tracking-widest uppercase font-bold">Bridge2Partners</span>
+           </div>
+         </div>
+         <div className="w-[75%] h-full flex flex-col p-[6cqw] pt-[8cqw] justify-start">
+           <h2 className="font-display font-black text-[3.5cqw] leading-[1.05] tracking-tight mb-[4cqw] text-neutral-900">Seamless Migration<br/>Protocol</h2>
+           
+           <div className="flex flex-col gap-[2cqw]">
+              <div className="flex items-start gap-[3cqw] border-l-2 border-[#98cc67] pl-[2cqw] py-1">
+                 <div className="w-[12cqw] shrink-0 font-ui font-black text-[1.3cqw] text-neutral-900 uppercase leading-snug">Pre-Flight<br/><span className="text-[#98cc67] text-[1cqw] tracking-widest font-bold">4 Weeks</span></div>
+                 <p className="font-sans text-[1.1cqw] text-neutral-600">Total Systems Audit. Deep mapping of all existing core processes, API endpoints, and undocumented legacy protocols to configure the target state architecture.</p>
+              </div>
+              <div className="flex items-start gap-[3cqw] border-l-2 border-neutral-200 pl-[2cqw] py-1">
+                 <div className="w-[12cqw] shrink-0 font-ui font-black text-[1.3cqw] text-neutral-900 uppercase leading-snug">Core Wrap<br/><span className="text-neutral-400 text-[1cqw] tracking-widest font-bold">8 Weeks</span></div>
+                 <p className="font-sans text-[1.1cqw] text-neutral-600">Construction of the abstraction layer. The legacy core is containerized behind secure REST interfaces allowing external systems to interact without direct core contact.</p>
+              </div>
+              <div className="flex items-start gap-[3cqw] border-l-2 border-neutral-200 pl-[2cqw] py-1">
+                 <div className="w-[12cqw] shrink-0 font-ui font-black text-[1.3cqw] text-neutral-900 uppercase leading-snug">Shadow Node<br/><span className="text-neutral-400 text-[1cqw] tracking-widest font-bold">6 Weeks</span></div>
+                 <p className="font-sans text-[1.1cqw] text-neutral-600">Parallel event routing. Transactions flow simultaneously through the legacy stack and the new middleware. Complete data verification without operational disruption.</p>
+              </div>
+              <div className="flex items-start gap-[3cqw] border-l-2 border-neutral-200 pl-[2cqw] py-1">
+                 <div className="w-[12cqw] shrink-0 font-ui font-black text-[1.3cqw] text-neutral-900 uppercase leading-snug">Go-Live Cut<br/><span className="text-neutral-400 text-[1cqw] tracking-widest font-bold">0 Downtime</span></div>
+                 <p className="font-sans text-[1.1cqw] text-neutral-600">Atomic transition. Shadow routing is finalized and primary logic flows through the accelerated architecture with 24/7 hypercare support attached.</p>
+              </div>
+           </div>
+         </div>
+         <div className="absolute bottom-[3cqw] right-[4cqw] font-ui text-[1cqw] text-neutral-300 tracking-widest font-bold z-30">
+           08
+         </div>
+      </div>
+    )
+  },
+  {
+    id: 9,
+    title: "Appendix C",
+    concept: "Integration Catalog",
+    speakerNotes: "The massive footprint of our integration experience.",
+    visualRules: "Light mode masonry grid displaying pure capability data.",
+    aiPersona: "Director of Vendor Management",
+    aiObjection: "Do you have specific experience with our obscure ledger system?",
+    slideContent: (
+      <div className="w-full h-full bg-white relative flex flex-row group z-30 overflow-hidden text-neutral-900 border-2 border-neutral-100">
+         <div className="w-[25%] h-[90%] my-auto relative border-r border-[#98cc67]/30 flex flex-col justify-between ml-[2cqw]">
+           <div className="absolute left-[3cqw] top-[6cqw] origin-top-left -rotate-90 translate-y-[26cqw]">
+             <span className="font-ui text-[1.2cqw] uppercase tracking-[0.3em] font-bold text-neutral-400">Appendix C // Integrations</span>
+           </div>
+           <div className="absolute bottom-[2cqw] left-[3cqw] flex items-center gap-[1cqw]">
+             <img 
+               src={`/api/proxy-image?url=${encodeURIComponent('https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2FBridge2Partners_Favicon.png?alt=media&token=8281d312-5968-4fa1-9e37-347481934b95')}`}
+               alt="B2P Logo" 
+               className="w-[2cqw] h-[2cqw] object-contain opacity-50 contrast-200 grayscale"
+             />
+             <span className="font-ui text-[0.9cqw] text-neutral-400/80 tracking-widest uppercase font-bold">Bridge2Partners</span>
+           </div>
+         </div>
+         <div className="w-[75%] h-full flex flex-col p-[6cqw] pt-[8cqw] justify-start">
+           <h2 className="font-display font-black text-[3.5cqw] leading-[1.05] tracking-tight mb-[4cqw] text-neutral-900">The Integration<br/>Catalog</h2>
+           
+           <div className="columns-2 gap-[4cqw] font-sans text-[1.2cqw] text-neutral-700">
+              {['Fiserv Core', 'FIS Profile', 'Jack Henry Silverlake', 'Salesforce Financial', 'nCino Bank Operating', 'Plaid Link', 'Synctera Ledger', 'Encompass Loan', 'Alkami Digital Banking', 'MuleSoft Anypoint', 'AWS Lambda Integration', 'Azure Event Grid', 'DocuSign eSignature', 'MANTIS Legacy', 'MeridianLink'].map(item => (
+                <div key={item} className="break-inside-avoid flex items-center gap-[1.5cqw] mb-[2cqw]">
+                   <div className="w-[0.5cqw] h-[0.5cqw] bg-neutral-300 rounded-sm flex-shrink-0" />
+                   <span className="font-ui font-semibold text-[1.2cqw]">{item}</span>
+                </div>
+              ))}
+           </div>
+         </div>
+         <div className="absolute bottom-[3cqw] right-[4cqw] font-ui text-[1cqw] text-neutral-300 tracking-widest font-bold z-30">
+           09
+         </div>
       </div>
     )
   }
+
 ];

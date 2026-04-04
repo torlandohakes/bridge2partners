@@ -45,7 +45,9 @@ export function PitchDeckGuidelines() {
     "We Are Bankers, Like You.\nWe have worked at the banks we serve. Dedicated specialists with tenure at the top 100 financial institutions.",
     "The Simplified\nMiddleware Layer.",
     "Execution at Scale.",
-    "Slide 7: Appendix\n(Pending High-Fidelity Design)",
+    "Appendix A: Playbooks & Capabilities",
+    "Appendix B: Seamless Migration Lifecycle",
+    "Appendix C: Integration Matrix",
   ]);
   const [currentSlide, setCurrentSlide] = useState(0);
   const [sidebarTab, setSidebarTab] = useState<'strategy' | 'roleplay'>('strategy');
