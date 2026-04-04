@@ -11,14 +11,15 @@ function ShowcaseBlock({ title, promptId, children }: { title: string; promptId:
       <h4 className="font-ui text-md font-semibold text-primary/80 uppercase tracking-widest text-[11px] mb-1">{title}</h4>
       <div className="grid lg:grid-cols-2 gap-4 w-full">
         {/* Light Mode Spec */}
+        {/* Light Mode Spec */}
         <div className="p-8 border border-primary/10 rounded-xl bg-background text-foreground flex flex-col items-center justify-center relative overflow-hidden shadow-sm">
-          <div className="absolute top-2 left-2 text-[10px] font-mono text-muted-foreground/50 uppercase tracking-widest">Light Spec</div>
-          <div className="w-full flex justify-center">{children}</div>
+          <div className="absolute top-3 left-4 text-[10px] font-mono text-muted-foreground/60 uppercase tracking-widest z-10">Light Spec</div>
+          <div className="w-full flex justify-center relative z-0">{children}</div>
         </div>
         {/* Tactical Dark Mode Spec */}
         <div className="dark p-8 border border-primary/10 rounded-xl bg-background text-foreground flex flex-col items-center justify-center relative overflow-hidden shadow-sm">
-          <div className="absolute top-2 left-2 text-[10px] font-mono text-muted-foreground/50 uppercase tracking-widest">Dark Spec</div>
-          <div className="w-full flex justify-center">{children}</div>
+          <div className="absolute top-3 left-4 text-[10px] font-mono text-muted-foreground/60 uppercase tracking-widest z-10">Dark Spec</div>
+          <div className="w-full flex justify-center relative z-0">{children}</div>
         </div>
       </div>
       <div className="w-full bg-muted/40 p-3 rounded-md flex items-center justify-between border border-border/10 cursor-copy hover:bg-muted/60 transition-colors group">
