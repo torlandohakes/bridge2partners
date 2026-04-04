@@ -239,8 +239,7 @@ const getPitchSlides = (slideCopies: string[], customBg: string | null) => [
          {/* Left Side: Typography & Proof (40%) */}
          <div className="w-[45%] flex flex-col justify-center h-full z-10 gap-[4cqw] pl-[2cqw]">
             <h2 className="font-display font-black text-[4.5cqw] leading-[1.05] tracking-tight text-transparent bg-clip-text bg-gradient-to-br from-white to-neutral-400">
-               {slideCopies[3].split('
-').map((line, index, array) => {
+               {slideCopies[3].split('\n').map((line, index, array) => {
                  const isLastLine = index === array.length - 1 && line.trim() !== "";
                  return (
                    <span key={index} className={cn(isLastLine ? "text-transparent bg-clip-text bg-gradient-to-r from-secondary to-secondary/70 drop-shadow-[0_0_20px_rgba(0,150,119,0.3)] leading-normal" : "")}>
