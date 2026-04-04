@@ -151,7 +151,7 @@ export function SocialLeadership() {
             <h4 className="font-ui font-bold text-primary tracking-tight pb-2 border-b border-neutral/10">Wireframe 2: The RAG Output Report</h4>
             
             <div className="bg-neutral/5 rounded-lg p-5 flex items-center justify-center h-[380px]">
-               <div className="w-full bg-white shadow-xl border border-black/5 rounded-xl flex flex-col font-mono text-[10px] text-neutral/50 uppercase tracking-widest relative border-t-[6px] border-t-primary">
+               <div className="w-full bg-white shadow-xl border border-black/5 rounded-xl flex flex-col font-mono text-[10px] text-neutral/50 uppercase tracking-widest relative">
                  <div className="flex items-center justify-between p-4 border-b border-black/5 bg-black/5">
                     <span className="font-bold">Output Validation</span>
                     <div className="flex items-center gap-1.5 bg-[#001b15] text-[#98cc67] px-2.5 py-1 rounded-full border border-[#98cc67]/30 shadow-[0_0_8px_rgba(152,204,103,0.2)]">
