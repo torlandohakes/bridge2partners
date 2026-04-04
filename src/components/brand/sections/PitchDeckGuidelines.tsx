@@ -132,11 +132,11 @@ export function PitchDeckGuidelines() {
     <section className="animate-in fade-in duration-500 flex flex-col gap-8 w-full max-w-7xl mx-auto">
       
       {/* Header Context */}
-      <div className="border-b border-neutral/10 pb-6 w-full flex flex-col gap-2">
-        <h2 className="text-3xl font-bold tracking-tighter text-primary font-heading">
+      <div className="border-b border-primary/10 pb-6 w-full flex flex-col gap-2">
+        <h2 className="text-3xl font-semibold tracking-tighter text-primary font-heading">
           Pitch Simulator & AI Roleplay
         </h2>
-        <p className="text-base text-neutral-600 font-sans max-w-3xl">
+        <p className="text-base text-foreground-600 font-sans max-w-3xl">
           Abandoning text-heavy brochures in favor of the Evidence-Based Strategic Narrative Framework. 
           Use this module to visualize the 6-slide arc and practice dynamic objections against B2P Intelligence.
         </p>
@@ -144,37 +144,37 @@ export function PitchDeckGuidelines() {
 
       {/* Simulator Interface */}
       <div className={cn(
-        "bg-white/40 backdrop-blur-sm border border-neutral/10 rounded-2xl overflow-hidden shadow-xl transition-all duration-300",
+        "bg-white/40 backdrop-blur-sm border border-primary/10 rounded-2xl overflow-hidden shadow-xl transition-all duration-300",
         isFullscreen ? "fixed inset-0 z-50 flex flex-col landscape:flex-row h-screen w-screen overflow-hidden bg-neutral-50/95 backdrop-blur" : "flex flex-col lg:flex-row relative min-h-[600px]"
       )}>
         
         {/* Left Stage: 16:9 Slide Viewer (60-70%) */}
         <div className={cn(
           "flex flex-col bg-neutral-100", 
-          isFullscreen ? "flex-1 w-full landscape:h-full flex flex-col overflow-hidden" : "w-full lg:w-[65%] border-b lg:border-b-0 lg:border-r border-neutral/10"
+          isFullscreen ? "flex-1 w-full landscape:h-full flex flex-col overflow-hidden" : "w-full lg:w-[65%] border-b lg:border-b-0 lg:border-r border-primary/10"
         )}>
           {/* Deck Header */}
-          <div className="h-14 bg-white border-b border-neutral/10 flex items-center justify-between px-6 shrink-0">
+          <div className="h-14 bg-white border-b border-primary/10 flex items-center justify-between px-6 shrink-0">
              <div className="flex items-center gap-3">
-               <span className="font-ui font-semibold text-neutral-800 text-sm tracking-tight">{activeSlide.title}</span>
+               <span className="font-ui font-semibold text-foreground-800 text-sm tracking-tight">{activeSlide.title}</span>
                <span className="bg-primary/10 text-primary text-[10px] font-mono px-2 py-0.5 rounded tracking-widest uppercase font-bold">Standard 16:9</span>
              </div>
              {/* Controls & Export Engine */}
              <div className="flex items-center gap-3">
-                <span className="text-xs font-ui text-neutral-500 font-medium mr-1 hidden sm:inline-block">Slide {currentSlide + 1} of {pitchSlides.length}</span>
+                <span className="text-xs font-ui text-foreground-500 font-medium mr-1 hidden sm:inline-block">Slide {currentSlide + 1} of {pitchSlides.length}</span>
                 
 
 
                 <div className="flex items-center gap-0.5 border border-neutral/20 rounded-md overflow-hidden bg-neutral-50 shadow-sm">
                    <button onClick={handlePrev} disabled={currentSlide === 0} className="p-1.5 hover:bg-neutral-200 disabled:opacity-30 disabled:hover:bg-transparent transition-colors">
-                     <ChevronLeft className="w-4 h-4 text-neutral-700" />
+                     <ChevronLeft className="w-4 h-4 text-foreground-700" />
                    </button>
                    <div className="w-px h-4 bg-neutral/20" />
                    <button onClick={handleNext} disabled={currentSlide === pitchSlides.length - 1} className="p-1.5 hover:bg-neutral-200 disabled:opacity-30 disabled:hover:bg-transparent transition-colors">
-                     <ChevronRight className="w-4 h-4 text-neutral-700" />
+                     <ChevronRight className="w-4 h-4 text-foreground-700" />
                    </button>
                 </div>
-                <button onClick={() => setIsFullscreen(!isFullscreen)} className="p-1.5 text-neutral-500 hover:text-neutral-900 transition-colors bg-white border border-neutral/20 rounded-md shadow-sm ml-1">
+                <button onClick={() => setIsFullscreen(!isFullscreen)} className="p-1.5 text-foreground-500 hover:text-foreground-900 transition-colors bg-white border border-neutral/20 rounded-md shadow-sm ml-1">
                    {isFullscreen ? <Shrink className="w-4 h-4" /> : <Expand className="w-4 h-4" />}
                 </button>
              </div>
@@ -217,13 +217,13 @@ export function PitchDeckGuidelines() {
           isFullscreen ? "w-full h-[40vh] landscape:w-[400px] landscape:h-full shrink-0 z-10 border-t landscape:border-t-0 landscape:border-l border-neutral-200 shadow-2xl" : "w-full lg:w-[35%] min-w-[320px]"
         )}>
           {/* Glassmorphic Tab Toggle */}
-          <div className="h-14 border-b border-neutral/10 px-4 flex items-center justify-center bg-neutral-50/50 shrink-0">
+          <div className="h-14 border-b border-primary/10 px-4 flex items-center justify-center bg-neutral-50/50 shrink-0">
              <div className="bg-neutral-200/60 p-1 rounded-lg w-full flex">
                <button 
                  onClick={() => setSidebarTab('strategy')}
                  className={cn(
                    "flex-1 flex items-center justify-center gap-2 py-1.5 text-xs font-semibold rounded-md transition-all",
-                   sidebarTab === 'strategy' ? "bg-white text-neutral-900 shadow-sm" : "text-neutral-500 hover:text-neutral-700"
+                   sidebarTab === 'strategy' ? "bg-white text-foreground-900 shadow-sm" : "text-foreground-500 hover:text-foreground-700"
                  )}
                >
                  <Lightbulb className="w-3.5 h-3.5" /> Slide Strategy
@@ -232,7 +232,7 @@ export function PitchDeckGuidelines() {
                  onClick={() => setSidebarTab('roleplay')}
                  className={cn(
                    "flex-1 flex items-center justify-center gap-2 py-1.5 text-xs font-semibold rounded-md transition-all",
-                   sidebarTab === 'roleplay' ? "bg-primary text-white shadow-sm" : "text-neutral-500 hover:text-neutral-700"
+                   sidebarTab === 'roleplay' ? "bg-primary text-white shadow-sm" : "text-foreground-500 hover:text-foreground-700"
                  )}
                >
                  <BrainCircuit className="w-3.5 h-3.5" /> B2P Intelligence
@@ -250,10 +250,10 @@ export function PitchDeckGuidelines() {
                  {/* Block 1: The Psychology */}
                  <div className="bg-neutral-50 border border-neutral-200 p-4 rounded-xl shadow-sm relative overflow-hidden group">
                    <div className="absolute left-0 top-0 bottom-0 w-1 bg-primary/20 group-hover:bg-primary transition-colors" />
-                   <span className="font-ui text-[10px] text-neutral-500 uppercase tracking-widest font-bold flex items-center gap-1.5 mb-2">
+                   <span className="font-ui text-[10px] text-foreground-500 uppercase tracking-widest font-bold flex items-center gap-1.5 mb-2">
                      <Target className="w-3.5 h-3.5 text-primary" /> The Cognitive Goal
                    </span>
-                   <p className="font-sans text-neutral-900 font-medium text-sm leading-relaxed">
+                   <p className="font-sans text-foreground-900 font-medium text-sm leading-relaxed">
                      {activeSlide.concept}
                    </p>
                  </div>
@@ -273,7 +273,7 @@ export function PitchDeckGuidelines() {
                        {copiedScript ? <Check className="w-3.5 h-3.5" /> : <Copy className="w-3.5 h-3.5" />}
                      </button>
                    </div>
-                   <p className="font-sans text-neutral-800 text-sm leading-relaxed italic">
+                   <p className="font-sans text-foreground-800 text-sm leading-relaxed italic">
                      "{activeSlide.speakerNotes}"
                    </p>
                  </div>
@@ -281,10 +281,10 @@ export function PitchDeckGuidelines() {
                  {/* Block 3: The Architecture */}
                  <div className="bg-neutral-50 border border-neutral-200 p-4 rounded-xl shadow-sm relative overflow-hidden group">
                    <div className="absolute left-0 top-0 bottom-0 w-1 bg-neutral-300 group-hover:bg-neutral-500 transition-colors" />
-                   <span className="font-ui text-[10px] text-neutral-500 uppercase tracking-widest font-bold flex items-center gap-1.5 mb-2">
-                     <Layout className="w-3.5 h-3.5 text-neutral-600" /> Visual Rules & Cognitive Load
+                   <span className="font-ui text-[10px] text-foreground-500 uppercase tracking-widest font-bold flex items-center gap-1.5 mb-2">
+                     <Layout className="w-3.5 h-3.5 text-foreground-600" /> Visual Rules & Cognitive Load
                    </span>
-                   <p className="font-sans text-neutral-700 text-sm leading-relaxed">
+                   <p className="font-sans text-foreground-700 text-sm leading-relaxed">
                      {activeSlide.visualRules}
                    </p>
                  </div>
@@ -298,10 +298,10 @@ export function PitchDeckGuidelines() {
                  
                  {/* Intelligence Header */}
                  <div className="space-y-1 mb-4 shrink-0">
-                   <h4 className="font-ui font-bold text-neutral-900 tracking-tight text-lg flex items-center gap-2">
-                     <BrainCircuit className="w-5 h-5 text-primary" /> B2P Intelligence <span className="text-xs font-mono font-bold uppercase tracking-widest text-neutral-400 mt-1">- Active Session</span>
+                   <h4 className="font-ui font-semibold text-foreground-900 tracking-tight text-lg flex items-center gap-2">
+                     <BrainCircuit className="w-5 h-5 text-primary" /> B2P Intelligence <span className="text-xs font-mono font-bold uppercase tracking-widest text-foreground-400 mt-1">- Active Session</span>
                    </h4>
-                   <p className="text-xs font-sans text-neutral-500">
+                   <p className="text-xs font-sans text-foreground-500">
                      Collaborative builder. Discuss your target account and we will architect a bespoke strategic narrative together.
                    </p>
                  </div>
@@ -315,13 +315,13 @@ export function PitchDeckGuidelines() {
                       <div className="flex gap-3 max-w-[95%]">
                         <div className="w-6 h-6 rounded bg-primary/10 flex items-center justify-center shrink-0 mt-0.5"><BrainCircuit className="w-3.5 h-3.5 text-primary"/></div>
                         <div className="bg-white border border-neutral-200 shadow-sm rounded-2xl rounded-tl-sm p-3">
-                          <p className="text-sm font-sans text-neutral-700 leading-relaxed">Tell me about your upcoming pitch. Who are we talking to?</p>
+                          <p className="text-sm font-sans text-foreground-700 leading-relaxed">Tell me about your upcoming pitch. Who are we talking to?</p>
                         </div>
                       </div>
 
                       {/* Message 2 (User) */}
                       <div className="flex gap-3 max-w-[95%] self-end flex-row-reverse">
-                        <div className="w-6 h-6 rounded bg-neutral-200 flex items-center justify-center shrink-0 mt-0.5"><span className="text-[9px] font-bold text-neutral-600">REP</span></div>
+                        <div className="w-6 h-6 rounded bg-neutral-200 flex items-center justify-center shrink-0 mt-0.5"><span className="text-[9px] font-bold text-foreground-600">REP</span></div>
                         <div className="bg-neutral-800 text-white shadow-sm rounded-2xl rounded-tr-sm p-3">
                           <p className="text-sm font-sans leading-relaxed">First Horizon Bank. Meeting with their EVP of Digital.</p>
                         </div>
@@ -331,13 +331,13 @@ export function PitchDeckGuidelines() {
                       <div className="flex gap-3 max-w-[95%]">
                         <div className="w-6 h-6 rounded bg-primary/10 flex items-center justify-center shrink-0 mt-0.5"><BrainCircuit className="w-3.5 h-3.5 text-primary"/></div>
                         <div className="bg-white border border-neutral-200 shadow-sm rounded-2xl rounded-tl-sm p-3">
-                          <p className="text-sm font-sans text-neutral-700 leading-relaxed">Got it. First Horizon has been pushing hard into wealth management. What's the specific pain point or trigger event we are anchoring this pitch to?</p>
+                          <p className="text-sm font-sans text-foreground-700 leading-relaxed">Got it. First Horizon has been pushing hard into wealth management. What's the specific pain point or trigger event we are anchoring this pitch to?</p>
                         </div>
                       </div>
 
                       {/* Message 4 (User) */}
                       <div className="flex gap-3 max-w-[95%] self-end flex-row-reverse">
-                        <div className="w-6 h-6 rounded bg-neutral-200 flex items-center justify-center shrink-0 mt-0.5"><span className="text-[9px] font-bold text-neutral-600">REP</span></div>
+                        <div className="w-6 h-6 rounded bg-neutral-200 flex items-center justify-center shrink-0 mt-0.5"><span className="text-[9px] font-bold text-foreground-600">REP</span></div>
                         <div className="bg-neutral-800 text-white shadow-sm rounded-2xl rounded-tr-sm p-3">
                           <p className="text-sm font-sans leading-relaxed">They are losing high-net-worth clients during the initial 90-day onboarding window due to disjointed legacy systems.</p>
                         </div>
@@ -348,14 +348,14 @@ export function PitchDeckGuidelines() {
                         <div className="w-6 h-6 rounded bg-primary/10 flex items-center justify-center shrink-0 mt-0.5"><BrainCircuit className="w-3.5 h-3.5 text-primary"/></div>
                         <div className="bg-white border border-[#98cc67]/30 shadow-md ring-1 ring-[#98cc67]/10 rounded-2xl rounded-tl-sm p-4 relative overflow-hidden">
                           <div className="absolute left-0 top-0 bottom-0 w-1 bg-[#98cc67]" />
-                          <p className="text-sm font-sans text-neutral-700 leading-relaxed mb-3">Perfect. Let's build the Strategic Narrative.</p>
+                          <p className="text-sm font-sans text-foreground-700 leading-relaxed mb-3">Perfect. Let's build the Strategic Narrative.</p>
                           <div className="bg-neutral-50 border border-neutral-200 rounded p-3 mb-3">
-                            <span className="font-ui font-bold text-xs text-neutral-800 block mb-1">Slide 1 (The Hook): "The Legacy Stack is the Anchor."</span>
-                            <p className="text-xs font-sans text-neutral-600">
-                              <span className="font-semibold text-neutral-800">Instruction:</span> Use massive left-stacked <code className="font-mono bg-neutral-200 px-1 py-0.5 rounded text-[10px]">font-display</code> text on a cinematic overlay. Do not mention B2P. Anchor their bleeding AUM directly to their core architecture gap.
+                            <span className="font-ui font-semibold text-xs text-foreground-800 block mb-1">Slide 1 (The Hook): "The Legacy Stack is the Anchor."</span>
+                            <p className="text-xs font-sans text-foreground-600">
+                              <span className="font-semibold text-foreground-800">Instruction:</span> Use massive left-stacked <code className="font-mono bg-neutral-200 px-1 py-0.5 rounded text-[10px]">font-display</code> text on a cinematic overlay. Do not mention B2P. Anchor their bleeding AUM directly to their core architecture gap.
                             </p>
                           </div>
-                          <p className="text-sm font-sans text-neutral-700 leading-relaxed font-semibold">Ready to map out Slide 2 (The Stakes)?</p>
+                          <p className="text-sm font-sans text-foreground-700 leading-relaxed font-semibold">Ready to map out Slide 2 (The Stakes)?</p>
                         </div>
                       </div>
                     </div>
@@ -365,14 +365,14 @@ export function PitchDeckGuidelines() {
 
 
                  {/* Mock Chat Input Area */}
-                 <div className="shrink-0 pt-3 border-t border-neutral/10 mt-2">
+                 <div className="shrink-0 pt-3 border-t border-primary/10 mt-2">
                     <div className="relative flex items-center bg-white border border-neutral-300 rounded-full shadow-sm focus-within:border-primary focus-within:ring-1 focus-within:ring-primary/20 transition-all">
-                       <button className="w-10 h-10 flex items-center justify-center text-neutral-400 hover:text-primary transition-colors ml-1">
+                       <button className="w-10 h-10 flex items-center justify-center text-foreground-400 hover:text-primary transition-colors ml-1">
                          <Mic className="w-4 h-4" />
                        </button>
                        <input 
                          type="text"
-                         className="flex-1 bg-transparent border-none text-sm placeholder:text-neutral-400 py-3 px-2 focus:outline-none font-sans"
+                         className="flex-1 bg-transparent border-none text-sm placeholder:text-foreground-400 py-3 px-2 focus:outline-none font-sans"
                          placeholder="Yes, let's build Slide 2..."
                        />
                        <button className="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-white mr-1.5 shadow-sm hover:bg-primary-dark transition-colors">
@@ -390,9 +390,9 @@ export function PitchDeckGuidelines() {
           <div className="shrink-0 p-4 border-t border-neutral-200 bg-white/95 backdrop-blur z-20 flex flex-col gap-4">
              {/* Dynamic Command Center (Universally Active) */}
                <div className="select-none flex flex-col">
-                 <label className="text-[11px] font-ui font-bold text-neutral-800 uppercase tracking-widest flex items-center justify-between mb-2">
+                 <label className="text-[11px] font-ui font-semibold text-foreground-800 uppercase tracking-widest flex items-center justify-between mb-2">
                    Customize Slide Copy (Max {currentSlideMaxWords} Words)
-                   <span className={cn("text-[9px] bg-neutral-100 px-1.5 py-0.5 rounded font-mono font-bold border", slideCopies[currentSlide].split(/\s+/).filter(w=>w.trim()!=='').length >= currentSlideMaxWords ? "text-red-500 border-red-200 bg-red-50" : "text-neutral-500 border-neutral-200/50")}>
+                   <span className={cn("text-[9px] bg-neutral-100 px-1.5 py-0.5 rounded font-mono font-bold border", slideCopies[currentSlide].split(/\s+/).filter(w=>w.trim()!=='').length >= currentSlideMaxWords ? "text-red-500 border-red-200 bg-red-50" : "text-foreground-500 border-neutral-200/50")}>
                      {slideCopies[currentSlide].split(/\s+/).filter(w=>w.trim()!=='').length} / {currentSlideMaxWords}
                    </span>
                  </label>
@@ -411,7 +411,7 @@ export function PitchDeckGuidelines() {
                        setTimeout(() => setWordLimitWarning(false), 2500);
                      }
                    }}
-                   className="w-full text-sm font-sans resize-none p-2.5 bg-neutral-50 border border-neutral-200 rounded-lg shadow-inner focus:bg-white focus:border-primary focus:ring-1 focus:ring-primary/20 outline-none transition-all placeholder:text-neutral-400"
+                   className="w-full text-sm font-sans resize-none p-2.5 bg-neutral-50 border border-neutral-200 rounded-lg shadow-inner focus:bg-white focus:border-primary focus:ring-1 focus:ring-primary/20 outline-none transition-all placeholder:text-foreground-400"
                    rows={3}
                    placeholder="Enter new multiline hook text here..."
                  />
@@ -433,7 +433,7 @@ export function PitchDeckGuidelines() {
                />
                <button 
                  onClick={() => fileInputRef.current?.click()}
-                 className="flex-1 py-1.5 px-3 border border-neutral-200 rounded-md shadow-sm bg-white hover:bg-neutral-50 text-neutral-600 text-[10px] sm:text-xs font-semibold uppercase tracking-widest flex items-center justify-center gap-2 transition-colors"
+                 className="flex-1 py-1.5 px-3 border border-neutral-200 rounded-md shadow-sm bg-white hover:bg-neutral-50 text-foreground-600 text-[10px] sm:text-xs font-semibold uppercase tracking-widest flex items-center justify-center gap-2 transition-colors"
                >
                  <ImagePlus className="w-3.5 h-3.5" />
                  Replace Background
@@ -456,7 +456,7 @@ export function PitchDeckGuidelines() {
                   title="Toggle Typography for Export"
                   className={cn(
                     "flex-1 py-2 px-3 transition-colors border rounded-md shadow-sm flex items-center justify-center gap-2 text-[10px] sm:text-xs font-semibold uppercase tracking-widest",
-                    hideTypography ? "bg-neutral-800 text-white border-neutral-800" : "bg-white text-neutral-600 border-neutral-200 hover:text-neutral-900 hover:bg-neutral-50"
+                    hideTypography ? "bg-neutral-800 text-white border-neutral-800" : "bg-white text-foreground-600 border-neutral-200 hover:text-foreground-900 hover:bg-neutral-50"
                   )}
                 >
                    {hideTypography ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}

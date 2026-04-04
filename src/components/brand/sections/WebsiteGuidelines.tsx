@@ -46,20 +46,20 @@ export function WebsiteGuidelines() {
     <section id="website-guidelines" className="space-y-16 pt-8 scroll-mt-20">
       
       {/* 1. The Header & Strategy */}
-      <div className="space-y-4 border-b border-neutral/10 pb-8">
-        <h2 className="text-3xl font-bold tracking-tighter text-primary font-heading">
+      <div className="space-y-4 border-b border-primary/10 pb-8">
+        <h2 className="text-3xl font-semibold tracking-tighter text-primary font-heading">
           Website Wireframes & BrandScript
         </h2>
-        <p className="text-lg text-neutral/80 font-sans max-w-3xl leading-relaxed">
+        <p className="text-lg text-muted-foreground font-sans max-w-3xl leading-relaxed">
           The Bridge2Partners website operates on a Hub-and-Spoke StoryBrand methodology. Our Hub is Change Management & Digital Transformation. Our Category Entry Point (the burning pain) is M&A integration.
         </p>
       </div>
 
       {/* 2. The BrandScript Matrix (Focus Index Accordion) */}
       <div className="space-y-6 pt-4">
-        <h3 className="text-xl font-bold font-heading text-neutral">The BrandScript Matrix</h3>
+        <h3 className="text-xl font-semibold font-heading text-foreground">The BrandScript Matrix</h3>
         
-        <div className="bg-white/40 backdrop-blur-md rounded-xl border border-neutral/10 p-2 shadow-sm flex flex-col gap-1 inline-block w-full">
+        <div className="bg-white/40 backdrop-blur-md rounded-xl border border-primary/10 p-2 shadow-sm flex flex-col gap-1 inline-block w-full">
           {brandScriptTriggers.map((trigger) => {
             const isExpanded = expandedTrigger === trigger.id;
             const Icon = trigger.icon;
@@ -81,13 +81,13 @@ export function WebsiteGuidelines() {
                   <div className="flex items-center gap-4">
                     <div className={cn(
                       "p-2 rounded-lg transition-colors min-h-[44px] min-w-[44px] flex items-center justify-center",
-                      isExpanded ? "bg-primary/10 text-primary" : "bg-neutral/5 text-neutral/50 group-hover:text-neutral/70"
+                      isExpanded ? "bg-primary/10 text-primary" : "bg-neutral/5 text-muted-foreground group-hover:text-muted-foreground"
                     )}>
                       <Icon strokeWidth={1.5} className="w-5 h-5 shrink-0" />
                     </div>
                     <span className={cn(
                       "font-ui font-semibold text-lg transition-colors",
-                      isExpanded ? "text-primary" : "text-neutral/80 group-hover:text-neutral"
+                      isExpanded ? "text-primary" : "text-muted-foreground group-hover:text-foreground"
                     )}>
                       {trigger.title}
                     </span>
@@ -96,7 +96,7 @@ export function WebsiteGuidelines() {
                     <ChevronDown
                       strokeWidth={1.5}
                       className={cn(
-                        "w-5 h-5 text-neutral/40 transition-transform duration-300",
+                        "w-5 h-5 text-foreground/40 transition-transform duration-300",
                         isExpanded ? "rotate-180 text-primary" : ""
                       )}
                     />
@@ -109,7 +109,7 @@ export function WebsiteGuidelines() {
                     isExpanded ? "max-h-[200px]" : "max-h-0"
                   )}
                 >
-                  <div className="p-6 pt-0 lg:pl-[88px] pl-[76px] text-neutral/80 font-sans leading-relaxed text-sm md:text-base border-l-2 border-transparent">
+                  <div className="p-6 pt-0 lg:pl-[88px] pl-[76px] text-muted-foreground font-sans leading-relaxed text-sm md:text-base border-l-2 border-transparent">
                     {trigger.detail}
                   </div>
                 </div>
@@ -123,10 +123,10 @@ export function WebsiteGuidelines() {
       <div className="space-y-8 pt-8">
         
         <div className="space-y-3">
-          <h3 className="text-2xl font-bold font-heading text-neutral flex items-center gap-2">
+          <h3 className="text-2xl font-bold font-heading text-foreground flex items-center gap-2">
             <LayoutTemplate className="w-6 h-6 text-primary" strokeWidth={1.5} /> Structural Schematics
           </h3>
-          <p className="text-neutral/70 font-sans max-w-2xl">
+          <p className="text-muted-foreground font-sans max-w-2xl">
             Below are functional wireframes outlining the digital structure, referencing our strict UI archetypes. These blueprints guide the engineering phase.
           </p>
         </div>

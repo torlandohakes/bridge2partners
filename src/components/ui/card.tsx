@@ -11,9 +11,9 @@ const Card = React.forwardRef<HTMLDivElement, CardProps>(
       ref={ref}
       className={cn(
         "rounded-lg text-card-foreground shadow-sm transition-all duration-300",
-        variant === "default" && "border border-neutral/10 bg-white",
+        variant === "default" && "border border-primary/10 bg-card",
         variant === "glass" && "border border-white/50 bg-white/60 backdrop-blur-md shadow-[0_8px_30px_rgba(0,0,0,0.04)]",
-        variant === "frosted" && "border-[0.5px] border-white/40 bg-white/40 backdrop-blur-xl shadow-[inset_0_1px_1px_rgba(255,255,255,0.7),0_8px_30px_rgba(0,0,0,0.08)]",
+        variant === "frosted" && "border border-white/40 bg-white/40 backdrop-blur-xl shadow-[inset_0_1px_1px_rgba(255,255,255,0.7),0_8px_30px_rgba(0,0,0,0.08)]",
         className
       )}
       {...props}
@@ -37,7 +37,7 @@ const CardTitle = React.forwardRef<HTMLParagraphElement, React.HTMLAttributes<HT
   ({ className, ...props }, ref) => (
     <h3
       ref={ref}
-      className={cn("font-semibold leading-none tracking-tight font-heading", className)}
+      className={cn("text-primary font-semibold leading-none tracking-tight font-heading", className)}
       {...props}
     />
   )

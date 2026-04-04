@@ -65,11 +65,11 @@ export function StrategicCore() {
   return (
     <section className="animate-in fade-in duration-500 space-y-12">
       
-      <div className="space-y-4 max-w-4xl border-b border-neutral/10 pb-6">
-        <h2 className="text-3xl font-bold tracking-tighter text-primary font-heading">
+      <div className="space-y-4 max-w-4xl border-b border-primary/10 pb-6">
+        <h2 className="text-3xl font-semibold tracking-tighter text-primary font-heading">
           Guiding Principles
         </h2>
-        <p className="text-lg text-neutral/90 font-sans leading-relaxed max-w-3xl">
+        <p className="text-lg text-foreground/90 font-sans leading-relaxed max-w-3xl">
           These guiding principles define how we operate as a firm and how individuals, teams, and departments are expected to behave in their work. Internally, they provide a shared framework for setting goals, making decisions, and evaluating performance. Externally, they describe how clients and partners should experience Bridge2Partners.
         </p>
       </div>
@@ -92,18 +92,18 @@ export function StrategicCore() {
                   "p-4 rounded-lg transition-all duration-300 flex items-center gap-4 text-left border",
                   isActive
                     ? "bg-white/60 backdrop-blur-md border-primary/20 shadow-[0_4px_20px_rgba(0,0,0,0.03)] scale-100"
-                    : "bg-transparent border-transparent hover:bg-white/30 text-neutral/70 hover:text-neutral scale-[0.98]"
+                    : "bg-transparent border-transparent hover:bg-white/30 text-muted-foreground hover:text-foreground scale-[0.98]"
                 )}
               >
                 <div className={cn(
                   "w-10 h-10 rounded-full flex items-center justify-center shrink-0 transition-colors",
-                  isActive ? "bg-primary text-white" : "bg-neutral/10 text-neutral/50 group-hover:bg-neutral/20"
+                  isActive ? "bg-primary text-white" : "bg-neutral/10 text-muted-foreground group-hover:bg-neutral/20"
                 )}>
                   <ItemIcon className="w-5 h-5" />
                 </div>
                 <div className="flex flex-col">
                   <span className={cn(
-                    "font-ui font-bold tracking-tight text-sm",
+                    "font-ui font-semibold tracking-tight text-sm",
                     isActive ? "text-primary" : ""
                   )}>
                     {p.title}
@@ -117,7 +117,7 @@ export function StrategicCore() {
         {/* Right Stage Column */}
         <Card key={activeId} variant="frosted" className="animate-in fade-in zoom-in-95 duration-300 ease-out p-8">
           <div className="flex flex-col gap-6">
-            <div className="flex items-center gap-4 border-b border-neutral/10 pb-6">
+            <div className="flex items-center gap-4 border-b border-primary/10 pb-6">
                <div className="bg-primary/10 w-16 h-16 rounded-full flex items-center justify-center shrink-0">
                   <Icon className="w-8 h-8 text-primary" />
                </div>
@@ -129,7 +129,7 @@ export function StrategicCore() {
             </div>
             
             
-            <p className="text-base text-neutral/80 font-sans leading-relaxed">
+            <p className="text-base text-muted-foreground font-sans leading-relaxed">
               {activePrinciple.body}
             </p>
             
@@ -145,8 +145,8 @@ export function StrategicCore() {
                   >
                     <div className="flex items-center py-2 w-full">
                       <span className={cn(
-                        "transition-colors duration-300 font-ui font-bold tracking-tight text-sm",
-                        isDetailActive ? "text-primary" : "text-neutral/40 group-hover:text-neutral/70"
+                        "transition-colors duration-300 font-ui font-semibold tracking-tight text-sm",
+                        isDetailActive ? "text-primary" : "text-foreground/40 group-hover:text-muted-foreground"
                       )}>
                         {b.trigger}
                       </span>
@@ -158,7 +158,7 @@ export function StrategicCore() {
                     )}>
                       <div className="overflow-hidden">
                         <p className={cn(
-                          "text-sm text-neutral/70 font-sans leading-relaxed pb-3 transition-opacity duration-300",
+                          "text-sm text-muted-foreground font-sans leading-relaxed pb-3 transition-opacity duration-300",
                           isDetailActive ? "opacity-100" : "opacity-0"
                         )}>
                            {b.text}

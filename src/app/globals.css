@@ -1,41 +1,107 @@
 @import "tailwindcss";
-
-@theme inline {
-  /* Brand Theme Colors */
-  --color-primary: #00573f;
-  --color-secondary: #009677;
-  --color-tertiary: #001b15;
-  --color-neutral: #3d4645;
-  --color-accent: #98cc67;
-
-  /* Semantic Interface Colors */
-  --color-success: #059669;
-  --color-warning: #d97706;
-  --color-error: #dc2626;
-
-  /* Background and Foreground Setup */
-  --color-background: #ffffff;
-  --color-foreground: #001b15;
-
-  /* Fonts */
-  --font-heading: var(--font-inter);
-  --font-ui: var(--font-inter);
-  --font-sans: var(--font-public-sans);
-  --font-display: var(--font-montserrat);
-  --font-data: var(--font-barlow);
-
-  /* Radius (matching "subtle roundedness") */
-  --radius-md: 0.375rem;
-  --radius: 0.375rem;
-}
+@custom-variant dark (&:is(.dark *));
 
 @layer base {
-  *,
-  ::after,
-  ::before,
-  ::backdrop,
-  ::file-selector-button {
-    border-color: var(--color-gray-200, currentColor);
+  :root {
+    /* Light Mode Foundation (HSL) */
+    --background: 0 0% 100%; /* #ffffff */
+    --foreground: 167 100% 5%; /* B2P Black #001b15 */
+    
+    /* Brand Core Palette */
+    --primary: 163 100% 17%; /* B2P Green #00573f */
+    --primary-foreground: 0 0% 100%;
+    
+    --secondary: 168 100% 29%; /* Secondary Teal #009677 */
+    --secondary-foreground: 0 0% 100%;
+    
+    --tertiary: 167 100% 5%; /* Tertiary B2P Black #001b15 */
+    --tertiary-foreground: 0 0% 100%;
+
+    --neutral: 173 7% 26%; /* Neutral #3d4645 */
+    --neutral-foreground: 0 0% 100%;
+    
+    /* Semantic Interface States */
+    --success: 161 94% 30%; /* #059669 */
+    --success-foreground: 0 0% 100%;
+    
+    --warning: 32 95% 44%; /* #d97706 */
+    --warning-foreground: 0 0% 100%;
+    
+    --destructive: 0 72% 51%; /* Error #dc2626 */
+    --destructive-foreground: 0 0% 100%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 167 100% 5%;
+    
+    --popover: 0 0% 100%;
+    --popover-foreground: 167 100% 5%;
+    
+    --muted: 173 7% 26%;
+    --muted-foreground: 173 7% 26%;
+    
+    --accent: 163 100% 17%;
+    --accent-foreground: 0 0% 100%;
+    
+    /* Hairline borders base tracking */
+    --border: 163 100% 17%;
+    --input: 163 100% 17%;
+    --ring: 163 100% 17%;
+
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    /* Tactical Dark Mode Foundation (HSL) */
+    --background: 167 100% 5%; /* B2P Black #001b15 */
+    --foreground: 0 0% 100%; /* #ffffff */
+    
+    /* Brand Theme Colors */
+    --primary: 91 50% 60%; /* Luminous Lime #98cc67 */
+    --primary-foreground: 167 100% 5%; /* Black text on lime */
+    
+    --secondary: 168 100% 29%; /* Secondary Teal #009677 */
+    --secondary-foreground: 0 0% 100%;
+    
+    --tertiary: 163 100% 17%; /* B2P Green replaces tertiary space */
+    --tertiary-foreground: 0 0% 100%;
+
+    --neutral: 173 7% 26%;
+    --neutral-foreground: 0 0% 100%;
+    
+    --success: 161 94% 30%;
+    --success-foreground: 0 0% 100%;
+    
+    --warning: 32 95% 44%;
+    --warning-foreground: 0 0% 100%;
+    
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 100%;
+
+    --card: 167 100% 5%;
+    --card-foreground: 0 0% 100%;
+    
+    --popover: 167 100% 5%;
+    --popover-foreground: 0 0% 100%;
+    
+    --muted: 173 7% 26%;
+    --muted-foreground: 173 7% 26%;
+    
+    --accent: 91 50% 60%;
+    --accent-foreground: 167 100% 5%;
+    
+    /* Gray/Slate scale borders */
+    --border: 91 50% 60%;
+    --input: 91 50% 60%;
+    --ring: 91 50% 60%;
+  }
+
+  *, ::after, ::before, ::backdrop, ::file-selector-button {
+    border-color: hsl(var(--border) / 0.08); /* Reduced for lighter structural feel */
+  }
+
+  hr {
+    border-top-width: 1px; /* Returned to 1px to avoid heavy sub-pixel anti-aliasing */
+    border-color: hsl(var(--border) / 0.08);
   }
 
   html {
@@ -43,18 +109,163 @@
   }
 
   body {
-    background-color: var(--color-background);
-    color: var(--color-foreground);
+    background-color: var(--background);
+    color: var(--foreground);
     font-family: var(--font-sans);
   }
 
-  h1, h2, h3 {
-    font-family: var(--font-heading);
-    letter-spacing: -0.04em;
-  }
-
-  h4, h5, h6 {
+  h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-heading);
     letter-spacing: -0.025em;
   }
+}
+
+@theme inline {
+  /* Mapping Brand Colors with HSL wrapper for v4 opacity */
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+  
+  --color-primary: hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+  
+  --color-secondary: hsl(var(--secondary));
+  --color-secondary-foreground: hsl(var(--secondary-foreground));
+  
+  --color-tertiary: hsl(var(--tertiary));
+  --color-tertiary-foreground: hsl(var(--tertiary-foreground));
+
+  --color-neutral: hsl(var(--neutral));
+  --color-neutral-foreground: hsl(var(--neutral-foreground));
+
+  --color-success: hsl(var(--success));
+  --color-success-foreground: hsl(var(--success-foreground));
+
+  --color-warning: hsl(var(--warning));
+  --color-warning-foreground: hsl(var(--warning-foreground));
+  
+  --color-muted: hsl(var(--muted));
+  --color-muted-foreground: hsl(var(--muted-foreground));
+  
+  --color-accent: hsl(var(--accent));
+  --color-accent-foreground: hsl(var(--accent-foreground));
+  
+  --color-destructive: hsl(var(--destructive));
+  --color-destructive-foreground: hsl(var(--destructive-foreground));
+  
+  --color-border: hsl(var(--border));
+  --color-input: hsl(var(--input));
+  --color-ring: hsl(var(--ring));
+
+  --color-card: hsl(var(--card));
+  --color-card-foreground: hsl(var(--card-foreground));
+
+  --color-popover: hsl(var(--popover));
+  --color-popover-foreground: hsl(var(--popover-foreground));
+
+  /* Exact Font Architecture Mapping per Prime Directive */
+  --font-display: var(--font-montserrat);
+  --font-data: var(--font-barlow);
+  --font-heading: var(--font-inter);
+  --font-ui: var(--font-inter);
+  --font-sans: var(--font-public-sans);
+  --font-reading: var(--font-public-sans);
+
+  /* Radius mapping */
+  --radius-sm: calc(var(--radius) - 2px);
+  --radius-md: var(--radius);
+  --radius-lg: calc(var(--radius) + 2px);
+  --radius-xl: calc(var(--radius) + 4px);
+  
+  /* Fluid Spacing Grid */
+  --spacing-fluid-sm: clamp(0.5rem, 1vw, 1rem);
+  --spacing-fluid-md: clamp(1rem, 2vw, 1.5rem);
+  --spacing-fluid-lg: clamp(1.5rem, 3vw, 2rem);
+  --spacing-fluid-xl: clamp(2rem, 4vw, 3rem);
+}
+
+/* =========================================
+   CONTAINER QUERIES & FLUID TYPOGRAPHY (CQW)
+   ========================================= */
+@utility container-cq {
+  container-type: inline-size;
+}
+
+@utility text-cqw-sm {
+  font-size: clamp(0.875rem, 2cqw, 1.125rem);
+  line-height: 1.5;
+}
+@utility text-cqw-base {
+  font-size: clamp(1rem, 3cqw, 1.25rem);
+  line-height: 1.5;
+}
+@utility text-cqw-lg {
+  font-size: clamp(1.125rem, 4cqw, 1.5rem);
+  line-height: 1.4;
+}
+@utility text-cqw-xl {
+  font-size: clamp(1.5rem, 5cqw, 2rem);
+  line-height: 1.3;
+}
+@utility text-cqw-2xl {
+  font-size: clamp(2rem, 6cqw, 3rem);
+  line-height: 1.2;
+}
+@utility text-cqw-display {
+  font-size: clamp(2.5rem, 8cqw, 4.5rem);
+  line-height: 1.1;
+  letter-spacing: -0.04em;
+}
+
+/* =========================================
+   STRUCTURAL GRIDS & SPLITS
+   ========================================= */
+@utility grid-split-25-75 {
+  display: grid;
+  grid-template-columns: 1fr;
+  @media (min-width: 768px) {
+    grid-template-columns: 25fr 75fr;
+  }
+}
+
+@utility grid-split-40-60 {
+  display: grid;
+  grid-template-columns: 1fr;
+  @media (min-width: 768px) {
+    grid-template-columns: 40fr 60fr;
+  }
+}
+
+@utility grid-split-75-25 {
+  display: grid;
+  grid-template-columns: 1fr;
+  @media (min-width: 768px) {
+    grid-template-columns: 75fr 25fr;
+  }
+}
+
+@utility grid-split-60-40 {
+  display: grid;
+  grid-template-columns: 1fr;
+  @media (min-width: 768px) {
+    grid-template-columns: 60fr 40fr;
+  }
+}
+
+/* =========================================
+   ASPECT RATIOS
+   ========================================= */
+@utility aspect-video {
+  aspect-ratio: 16 / 9;
+}
+@utility aspect-square {
+  aspect-ratio: 1 / 1;
+}
+@utility aspect-portrait {
+  aspect-ratio: 9 / 16;
+}
+@utility aspect-ultrawide {
+  aspect-ratio: 21 / 9;
+}
+@utility aspect-golden {
+  aspect-ratio: 1.618 / 1;
 }

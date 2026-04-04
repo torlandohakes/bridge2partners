@@ -7,11 +7,11 @@ import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 export function UIComponentLibrary() {
   return (
     <section id="ui-component-library" className="space-y-8 pt-8 scroll-mt-20">
-      <div className="space-y-2 border-b border-neutral/10 pb-4">
-        <h2 className="text-3xl font-bold tracking-tighter text-primary font-heading">
+      <div className="space-y-2 border-b border-primary/10 pb-4">
+        <h2 className="text-3xl font-semibold tracking-tighter text-primary font-heading">
           UI Component Library
         </h2>
-        <p className="text-neutral/80">
+        <p className="text-muted-foreground">
           The master reference for universal interactive elements across the platform.
         </p>
       </div>
@@ -36,14 +36,14 @@ export function UIComponentLibrary() {
       {/* Container Archetypes */}
       <div className="space-y-4 pt-4">
         <h3 className="text-lg font-semibold font-heading">Container Archetypes</h3>
-        <p className="text-sm text-neutral/70">The underlying structural geometries that house content across the platform.</p>
+        <p className="text-sm text-muted-foreground">The underlying structural geometries that house content across the platform.</p>
         <div className="grid md:grid-cols-3 gap-6">
           <Card variant="default">
             <CardHeader>
-              <CardTitle className="text-base text-neutral">Default Frame</CardTitle>
+              <CardTitle className="text-base text-foreground">Default Frame</CardTitle>
             </CardHeader>
             <CardContent>
-              <p className="text-sm text-neutral/80">Standard <code>bg-white</code> component with a subtle border. Used for generic form wrappers and low-priority panels.</p>
+              <p className="text-sm text-muted-foreground">Standard <code>bg-white</code> component with a subtle border. Used for generic form wrappers and low-priority panels.</p>
             </CardContent>
           </Card>
 
@@ -52,7 +52,7 @@ export function UIComponentLibrary() {
               <CardTitle className="text-base text-primary">Glass Container</CardTitle>
             </CardHeader>
             <CardContent>
-              <p className="text-sm text-neutral/80">Premium <code>backdrop-blur-md</code> aesthetic mapping beautifully over our dynamic mesh lighting.</p>
+              <p className="text-sm text-muted-foreground">Premium <code>backdrop-blur-md</code> aesthetic mapping beautifully over our dynamic mesh lighting.</p>
             </CardContent>
           </Card>
 
@@ -61,7 +61,7 @@ export function UIComponentLibrary() {
               <CardTitle className="text-base text-primary">Frosted Container</CardTitle>
             </CardHeader>
             <CardContent>
-              <p className="text-sm text-neutral/80">Heavily blurred <code>backdrop-blur-xl</code> with inset luminous borders. Used exclusively for deeply interactive states and authoritative macro-information.</p>
+              <p className="text-sm text-muted-foreground">Heavily blurred <code>backdrop-blur-xl</code> with inset luminous borders. Used exclusively for deeply interactive states and authoritative macro-information.</p>
             </CardContent>
           </Card>
         </div>
@@ -106,7 +106,7 @@ export function UIComponentLibrary() {
               <CardTitle className="text-primary text-base">Section Padding `py-16 md:py-24`</CardTitle>
             </CardHeader>
             <CardContent>
-              <p className="text-sm text-neutral/80">
+              <p className="text-sm text-muted-foreground">
                 Use generous vertical padding to separate distinct macro-sections of content.
               </p>
             </CardContent>
@@ -117,7 +117,7 @@ export function UIComponentLibrary() {
               <CardTitle className="text-secondary text-base">Grid Gap `gap-6` or `gap-8`</CardTitle>
             </CardHeader>
             <CardContent>
-              <p className="text-sm text-neutral/80">
+              <p className="text-sm text-muted-foreground">
                 Maintains a breathable, airy interface suitable for dense data presentation without feeling cluttered.
               </p>
             </CardContent>
@@ -128,30 +128,30 @@ export function UIComponentLibrary() {
       {/* Strict Engineering Standards */}
       <div className="space-y-4 pt-4">
         <h3 className="text-lg font-semibold font-heading">Strict Engineering Standards</h3>
-        <p className="text-sm text-neutral/70">UX baseline directives that cannot be violated during development.</p>
+        <p className="text-sm text-muted-foreground">UX baseline directives that cannot be violated during development.</p>
 
         <div className="grid md:grid-cols-3 gap-6">
           <Card variant="default">
              <CardHeader className="pb-3"><CardTitle className="text-base text-primary">A11y Focus Rings</CardTitle></CardHeader>
              <CardContent>
-                <p className="text-sm text-neutral/80 font-mono text-xs bg-neutral/5 p-2 rounded-lg mb-3 break-all">focus-visible:ring-2 focus-visible:ring-primary/50 focus-visible:outline-none</p>
-                <p className="text-sm text-neutral/80 leading-relaxed font-sans">Every single interactive element (Inputs, Buttons, Links, Dropdowns) must inherit this exact custom focus ring logic to ensure keyboard-navigation compliance.</p>
+                <p className="text-sm text-muted-foreground font-mono text-xs bg-neutral/5 p-2 rounded-lg mb-3 break-all">focus-visible:ring-2 focus-visible:ring-primary/50 focus-visible:outline-none</p>
+                <p className="text-sm text-muted-foreground leading-relaxed font-sans">Every single interactive element (Inputs, Buttons, Links, Dropdowns) must inherit this exact custom focus ring logic to ensure keyboard-navigation compliance.</p>
              </CardContent>
           </Card>
           
           <Card variant="default">
              <CardHeader className="pb-3"><CardTitle className="text-base text-primary">Mobile Touch Physics</CardTitle></CardHeader>
              <CardContent>
-                <p className="text-sm text-neutral/80 font-mono text-xs bg-neutral/5 p-2 rounded-lg mb-3 break-all">min-h-[44px] min-w-[44px]</p>
-                <p className="text-sm text-neutral/80 leading-relaxed font-sans">Visual icon size does not govern physical tap targets. All clickable vectors and tiny icon buttons must be wrapped in a hit-area spanning a minimum of 44x44 CSS pixels.</p>
+                <p className="text-sm text-muted-foreground font-mono text-xs bg-neutral/5 p-2 rounded-lg mb-3 break-all">min-h-[44px] min-w-[44px]</p>
+                <p className="text-sm text-muted-foreground leading-relaxed font-sans">Visual icon size does not govern physical tap targets. All clickable vectors and tiny icon buttons must be wrapped in a hit-area spanning a minimum of 44x44 CSS pixels.</p>
              </CardContent>
           </Card>
 
           <Card variant="default">
              <CardHeader className="pb-3"><CardTitle className="text-base text-primary">Iconography</CardTitle></CardHeader>
              <CardContent>
-                <p className="text-sm text-neutral/80 font-mono text-xs bg-neutral/5 p-2 rounded-lg mb-3 break-all">lucide-react strokeWidth={"{1.5}"}</p>
-                <p className="text-sm text-neutral/80 leading-relaxed font-sans">Do not mix iconography libraries. Use Lucide React exclusively. To maintain our lightweight glassmorphic aesthetic, explicitly force the stroke width to 1.5 across all instances.</p>
+                <p className="text-sm text-muted-foreground font-mono text-xs bg-neutral/5 p-2 rounded-lg mb-3 break-all">lucide-react strokeWidth={"{1.5}"}</p>
+                <p className="text-sm text-muted-foreground leading-relaxed font-sans">Do not mix iconography libraries. Use Lucide React exclusively. To maintain our lightweight glassmorphic aesthetic, explicitly force the stroke width to 1.5 across all instances.</p>
              </CardContent>
           </Card>
         </div>

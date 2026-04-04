@@ -37,20 +37,20 @@ export function SocialLeadership() {
     <section id="social-leadership" className="space-y-16 pt-8 scroll-mt-20">
       
       {/* 1. The Header */}
-      <div className="space-y-4 border-b border-neutral/10 pb-8">
-        <h2 className="text-3xl font-bold tracking-tighter text-primary font-heading">
+      <div className="space-y-4 border-b border-primary/10 pb-8">
+        <h2 className="text-3xl font-semibold tracking-tighter text-primary font-heading">
           Thought Leadership & B2P Intelligence
         </h2>
-        <p className="text-lg text-neutral/80 font-sans max-w-3xl leading-relaxed">
+        <p className="text-lg text-muted-foreground font-sans max-w-3xl leading-relaxed">
           We do not rely on generic marketing copy. Our thought leadership is powered by a proprietary AI pipeline that extracts tacit knowledge from our executive SMEs, vectorizes it, and deploys it via Retrieval-Augmented Generation (RAG) to produce institutional-grade content and interactive lead magnets.
         </p>
       </div>
 
       {/* 2. The Extraction Engine (Focus Index Accordion) */}
       <div className="space-y-6 pt-4">
-        <h3 className="text-xl font-bold font-heading text-neutral">The Extraction Engine</h3>
+        <h3 className="text-xl font-semibold font-heading text-foreground">The Extraction Engine</h3>
         
-        <div className="bg-white/40 backdrop-blur-md rounded-xl border border-neutral/10 p-2 shadow-sm flex flex-col gap-1 inline-block w-full">
+        <div className="bg-white/40 backdrop-blur-md rounded-xl border border-primary/10 p-2 shadow-sm flex flex-col gap-1 inline-block w-full">
           {extractionTriggers.map((trigger) => {
             const isExpanded = expandedTrigger === trigger.id;
             const Icon = trigger.icon;
@@ -72,13 +72,13 @@ export function SocialLeadership() {
                   <div className="flex items-center gap-4">
                     <div className={cn(
                       "p-2 rounded-lg transition-colors min-h-[44px] min-w-[44px] flex items-center justify-center",
-                      isExpanded ? "bg-primary/10 text-primary" : "bg-neutral/5 text-neutral/50 group-hover:text-neutral/70"
+                      isExpanded ? "bg-primary/10 text-primary" : "bg-neutral/5 text-muted-foreground group-hover:text-muted-foreground"
                     )}>
                       <Icon strokeWidth={1.5} className="w-5 h-5 shrink-0" />
                     </div>
                     <span className={cn(
                       "font-ui font-semibold text-lg transition-colors",
-                      isExpanded ? "text-primary" : "text-neutral/80 group-hover:text-neutral"
+                      isExpanded ? "text-primary" : "text-muted-foreground group-hover:text-foreground"
                     )}>
                       {trigger.title}
                     </span>
@@ -87,7 +87,7 @@ export function SocialLeadership() {
                     <ChevronDown
                       strokeWidth={1.5}
                       className={cn(
-                        "w-5 h-5 text-neutral/40 transition-transform duration-300",
+                        "w-5 h-5 text-foreground/40 transition-transform duration-300",
                         isExpanded ? "rotate-180 text-primary" : ""
                       )}
                     />
@@ -100,7 +100,7 @@ export function SocialLeadership() {
                     isExpanded ? "max-h-[200px]" : "max-h-0"
                   )}
                 >
-                  <div className="p-6 pt-0 lg:pl-[88px] pl-[76px] text-neutral/80 font-sans leading-relaxed text-sm md:text-base border-l-2 border-transparent">
+                  <div className="p-6 pt-0 lg:pl-[88px] pl-[76px] text-muted-foreground font-sans leading-relaxed text-sm md:text-base border-l-2 border-transparent">
                     {trigger.detail}
                   </div>
                 </div>
@@ -113,10 +113,10 @@ export function SocialLeadership() {
       {/* 3. The Blueprint: Gap Analysis Lead Magnet (CSS Wireframes) */}
       <div className="space-y-8 pt-8">
         <div className="space-y-3">
-          <h3 className="text-2xl font-bold font-heading text-neutral flex items-center gap-2">
+          <h3 className="text-2xl font-bold font-heading text-foreground flex items-center gap-2">
             <LayoutTemplate className="w-6 h-6 text-primary" strokeWidth={1.5} /> Tool Schematics
           </h3>
-          <p className="text-neutral/70 font-sans max-w-2xl">
+          <p className="text-muted-foreground font-sans max-w-2xl">
             Below are architectural wireframes mapping the interactive deployment end-state for our AI-generated Gap Analysis lead magnet.
           </p>
         </div>
@@ -124,11 +124,11 @@ export function SocialLeadership() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           
           {/* Wireframe 1: The Discovery Interface */}
-          <div className="bg-white/60 backdrop-blur-md rounded-xl border border-neutral/10 p-6 shadow-sm space-y-6">
-            <h4 className="font-ui font-bold text-primary tracking-tight pb-2 border-b border-neutral/10">Wireframe 1: The Discovery Interface</h4>
+          <div className="bg-white/60 backdrop-blur-md rounded-xl border border-primary/10 p-6 shadow-sm space-y-6">
+            <h4 className="font-ui font-semibold text-primary tracking-tight pb-2 border-b border-primary/10">Wireframe 1: The Discovery Interface</h4>
             
             <div className="bg-neutral/5 rounded-lg p-5 flex items-center justify-center h-[380px]">
-               <div className="w-full max-w-[340px] bg-white shadow-md border border-neutral/10 rounded-xl overflow-hidden flex flex-col font-mono text-[10px] text-neutral/50 uppercase tracking-widest relative p-6 space-y-5">
+               <div className="w-full max-w-[340px] bg-white shadow-md border border-primary/10 rounded-xl overflow-hidden flex flex-col font-mono text-[10px] text-muted-foreground uppercase tracking-widest relative p-6 space-y-5">
                  <div className="flex items-center gap-2 pb-3 border-b border-black/5">
                     <MessageSquare className="w-4 h-4 shrink-0 text-primary/70" />
                     <span className="font-bold opacity-80 text-primary">AI Gap Analysis Engine</span>
@@ -147,11 +147,11 @@ export function SocialLeadership() {
           </div>
 
           {/* Wireframe 2: The RAG Output Report */}
-          <div className="bg-white/60 backdrop-blur-md rounded-xl border border-neutral/10 p-6 shadow-sm space-y-6">
-            <h4 className="font-ui font-bold text-primary tracking-tight pb-2 border-b border-neutral/10">Wireframe 2: The RAG Output Report</h4>
+          <div className="bg-white/60 backdrop-blur-md rounded-xl border border-primary/10 p-6 shadow-sm space-y-6">
+            <h4 className="font-ui font-semibold text-primary tracking-tight pb-2 border-b border-primary/10">Wireframe 2: The RAG Output Report</h4>
             
             <div className="bg-neutral/5 rounded-lg p-5 flex items-center justify-center h-[380px]">
-               <div className="w-full bg-white shadow-xl border border-black/5 rounded-xl flex flex-col font-mono text-[10px] text-neutral/50 uppercase tracking-widest relative">
+               <div className="w-full bg-white shadow-xl border border-black/5 rounded-xl flex flex-col font-mono text-[10px] text-muted-foreground uppercase tracking-widest relative">
                  <div className="flex items-center justify-between p-4 border-b border-black/5 bg-black/5">
                     <span className="font-bold">Output Validation</span>
                     <div className="flex items-center gap-1.5 bg-[#001b15] text-[#98cc67] px-2.5 py-1 rounded-full border border-[#98cc67]/30 shadow-[0_0_8px_rgba(152,204,103,0.2)]">
@@ -194,45 +194,45 @@ export function SocialLeadership() {
 
       {/* 4. The 2026 Algorithmic Strategy */}
       <div className="space-y-8 pt-8">
-        <h3 className="text-2xl font-bold font-heading text-neutral">2026 LinkedIn Distribution Strategy & Visual Standards</h3>
+        <h3 className="text-2xl font-bold font-heading text-foreground">2026 LinkedIn Distribution Strategy & Visual Standards</h3>
         
-        <div className="bg-white/40 backdrop-blur-md rounded-xl border border-neutral/10 p-6 md:p-8 shadow-sm space-y-6">
-          <div className="space-y-3 pb-6 border-b border-neutral/10">
-            <h4 className="font-ui font-bold text-primary text-xl tracking-tight">The 2026 Playbook: Zero-Click & Dwell Time</h4>
-            <p className="font-sans text-neutral/80 leading-relaxed max-w-4xl hover:text-neutral transition-colors">
+        <div className="bg-white/40 backdrop-blur-md rounded-xl border border-primary/10 p-6 md:p-8 shadow-sm space-y-6">
+          <div className="space-y-3 pb-6 border-b border-primary/10">
+            <h4 className="font-ui font-semibold text-primary text-xl tracking-tight">The 2026 Playbook: Zero-Click & Dwell Time</h4>
+            <p className="font-sans text-muted-foreground leading-relaxed max-w-4xl hover:text-foreground transition-colors">
               Executive buyers ignore fluff. We deploy "Zero-Click Content" (delivering the entire insight in the feed without requiring a click). We optimize for Dwell Time by leveraging deep-dive Carousels.
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="bg-white/40 border border-white/60 p-5 rounded-xl h-full flex flex-col space-y-2 shadow-sm">
-              <span className="font-ui font-bold text-neutral-900">The Native Distribution Pipeline (No Reposts)</span>
-              <p className="font-sans text-neutral-700 text-sm leading-relaxed">
+              <span className="font-ui font-semibold text-foreground-900">The Native Distribution Pipeline (No Reposts)</span>
+              <p className="font-sans text-foreground-700 text-sm leading-relaxed">
                 Never ask the team to "repost" from the Bridge2Partners company page. Reposts suffer a massive algorithmic reach penalty. Instead, marketing will provide the team with the raw assets (PDFs, images) and text frameworks. The team must upload and publish these assets natively directly to their own feeds. A native personal post generates up to 10x the reach of a company page repost.
               </p>
             </div>
             <div className="bg-white/40 border border-white/60 p-5 rounded-xl h-full flex flex-col space-y-3 shadow-sm">
-              <span className="font-ui font-bold text-neutral-900">Optimal Post Architecture</span>
+              <span className="font-ui font-semibold text-foreground-900">Optimal Post Architecture</span>
               <div className="space-y-4 flex-1">
-                <p className="font-sans text-neutral-700 text-sm leading-relaxed">
+                <p className="font-sans text-foreground-700 text-sm leading-relaxed">
                   Feed Posts: Maintain a strict <span className="font-data text-primary font-bold px-1.5 py-0.5 bg-[#98cc67]/20 rounded shadow-sm text-sm">1,300 - 1,900 characters</span> constraint for optimal dwell-time.
                 </p>
-                <p className="font-sans text-neutral-700 text-sm leading-relaxed">
-                  Articles: Target <span className="font-data font-extrabold text-neutral-900">800 - 1,200 words</span>. Shorter pieces face suppression and must be natively reformatted.
+                <p className="font-sans text-foreground-700 text-sm leading-relaxed">
+                  Articles: Target <span className="font-data font-extrabold text-foreground-900">800 - 1,200 words</span>. Shorter pieces face suppression and must be natively reformatted.
                 </p>
-                <p className="font-sans text-neutral-700 text-sm leading-relaxed">
-                  Comments: Generic replies are penalized. Trigger engagement multipliers by exceeding <span className="font-data font-extrabold text-neutral-900">12 words</span> with a <span className="font-data font-extrabold text-neutral-900">2-sentence minimum</span>.
+                <p className="font-sans text-foreground-700 text-sm leading-relaxed">
+                  Comments: Generic replies are penalized. Trigger engagement multipliers by exceeding <span className="font-data font-extrabold text-foreground-900">12 words</span> with a <span className="font-data font-extrabold text-foreground-900">2-sentence minimum</span>.
                 </p>
               </div>
             </div>
             <div className="bg-white/40 border border-white/60 p-5 rounded-xl h-full flex flex-col space-y-2 shadow-sm">
-              <span className="font-ui font-bold text-neutral-900">Penalties & Spam Filtering</span>
-              <p className="font-sans text-neutral-700 text-sm leading-relaxed">
+              <span className="font-ui font-semibold text-foreground-900">Penalties & Spam Filtering</span>
+              <p className="font-sans text-foreground-700 text-sm leading-relaxed">
                 Tagging is restricted to <span className="bg-red-50 text-red-700 px-1.5 py-0.5 rounded text-xs font-bold uppercase">3-5 people maximum</span>. If tagged individuals do not engage in the first hour, the post is penalized. Hashtags are capped at 3-5 relevant tags; engagement-bait (#follow) is <span className="bg-red-50 text-red-700 px-1.5 py-0.5 rounded text-xs font-bold uppercase">strictly forbidden</span>.
               </p>
             </div>
             <div className="bg-white/40 border border-white/60 p-5 rounded-xl h-full flex flex-col space-y-2 shadow-sm">
-              <span className="font-ui font-bold text-neutral-900">Visual Guidelines</span>
-              <p className="font-sans text-neutral-700 text-sm leading-relaxed">
+              <span className="font-ui font-semibold text-foreground-900">Visual Guidelines</span>
+              <p className="font-sans text-foreground-700 text-sm leading-relaxed">
                 No generic stock photos. All human imagery must use our cool-toned/grayscale filter. Data visualizations must utilize our B2P Green and Luminous Lime for high-signal contrast.
               </p>
             </div>
