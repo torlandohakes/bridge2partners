@@ -534,8 +534,7 @@ export const getPitchSlides = (slideCopies: string[], customBg: string | null) =
     slideContent: (
       <div className="w-full h-full bg-black relative flex flex-col items-center justify-center overflow-hidden z-30">
          <div className="flex flex-col items-center justify-center opacity-80">
-           <img src={`/api/proxy-image?url=${encodeURIComponent('https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2FBridge2Partners_Favicon.png?alt=media&token=8281d312-5968-4fa1-9e37-347481934b95')}`} alt="B2P Logo" className="w-[8cqw] h-[8cqw] object-contain mb-[2cqw]" />
-           <span className="font-ui text-[1.5cqw] text-neutral-400 tracking-[0.6em] uppercase font-bold">Bridge2Partners</span>
+           <img src={`/api/proxy-image?url=${encodeURIComponent('https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2FBridge2Partners_Brand_Logo_v7.webp?alt=media&token=a90040bc-3446-408d-8794-cab07568de66')}`} alt="B2P Brand Logo" className="w-[24cqw] object-contain" />
          </div>
       </div>
     )
