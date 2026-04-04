@@ -243,11 +243,10 @@ export function PitchDeckGuidelines() {
   const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
-      const reader = new FileReader();
-      reader.onload = (event) => {
-        setCustomBg(event.target?.result as string);
-      };
-      reader.readAsDataURL(file);
+      if (customBg) URL.revokeObjectURL(customBg); // Cleanup previous blob
+      const objectUrl = URL.createObjectURL(file);
+      setCustomBg(objectUrl);
+      e.target.value = ''; // Reset input to allow re-uploading the same file
     }
   };
   const [isExporting, setIsExporting] = useState(false);
