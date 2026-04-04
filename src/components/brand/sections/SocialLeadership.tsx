@@ -203,26 +203,26 @@ export function SocialLeadership() {
               Executive buyers ignore fluff. We deploy "Zero-Click Content" (delivering the entire insight in the feed without requiring a click). We optimize for Dwell Time by leveraging deep-dive Carousels.
             </p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
-            <div className="space-y-2">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="bg-white/40 border border-white/60 p-5 rounded-xl h-full flex flex-col space-y-2 shadow-sm">
               <span className="font-ui font-bold text-neutral-900">The Native Distribution Pipeline (No Reposts)</span>
               <p className="font-sans text-neutral-700 text-sm leading-relaxed">
                 Never ask the team to "repost" from the Bridge2Partners company page. Reposts suffer a massive algorithmic reach penalty. Instead, marketing will provide the team with the raw assets (PDFs, images) and text frameworks. The team must upload and publish these assets natively directly to their own feeds. A native personal post generates up to 10x the reach of a company page repost.
               </p>
             </div>
-            <div className="space-y-2">
+            <div className="bg-white/40 border border-white/60 p-5 rounded-xl h-full flex flex-col space-y-2 shadow-sm">
               <span className="font-ui font-bold text-neutral-900">Optimal Post Architecture</span>
               <p className="font-sans text-neutral-700 text-sm leading-relaxed">
                 While LinkedIn allows up to 3,000 characters, optimal dwell-time completion rates dictate a strict constraint of <span className="font-data text-primary font-bold px-1.5 py-0.5 bg-[#98cc67]/20 rounded shadow-sm text-sm">1,300 - 1,900 characters</span> per text post.
               </p>
             </div>
-            <div className="space-y-2">
+            <div className="bg-white/40 border border-white/60 p-5 rounded-xl h-full flex flex-col space-y-2 shadow-sm">
               <span className="font-ui font-bold text-neutral-900">Penalties & Spam Filtering</span>
               <p className="font-sans text-neutral-700 text-sm leading-relaxed">
                 Tagging is restricted to <span className="bg-red-50 text-red-700 px-1.5 py-0.5 rounded text-xs font-bold uppercase">3-5 people maximum</span>. If tagged individuals do not engage in the first hour, the post is penalized. Hashtags are capped at 3-5 relevant tags; engagement-bait (#follow) is <span className="bg-red-50 text-red-700 px-1.5 py-0.5 rounded text-xs font-bold uppercase">strictly forbidden</span>.
               </p>
             </div>
-            <div className="space-y-2">
+            <div className="bg-white/40 border border-white/60 p-5 rounded-xl h-full flex flex-col space-y-2 shadow-sm">
               <span className="font-ui font-bold text-neutral-900">Visual Guidelines</span>
               <p className="font-sans text-neutral-700 text-sm leading-relaxed">
                 No generic stock photos. All human imagery must use our cool-toned/grayscale filter. Data visualizations must utilize our B2P Green and Luminous Lime for high-signal contrast.
@@ -232,7 +232,7 @@ export function SocialLeadership() {
         </div>
 
         {/* 5. The Post Blueprints (Imported) */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 pt-4 max-w-5xl">
+        <div className="grid grid-cols-1 xl:grid-cols-2 gap-8 pt-4 w-full">
           <WireframeTextPost />
           <WireframeStatCard />
           <WireframeRelationalAnchor />

@@ -131,7 +131,7 @@ export function WebsiteGuidelines() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 xl:grid-cols-2 gap-8 w-full">
           <WireframeHomepage />
 
           <div className="space-y-8 flex flex-col">
@@ -141,7 +141,7 @@ export function WebsiteGuidelines() {
         </div>
 
         {/* --- SECOND TIER SCHEMATICS --- */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mt-8">
+        <div className="grid grid-cols-1 xl:grid-cols-2 gap-8 w-full mt-8">
           <WireframeProcurement />
           <WireframeTeam />
           <WireframeBusinessCard />
