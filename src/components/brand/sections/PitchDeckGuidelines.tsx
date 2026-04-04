@@ -27,7 +27,7 @@ import {
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
-const pitchSlides = [
+const getPitchSlides = (slideOneCopy: string) => [
   {
     id: 1,
     title: "The Hook",
@@ -57,9 +57,22 @@ const pitchSlides = [
          />
          
          {/* Stacked Left-Aligned Typography */}
-         <div className="relative z-10 w-[75cqw] flex flex-col gap-[1.5cqw] b2p-narrative-text transition-opacity duration-300">
+         <div className="relative z-10 w-[85cqw] flex flex-col gap-[1.5cqw] b2p-narrative-text transition-opacity duration-300">
             <h2 className="font-display font-black text-[5.5cqw] tracking-tight leading-[1.1] text-transparent bg-clip-text bg-gradient-to-br from-white to-neutral-300 drop-shadow-md">
-              Innovation is Survival.<br/>Your Legacy Stack is the <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#98cc67] to-[#7bb050] drop-shadow-[0_0_20px_rgba(152,204,103,0.3)]">Anchor.</span>
+              {(() => {
+                const words = slideOneCopy.split(" ").filter(w => w.trim() !== "");
+                if (words.length === 0) return null;
+                const lastWord = words.pop();
+                const firstPart = words.join(" ");
+                return (
+                  <>
+                    {firstPart}{firstPart ? " " : ""}
+                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#98cc67] to-[#7bb050] drop-shadow-[0_0_20px_rgba(152,204,103,0.3)]">
+                      {lastWord}
+                    </span>
+                  </>
+                );
+              })()}
             </h2>
          </div>
 
@@ -203,13 +216,18 @@ const pitchSlides = [
 ];
 
 export function PitchDeckGuidelines() {
+  const [slideOneCopy, setSlideOneCopy] = useState("Innovation is Survival. Your Legacy Stack is the Anchor.");
   const [currentSlide, setCurrentSlide] = useState(0);
   const [sidebarTab, setSidebarTab] = useState<'strategy' | 'roleplay'>('strategy');
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [hideTypography, setHideTypography] = useState(false);
   const [isExporting, setIsExporting] = useState(false);
   const [exportSuccess, setExportSuccess] = useState(false);
+  const [wordLimitWarning, setWordLimitWarning] = useState(false);
   const slideRef = useRef<HTMLDivElement>(null);
+
+  const pitchSlides = getPitchSlides(slideOneCopy);
+
 
   // Real DOM-to-Image capture sequence
   const handleExportSlide = async () => {
@@ -494,8 +512,44 @@ export function PitchDeckGuidelines() {
 
                  </div>
 
+                 {/* State-Bound Slide Customizer */}
+                 {currentSlide === 0 && (
+                   <div className="shrink-0 py-4 border-t border-neutral/10 select-none bg-neutral-50/50 -mx-4 px-4">
+                     <label className="text-[11px] font-ui font-bold text-neutral-800 uppercase tracking-widest flex items-center justify-between mb-2">
+                       Customize Hook (Max 10 Words)
+                       <span className={cn("text-[9px] bg-white border border-neutral-200 px-1.5 py-0.5 rounded shadow-sm", slideOneCopy.split(" ").filter(w=>w.trim()!=='').length >= 10 ? "text-red-500 font-bold border-red-200 bg-red-50" : "text-neutral-500")}>
+                         {slideOneCopy.split(" ").filter(w=>w.trim()!=='').length} / 10
+                       </span>
+                     </label>
+                     <textarea 
+                       value={slideOneCopy}
+                       onChange={(e) => {
+                         const copy = e.target.value;
+                         const words = copy.split(" ").filter(w => w.trim() !== "");
+                         
+                         // Enforce 10 words strict limitation
+                         if (words.length <= 10) {
+                           setSlideOneCopy(copy);
+                           setWordLimitWarning(false);
+                         } else {
+                           setWordLimitWarning(true);
+                           setTimeout(() => setWordLimitWarning(false), 2500); // clear flash
+                         }
+                       }}
+                       className="w-full text-sm font-sans resize-none p-3 bg-white border border-neutral-200 rounded-lg shadow-inner focus:border-primary focus:ring-1 focus:ring-primary/20 outline-none transition-all placeholder:text-neutral-400"
+                       rows={2}
+                       placeholder="Enter new hook text here..."
+                     />
+                     {wordLimitWarning && (
+                       <p className="text-[10px] text-red-500 font-bold mt-1.5 animate-in fade-in slide-in-from-top-1 bg-red-50 px-2 py-1 rounded-sm border border-red-100 flex items-center gap-1.5">
+                         <ShieldAlert className="w-3.5 h-3.5" /> Max word count reached. Protect the prospect's cognitive load.
+                       </p>
+                     )}
+                   </div>
+                 )}
+
                  {/* Mock Chat Input Area */}
-                 <div className="shrink-0 pt-2 border-t border-neutral/10">
+                 <div className="shrink-0 pt-3 border-t border-neutral/10 mt-2">
                     <div className="relative flex items-center bg-white border border-neutral-300 rounded-full shadow-sm focus-within:border-primary focus-within:ring-1 focus-within:ring-primary/20 transition-all">
                        <button className="w-10 h-10 flex items-center justify-center text-neutral-400 hover:text-primary transition-colors ml-1">
                          <Mic className="w-4 h-4" />
