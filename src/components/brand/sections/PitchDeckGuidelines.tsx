@@ -42,7 +42,7 @@ export function PitchDeckGuidelines() {
     "Innovation is Survival.\nYour Legacy Stack is\nDead Weight.",
     "Delaying modernization\nfunds your\nCompetitors.",
     "Don't break the bank.\nBuild in parallel.",
-    "Subject Matter Experts. Insiders.\nWe have worked at the banks we serve. Dedicated specialists with tenure at the top 100 financial institutions.",
+    "We Are Bankers, Like You.\nWe have worked at the banks we serve. Dedicated specialists with tenure at the top 100 financial institutions.",
     "Slide 5: The Magic Tools\n(Pending High-Fidelity Design)",
     "Slide 6: The Proof\n(Pending High-Fidelity Design)",
     "Slide 7: Appendix\n(Pending High-Fidelity Design)",

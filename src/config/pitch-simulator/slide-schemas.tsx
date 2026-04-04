@@ -242,7 +242,7 @@ export const getPitchSlides = (slideCopies: string[], customBg: string | null) =
          {/* Left Side (40%): Typography Header */}
          <div className="w-[38%] flex flex-col justify-center h-full z-30 gap-[1cqw]">
             <h2 className="font-display font-black text-[4cqw] leading-[1.05] tracking-tight text-white drop-shadow-md">
-               {slideCopies[3].split('\n')[0] || "Subject Matter Experts. Insiders."}
+               {slideCopies[3].split('\n')[0] || "We Are Bankers, Like You."}
             </h2>
             <p className="font-sans text-[1.4cqw] leading-snug text-neutral-400 font-medium mt-[1cqw] max-w-[90%]">
                {slideCopies[3].split('\n').slice(1).join('\n') || "We have worked at the banks we serve. Dedicated specialists with tenure at the top 100 financial institutions."}

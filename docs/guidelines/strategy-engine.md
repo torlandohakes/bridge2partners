@@ -8,6 +8,7 @@ The human brain cannot simultaneously process auditory complex data and read par
 **Constraint Rule:**
 - **Slides 1 & 2:** Absolutely zero body copy. 8-10 words maximum. The words are traps designed to be comprehended in <2 seconds.
 - **Slides 3+:** Body copy is permissible ONLY if it acts as a strategy anchor (e.g., "$80B", "40+ Integrations").
+- **Slide 4 (The Directory):** EXCEPTION: The 10-word maximum constraint is lifted on directory/organizational roster pages ("The Insiders"), as data density actively enforces the "Elite Pedigree" psychological anchor.
 
 ## 3. Persona Mapping & Objections
 The AI simulates specific executive archetypes:
