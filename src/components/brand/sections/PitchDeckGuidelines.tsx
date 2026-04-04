@@ -41,7 +41,7 @@ const pitchSlides = [
          {/* Remote Image Background Layer */}
          <div 
            className="absolute inset-0 bg-cover bg-right bg-no-repeat opacity-50 mix-blend-luminosity z-0" 
-           style={{ backgroundImage: 'url("https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2Fbridge2partners-hero-1.webp?alt=media&token=bb05e1e4-8f2d-4a75-8880-ddd7bbfa2797")' }}
+           style={{ backgroundImage: `url("/api/proxy-image?url=${encodeURIComponent('https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2Fbridge2partners-hero-1.webp?alt=media&token=bb05e1e4-8f2d-4a75-8880-ddd7bbfa2797')}")` }}
          />
          {/* Partial Frosted Glass (Protects the 'Bridge' rendering on the right) */}
          <div className="absolute inset-y-0 left-0 w-3/4 pointer-events-none z-0 backdrop-blur-[2px] [mask-image:linear-gradient(to_right,black_40%,transparent_100%)]" />
@@ -67,7 +67,7 @@ const pitchSlides = [
          {/* Custom Slide Anchors */}
          <div className="absolute bottom-[3cqw] left-[4cqw] flex items-center gap-[1cqw] z-20">
            <img 
-             src="https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2FBridge2Partners_Favicon.png?alt=media&token=8281d312-5968-4fa1-9e37-347481934b95" 
+             src={`/api/proxy-image?url=${encodeURIComponent('https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2FBridge2Partners_Favicon.png?alt=media&token=8281d312-5968-4fa1-9e37-347481934b95')}`}
              alt="B2P Logo" 
              className="w-[2.5cqw] h-[2.5cqw] rounded-[0.5cqw] opacity-90 shadow-[0_0_15px_rgba(152,204,103,0.2)]"
            />
@@ -111,7 +111,7 @@ const pitchSlides = [
          {/* Custom Slide Anchors */}
          <div className="absolute bottom-[3cqw] left-[4cqw] flex items-center gap-[1cqw] z-20">
            <img 
-             src="https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2FBridge2Partners_Favicon.png?alt=media&token=8281d312-5968-4fa1-9e37-347481934b95" 
+             src={`/api/proxy-image?url=${encodeURIComponent('https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2FBridge2Partners_Favicon.png?alt=media&token=8281d312-5968-4fa1-9e37-347481934b95')}`}
              alt="B2P Logo" 
              className="w-[2.5cqw] h-[2.5cqw] rounded-[0.5cqw] opacity-40 shadow-[0_0_15px_rgba(255,255,255,0.05)] mix-blend-luminosity grayscale group-hover:grayscale-0 transition-all duration-500"
            />
