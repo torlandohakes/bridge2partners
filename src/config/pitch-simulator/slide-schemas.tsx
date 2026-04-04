@@ -419,23 +419,23 @@ export const getPitchSlides = (slideCopies: string[], customBg: string | null) =
          {/* The Metrics Layout (3 Columns) */}
          <div className="relative z-30 w-[88cqw] flex flex-row items-center justify-between gap-[4cqw] mt-[6cqw]">
             {/* Metric 1 */}
-            <div className="flex flex-col items-center justify-center flex-1 text-center bg-white/5 border border-white/10 p-[4cqw] h-[24cqw] rounded-[1cqw] hover:bg-white/10 transition-colors shadow-2xl relative overflow-hidden">
+            <div className="flex flex-col items-center justify-center flex-1 text-center bg-white/5 border border-white/10 p-[4cqw] h-[26cqw] rounded-[1cqw] hover:bg-white/10 transition-colors shadow-2xl relative overflow-hidden">
                <div className="absolute top-0 right-0 p-[2cqw] opacity-20"><Database className="w-[4cqw] h-[4cqw] text-primary" /></div>
-               <span className="text-primary text-[8cqw] font-black leading-none drop-shadow-[0_0_20px_rgba(152,204,103,0.3)] mb-[1cqw] z-10">40+</span>
+               <span className="text-white text-[8cqw] font-black leading-none drop-shadow-[0_0_30px_rgba(255,255,255,0.2)] mb-[1cqw] z-10">40+</span>
                <span className="text-neutral-300 text-[1.4cqw] font-ui uppercase tracking-[0.2em] font-bold leading-relaxed px-[1cqw] z-10">Interfaces Built & Deployed</span>
             </div>
 
             {/* Metric 2 */}
-            <div className="flex flex-col items-center justify-center flex-1 text-center bg-white/5 border border-primary/30 p-[4cqw] h-[26cqw] rounded-[1cqw] bg-gradient-to-b from-white/10 to-transparent hover:bg-white/10 transition-colors shadow-[0_0_40px_rgba(152,204,103,0.1)] relative overflow-hidden -translate-y-[2cqw]">
-               <div className="absolute top-0 right-0 p-[4cqw] opacity-10"><Target className="w-[8cqw] h-[8cqw] text-primary" /></div>
-               <span className="text-white text-[9cqw] font-black leading-none drop-shadow-[0_0_30px_rgba(255,255,255,0.4)] mb-[1cqw] z-10">$80B</span>
-               <span className="text-primary text-[1.5cqw] font-ui uppercase tracking-[0.2em] font-black leading-relaxed px-[1cqw] z-10">Super-Regional Bank Transformed</span>
+            <div className="flex flex-col items-center justify-center flex-1 text-center bg-white/5 border border-white/10 p-[4cqw] h-[26cqw] rounded-[1cqw] hover:bg-white/10 transition-colors shadow-2xl relative overflow-hidden">
+               <div className="absolute top-0 right-0 p-[2cqw] opacity-20"><Target className="w-[4cqw] h-[4cqw] text-primary" /></div>
+               <span className="text-white text-[8cqw] font-black leading-none drop-shadow-[0_0_30px_rgba(255,255,255,0.2)] mb-[1cqw] z-10">$80B</span>
+               <span className="text-neutral-300 text-[1.4cqw] font-ui uppercase tracking-[0.2em] font-bold leading-relaxed px-[1cqw] z-10">Super-Regional Bank Transformed</span>
             </div>
 
             {/* Metric 3 */}
-            <div className="flex flex-col items-center justify-center flex-1 text-center bg-white/5 border border-white/10 p-[4cqw] h-[24cqw] rounded-[1cqw] hover:bg-white/10 transition-colors shadow-2xl relative overflow-hidden">
+            <div className="flex flex-col items-center justify-center flex-1 text-center bg-white/5 border border-white/10 p-[4cqw] h-[26cqw] rounded-[1cqw] hover:bg-white/10 transition-colors shadow-2xl relative overflow-hidden">
                <div className="absolute top-0 right-0 p-[2cqw] opacity-20"><CheckCircle2 className="w-[4cqw] h-[4cqw] text-primary" /></div>
-               <span className="text-primary text-[8cqw] font-black leading-none drop-shadow-[0_0_20px_rgba(152,204,103,0.3)] mb-[1cqw] z-10">ZERO</span>
+               <span className="text-white text-[8cqw] font-black leading-none drop-shadow-[0_0_30px_rgba(255,255,255,0.2)] mb-[1cqw] z-10">ZERO</span>
                <span className="text-neutral-300 text-[1.4cqw] font-ui uppercase tracking-[0.2em] font-bold leading-relaxed px-[1cqw] z-10">Operational Disruption</span>
             </div>
          </div>
