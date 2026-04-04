@@ -162,15 +162,53 @@ const getPitchSlides = (slideCopies: string[], customBg: string | null) => [
   {
     id: 3,
     title: "The Reframe",
-    concept: "Simplify the Ecosystem.",
-    speakerNotes: "Explain that integration fails when treated as an IT problem rather than a systems architecture problem.",
-    visualRules: "Clean minimalist hub-and-spoke diagram.",
+    concept: "The Paradigm Shift. They are terrified of a 'rip and replace' demolition. Relieve that anxiety instantly. You are shifting their mental model from risky destruction to a safe, surgical parallel build.",
+    speakerNotes: "Drop the pitch tone and speak like a partner. 'You don't need a wrecking ball, and you don't need an army. We act as your elite task force. Your legacy systems keep making money, while we surgically build your modern architecture alongside it.'",
+    visualRules: "Clean and authoritative. Perfectly centered typography anchoring the concept of precision engineering over brute-force destruction.",
     aiPersona: "Chief Information Officer",
     aiObjection: "You're oversimplifying. We have 40+ legacy systems tied directly into our core banking platform. A clean 'hub and spoke' is a consultant's pipe dream.",
     slideContent: (
-      <div className="w-full h-full bg-neutral-100 flex flex-col items-center justify-center border-2 border-dashed border-neutral-300 relative z-30">
-         <span className="font-ui font-semibold text-neutral-500 uppercase tracking-widest sm:text-lg">Slide 3: The Reframe</span>
-         <span className="font-sans text-neutral-400 mt-2 text-sm italic">(Pending High-Fidelity Design)</span>
+      <div className="w-full h-full bg-neutral-950 relative flex flex-col items-center justify-center p-[6cqw] overflow-hidden group z-30">
+         {/* Background Image Layer */}
+         {customBg ? (
+           <img 
+             src={customBg} 
+             alt="Custom Background" 
+             className="absolute inset-0 w-full h-full object-cover object-center z-0" 
+           />
+         ) : null}
+
+         {/* Cinematic Background Overlay */}
+         <div 
+           className="absolute inset-0 w-full h-full min-w-full min-h-full pointer-events-none z-0 mix-blend-multiply bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-neutral-700/70 via-neutral-900/90 to-neutral-950/95" 
+         />
+         
+         {/* Centered Typography */}
+         <div className="relative z-10 w-[85cqw] flex flex-col items-center gap-[1.5cqw] b2p-narrative-text transition-opacity duration-300 overflow-visible text-center">
+            <h2 className="font-display font-black text-[5cqw] tracking-tight text-transparent bg-clip-text bg-gradient-to-br from-white to-neutral-300 drop-shadow-md flex flex-col leading-[1.1] overflow-visible pb-0">
+              {slideCopies[2].split('\n').map((line, index, array) => {
+                 const isLastLine = index === array.length - 1 && line.trim() !== "";
+                 return (
+                   <span key={index} className={cn(isLastLine ? "text-transparent bg-clip-text bg-gradient-to-r from-[#98cc67] to-[#7bb050] drop-shadow-[0_0_20px_rgba(152,204,103,0.3)] leading-normal" : "")}>
+                     {line}
+                   </span>
+                 );
+              })}
+            </h2>
+         </div>
+
+         {/* Custom Slide Anchors */}
+         <div className="absolute bottom-[3cqw] left-[4cqw] flex items-center gap-[1cqw] z-20">
+           <img 
+             src={`/api/proxy-image?url=${encodeURIComponent('https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2FBridge2Partners_Favicon.png?alt=media&token=8281d312-5968-4fa1-9e37-347481934b95')}`}
+             alt="B2P Logo" 
+             className="w-[2.5cqw] h-[2.5cqw] rounded-[0.5cqw] opacity-90 shadow-[0_0_15px_rgba(152,204,103,0.2)]"
+           />
+           <span className="font-ui text-[1.2cqw] text-white/50 tracking-widest uppercase font-bold">Bridge2Partners</span>
+         </div>
+         <div className="absolute bottom-[3cqw] right-[4cqw] font-ui text-[1.2cqw] text-white/50 tracking-widest font-bold z-20">
+           03
+         </div>
       </div>
     )
   },
@@ -243,7 +281,7 @@ export function PitchDeckGuidelines() {
   const [slideCopies, setSlideCopies] = useState<string[]>([
     "Innovation is Survival.\nYour Legacy Stack is\nDead Weight.",
     "Delaying modernization\nfunds your\nCompetitors.",
-    "Slide 3: The Reframe\n(Pending High-Fidelity Design)",
+    "Don't break the bank.\nBuild in parallel.",
     "Slide 4: The Promised Land\n(Pending High-Fidelity Design)",
     "Slide 5: The Magic Tools\n(Pending High-Fidelity Design)",
     "Slide 6: The Proof\n(Pending High-Fidelity Design)",
