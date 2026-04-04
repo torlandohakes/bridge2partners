@@ -88,15 +88,40 @@ const getPitchSlides = (slideOneCopy: string) => [
   {
     id: 2,
     title: "The Stakes",
-    concept: "Polarizing the Room. You must create a stark contrast between their current trajectory (pain) and the Bridge2Partners trajectory (speed). If they don't feel the sting of the left side, they won't buy the right side.",
-    speakerNotes: "Point directly to the slide. 'Right now, every new integration you attempt adds quarters of tech debt. With the B2P Hub-and-Spoke architecture, we deliver functional, compliant results in weeks.'",
-    visualRules: "50/50 visual split. The negative outcome must be visually muted and heavy. The positive outcome must utilize our Luminous Lime to signal activation and relief.",
+    concept: "The Risk Inversion. You must destroy the illusion that doing nothing is the 'safe' option. We are taking their fear of operational risk and replacing it with the much more dangerous reality of active market share loss.",
+    speakerNotes: "Look the champion in the eye. 'Every quarter you push this project back because of internal friction, your headcount rises to manage the legacy mess, and your best customers migrate to better tech. Doing nothing is actively costing you market share.'",
+    visualRules: "A stark Cause-and-Effect layout. Reading left to right, the muted left side represents their internal inertia, while the right side uses Luminous Lime to make the external financial threat visually undeniable.",
     aiPersona: "Conservative CFO",
     aiObjection: "Our current tech debt is manageable. Shifting to a new modular methodology seems like a massive capital expenditure for unproven ROI. How do you justify the initial burn?",
     slideContent: (
-      <div className="w-full h-full bg-neutral-100 flex flex-col items-center justify-center border-2 border-dashed border-neutral-300 relative z-30">
-         <span className="font-ui font-semibold text-neutral-500 uppercase tracking-widest sm:text-lg">Slide 2: The Stakes</span>
-         <span className="font-sans text-neutral-400 mt-2 text-sm italic">(Pending High-Fidelity Design)</span>
+      <div className="w-full h-full grid grid-cols-2 bg-black relative overflow-hidden z-30">
+         {/* Left Side: The Inaction */}
+         <div className="bg-neutral-950 flex flex-col justify-center p-[6cqw] border-r border-white/5 relative">
+            <h2 className="font-display font-black text-[4.5cqw] tracking-tight leading-[1.1] text-white/40 flex flex-col drop-shadow-sm">
+              <span>Delaying</span>
+              <span>Modernization</span>
+            </h2>
+         </div>
+         {/* Right Side: The Consequence */}
+         <div className="bg-gradient-to-br from-[#0a110f] to-neutral-900 flex flex-col justify-center p-[6cqw] relative">
+            <h2 className="font-display font-black text-[4.5cqw] tracking-tight leading-[1.1] text-white flex flex-col drop-shadow-sm">
+              <span>Funds Your</span>
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#98cc67] to-[#7bb050] drop-shadow-[0_0_20px_rgba(152,204,103,0.3)]">Competitors.</span>
+            </h2>
+         </div>
+
+         {/* Custom Slide Anchors */}
+         <div className="absolute bottom-[3cqw] left-[4cqw] flex items-center gap-[1cqw] z-20">
+           <img 
+             src={`/api/proxy-image?url=${encodeURIComponent('https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2FBridge2Partners_Favicon.png?alt=media&token=8281d312-5968-4fa1-9e37-347481934b95')}`}
+             alt="B2P Logo" 
+             className="w-[2.5cqw] h-[2.5cqw] rounded-[0.5cqw] opacity-40 shadow-[0_0_15px_rgba(255,255,255,0.05)] mix-blend-luminosity grayscale transition-all duration-500"
+           />
+           <span className="font-ui text-[1.2cqw] text-white/20 tracking-widest uppercase font-bold">Bridge2Partners</span>
+         </div>
+         <div className="absolute bottom-[3cqw] right-[4cqw] font-ui text-[1.2cqw] text-[#98cc67]/70 tracking-widest font-bold z-20">
+           02
+         </div>
       </div>
     )
   },
