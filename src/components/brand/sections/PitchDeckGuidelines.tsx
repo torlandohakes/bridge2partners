@@ -32,6 +32,8 @@ import {
   Database,
   Users,
   Zap,
+  Copy,
+  Check,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { getPitchSlides } from "@/config/pitch-simulator/slide-schemas";
@@ -54,6 +56,7 @@ export function PitchDeckGuidelines() {
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [hideTypography, setHideTypography] = useState(false);
   const [customBg, setCustomBg] = useState<string | null>(null);
+  const [copiedScript, setCopiedScript] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -111,6 +114,12 @@ export function PitchDeckGuidelines() {
   
   const handlePrev = () => {
     if (currentSlide > 0) setCurrentSlide(prev => prev - 1);
+  };
+
+  const handleCopyScript = () => {
+    navigator.clipboard.writeText(pitchSlides[currentSlide].speakerNotes || '');
+    setCopiedScript(true);
+    setTimeout(() => setCopiedScript(false), 2000);
   };
 
   return (
@@ -246,9 +255,18 @@ export function PitchDeckGuidelines() {
                  {/* Block 2: The Script */}
                  <div className="bg-primary/5 border border-primary/20 p-4 rounded-xl shadow-sm relative overflow-hidden group">
                    <div className="absolute left-0 top-0 bottom-0 w-1 bg-primary/40 group-hover:bg-primary transition-colors" />
-                   <span className="font-ui text-[10px] text-primary uppercase tracking-widest font-bold flex items-center gap-1.5 mb-2">
-                     <PlayCircle className="w-3.5 h-3.5" /> Execution & Speaker Notes
-                   </span>
+                   <div className="flex items-center justify-between mb-2">
+                     <span className="font-ui text-[10px] text-primary uppercase tracking-widest font-bold flex items-center gap-1.5">
+                       <PlayCircle className="w-3.5 h-3.5" /> Execution & Speaker Notes
+                     </span>
+                     <button 
+                       onClick={handleCopyScript}
+                       className="text-primary hover:bg-primary/10 p-1.5 rounded-md transition-colors"
+                       title="Copy to clipboard"
+                     >
+                       {copiedScript ? <Check className="w-3.5 h-3.5" /> : <Copy className="w-3.5 h-3.5" />}
+                     </button>
+                   </div>
                    <p className="font-sans text-neutral-800 text-sm leading-relaxed italic">
                      "{activeSlide.speakerNotes}"
                    </p>
