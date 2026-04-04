@@ -1,4 +1,5 @@
-import { MousePointerClick, Columns3, Fingerprint, Swords } from "lucide-react";
+import { MousePointerClick, Columns3, Fingerprint, Swords, ChevronDown } from "lucide-react";
+import Image from "next/image";
 
 export function WireframeHomepage() {
   return (
@@ -8,22 +9,43 @@ export function WireframeHomepage() {
       <div className="bg-neutral/5 rounded-lg p-5 space-y-4 font-mono text-xs text-neutral-700 uppercase tracking-wider font-semibold">
         {/* Hero Block / Production Asset Preview */}
         <div 
-          className="relative overflow-hidden flex flex-col items-center justify-center p-10 rounded-lg shadow-sm border border-neutral/10 gap-4 transition-all hover:scale-[1.01]"
+          className="relative overflow-hidden flex flex-col rounded-lg shadow-sm border border-neutral/10 transition-all hover:scale-[1.01] min-h-[400px]"
           style={{ 
             backgroundImage: 'url("https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2Fbridge2partners-hero-1.webp?alt=media&token=bb05e1e4-8f2d-4a75-8880-ddd7bbfa2797")', 
             backgroundSize: 'cover', 
             backgroundPosition: 'center' 
           }}
         >
-           {/* Contrast Overlay */}
-           <div className="absolute inset-0 bg-[#001b15]/60 backdrop-blur-[2px]" />
+           {/* Contrast Overlay (Gradient) */}
+           <div className="absolute inset-0 bg-gradient-to-r from-[#001b15]/90 via-[#001b15]/50 to-transparent" />
            
-           {/* Wireframe UI mapped over the hero image */}
-           <div className="relative z-10 w-3/4 max-w-lg h-10 bg-white/20 backdrop-blur-md rounded border border-white/10" />
-           <div className="relative z-10 w-2/3 max-w-sm h-4 bg-white/20 backdrop-blur-md rounded border border-white/10" />
-           <div className="relative z-10 flex items-center gap-2 mt-4">
-             <div className="bg-primary text-white border border-primary/50 px-5 py-2.5 rounded flex items-center gap-2 shadow-xl hover:bg-primary/90 transition-colors cursor-pointer">
-               <MousePointerClick className="w-4 h-4" /> Primary CTA
+           {/* Mock Header Nav */}
+           <div className="relative z-10 w-full flex items-center justify-between px-6 pt-6 pb-4">
+              <Image src="/images/Bridge2Partners_Logo-3-White.png" alt="Bridge2Partners Logo" width={180} height={40} className="w-auto h-6 object-contain" />
+              <div className="hidden sm:flex items-center gap-6 font-ui text-xs font-medium text-white/90">
+                <span className="flex items-center gap-1 cursor-pointer hover:text-white transition-colors tracking-normal normal-case">Services <ChevronDown className="w-3 h-3 opacity-60" /></span>
+                <span className="cursor-pointer hover:text-white transition-colors tracking-normal normal-case">Compliance Docs</span>
+                <button className="bg-primary hover:bg-primary/90 text-white px-5 py-2 rounded-md transition-colors shadow-sm font-semibold tracking-wide normal-case border border-primary-dark">
+                  Schedule analysis
+                </button>
+              </div>
+           </div>
+
+           {/* Hero Content Body */}
+           <div className="relative z-10 flex flex-col items-start justify-center flex-1 px-8 py-12 w-full max-w-3xl gap-4">
+             <span className="font-ui text-[11px] sm:text-xs text-white/70 uppercase tracking-widest font-bold">For Banking Executives Facing Disruption</span>
+             
+             <h1 className="font-display font-extrabold text-4xl sm:text-5xl text-white leading-[1.1] tracking-tight normal-case">
+               Innovate now.<br/>Future Proof Your Bank.
+             </h1>
+             
+             <div className="flex flex-wrap items-center gap-4 mt-4">
+               <button className="bg-primary hover:bg-primary/90 text-white font-ui text-sm font-semibold border border-primary-dark px-6 py-3 rounded-md shadow-xl transition-all normal-case tracking-normal">
+                 Digital Transformation
+               </button>
+               <button className="bg-transparent hover:bg-white/10 text-white font-ui text-sm font-semibold border border-white/40 px-6 py-3 rounded-md shadow-sm transition-all backdrop-blur-sm normal-case tracking-normal">
+                 Schedule analysis
+               </button>
              </div>
            </div>
         </div>
