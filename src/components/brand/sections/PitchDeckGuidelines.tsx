@@ -27,7 +27,7 @@ import {
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
-const getPitchSlides = (slideOneCopy: string) => [
+const getPitchSlides = (slideCopies: string[]) => [
   {
     id: 1,
     title: "The Hook",
@@ -59,7 +59,7 @@ const getPitchSlides = (slideOneCopy: string) => [
          {/* Stacked Left-Aligned Typography */}
          <div className="relative z-10 w-[85cqw] flex flex-col gap-[1.5cqw] b2p-narrative-text transition-opacity duration-300 overflow-visible">
             <h2 className="font-display font-black text-[5.5cqw] tracking-tight text-transparent bg-clip-text bg-gradient-to-br from-white to-neutral-300 drop-shadow-md flex flex-col leading-[1.05] overflow-visible border-b-[1.5cqw] border-transparent pb-0">
-              {slideOneCopy.split('\n').map((line, index, array) => {
+              {slideCopies[0].split('\n').map((line, index, array) => {
                  const isLastLine = index === array.length - 1 && line.trim() !== "";
                  return (
                    <span key={index} className={cn(isLastLine ? "text-transparent bg-clip-text bg-gradient-to-r from-[#98cc67] to-[#7bb050] drop-shadow-[0_0_20px_rgba(152,204,103,0.3)] leading-normal" : "")}>
@@ -115,11 +115,14 @@ const getPitchSlides = (slideOneCopy: string) => [
          {/* Stacked Left-Aligned Typography */}
          <div className="relative z-10 w-[85cqw] flex flex-col gap-[1.5cqw] b2p-narrative-text transition-opacity duration-300 overflow-visible">
             <h2 className="font-display font-black text-[5.5cqw] tracking-tight text-transparent bg-clip-text bg-gradient-to-br from-white to-neutral-300 drop-shadow-md flex flex-col leading-[1.05] overflow-visible border-b-[1.5cqw] border-transparent pb-0">
-              <span>Delaying modernization</span>
-              <span>funds your</span>
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#98cc67] to-[#7bb050] drop-shadow-[0_0_20px_rgba(152,204,103,0.3)] leading-normal">
-                Competitors.
-              </span>
+              {slideCopies[1].split('\n').map((line, index, array) => {
+                 const isLastLine = index === array.length - 1 && line.trim() !== "";
+                 return (
+                   <span key={index} className={cn(isLastLine ? "text-transparent bg-clip-text bg-gradient-to-r from-[#98cc67] to-[#7bb050] drop-shadow-[0_0_20px_rgba(152,204,103,0.3)] leading-normal" : "")}>
+                     {line}
+                   </span>
+                 );
+              })}
             </h2>
          </div>
 
@@ -219,7 +222,15 @@ const getPitchSlides = (slideOneCopy: string) => [
 ];
 
 export function PitchDeckGuidelines() {
-  const [slideOneCopy, setSlideOneCopy] = useState("Innovation is Survival.\nYour Legacy Stack is\nDead Weight.");
+  const [slideCopies, setSlideCopies] = useState<string[]>([
+    "Innovation is Survival.\nYour Legacy Stack is\nDead Weight.",
+    "Delaying modernization\nfunds your\nCompetitors.",
+    "Slide 3: The Reframe\n(Pending High-Fidelity Design)",
+    "Slide 4: The Promised Land\n(Pending High-Fidelity Design)",
+    "Slide 5: The Magic Tools\n(Pending High-Fidelity Design)",
+    "Slide 6: The Proof\n(Pending High-Fidelity Design)",
+    "Slide 7: Appendix\n(Pending High-Fidelity Design)",
+  ]);
   const [currentSlide, setCurrentSlide] = useState(0);
   const [sidebarTab, setSidebarTab] = useState<'strategy' | 'roleplay'>('strategy');
   const [isFullscreen, setIsFullscreen] = useState(false);
@@ -229,7 +240,7 @@ export function PitchDeckGuidelines() {
   const [wordLimitWarning, setWordLimitWarning] = useState(false);
   const slideRef = useRef<HTMLDivElement>(null);
 
-  const pitchSlides = getPitchSlides(slideOneCopy);
+  const pitchSlides = getPitchSlides(slideCopies);
 
 
   // Real DOM-to-Image capture sequence
@@ -514,22 +525,23 @@ export function PitchDeckGuidelines() {
           
           {/* Persistent Customization & Export Dock */}
           <div className="shrink-0 p-4 border-t border-neutral-200 bg-white/95 backdrop-blur z-20 flex flex-col gap-4">
-             {/* Dynamic Command Center (Only visible on Custom Slides) */}
-             {currentSlide === 0 && (
+             {/* Dynamic Command Center (Universally Active) */}
                <div className="select-none flex flex-col">
                  <label className="text-[11px] font-ui font-bold text-neutral-800 uppercase tracking-widest flex items-center justify-between mb-2">
-                   Customize Hook (Max 10 Words)
-                   <span className={cn("text-[9px] bg-neutral-100 px-1.5 py-0.5 rounded font-mono font-bold border", slideOneCopy.split(/\s+/).filter(w=>w.trim()!=='').length >= 10 ? "text-red-500 border-red-200 bg-red-50" : "text-neutral-500 border-neutral-200/50")}>
-                     {slideOneCopy.split(/\s+/).filter(w=>w.trim()!=='').length} / 10
+                   Customize Slide Copy (Max 10 Words)
+                   <span className={cn("text-[9px] bg-neutral-100 px-1.5 py-0.5 rounded font-mono font-bold border", slideCopies[currentSlide].split(/\s+/).filter(w=>w.trim()!=='').length >= 10 ? "text-red-500 border-red-200 bg-red-50" : "text-neutral-500 border-neutral-200/50")}>
+                     {slideCopies[currentSlide].split(/\s+/).filter(w=>w.trim()!=='').length} / 10
                    </span>
                  </label>
                  <textarea 
-                   value={slideOneCopy}
+                   value={slideCopies[currentSlide]}
                    onChange={(e) => {
                      const copy = e.target.value;
                      const words = copy.split(/\s+/).filter(w => w.trim() !== "");
                      if (words.length <= 10) {
-                       setSlideOneCopy(copy);
+                       const newCopies = [...slideCopies];
+                       newCopies[currentSlide] = copy;
+                       setSlideCopies(newCopies);
                        setWordLimitWarning(false);
                      } else {
                        setWordLimitWarning(true);
@@ -546,7 +558,6 @@ export function PitchDeckGuidelines() {
                    </p>
                  )}
                </div>
-             )}
 
              {/* Export Engine */}
              <div className="flex items-center justify-between gap-3 pt-1">
