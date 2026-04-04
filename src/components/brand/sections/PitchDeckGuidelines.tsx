@@ -48,7 +48,7 @@ const pitchSlides = [
 
          {/* Organic Cinematic Background Overlay */}
          <div 
-           className="absolute inset-0 pointer-events-none z-0" 
+           className="absolute inset-0 w-full h-full min-w-full min-h-full pointer-events-none z-0" 
            style={{
              backgroundImage: `
                linear-gradient(110deg, rgba(10, 17, 15, 0.95) 0%, rgba(10, 17, 15, 0.4) 40%, transparent 80%),
