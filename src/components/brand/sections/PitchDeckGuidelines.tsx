@@ -23,11 +23,13 @@ import {
   Layout,
   Download,
   Eye,
-  EyeOff
+  EyeOff,
+  ImagePlus,
+  X
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
-const getPitchSlides = (slideCopies: string[]) => [
+const getPitchSlides = (slideCopies: string[], customBg: string | null) => [
   {
     id: 1,
     title: "The Hook",
@@ -41,7 +43,7 @@ const getPitchSlides = (slideCopies: string[]) => [
          {/* Remote Image Background Layer */}
          <div 
            className="absolute inset-0 bg-cover bg-right bg-no-repeat opacity-50 mix-blend-luminosity z-0" 
-           style={{ backgroundImage: `url("/api/proxy-image?url=${encodeURIComponent('https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2Fbridge2partners-hero-1.webp?alt=media&token=bb05e1e4-8f2d-4a75-8880-ddd7bbfa2797')}")` }}
+           style={{ backgroundImage: customBg ? `url(${customBg})` : `url("/api/proxy-image?url=${encodeURIComponent('https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2Fbridge2partners-hero-1.webp?alt=media&token=bb05e1e4-8f2d-4a75-8880-ddd7bbfa2797')}")` }}
          />
 
 
@@ -98,7 +100,7 @@ const getPitchSlides = (slideCopies: string[]) => [
          {/* Background Image Layer */}
          <div 
            className="absolute inset-0 bg-cover bg-center bg-no-repeat z-0" 
-           style={{ backgroundImage: `url("/images/slide_2_chains.png")` }}
+           style={{ backgroundImage: customBg ? `url(${customBg})` : `url("/images/slide_2_chains.png")` }}
          />
 
          {/* Cinematic Background Overlay */}
@@ -235,12 +237,25 @@ export function PitchDeckGuidelines() {
   const [sidebarTab, setSidebarTab] = useState<'strategy' | 'roleplay'>('strategy');
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [hideTypography, setHideTypography] = useState(false);
+  const [customBg, setCustomBg] = useState<string | null>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
+  const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        setCustomBg(event.target?.result as string);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
   const [isExporting, setIsExporting] = useState(false);
   const [exportSuccess, setExportSuccess] = useState(false);
   const [wordLimitWarning, setWordLimitWarning] = useState(false);
   const slideRef = useRef<HTMLDivElement>(null);
 
-  const pitchSlides = getPitchSlides(slideCopies);
+  const pitchSlides = getPitchSlides(slideCopies, customBg);
 
 
   // Real DOM-to-Image capture sequence
@@ -558,6 +573,33 @@ export function PitchDeckGuidelines() {
                    </p>
                  )}
                </div>
+
+             {/* Environmental Overlays */}
+             <div className="pt-2 border-t border-neutral-100 flex items-center justify-between gap-3">
+               <input 
+                 type="file" 
+                 ref={fileInputRef} 
+                 onChange={handleImageUpload} 
+                 accept="image/*" 
+                 className="hidden" 
+               />
+               <button 
+                 onClick={() => fileInputRef.current?.click()}
+                 className="flex-1 py-1.5 px-3 border border-neutral-200 rounded-md shadow-sm bg-white hover:bg-neutral-50 text-neutral-600 text-[10px] sm:text-xs font-semibold uppercase tracking-widest flex items-center justify-center gap-2 transition-colors"
+               >
+                 <ImagePlus className="w-3.5 h-3.5" />
+                 Replace Background
+               </button>
+               {customBg && (
+                 <button 
+                   onClick={() => setCustomBg(null)}
+                   title="Remove Custom Background"
+                   className="p-1.5 border border-red-200 rounded-md shadow-sm bg-red-50 hover:bg-red-100 text-red-500 transition-colors"
+                 >
+                   <X className="w-3.5 h-3.5" />
+                 </button>
+               )}
+             </div>
 
              {/* Export Engine */}
              <div className="flex items-center justify-between gap-3 pt-1">
