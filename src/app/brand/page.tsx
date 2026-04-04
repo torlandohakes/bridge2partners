@@ -2,6 +2,7 @@
 
 import { useSearchParams } from "next/navigation";
 import { Suspense } from "react";
+import Image from "next/image";
 import { SidebarNav } from "@/components/brand/SidebarNav";
 import { StrategicCore } from "@/components/brand/sections/StrategicCore";
 import { VisualIdentity } from "@/components/brand/sections/VisualIdentity";
@@ -39,21 +40,32 @@ export default function BrandDashboard() {
       <div className="max-w-[1400px] mx-auto px-4 md:px-8 relative z-10">
         
         {/* Top Header */}
-        <header className="py-12 md:py-16 border-b border-neutral/10">
-          <h1 className="text-4xl md:text-5xl font-bold tracking-tighter text-primary font-heading">
-            Bridge2Partners Dashboard
-          </h1>
-          <p className="text-xl text-neutral/80 max-w-3xl mt-4">
+        <header className="pt-12 md:pt-16 pb-8 border-b border-neutral/10">
+          <div className="flex flex-col-reverse md:flex-row justify-between items-start md:items-center gap-6 mb-6">
+            <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight font-display max-w-3xl">
+              <span className="text-primary">Bridge2Partners</span> <span className="text-neutral/50 font-light">Brand Guidelines</span>
+            </h1>
+            
+            <div className="inline-flex shrink-0 items-center justify-center self-end md:self-auto py-2">
+              <Image 
+                src="/images/Bridge2Partners_Brand_Logo_v7.png" 
+                alt="Bridge2Partners Logo" 
+                width={300} 
+                height={80} 
+                className="w-auto h-8 md:h-12 object-contain drop-shadow-sm" 
+                priority
+              />
+            </div>
+          </div>
+          <p className="text-lg text-neutral/60 font-sans max-w-3xl leading-relaxed">
             The definitive architectural, visual, and strategic system engineered for the AI-ready bank.
           </p>
         </header>
 
         {/* Dashboard Layout */}
-        <div className="grid grid-cols-1 md:grid-cols-[250px_1fr] gap-12 py-12">
-          <Suspense fallback={<div className="col-span-2 animate-pulse bg-neutral/5 h-64 rounded-lg" />}>
-            <aside className="hidden md:block">
-              <SidebarNav />
-            </aside>
+        <div className="flex flex-col md:flex-row gap-8 lg:gap-12 py-8 md:py-12 pb-32 md:pb-12 relative items-start">
+          <Suspense fallback={<div className="flex-1 animate-pulse bg-neutral/5 h-64 rounded-lg" />}>
+            <SidebarNav />
             <TabContent />
           </Suspense>
         </div>

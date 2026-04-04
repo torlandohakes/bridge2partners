@@ -26,10 +26,10 @@ export function VisualIdentity() {
                {/* Left Column (Light Mode) */}
                <div className="flex flex-col gap-2">
                  <div className="bg-white p-6 rounded-lg flex items-center justify-center border border-neutral/10 shadow-sm min-h-[140px]">
-                   <Image src="/images/Bridge2Partners_Logo-1-Color.png" alt="Bridge2Partners Primary Logo" width={200} height={60} className="w-full max-w-[160px] h-auto object-contain" />
+                   <Image src="/images/Bridge2Partners_Brand_Logo_v7.webp" alt="Bridge2Partners Primary Logo" width={200} height={60} className="w-full max-w-[160px] h-auto object-contain" />
                  </div>
-                 <a href="/images/Bridge2Partners_Logo-1-Color.png" download className="flex items-center justify-center gap-2 text-xs font-medium text-neutral/70 hover:text-primary transition-colors py-2 bg-neutral/5 rounded-md border border-neutral/10">
-                   <Download className="w-3.5 h-3.5" /> Download Primary PNG
+                 <a href="/images/Bridge2Partners_Brand_Logo_v7.webp" download className="flex items-center justify-center gap-2 text-xs font-medium text-neutral/70 hover:text-primary transition-colors py-2 bg-neutral/5 rounded-md border border-neutral/10">
+                   <Download className="w-3.5 h-3.5" /> Download Primary
                  </a>
                </div>
                

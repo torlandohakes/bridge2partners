@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useCallback, useRef, useEffect } from "react";
-import { UploadCloud, Copy, FileIcon, AlertTriangle, CheckCircle2, Loader2 } from "lucide-react";
+import { UploadCloud, Copy, FileIcon, AlertTriangle, CheckCircle2, Loader2, Trash2 } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { uploadToFirebase } from "@/lib/firebase/storage";
@@ -89,6 +89,23 @@ export default function ImageUploaderPage() {
   const handleCopy = async (url: string) => {
     await navigator.clipboard.writeText(url);
     // Could add a toast notification here
+  };
+
+  const handleDeleteLocalAsset = async (url: string) => {
+    if (!confirm("Are you sure you want to permanently delete this asset?")) return;
+    try {
+      const filename = url.split('/').pop();
+      const res = await fetch("/api/images/local", {
+        method: "DELETE",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ filename })
+      });
+      if (!res.ok) throw new Error("Delete failed");
+      setLocalAssets(prev => prev.filter(img => img !== url));
+    } catch (err) {
+      console.error(err);
+      alert("Failed to delete asset. Ensure it is not locked by another process.");
+    }
   };
 
   return (
@@ -263,15 +280,26 @@ export default function ImageUploaderPage() {
                           {url.split('/').pop()}
                         </span>
                       </div>
-                      <Button
-                        variant="secondary"
-                        size="sm"
-                        onClick={() => handleCopy(url)}
-                        title="Copy Path"
-                        className="shrink-0 h-8 font-medium px-3"
-                      >
-                        <Copy className="h-3 w-3 mr-1.5" /> Copy
-                      </Button>
+                      <div className="flex items-center gap-2">
+                        <Button
+                          variant="secondary"
+                          size="sm"
+                          onClick={() => handleCopy(url)}
+                          title="Copy Path"
+                          className="shrink-0 h-8 font-medium px-3"
+                        >
+                          <Copy className="h-3 w-3 mr-1.5" /> Copy
+                        </Button>
+                        <Button
+                          variant="ghost"
+                          size="icon"
+                          onClick={() => handleDeleteLocalAsset(url)}
+                          title="Delete Asset"
+                          className="shrink-0 h-8 w-8 !bg-[#dc2626]/10 text-[#dc2626] hover:bg-[#dc2626]/20 border border-[#dc2626]/20 shadow-sm"
+                        >
+                          <Trash2 className="h-4 w-4" />
+                        </Button>
+                      </div>
                     </div>
                   </CardContent>
                 </Card>

@@ -66,7 +66,7 @@ export function StrategicCore() {
     <section className="animate-in fade-in duration-500 space-y-12">
       
       <div className="space-y-4 max-w-4xl border-b border-neutral/10 pb-6">
-        <h2 className="text-4xl sm:text-5xl font-display font-extrabold tracking-tighter text-primary">
+        <h2 className="text-3xl font-bold tracking-tighter text-primary font-heading">
           Guiding Principles
         </h2>
         <p className="text-lg text-neutral/90 font-sans leading-relaxed max-w-3xl">
