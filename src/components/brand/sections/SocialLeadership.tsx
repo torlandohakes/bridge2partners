@@ -214,13 +214,13 @@ export function SocialLeadership() {
               <span className="font-ui font-bold text-neutral-900">Optimal Post Architecture</span>
               <div className="space-y-4 flex-1">
                 <p className="font-sans text-neutral-700 text-sm leading-relaxed">
-                  While LinkedIn allows up to 3,000 characters, optimal dwell-time completion rates dictate a strict constraint of <span className="font-data text-primary font-bold px-1.5 py-0.5 bg-[#98cc67]/20 rounded shadow-sm text-sm">1,300 - 1,900 characters</span> per text post.
+                  Feed Posts: Maintain a strict <span className="font-data text-primary font-bold px-1.5 py-0.5 bg-[#98cc67]/20 rounded shadow-sm text-sm">1,300 - 1,900 characters</span> constraint for optimal dwell-time.
                 </p>
                 <p className="font-sans text-neutral-700 text-sm leading-relaxed">
-                  For long-form Articles and Newsletters, the executive sweet spot is <span className="font-data font-extrabold text-neutral-900">800 - 1,200 words</span>. Anything shorter should be reformatted as a native feed post to avoid algorithmic suppression.
+                  Articles: Target <span className="font-data font-extrabold text-neutral-900">800 - 1,200 words</span>. Shorter pieces face suppression and must be natively reformatted.
                 </p>
                 <p className="font-sans text-neutral-700 text-sm leading-relaxed">
-                  Comment velocity dictates overall reach. The algorithm flags generic replies ('Great post!') as low-value. To trigger the engagement multiplier, comments must exceed <span className="font-data font-extrabold text-neutral-900">12 words</span>. When replying to prospects, enforce a <span className="font-data font-extrabold text-neutral-900">2-sentence minimum</span> to compound the post's algorithmic score.
+                  Comments: Generic replies are penalized. Trigger engagement multipliers by exceeding <span className="font-data font-extrabold text-neutral-900">12 words</span> with a <span className="font-data font-extrabold text-neutral-900">2-sentence minimum</span>.
                 </p>
               </div>
             </div>
