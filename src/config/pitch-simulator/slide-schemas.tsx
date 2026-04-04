@@ -492,23 +492,33 @@ export const getPitchSlides = (slideCopies: string[], customBg: string | null) =
          />
          <div className="absolute inset-0 bg-[#001b15]/50 z-0 pointer-events-none" />
 
-         {/* Top Center Logo */}
-         <div className="absolute top-[4cqw] left-1/2 -translate-x-1/2 z-30">
-           <img src={`/api/proxy-image?url=${encodeURIComponent('https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2FBridge2Partners_Brand_Logo_v7.webp?alt=media&token=a90040bc-3446-408d-8794-cab07568de66')}`} alt="B2P Logo" className="h-[3.5cqw] object-contain opacity-90" />
-         </div>
+         {/* Secondary Teal Line Anchor - 100% Width */}
+         <div className="absolute bottom-[5.5cqw] left-0 w-full h-[0.15cqw] bg-secondary z-20 shadow-[0_0_10px_rgba(0,150,119,0.5)]" />
 
-         {/* Secondary Teal Line Anchor */}
-         <div className="absolute bottom-[5.5cqw] left-[3cqw] w-[94cqw] h-[0.15cqw] bg-secondary z-20 shadow-[0_0_10px_rgba(0,150,119,0.5)]" />
-         <div className="flex flex-col items-center justify-center text-center max-w-[80%] z-30 transform transition-transform duration-700 ease-out group-hover:scale-[1.02]">
+         <div className="relative z-30 w-[85cqw] flex flex-col items-start text-left pl-[8cqw] transform transition-transform duration-700 ease-out group-hover:scale-[1.02]">
             <h2 className="font-display font-black text-[5cqw] leading-[1.1] tracking-tight text-white drop-shadow-md mb-[2cqw]">
               The Enterprise Architecture Assessment.
             </h2>
-            <p className="font-sans text-[1.8cqw] text-neutral-300 leading-relaxed font-light mb-[4cqw] max-w-[90%]">
+            <p className="font-sans text-[1.8cqw] text-neutral-300 leading-relaxed font-light mb-[4cqw] max-w-[80%]">
               In 14 days, our practitioners will map your legacy constraints and deliver the parallel-build blueprint.
             </p>
-            <button className="flex items-center gap-[1cqw] bg-primary text-white border-2 border-transparent px-[4cqw] py-[1.5cqw] rounded-md font-ui uppercase font-extrabold tracking-widest text-[1.2cqw] hover:bg-primary/90 transition-colors shadow-2xl focus-visible:ring-2 focus-visible:ring-primary/50 focus-visible:outline-none">
+            <button className="flex items-center gap-[1cqw] bg-transparent border-2 border-primary text-primary px-[4cqw] py-[1.5cqw] rounded-md font-ui uppercase font-extrabold tracking-widest text-[1.2cqw] hover:bg-primary/10 transition-colors shadow-2xl focus-visible:ring-2 focus-visible:ring-primary/50 focus-visible:outline-none">
               Initiate Assessment
             </button>
+         </div>
+
+         {/* Standard Logo Anchor Bottom Left */}
+         <div className="absolute bottom-[2cqw] left-[4cqw] flex items-center gap-[1cqw] z-30">
+           <img 
+             src={`/api/proxy-image?url=${encodeURIComponent('https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2FBridge2Partners_Favicon.png?alt=media&token=8281d312-5968-4fa1-9e37-347481934b95')}`}
+             alt="B2P Logo" 
+             className="w-[2.5cqw] h-[2.5cqw] rounded-[0.5cqw] opacity-90 shadow-[0_0_15px_rgba(152,204,103,0.2)]"
+           />
+           <span className="font-ui text-[1.2cqw] text-white/50 tracking-widest uppercase font-bold">Bridge2Partners</span>
+         </div>
+         {/* Page Number Bottom Right */}
+         <div className="absolute bottom-[2cqw] right-[4cqw] font-ui text-[1.2cqw] text-white/50 tracking-widest font-bold z-30">
+           07
          </div>
       </div>
     )
