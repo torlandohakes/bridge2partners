@@ -37,7 +37,7 @@ const pitchSlides = [
            style={{ backgroundImage: 'url("https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2Fbridge2partners-hero-1.webp?alt=media&token=bb05e1e4-8f2d-4a75-8880-ddd7bbfa2797")' }}
          />
          {/* Cinematic Background Gradient */}
-         <div className="absolute inset-0 bg-gradient-to-r from-black/95 via-black/60 to-transparent pointer-events-none z-0" />
+         <div className="absolute inset-0 bg-gradient-to-r from-primary/95 via-primary/60 to-transparent pointer-events-none z-0" />
          
          {/* Stacked Left-Aligned Typography */}
          <div className="relative z-10 max-w-3xl flex flex-col gap-2">
