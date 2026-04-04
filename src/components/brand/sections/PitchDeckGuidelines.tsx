@@ -43,7 +43,7 @@ const getPitchSlides = (slideCopies: string[], customBg: string | null) => [
          {/* Remote Image Background Layer */}
          <div 
            className="absolute inset-0 bg-cover bg-right bg-no-repeat opacity-50 mix-blend-luminosity z-0" 
-           style={{ backgroundImage: customBg ? `url(${customBg})` : `url("/api/proxy-image?url=${encodeURIComponent('https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2Fbridge2partners-hero-1.webp?alt=media&token=bb05e1e4-8f2d-4a75-8880-ddd7bbfa2797')}")` }}
+           style={{ backgroundImage: customBg ? `url('${customBg}')` : `url("/api/proxy-image?url=${encodeURIComponent('https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2Fbridge2partners-hero-1.webp?alt=media&token=bb05e1e4-8f2d-4a75-8880-ddd7bbfa2797')}")` }}
          />
 
 
@@ -100,7 +100,7 @@ const getPitchSlides = (slideCopies: string[], customBg: string | null) => [
          {/* Background Image Layer */}
          <div 
            className="absolute inset-0 bg-cover bg-center bg-no-repeat z-0" 
-           style={{ backgroundImage: customBg ? `url(${customBg})` : `url("/images/slide_2_chains.png")` }}
+           style={{ backgroundImage: customBg ? `url('${customBg}')` : `url("/images/slide_2_chains.png")` }}
          />
 
          {/* Cinematic Background Overlay */}
