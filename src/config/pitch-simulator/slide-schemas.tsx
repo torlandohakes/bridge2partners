@@ -411,7 +411,7 @@ export const getPitchSlides = (slideCopies: string[], customBg: string | null) =
 
          {/* Absolute Center Typography Header (Single Line) */}
          <div className="absolute top-[10cqw] w-full flex justify-center z-30">
-            <h2 className="font-display font-extrabold text-[5cqw] leading-[1.05] tracking-tight text-secondary drop-shadow-md">
+            <h2 className="font-display font-extrabold text-[7cqw] leading-[1.05] tracking-tight text-secondary drop-shadow-md">
                {slideCopies[5].split('\n')[0] || "Execution at Scale."}
             </h2>
          </div>
