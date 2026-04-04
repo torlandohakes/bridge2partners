@@ -36,7 +36,7 @@ const pitchSlides = [
     aiPersona: "Skeptical Regional Bank EVP",
     aiObjection: "Look, we've integrated three banks in the last five years using legacy methods. It's slow, but it works. Why do I need to change?",
     slideContent: (
-      <div className="w-full h-full bg-[#0a110f] relative flex flex-col justify-center p-16 lg:p-20 overflow-hidden group z-30">
+      <div className="w-full h-full bg-[#0a110f] relative flex flex-col justify-center p-[6cqw] overflow-hidden group z-30">
          {/* Remote Image Background Layer */}
          <div 
            className="absolute inset-0 bg-cover bg-right bg-no-repeat opacity-50 mix-blend-luminosity z-0" 
@@ -57,22 +57,22 @@ const pitchSlides = [
          />
          
          {/* Stacked Left-Aligned Typography */}
-         <div className="relative z-10 max-w-3xl flex flex-col gap-2">
-            <h2 className="font-display font-black text-5xl lg:text-6xl tracking-tight leading-[1.1] text-transparent bg-clip-text bg-gradient-to-br from-white to-neutral-300 drop-shadow-md">
+         <div className="relative z-10 w-[75cqw] flex flex-col gap-[1.5cqw] b2p-narrative-text transition-opacity duration-300">
+            <h2 className="font-display font-black text-[5.5cqw] tracking-tight leading-[1.1] text-transparent bg-clip-text bg-gradient-to-br from-white to-neutral-300 drop-shadow-md">
               Innovation is Survival.<br/>Your Legacy Stack is the <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#98cc67] to-[#7bb050] drop-shadow-[0_0_20px_rgba(152,204,103,0.3)]">Anchor.</span>
             </h2>
          </div>
 
          {/* Custom Slide Anchors */}
-         <div className="absolute bottom-6 left-8 flex items-center gap-3 z-20">
+         <div className="absolute bottom-[3cqw] left-[4cqw] flex items-center gap-[1cqw] z-20">
            <img 
              src="https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2FBridge2Partners_Favicon.png?alt=media&token=8281d312-5968-4fa1-9e37-347481934b95" 
              alt="B2P Logo" 
-             className="w-5 h-5 rounded-md opacity-90 shadow-[0_0_15px_rgba(152,204,103,0.2)]"
+             className="w-[2.5cqw] h-[2.5cqw] rounded-[0.5cqw] opacity-90 shadow-[0_0_15px_rgba(152,204,103,0.2)]"
            />
-           <span className="font-ui text-[10px] text-white/50 tracking-widest uppercase font-bold">Bridge2Partners</span>
+           <span className="font-ui text-[1.2cqw] text-white/50 tracking-widest uppercase font-bold">Bridge2Partners</span>
          </div>
-         <div className="absolute bottom-6 right-8 font-ui text-[10px] text-white/50 tracking-widest font-bold z-20">
+         <div className="absolute bottom-[3cqw] right-[4cqw] font-ui text-[1.2cqw] text-white/50 tracking-widest font-bold z-20">
            01
          </div>
       </div>
@@ -292,8 +292,8 @@ export function PitchDeckGuidelines() {
              <div 
                id="b2p-slide-capture-node" 
                className={cn(
-                 "w-full max-w-full relative shadow-2xl ring-1 ring-black/5 overflow-hidden transition-opacity duration-300",
-                 hideTypography && "[&_h2]:opacity-0 [&_span]:opacity-0 [&_p]:opacity-0 [&_svg]:opacity-0 [&_img]:opacity-0"
+                 "w-full max-w-full relative shadow-2xl ring-1 ring-black/5 overflow-hidden transition-opacity duration-300 @container",
+                 hideTypography && "[&_.b2p-narrative-text]:opacity-0"
                )} 
                style={{ aspectRatio: '16/9' }}
              >
