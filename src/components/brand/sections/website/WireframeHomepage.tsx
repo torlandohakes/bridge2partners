@@ -60,7 +60,7 @@ export function WireframeHomepage() {
            </div>
 
            {/* Glassmorphic AI Prompt Pill */}
-           <div className="relative z-20 w-full px-8 pb-8 flex flex-col justify-start mt-auto max-w-3xl">
+           <div className="relative z-20 w-full px-8 pb-8 flex flex-col justify-start mt-auto">
               <div className="w-full flex flex-col gap-2.5">
                  <label className="font-ui text-xs text-white/80 font-medium pl-5 tracking-wide normal-case drop-shadow-md">
                    What challenges are you facing in your role? <span className="text-white font-bold ml-1">Ask B2P Intelligence.</span>

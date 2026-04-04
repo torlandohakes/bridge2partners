@@ -63,7 +63,7 @@ export default function Home() {
          </div>
 
          {/* Glassmorphic AI Prompt Pill */}
-         <div className="relative z-20 w-full px-6 md:px-12 pb-12 md:pb-16 flex flex-col justify-start mt-auto max-w-5xl">
+         <div className="relative z-20 w-full px-6 md:px-12 pb-12 md:pb-16 flex flex-col justify-start mt-auto">
             <div className="w-full flex flex-col gap-3">
                <label className="font-ui text-xs sm:text-sm text-white/80 font-medium pl-6 drop-shadow tracking-wide">
                  What challenges are you facing in your role? <span className="text-white font-bold ml-1">Ask B2P Intelligence.</span>
