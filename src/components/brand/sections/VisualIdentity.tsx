@@ -52,8 +52,8 @@ export function VisualIdentity() {
             <div className="mt-4 pt-6 border-t border-neutral/10 space-y-3">
               <span className="block text-xs font-bold text-neutral/50 uppercase tracking-widest">Secondary Assets</span>
               <div className="flex flex-wrap items-center gap-3">
-                <div className="bg-white p-2 rounded flex items-center justify-center border border-neutral/10 shadow-sm w-10 h-10 shrink-0">
-                  <Image src="/icon-brand.png" alt="Bridge2Partners Icon" width={24} height={24} className="w-full h-auto object-contain" />
+                <div className="bg-white rounded overflow-hidden flex items-center justify-center border border-neutral/10 shadow-sm w-10 h-10 shrink-0">
+                  <Image src="/icon-brand.png" alt="Bridge2Partners Icon" width={40} height={40} className="w-full h-full object-contain" />
                 </div>
                 <a href="/icon-brand.png" download className="flex items-center justify-center gap-2 text-xs font-medium text-neutral/70 hover:text-primary transition-colors px-3 bg-neutral/5 rounded border border-neutral/10 outline-none focus-visible:ring-2 focus-visible:ring-primary/50 h-10">
                   <Download className="w-3.5 h-3.5" /> Icon Mark
