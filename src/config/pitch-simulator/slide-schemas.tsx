@@ -410,14 +410,14 @@ export const getPitchSlides = (slideCopies: string[], customBg: string | null) =
          <div className="absolute bottom-[5.5cqw] left-0 w-full h-[0.15cqw] bg-primary z-20 shadow-[0_0_10px_rgba(152,204,103,0.5)]" />
 
          {/* Absolute Center Typography Header (Single Line) */}
-         <div className="absolute top-[14cqw] w-full flex justify-center z-30">
+         <div className="absolute top-[10cqw] w-full flex justify-center z-30">
             <h2 className="font-display font-black text-[5cqw] leading-[1.05] tracking-tight text-transparent bg-clip-text bg-gradient-to-br from-white to-neutral-400 drop-shadow-md">
                {slideCopies[5].split('\n')[0] || "Execution at Scale."}
             </h2>
          </div>
 
          {/* The Metrics Layout (3 Columns) */}
-         <div className="relative z-30 w-[88cqw] flex flex-row items-center justify-between gap-[4cqw] mt-[6cqw]">
+         <div className="relative z-30 w-[88cqw] flex flex-row items-center justify-between gap-[4cqw] mt-[10cqw]">
             {/* Metric 1 */}
             <div className="flex flex-col items-center justify-center flex-1 text-center bg-white/5 border border-white/10 p-[4cqw] h-[26cqw] rounded-[1cqw] hover:bg-white/10 transition-colors shadow-2xl relative overflow-hidden">
                <div className="absolute top-0 right-0 p-[2cqw] opacity-20"><Database className="w-[4cqw] h-[4cqw] text-primary" /></div>
