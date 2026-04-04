@@ -259,13 +259,13 @@ export function PitchDeckGuidelines() {
       {/* Simulator Interface */}
       <div className={cn(
         "bg-white/40 backdrop-blur-sm border border-neutral/10 rounded-2xl overflow-hidden shadow-xl transition-all duration-300",
-        isFullscreen ? "fixed inset-0 z-50 flex flex-col lg:flex-row h-screen w-screen overflow-hidden bg-neutral-50/95 backdrop-blur" : "flex flex-col lg:flex-row relative min-h-[600px]"
+        isFullscreen ? "fixed inset-0 z-50 flex flex-col landscape:flex-row h-screen w-screen overflow-hidden bg-neutral-50/95 backdrop-blur" : "flex flex-col lg:flex-row relative min-h-[600px]"
       )}>
         
         {/* Left Stage: 16:9 Slide Viewer (60-70%) */}
         <div className={cn(
           "flex flex-col bg-neutral-100", 
-          isFullscreen ? "flex-1 h-full flex flex-col overflow-hidden" : "w-full lg:w-[65%] border-b lg:border-b-0 lg:border-r border-neutral/10"
+          isFullscreen ? "flex-1 w-full landscape:h-full flex flex-col overflow-hidden" : "w-full lg:w-[65%] border-b lg:border-b-0 lg:border-r border-neutral/10"
         )}>
           {/* Deck Header */}
           <div className="h-14 bg-white border-b border-neutral/10 flex items-center justify-between px-6 shrink-0">
@@ -355,7 +355,7 @@ export function PitchDeckGuidelines() {
         {/* Right Sidebar: Interactive Training Panel (30-40%) */}
         <div className={cn(
           "flex flex-col bg-white",
-          isFullscreen ? "w-full lg:w-[450px] shrink-0 h-full overflow-y-auto border-l shadow-2xl z-10" : "w-full lg:w-[35%] min-w-[320px]"
+          isFullscreen ? "w-full h-[40vh] landscape:w-[400px] landscape:h-full shrink-0 overflow-y-auto z-10 border-t landscape:border-t-0 landscape:border-l border-neutral-200 shadow-2xl" : "w-full lg:w-[35%] min-w-[320px]"
         )}>
           {/* Glassmorphic Tab Toggle */}
           <div className="h-14 border-b border-neutral/10 px-4 flex items-center justify-center bg-neutral-50/50 shrink-0">
