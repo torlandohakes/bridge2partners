@@ -330,7 +330,7 @@ export const getPitchSlides = (slideCopies: string[], customBg: string | null) =
          </div>
 
          {/* Right Side (65%): The Sonar Diagram */}
-         <div className="w-[65%] relative h-full flex items-center justify-center z-10 scale-[1.10] -ml-[2cqw]">
+         <div className="w-[65%] relative h-full flex items-center justify-center z-10 scale-[1.0] -ml-[2cqw]">
             {/* Background Sonar Grid */}
             <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:2cqw_2cqw] [mask-image:radial-gradient(ellipse_70%_70%_at_50%_50%,#000_20%,transparent_100%)] pointer-events-none" />
 
@@ -349,9 +349,9 @@ export const getPitchSlides = (slideCopies: string[], customBg: string | null) =
             <svg className="absolute w-[45cqw] h-[45cqw]" viewBox="0 0 100 100">
                <line x1="50" y1="50" x2="50" y2="0" stroke="rgba(255,255,255,0.4)" strokeWidth="0.5" /> {/* Top */}
                <line x1="50" y1="50" x2="97.5" y2="34.5" stroke="rgba(255,255,255,0.4)" strokeWidth="0.5" /> {/* Top Right */}
-               <line x1="50" y1="50" x2="79.3" y2="90.4" stroke="rgba(152,204,103,1)" strokeWidth="0.8" className="drop-shadow-[0_0_5px_rgba(152,204,103,0.8)]"/> {/* Bottom Right - Active Routing (Primary) */}
+               <line x1="50" y1="50" x2="79.3" y2="90.4" stroke="rgba(255,255,255,0.4)" strokeWidth="0.5" /> {/* Bottom Right */}
                <line x1="50" y1="50" x2="20.7" y2="90.4" stroke="rgba(255,255,255,0.4)" strokeWidth="0.5" /> {/* Bottom Left */}
-               <line x1="50" y1="50" x2="2.5" y2="34.5" stroke="rgba(255,255,255,0.4)" strokeWidth="0.5" /> {/* Top Left */}
+               <line x1="50" y1="50" x2="2.5" y2="34.5" stroke="rgba(152,204,103,1)" strokeWidth="0.8" className="drop-shadow-[0_0_5px_rgba(152,204,103,0.8)]"/> {/* Top Left - Active Routing (Primary) */}
             </svg>
 
             {/* Glassmorphic Nodes positioning manually */}
@@ -366,8 +366,8 @@ export const getPitchSlides = (slideCopies: string[], customBg: string | null) =
             </div>
 
             {/* Node 3 Bottom Right (Payments & Cards) */}
-            <div className="absolute top-[calc(50%+18cqw)] left-[calc(50%+10cqw)] w-[18cqw] h-[4cqw] rounded-xl border-[0.2cqw] border-primary/80 bg-neutral-900/95 flex items-center justify-center z-40 backdrop-blur-md shadow-[0_0_30px_rgba(152,204,103,0.3)]">
-              <span className="font-ui text-[1cqw] text-white tracking-widest font-extrabold uppercase text-center w-full px-2">Payments & Cards</span>
+            <div className="absolute top-[calc(50%+18cqw)] left-[calc(50%+10cqw)] w-[18cqw] h-[4cqw] rounded-xl border-[0.15cqw] border-white/30 bg-neutral-900/90 flex items-center justify-center z-40 backdrop-blur-md shadow-2xl">
+              <span className="font-ui text-[1cqw] text-white tracking-widest font-bold uppercase text-center w-full px-2">Payments & Cards</span>
             </div>
 
             {/* Node 4 Bottom Left (Data Lake / Warehouse) */}
@@ -376,8 +376,8 @@ export const getPitchSlides = (slideCopies: string[], customBg: string | null) =
             </div>
 
             {/* Node 5 Top Left (APIs, Interfaces & Open Banking) */}
-            <div className="absolute top-[calc(50%-10cqw)] left-[calc(50%-32cqw)] w-[24cqw] h-[4cqw] rounded-xl border-[0.15cqw] border-white/30 bg-neutral-900/90 flex items-center justify-center z-40 backdrop-blur-md shadow-2xl">
-              <span className="font-ui text-[0.8cqw] text-white tracking-widest font-bold uppercase text-center w-full px-2">APIs, Interfaces & Open Banking</span>
+            <div className="absolute top-[calc(50%-10cqw)] left-[calc(50%-32cqw)] w-[24cqw] h-[4cqw] rounded-xl border-[0.2cqw] border-primary/80 bg-neutral-900/95 flex items-center justify-center z-40 backdrop-blur-md shadow-[0_0_30px_rgba(152,204,103,0.3)]">
+              <span className="font-ui text-[0.8cqw] text-white tracking-widest font-extrabold uppercase text-center w-full px-2">APIs, Interfaces & Open Banking</span>
             </div>
          </div>
 
