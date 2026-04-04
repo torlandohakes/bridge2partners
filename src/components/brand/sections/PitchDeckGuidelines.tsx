@@ -260,13 +260,13 @@ export function PitchDeckGuidelines() {
       {/* Simulator Interface */}
       <div className={cn(
         "bg-white/40 backdrop-blur-sm border border-neutral/10 rounded-2xl overflow-hidden shadow-xl transition-all duration-300",
-        isFullscreen ? "fixed inset-4 z-[100] flex flex-col bg-white shadow-2xl border-none ring-1 ring-black/5" : "flex flex-col lg:flex-row relative min-h-[600px]"
+        isFullscreen ? "fixed inset-0 z-50 flex flex-col lg:flex-row h-screen w-screen overflow-hidden bg-neutral-50/95 backdrop-blur" : "flex flex-col lg:flex-row relative min-h-[600px]"
       )}>
         
         {/* Left Stage: 16:9 Slide Viewer (60-70%) */}
         <div className={cn(
           "flex flex-col bg-neutral-100", 
-          isFullscreen ? "flex-1" : "w-full lg:w-[65%] border-b lg:border-b-0 lg:border-r border-neutral/10"
+          isFullscreen ? "flex-1 h-full flex flex-col overflow-hidden" : "w-full lg:w-[65%] border-b lg:border-b-0 lg:border-r border-neutral/10"
         )}>
           {/* Deck Header */}
           <div className="h-14 bg-white border-b border-neutral/10 flex items-center justify-between px-6 shrink-0">
@@ -323,13 +323,16 @@ export function PitchDeckGuidelines() {
           </div>
           
           {/* Active Canvas wrapper */}
-          <div className="flex-1 w-full bg-neutral-100/50 flex items-center justify-center p-4 sm:p-8 overflow-hidden">
+          <div className={cn(
+            "w-full bg-neutral-100/50 flex items-center justify-center overflow-hidden",
+            isFullscreen ? "flex-1 h-full p-4 lg:p-10" : "flex-1 p-4 sm:p-8"
+          )}>
              {/* Aspect Ratio 16:9 Enforcer */}
              <div 
                id="b2p-slide-capture-node" 
                ref={slideRef}
                className={cn(
-                 "w-full max-w-full relative shadow-2xl ring-1 ring-black/5 overflow-hidden transition-opacity duration-300 @container",
+                 "w-full max-w-full max-h-full mx-auto relative shadow-2xl ring-1 ring-black/5 overflow-hidden transition-opacity duration-300 @container",
                  hideTypography && "[&_.b2p-narrative-text]:opacity-0"
                )} 
                style={{ aspectRatio: '16/9' }}
@@ -353,7 +356,7 @@ export function PitchDeckGuidelines() {
         {/* Right Sidebar: Interactive Training Panel (30-40%) */}
         <div className={cn(
           "flex flex-col bg-white",
-          isFullscreen ? "h-[300px] shrink-0 border-t border-neutral/10" : "w-full lg:w-[35%] min-w-[320px]"
+          isFullscreen ? "w-full lg:w-[450px] shrink-0 h-full overflow-y-auto border-l shadow-2xl z-10" : "w-full lg:w-[35%] min-w-[320px]"
         )}>
           {/* Glassmorphic Tab Toggle */}
           <div className="h-14 border-b border-neutral/10 px-4 flex items-center justify-center bg-neutral-50/50 shrink-0">
