@@ -6,12 +6,23 @@ export function WireframeHomepage() {
       <h4 className="font-ui font-bold text-primary tracking-tight pb-2 border-b border-neutral/10">Wireframe 1: The Homepage (Category Entry Point)</h4>
       
       <div className="bg-neutral/5 rounded-lg p-5 space-y-4 font-mono text-xs text-neutral-700 uppercase tracking-wider font-semibold">
-        {/* Hero Block */}
-        <div className="border-dashed border-2 border-neutral-300 flex flex-col items-center justify-center p-6 rounded bg-black/5 gap-3 transition-colors hover:bg-black/10">
-           <div className="w-3/4 h-6 bg-black/10 rounded" />
-           <div className="w-1/2 h-3 bg-black/10 rounded" />
-           <div className="flex items-center gap-2 mt-2">
-             <div className="bg-primary/20 text-primary border border-primary/30 px-4 py-2 rounded flex items-center gap-2 shadow-sm">
+        {/* Hero Block / Production Asset Preview */}
+        <div 
+          className="relative overflow-hidden flex flex-col items-center justify-center p-10 rounded-lg shadow-sm border border-neutral/10 gap-4 transition-all hover:scale-[1.01]"
+          style={{ 
+            backgroundImage: 'url("https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2Fbridge2partners-hero-1.webp?alt=media&token=bb05e1e4-8f2d-4a75-8880-ddd7bbfa2797")', 
+            backgroundSize: 'cover', 
+            backgroundPosition: 'center' 
+          }}
+        >
+           {/* Contrast Overlay */}
+           <div className="absolute inset-0 bg-[#001b15]/60 backdrop-blur-[2px]" />
+           
+           {/* Wireframe UI mapped over the hero image */}
+           <div className="relative z-10 w-3/4 max-w-lg h-10 bg-white/20 backdrop-blur-md rounded border border-white/10" />
+           <div className="relative z-10 w-2/3 max-w-sm h-4 bg-white/20 backdrop-blur-md rounded border border-white/10" />
+           <div className="relative z-10 flex items-center gap-2 mt-4">
+             <div className="bg-primary text-white border border-primary/50 px-5 py-2.5 rounded flex items-center gap-2 shadow-xl hover:bg-primary/90 transition-colors cursor-pointer">
                <MousePointerClick className="w-4 h-4" /> Primary CTA
              </div>
            </div>
