@@ -495,14 +495,14 @@ export const getPitchSlides = (slideCopies: string[], customBg: string | null) =
          {/* Secondary Teal Line Anchor - 100% Width */}
          <div className="absolute bottom-[5.5cqw] left-0 w-full h-[0.15cqw] bg-secondary z-20 shadow-[0_0_10px_rgba(0,150,119,0.5)]" />
 
-         <div className="relative z-30 w-[85cqw] flex flex-col items-start text-left pl-[8cqw] transform transition-transform duration-700 ease-out group-hover:scale-[1.02]">
+         <div className="relative z-30 w-[85cqw] flex flex-col items-start text-left transform transition-transform duration-700 ease-out group-hover:scale-[1.02]">
             <h2 className="font-display font-black text-[5cqw] leading-[1.1] tracking-tight text-white drop-shadow-md mb-[2cqw]">
               The Enterprise Architecture Assessment.
             </h2>
             <p className="font-sans text-[1.8cqw] text-neutral-300 leading-relaxed font-light mb-[4cqw] max-w-[80%]">
               In 14 days, our practitioners will map your legacy constraints and deliver the parallel-build blueprint.
             </p>
-            <button className="flex items-center gap-[1cqw] bg-transparent border-2 border-primary text-primary px-[4cqw] py-[1.5cqw] rounded-md font-ui uppercase font-extrabold tracking-widest text-[1.2cqw] hover:bg-primary/10 transition-colors shadow-2xl focus-visible:ring-2 focus-visible:ring-primary/50 focus-visible:outline-none">
+            <button className="flex items-center gap-[1cqw] bg-transparent border-2 border-white text-white px-[4cqw] py-[1.5cqw] rounded-md font-ui uppercase font-extrabold tracking-widest text-[1.2cqw] hover:bg-white/10 transition-colors shadow-2xl focus-visible:ring-2 focus-visible:ring-white/50 focus-visible:outline-none">
               Initiate Assessment
             </button>
          </div>
