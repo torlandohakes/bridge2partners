@@ -63,12 +63,12 @@ export default function Home() {
          </div>
 
          {/* Glassmorphic AI Prompt Pill */}
-         <div className="relative z-20 w-full px-6 md:px-12 pb-12 md:pb-16 flex justify-center mt-auto">
-            <div className="w-full max-w-4xl flex flex-col gap-3">
+         <div className="relative z-20 w-full px-6 md:px-12 pb-12 md:pb-16 flex flex-col justify-start mt-auto max-w-5xl">
+            <div className="w-full flex flex-col gap-3">
                <label className="font-ui text-xs sm:text-sm text-white/80 font-medium pl-6 drop-shadow tracking-wide">
                  What challenges are you facing in your role? <span className="text-white font-bold ml-1">Ask B2P Intelligence.</span>
                </label>
-               <div className="relative w-full flex flex-col sm:flex-row items-center bg-white/5 backdrop-blur-[12px] border border-white/20 rounded-3xl sm:rounded-full shadow-2xl overflow-hidden p-2 group transition-all hover:bg-white/10 hover:border-white/30">
+               <div className="relative w-full flex flex-col sm:flex-row items-center bg-white/5 backdrop-blur-[12px] border border-white/20 rounded-3xl sm:rounded-full shadow-2xl overflow-hidden p-2 group transition-all hover:bg-white/10 hover:border-white/30 hover:shadow-[0_0_20px_rgba(255,255,255,0.05)]">
                   <div className="hidden sm:flex w-12 h-12 shrink-0 items-center justify-center bg-white/10 rounded-full ml-1 backdrop-blur-md border border-white/10 shadow-inner">
                      <BrainCircuit className="w-5 h-5 text-white/90" />
                   </div>
@@ -81,9 +81,9 @@ export default function Home() {
                     Analyze <ArrowRight className="w-4 h-4" />
                   </button>
                </div>
-               <span className="font-ui text-[10px] sm:text-[11px] text-white/40 pl-6 uppercase tracking-widest font-semibold flex items-center gap-2">
-                 <span className="w-1.5 h-1.5 rounded-full bg-[#98cc67] shadow-[0_0_8px_rgba(152,204,103,1)]"></span>
-                 B2P Intelligence Live • Strict Confidentiality Enforced
+               <span className="font-ui text-[10px] sm:text-[11px] text-white/50 pl-6 flex flex-col sm:flex-row items-start sm:items-center gap-2 mt-1">
+                 <strong className="flex items-center gap-1.5 uppercase tracking-widest text-[#98cc67] whitespace-nowrap"><span className="w-1.5 h-1.5 rounded-full bg-[#98cc67] shadow-[0_0_8px_rgba(152,204,103,1)]"></span>B2P Intelligence</strong>
+                 <span className="opacity-80 leading-snug">Modeled directly on internal M&A experts. AI can hallucinate; always verify critical structural decisions.</span>
                </span>
             </div>
          </div>
