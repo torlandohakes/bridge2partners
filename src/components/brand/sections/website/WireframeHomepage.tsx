@@ -25,7 +25,7 @@ export function WireframeHomepage() {
               <div className="hidden sm:flex items-center gap-6 font-ui text-xs font-medium text-white/90">
                 <span className="flex items-center gap-1 cursor-pointer hover:text-white transition-colors tracking-normal normal-case">Services <ChevronDown className="w-3 h-3 opacity-60" /></span>
                 <span className="cursor-pointer hover:text-white transition-colors tracking-normal normal-case">Compliance Docs</span>
-                <button className="bg-primary hover:bg-primary/90 text-white px-5 py-2 rounded-md transition-colors shadow-sm font-semibold tracking-wide normal-case border border-primary-dark">
+                <button className="bg-primary hover:bg-primary/90 text-white px-5 py-2 rounded-md transition-colors shadow-sm font-semibold tracking-wide normal-case">
                   Schedule analysis
                 </button>
               </div>
@@ -40,7 +40,7 @@ export function WireframeHomepage() {
              </h1>
              
              <div className="flex flex-wrap items-center gap-4 mt-4">
-               <button className="bg-primary hover:bg-primary/90 text-white font-ui text-sm font-semibold border border-primary-dark px-6 py-3 rounded-md shadow-xl transition-all normal-case tracking-normal">
+               <button className="bg-primary hover:bg-primary/90 text-white font-ui text-sm font-semibold px-6 py-3 rounded-md shadow-xl transition-all normal-case tracking-normal">
                  Digital Transformation
                </button>
                <button className="bg-transparent hover:bg-white/10 text-white font-ui text-sm font-semibold border border-white/40 px-6 py-3 rounded-md shadow-sm transition-all backdrop-blur-sm normal-case tracking-normal">
@@ -92,7 +92,7 @@ export function WireframeHomepage() {
         <div className="border-dashed border-2 border-primary/40 flex flex-col items-center justify-center p-6 rounded bg-primary/5 gap-3 transition-colors hover:bg-primary/10">
            <span className="text-primary font-bold tracking-widest">The Final Call To Action</span>
            <div className="w-3/4 h-2 bg-primary/20 rounded mb-1" />
-           <div className="bg-primary text-white border border-primary-dark px-5 py-2.5 rounded flex items-center gap-2 shadow-md">
+           <div className="bg-primary text-white px-5 py-2.5 rounded flex items-center gap-2 shadow-md">
              <MousePointerClick className="w-4 h-4" /> Start Assessment
            </div>
         </div>

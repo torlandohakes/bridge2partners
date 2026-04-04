@@ -28,7 +28,7 @@ export default function Home() {
               <Link href="/brand" className="hidden sm:block text-white/60 hover:text-white transition-colors text-xs font-mono uppercase tracking-widest bg-white/5 border border-white/10 px-3 py-1.5 rounded-full">
                 Design System
               </Link>
-              <button className="bg-primary hover:bg-primary/90 text-white px-6 py-2.5 rounded-md transition-colors shadow-sm font-semibold tracking-wide normal-case border border-primary-dark cursor-pointer">
+              <button className="bg-primary hover:bg-primary/90 text-white px-6 py-2.5 rounded-md transition-colors shadow-sm font-semibold tracking-wide normal-case cursor-pointer">
                 Schedule analysis
               </button>
             </div>
@@ -43,7 +43,7 @@ export default function Home() {
            </h1>
            
            <div className="flex flex-wrap items-center gap-4 mt-4 md:mt-8">
-             <button className="bg-primary hover:bg-primary/90 text-white font-ui text-base font-semibold border border-primary-dark px-8 py-4 rounded-md shadow-xl transition-all normal-case tracking-normal cursor-pointer w-full sm:w-auto">
+             <button className="bg-primary hover:bg-primary/90 text-white font-ui text-base font-semibold px-8 py-4 rounded-md shadow-xl transition-all normal-case tracking-normal cursor-pointer w-full sm:w-auto">
                Digital Transformation
              </button>
              <button className="bg-transparent hover:bg-white/10 text-white font-ui text-base font-semibold border border-white/40 px-8 py-4 rounded-md shadow-sm transition-all backdrop-blur-sm normal-case tracking-normal cursor-pointer w-full sm:w-auto">
