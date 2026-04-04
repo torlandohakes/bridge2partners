@@ -36,13 +36,16 @@ const pitchSlides = [
            className="absolute inset-0 bg-cover bg-right bg-no-repeat opacity-50 mix-blend-luminosity z-0" 
            style={{ backgroundImage: 'url("https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2Fbridge2partners-hero-1.webp?alt=media&token=bb05e1e4-8f2d-4a75-8880-ddd7bbfa2797")' }}
          />
+         {/* Partial Frosted Glass (Protects the 'Bridge' rendering on the right) */}
+         <div className="absolute inset-y-0 left-0 w-3/4 pointer-events-none z-0 backdrop-blur-[2px] [mask-image:linear-gradient(to_right,black_40%,transparent_100%)]" />
+
          {/* Organic Cinematic Background Overlay */}
          <div 
-           className="absolute inset-0 pointer-events-none z-0 backdrop-blur-[2px]" 
+           className="absolute inset-0 pointer-events-none z-0" 
            style={{
              backgroundImage: `
-               linear-gradient(110deg, rgb(4, 43, 38) 0%, rgba(10, 17, 15, 0.85) 45%, transparent 100%),
-               linear-gradient(20deg, rgba(10, 17, 15, 0.9) 0%, rgba(4, 43, 38, 0.3) 60%, transparent 100%)
+               linear-gradient(110deg, rgba(10, 17, 15, 0.95) 0%, rgba(10, 17, 15, 0.4) 20%, transparent 60%),
+               linear-gradient(20deg, rgba(4, 43, 38, 0.9) 0%, rgba(4, 43, 38, 0.5) 45%, transparent 100%)
              `
            }}
          />
