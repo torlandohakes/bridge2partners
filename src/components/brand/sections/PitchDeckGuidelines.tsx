@@ -124,8 +124,8 @@ const getPitchSlides = (slideCopies: string[], customBg: string | null) => [
            className="absolute inset-0 w-full h-full min-w-full min-h-full pointer-events-none z-0 mix-blend-multiply" 
            style={{
              backgroundImage: `
-               linear-gradient(110deg, rgba(5, 9, 8, 0.85) 0%, rgba(5, 9, 8, 0.55) 45%, transparent 90%),
-               linear-gradient(20deg, rgba(5, 14, 11, 0.75) 0%, rgba(5, 14, 11, 0.40) 50%, transparent 100%)
+               linear-gradient(110deg, rgba(5, 9, 8, 0.40) 0%, rgba(5, 9, 8, 0.20) 45%, transparent 90%),
+               linear-gradient(20deg, rgba(5, 14, 11, 0.40) 0%, rgba(5, 14, 11, 0.15) 50%, transparent 100%)
              `
            }}
          />
