@@ -31,8 +31,13 @@ const pitchSlides = [
     aiObjection: "Look, we've integrated three banks in the last five years using legacy methods. It's slow, but it works. Why do I need to change?",
     slideContent: (
       <div className="w-full h-full bg-[#0a110f] relative flex flex-col justify-center p-16 lg:p-20 overflow-hidden group z-30">
-         {/* Cinematic Background */}
-         <div className="absolute inset-0 bg-gradient-to-r from-black/80 to-transparent pointer-events-none z-0" />
+         {/* Remote Image Background Layer */}
+         <div 
+           className="absolute inset-0 bg-cover bg-right bg-no-repeat opacity-50 mix-blend-luminosity z-0" 
+           style={{ backgroundImage: 'url("https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2Fbridge2partners-hero-1.webp?alt=media&token=bb05e1e4-8f2d-4a75-8880-ddd7bbfa2797")' }}
+         />
+         {/* Cinematic Background Gradient */}
+         <div className="absolute inset-0 bg-gradient-to-r from-black/95 via-black/60 to-transparent pointer-events-none z-0" />
          
          {/* Stacked Left-Aligned Typography */}
          <div className="relative z-10 max-w-3xl flex flex-col gap-2">
@@ -42,10 +47,15 @@ const pitchSlides = [
          </div>
 
          {/* Custom Slide Anchors */}
-         <div className="absolute bottom-6 left-8 flex items-center gap-2 z-20">
-           <span className="font-ui text-[10px] text-white/40 tracking-widest uppercase font-bold">Bridge2Partners</span>
+         <div className="absolute bottom-6 left-8 flex items-center gap-3 z-20">
+           <img 
+             src="https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2FBridge2Partners_Favicon.png?alt=media&token=8281d312-5968-4fa1-9e37-347481934b95" 
+             alt="B2P Logo" 
+             className="w-5 h-5 rounded-md opacity-90 shadow-[0_0_15px_rgba(152,204,103,0.2)]"
+           />
+           <span className="font-ui text-[10px] text-white/50 tracking-widest uppercase font-bold">Bridge2Partners</span>
          </div>
-         <div className="absolute bottom-6 right-8 font-ui text-[10px] text-white/40 tracking-widest font-bold z-20">
+         <div className="absolute bottom-6 right-8 font-ui text-[10px] text-white/50 tracking-widest font-bold z-20">
            01
          </div>
       </div>
