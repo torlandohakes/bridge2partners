@@ -58,21 +58,15 @@ const getPitchSlides = (slideOneCopy: string) => [
          
          {/* Stacked Left-Aligned Typography */}
          <div className="relative z-10 w-[85cqw] flex flex-col gap-[1.5cqw] b2p-narrative-text transition-opacity duration-300">
-            <h2 className="font-display font-black text-[5.5cqw] tracking-tight leading-[1.1] text-transparent bg-clip-text bg-gradient-to-br from-white to-neutral-300 drop-shadow-md">
-              {(() => {
-                const words = slideOneCopy.split(" ").filter(w => w.trim() !== "");
-                if (words.length === 0) return null;
-                const lastWord = words.pop();
-                const firstPart = words.join(" ");
-                return (
-                  <>
-                    {firstPart}{firstPart ? " " : ""}
-                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#98cc67] to-[#7bb050] drop-shadow-[0_0_20px_rgba(152,204,103,0.3)]">
-                      {lastWord}
-                    </span>
-                  </>
-                );
-              })()}
+            <h2 className="font-display font-black text-[5.5cqw] tracking-tight text-transparent bg-clip-text bg-gradient-to-br from-white to-neutral-300 drop-shadow-md flex flex-col leading-[1.05]">
+              {slideOneCopy.split('\n').map((line, index, array) => {
+                 const isLastLine = index === array.length - 1 && line.trim() !== "";
+                 return (
+                   <span key={index} className={isLastLine ? "text-transparent bg-clip-text bg-gradient-to-r from-[#98cc67] to-[#7bb050] drop-shadow-[0_0_20px_rgba(152,204,103,0.3)]" : ""}>
+                     {line}
+                   </span>
+                 );
+              })}
             </h2>
          </div>
 
@@ -100,38 +94,9 @@ const getPitchSlides = (slideOneCopy: string) => [
     aiPersona: "Conservative CFO",
     aiObjection: "Our current tech debt is manageable. Shifting to a new modular methodology seems like a massive capital expenditure for unproven ROI. How do you justify the initial burn?",
     slideContent: (
-      <div className="w-full h-full relative flex overflow-hidden z-30 bg-black">
-         {/* Left Side: Muted / Tech Debt */}
-         <div className="flex-1 bg-neutral-950 flex flex-col justify-center p-[6cqw] border-r border-white/5 relative group pb-[8cqw]">
-            <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent pointer-events-none z-0" />
-            <div className="relative z-10 w-[35cqw] flex flex-col b2p-narrative-text transition-opacity duration-300">
-               <h2 className="font-display font-black text-[4.5cqw] tracking-tight leading-[1.1] text-white/40 drop-shadow-sm">
-                 Quarters of Tech Debt.
-               </h2>
-            </div>
-         </div>
-         {/* Right Side: Activated / Results */}
-         <div className="flex-1 bg-gradient-to-br from-[#0a110f] to-[#042b26] flex flex-col justify-center p-[6cqw] relative group pb-[8cqw]">
-            <div className="absolute inset-0 bg-[#98cc67]/10 mix-blend-overlay pointer-events-none z-0" />
-            <div className="relative z-10 w-[35cqw] flex flex-col b2p-narrative-text transition-opacity duration-300">
-               <h2 className="font-display font-black text-[4.5cqw] tracking-tight leading-[1.1] text-transparent bg-clip-text bg-gradient-to-r from-[#98cc67] to-[#7bb050] drop-shadow-[0_0_20px_rgba(152,204,103,0.3)]">
-                 Results in Weeks.
-               </h2>
-            </div>
-         </div>
-
-         {/* Custom Slide Anchors */}
-         <div className="absolute bottom-[3cqw] left-[4cqw] flex items-center gap-[1cqw] z-20">
-           <img 
-             src={`/api/proxy-image?url=${encodeURIComponent('https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2FBridge2Partners_Favicon.png?alt=media&token=8281d312-5968-4fa1-9e37-347481934b95')}`}
-             alt="B2P Logo" 
-             className="w-[2.5cqw] h-[2.5cqw] rounded-[0.5cqw] opacity-40 shadow-[0_0_15px_rgba(255,255,255,0.05)] mix-blend-luminosity grayscale group-hover:grayscale-0 transition-all duration-500"
-           />
-           <span className="font-ui text-[1.2cqw] text-white/20 tracking-widest uppercase font-bold">Bridge2Partners</span>
-         </div>
-         <div className="absolute bottom-[3cqw] right-[4cqw] font-ui text-[1.2cqw] text-[#98cc67]/70 tracking-widest font-bold z-20">
-           02
-         </div>
+      <div className="w-full h-full bg-neutral-100 flex flex-col items-center justify-center border-2 border-dashed border-neutral-300 relative z-30">
+         <span className="font-ui font-semibold text-neutral-500 uppercase tracking-widest sm:text-lg">Slide 2: The Stakes</span>
+         <span className="font-sans text-neutral-400 mt-2 text-sm italic">(Pending High-Fidelity Design)</span>
       </div>
     )
   },
@@ -216,7 +181,7 @@ const getPitchSlides = (slideOneCopy: string) => [
 ];
 
 export function PitchDeckGuidelines() {
-  const [slideOneCopy, setSlideOneCopy] = useState("Innovation is Survival. Your Legacy Stack is the Anchor.");
+  const [slideOneCopy, setSlideOneCopy] = useState("Innovation is Survival.\nYour Legacy Stack is the\nAnchor.");
   const [currentSlide, setCurrentSlide] = useState(0);
   const [sidebarTab, setSidebarTab] = useState<'strategy' | 'roleplay'>('strategy');
   const [isFullscreen, setIsFullscreen] = useState(false);
@@ -517,15 +482,15 @@ export function PitchDeckGuidelines() {
                    <div className="shrink-0 py-4 border-t border-neutral/10 select-none bg-neutral-50/50 -mx-4 px-4">
                      <label className="text-[11px] font-ui font-bold text-neutral-800 uppercase tracking-widest flex items-center justify-between mb-2">
                        Customize Hook (Max 10 Words)
-                       <span className={cn("text-[9px] bg-white border border-neutral-200 px-1.5 py-0.5 rounded shadow-sm", slideOneCopy.split(" ").filter(w=>w.trim()!=='').length >= 10 ? "text-red-500 font-bold border-red-200 bg-red-50" : "text-neutral-500")}>
-                         {slideOneCopy.split(" ").filter(w=>w.trim()!=='').length} / 10
+                       <span className={cn("text-[9px] bg-white border border-neutral-200 px-1.5 py-0.5 rounded shadow-sm", slideOneCopy.split(/\s+/).filter(w=>w.trim()!=='').length >= 10 ? "text-red-500 font-bold border-red-200 bg-red-50" : "text-neutral-500")}>
+                         {slideOneCopy.split(/\s+/).filter(w=>w.trim()!=='').length} / 10
                        </span>
                      </label>
                      <textarea 
                        value={slideOneCopy}
                        onChange={(e) => {
                          const copy = e.target.value;
-                         const words = copy.split(" ").filter(w => w.trim() !== "");
+                         const words = copy.split(/\s+/).filter(w => w.trim() !== "");
                          
                          // Enforce 10 words strict limitation
                          if (words.length <= 10) {
@@ -537,8 +502,8 @@ export function PitchDeckGuidelines() {
                          }
                        }}
                        className="w-full text-sm font-sans resize-none p-3 bg-white border border-neutral-200 rounded-lg shadow-inner focus:border-primary focus:ring-1 focus:ring-primary/20 outline-none transition-all placeholder:text-neutral-400"
-                       rows={2}
-                       placeholder="Enter new hook text here..."
+                       rows={3}
+                       placeholder="Enter new multiline hook text here..."
                      />
                      {wordLimitWarning && (
                        <p className="text-[10px] text-red-500 font-bold mt-1.5 animate-in fade-in slide-in-from-top-1 bg-red-50 px-2 py-1 rounded-sm border border-red-100 flex items-center gap-1.5">
