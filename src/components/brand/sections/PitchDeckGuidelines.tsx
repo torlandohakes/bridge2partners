@@ -181,7 +181,7 @@ const getPitchSlides = (slideOneCopy: string) => [
 ];
 
 export function PitchDeckGuidelines() {
-  const [slideOneCopy, setSlideOneCopy] = useState("Innovation is Survival.\nYour Legacy Stack is the\nAnchor.");
+  const [slideOneCopy, setSlideOneCopy] = useState("Innovation is Survival.\nYour Legacy Stack is\nDead Weight.");
   const [currentSlide, setCurrentSlide] = useState(0);
   const [sidebarTab, setSidebarTab] = useState<'strategy' | 'roleplay'>('strategy');
   const [isFullscreen, setIsFullscreen] = useState(false);
