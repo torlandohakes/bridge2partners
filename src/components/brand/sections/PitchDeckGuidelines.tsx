@@ -174,18 +174,8 @@ const pitchSlides = [
 
 export function PitchDeckGuidelines() {
   const [currentSlide, setCurrentSlide] = useState(0);
-  const [sidebarTab, setSidebarTab] = useState<'strategy' | 'roleplay' | 'custom-builder'>('strategy');
+  const [sidebarTab, setSidebarTab] = useState<'strategy' | 'roleplay'>('strategy');
   const [isFullscreen, setIsFullscreen] = useState(false);
-  const [isGeneratingDeck, setIsGeneratingDeck] = useState(false);
-  const [hasGeneratedDeck, setHasGeneratedDeck] = useState(false);
-
-  const handleGenerateDeck = () => {
-    setIsGeneratingDeck(true);
-    setTimeout(() => {
-      setIsGeneratingDeck(false);
-      setHasGeneratedDeck(true);
-    }, 2500);
-  };
 
   const activeSlide = pitchSlides[currentSlide];
 
@@ -277,29 +267,20 @@ export function PitchDeckGuidelines() {
                <button 
                  onClick={() => setSidebarTab('strategy')}
                  className={cn(
-                   "flex-1 flex items-center justify-center gap-1.5 py-1.5 text-[10px] sm:text-xs font-semibold rounded-md transition-all",
+                   "flex-1 flex items-center justify-center gap-2 py-1.5 text-xs font-semibold rounded-md transition-all",
                    sidebarTab === 'strategy' ? "bg-white text-neutral-900 shadow-sm" : "text-neutral-500 hover:text-neutral-700"
                  )}
                >
-                 <Lightbulb className="w-3.5 h-3.5" /> Strategy
+                 <Lightbulb className="w-3.5 h-3.5" /> Slide Strategy
                </button>
                <button 
                  onClick={() => setSidebarTab('roleplay')}
                  className={cn(
-                   "flex-1 flex items-center justify-center gap-1.5 py-1.5 text-[10px] sm:text-xs font-semibold rounded-md transition-all",
+                   "flex-1 flex items-center justify-center gap-2 py-1.5 text-xs font-semibold rounded-md transition-all",
                    sidebarTab === 'roleplay' ? "bg-primary text-white shadow-sm" : "text-neutral-500 hover:text-neutral-700"
                  )}
                >
-                 <BrainCircuit className="w-3.5 h-3.5" /> Roleplay
-               </button>
-               <button 
-                 onClick={() => setSidebarTab('custom-builder')}
-                 className={cn(
-                   "flex-1 flex items-center justify-center gap-1.5 py-1.5 text-[10px] sm:text-xs font-semibold rounded-md transition-all",
-                   sidebarTab === 'custom-builder' ? "bg-neutral-800 text-white shadow-sm" : "text-neutral-500 hover:text-neutral-700"
-                 )}
-               >
-                 <Wand2 className="w-3.5 h-3.5" /> Custom
+                 <BrainCircuit className="w-3.5 h-3.5" /> B2P Intelligence
                </button>
              </div>
           </div>
@@ -346,158 +327,93 @@ export function PitchDeckGuidelines() {
               </div>
             )}
 
-            {/* Roleplay Tab */}
+            {/* B2P Intelligence Tab (Socratic Chat) */}
             {sidebarTab === 'roleplay' && (
-              <div className="flex flex-col flex-1 animate-in fade-in slide-in-from-left-4 duration-300 h-full max-h-[500px]">
+              <div className="flex flex-col flex-1 animate-in fade-in slide-in-from-left-4 duration-300 h-full max-h-[600px] pb-4">
                  
-                 {/* Persona Header */}
-                 <div className="bg-primary/5 border border-primary/20 p-3 rounded-lg flex items-start gap-3 mb-4 shrink-0">
-                    <div className="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center shrink-0">
-                      <BrainCircuit className="w-4 h-4 text-primary" />
-                    </div>
-                    <div>
-                      <span className="font-ui text-[10px] text-primary uppercase tracking-widest font-bold block">Simulated Persona</span>
-                      <span className="font-sans text-neutral-900 font-semibold text-sm leading-tight">
-                        {activeSlide.aiPersona}
-                      </span>
-                    </div>
+                 {/* Intelligence Header */}
+                 <div className="space-y-1 mb-4 shrink-0">
+                   <h4 className="font-ui font-bold text-neutral-900 tracking-tight text-lg flex items-center gap-2">
+                     <BrainCircuit className="w-5 h-5 text-primary" /> B2P Intelligence <span className="text-xs font-mono font-bold uppercase tracking-widest text-neutral-400 mt-1">- Active Session</span>
+                   </h4>
+                   <p className="text-xs font-sans text-neutral-500">
+                     Collaborative builder. Discuss your target account and we will architect a bespoke strategic narrative together.
+                   </p>
                  </div>
 
-                 {/* Mock Chat Window */}
-                 <div className="flex-1 w-full bg-neutral-50 border border-neutral-100 rounded-xl p-4 flex flex-col gap-4 overflow-y-auto min-h-[150px]">
+                 {/* Conversational Chat Window */}
+                 <div className="flex-1 w-full bg-neutral-50 border border-neutral-100 rounded-xl p-4 flex flex-col gap-4 overflow-y-auto mb-4 custom-scrollbar">
                     
-                    {/* B2P Initialization */}
-                    <div className="flex flex-col items-center justify-center text-center pb-4 border-b border-neutral-100 mb-2">
-                       <span className="text-[10px] uppercase font-bold tracking-widest text-neutral-400 mb-1">Scenario Loaded</span>
-                       <span className="text-xs text-neutral-500">Presenting: Slide {currentSlide + 1} - {activeSlide.title}</span>
-                    </div>
+                    {/* Transcript Generation */}
+                    <div className="flex flex-col gap-4 pb-2">
+                      {/* Message 1 (AI) */}
+                      <div className="flex gap-3 max-w-[95%]">
+                        <div className="w-6 h-6 rounded bg-primary/10 flex items-center justify-center shrink-0 mt-0.5"><BrainCircuit className="w-3.5 h-3.5 text-primary"/></div>
+                        <div className="bg-white border border-neutral-200 shadow-sm rounded-2xl rounded-tl-sm p-3">
+                          <p className="text-sm font-sans text-neutral-700 leading-relaxed">Tell me about your upcoming pitch. Who are we talking to?</p>
+                        </div>
+                      </div>
 
-                    {/* AI Objection */}
-                    <div className="bg-white border border-neutral-200 shadow-sm rounded-2xl rounded-tl-sm p-4 animate-in slide-in-from-left-2 relative">
-                       <span className="absolute -top-2 left-2 bg-white px-1 font-ui text-[9px] font-bold text-neutral-400 uppercase tracking-widest">Objection</span>
-                       <p className="text-sm font-sans text-neutral-700 leading-relaxed mt-1">
-                         "{activeSlide.aiObjection}"
-                       </p>
+                      {/* Message 2 (User) */}
+                      <div className="flex gap-3 max-w-[95%] self-end flex-row-reverse">
+                        <div className="w-6 h-6 rounded bg-neutral-200 flex items-center justify-center shrink-0 mt-0.5"><span className="text-[9px] font-bold text-neutral-600">REP</span></div>
+                        <div className="bg-neutral-800 text-white shadow-sm rounded-2xl rounded-tr-sm p-3">
+                          <p className="text-sm font-sans leading-relaxed">First Horizon Bank. Meeting with their EVP of Digital.</p>
+                        </div>
+                      </div>
+
+                      {/* Message 3 (AI) */}
+                      <div className="flex gap-3 max-w-[95%]">
+                        <div className="w-6 h-6 rounded bg-primary/10 flex items-center justify-center shrink-0 mt-0.5"><BrainCircuit className="w-3.5 h-3.5 text-primary"/></div>
+                        <div className="bg-white border border-neutral-200 shadow-sm rounded-2xl rounded-tl-sm p-3">
+                          <p className="text-sm font-sans text-neutral-700 leading-relaxed">Got it. First Horizon has been pushing hard into wealth management. What's the specific pain point or trigger event we are anchoring this pitch to?</p>
+                        </div>
+                      </div>
+
+                      {/* Message 4 (User) */}
+                      <div className="flex gap-3 max-w-[95%] self-end flex-row-reverse">
+                        <div className="w-6 h-6 rounded bg-neutral-200 flex items-center justify-center shrink-0 mt-0.5"><span className="text-[9px] font-bold text-neutral-600">REP</span></div>
+                        <div className="bg-neutral-800 text-white shadow-sm rounded-2xl rounded-tr-sm p-3">
+                          <p className="text-sm font-sans leading-relaxed">They are losing high-net-worth clients during the initial 90-day onboarding window due to disjointed legacy systems.</p>
+                        </div>
+                      </div>
+
+                      {/* Message 5 (AI) */}
+                      <div className="flex gap-3 max-w-[95%] animate-in slide-in-from-left-2 duration-500">
+                        <div className="w-6 h-6 rounded bg-primary/10 flex items-center justify-center shrink-0 mt-0.5"><BrainCircuit className="w-3.5 h-3.5 text-primary"/></div>
+                        <div className="bg-white border border-[#98cc67]/30 shadow-md ring-1 ring-[#98cc67]/10 rounded-2xl rounded-tl-sm p-4 relative overflow-hidden">
+                          <div className="absolute left-0 top-0 bottom-0 w-1 bg-[#98cc67]" />
+                          <p className="text-sm font-sans text-neutral-700 leading-relaxed mb-3">Perfect. Let's build the Strategic Narrative.</p>
+                          <div className="bg-neutral-50 border border-neutral-200 rounded p-3 mb-3">
+                            <span className="font-ui font-bold text-xs text-neutral-800 block mb-1">Slide 1 (The Hook): "The 90-Day Wealth Drain."</span>
+                            <p className="text-xs font-sans text-neutral-600">
+                              <span className="font-semibold text-neutral-800">Instruction:</span> Use massive <code className="font-mono bg-neutral-200 px-1 py-0.5 rounded text-[10px]">font-display</code> text. Don't mention Bridge2Partners yet. Force them to acknowledge that slow onboarding is actively shrinking their AUM.
+                            </p>
+                          </div>
+                          <p className="text-sm font-sans text-neutral-700 leading-relaxed font-semibold">Ready to map out Slide 2 (The Stakes)?</p>
+                        </div>
+                      </div>
                     </div>
 
                  </div>
 
-                 {/* Mock Input Area */}
-                 <div className="mt-4 pt-3 border-t border-neutral/10 shrink-0">
+                 {/* Mock Chat Input Area */}
+                 <div className="shrink-0 pt-2 border-t border-neutral/10">
                     <div className="relative flex items-center bg-white border border-neutral-300 rounded-full shadow-sm focus-within:border-primary focus-within:ring-1 focus-within:ring-primary/20 transition-all">
                        <button className="w-10 h-10 flex items-center justify-center text-neutral-400 hover:text-primary transition-colors ml-1">
                          <Mic className="w-4 h-4" />
                        </button>
                        <input 
                          type="text"
-                         className="flex-1 bg-transparent border-none text-sm placeholder:text-neutral-400 py-3 px-2 focus:outline-none"
-                         placeholder="Practice your rebuttal..."
+                         className="flex-1 bg-transparent border-none text-sm placeholder:text-neutral-400 py-3 px-2 focus:outline-none font-sans"
+                         placeholder="Yes, let's build Slide 2..."
                        />
                        <button className="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-white mr-1.5 shadow-sm hover:bg-primary-dark transition-colors">
                          <Send className="w-3.5 h-3.5 -ml-0.5" />
                        </button>
                     </div>
-                    <span className="block text-center mt-2 font-ui text-[9px] text-neutral-400 tracking-widest uppercase">
-                      Speech-to-Text API Offline in Preview
-                    </span>
                  </div>
                  
-              </div>
-            )}
-
-            {/* Custom Engine Tab */}
-            {sidebarTab === 'custom-builder' && (
-              <div className="flex flex-col flex-1 gap-5 animate-in fade-in slide-in-from-bottom-4 duration-300 pb-8">
-                 
-                 <div className="space-y-1">
-                   <h4 className="font-ui font-bold text-neutral-900 tracking-tight text-lg flex items-center gap-2">
-                     <Wand2 className="w-5 h-5 text-neutral-600" /> AI Strategic Builder
-                   </h4>
-                   <p className="text-xs font-sans text-neutral-500">
-                     Generate a dynamically tailored 4-slide structure by pointing our pipeline at a target domain.
-                   </p>
-                 </div>
-
-                 {/* Inputs */}
-                 <div className="space-y-4 bg-neutral-50 border border-neutral-100 p-4 rounded-xl">
-                   <div className="space-y-1.5">
-                     <label className="font-ui text-[10px] uppercase tracking-widest font-bold text-neutral-700">Target Bank Domain</label>
-                     <div className="relative">
-                       <Globe className="absolute left-3 top-2.5 w-4 h-4 text-neutral-400" />
-                       <input 
-                         type="text" 
-                         defaultValue="firsthorizon.com"
-                         className="w-full bg-white border border-neutral-200 rounded-md py-2 pl-9 pr-3 text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all font-mono text-neutral-800 shadow-sm"
-                       />
-                     </div>
-                   </div>
-                   
-                   <div className="space-y-1.5">
-                     <label className="font-ui text-[10px] uppercase tracking-widest font-bold text-neutral-700">Hypothesized Pain Point</label>
-                     <textarea 
-                       rows={3}
-                       defaultValue="Struggling with digital onboarding drop-off and high abandonment rates among Gen-Z wealth transfer targets."
-                       className="w-full bg-white border border-neutral-200 rounded-md p-3 text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all font-sans text-neutral-700 resize-none shadow-sm"
-                     />
-                   </div>
-                 </div>
-
-                 {/* CTA */}
-                 {!hasGeneratedDeck && (
-                   <button 
-                     onClick={handleGenerateDeck}
-                     disabled={isGeneratingDeck}
-                     className={cn(
-                       "w-full py-3 rounded-lg font-ui font-bold uppercase tracking-widest text-[11px] transition-all flex items-center justify-center gap-2 mt-2",
-                       isGeneratingDeck ? "bg-primary/50 text-white cursor-not-allowed" : "bg-primary hover:bg-primary-dark text-white shadow-md active:scale-[0.98]"
-                     )}
-                   >
-                     {isGeneratingDeck ? <Loader2 className="w-4 h-4 animate-spin" /> : <Wand2 className="w-4 h-4" />}
-                     {isGeneratingDeck ? "Running Web Analysis..." : "Run Web Analysis & Generate Narrative"}
-                   </button>
-                 )}
-
-                 {/* Output State */}
-                 {hasGeneratedDeck && (
-                   <div className="flex flex-col gap-4 animate-in zoom-in-95 duration-500 mt-2">
-                      <div className="bg-[#98cc67]/10 border border-[#98cc67]/30 rounded-lg p-3 flex items-center justify-between shadow-sm">
-                         <span className="font-mono text-xs text-[#98cc67] font-semibold flex items-center gap-2 drop-shadow-sm">
-                           <CheckCircle2 className="w-4 h-4" /> Analysis Complete
-                         </span>
-                         <button onClick={() => setHasGeneratedDeck(false)} className="text-[10px] text-neutral-500 font-ui uppercase tracking-widest hover:text-neutral-900 transition-colors">Reset</button>
-                      </div>
-                      
-                      <div className="space-y-3 pb-8">
-                         <p className="font-ui text-sm font-semibold text-neutral-800 border-b border-neutral-100 pb-2">
-                           Recommended 4-Slide Structure for <span className="text-primary font-bold">First Horizon</span>:
-                         </p>
-                         
-                         {/* Slide 1 */}
-                         <div className="bg-white border border-neutral-200 p-3.5 rounded-lg shadow-sm group hover:border-[#98cc67] hover:shadow-md transition-all relative overflow-hidden">
-                            <div className="absolute left-0 top-0 bottom-0 w-1 bg-[#98cc67] opacity-0 group-hover:opacity-100 transition-opacity" />
-                            <span className="font-ui font-bold text-xs text-neutral-800 block mb-1">Slide 1: Custom Hook</span>
-                            <span className="font-display font-medium text-xl text-primary leading-tight block mb-2">"70% Drop-Off is Not a UX Problem."</span>
-                            <p className="font-sans text-[11px] text-neutral-600 font-medium">Use <code className="font-mono bg-neutral-100 px-1 py-0.5 rounded border border-neutral-200 text-[10px]">font-display</code> to reframe the onboarding crisis as a core systems integration failure.</p>
-                         </div>
-
-                         {/* Slide 2 */}
-                         <div className="bg-white border border-neutral-200 p-3.5 rounded-lg shadow-sm group hover:border-[#98cc67] hover:shadow-md transition-all relative overflow-hidden">
-                            <div className="absolute left-0 top-0 bottom-0 w-1 bg-[#98cc67] opacity-0 group-hover:opacity-100 transition-opacity" />
-                            <span className="font-ui font-bold text-xs text-neutral-800 block mb-1">Slide 2: Custom Pattern Interrupt</span>
-                            <p className="font-sans text-[11px] text-neutral-600 font-medium">Map their exact Wealth Management silo against the new API standard. No bullets. 1 graphic.</p>
-                         </div>
-
-                         {/* Slide 3 */}
-                         <div className="bg-white border border-neutral-200 p-3.5 rounded-lg shadow-sm group hover:border-[#98cc67] hover:shadow-md transition-all relative overflow-hidden">
-                            <div className="absolute left-0 top-0 bottom-0 w-1 bg-[#98cc67] opacity-0 group-hover:opacity-100 transition-opacity" />
-                            <span className="font-ui font-bold text-xs text-neutral-800 block mb-1">Slide 3: Custom Proof</span>
-                            <span className="font-data font-semibold text-2xl text-neutral-800 block mb-1.5 tracking-tight">2.4x Conversion</span>
-                            <p className="font-sans text-[11px] text-neutral-600 font-medium">Use <code className="font-mono bg-neutral-100 px-1 py-0.5 rounded border border-neutral-200 text-[10px]">font-data</code> citing our Q3 integration metric for seamless account transfers.</p>
-                         </div>
-                      </div>
-                   </div>
-                 )}
-
               </div>
             )}
 
