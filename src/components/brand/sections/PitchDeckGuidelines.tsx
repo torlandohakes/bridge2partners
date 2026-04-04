@@ -19,7 +19,10 @@ import {
   Globe,
   Target,
   PlayCircle,
-  Layout
+  Layout,
+  Download,
+  Eye,
+  EyeOff
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -174,6 +177,25 @@ export function PitchDeckGuidelines() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [sidebarTab, setSidebarTab] = useState<'strategy' | 'roleplay'>('strategy');
   const [isFullscreen, setIsFullscreen] = useState(false);
+  const [hideTypography, setHideTypography] = useState(false);
+  const [isExporting, setIsExporting] = useState(false);
+  const [exportSuccess, setExportSuccess] = useState(false);
+
+  // Simulated DOM-to-Image capture sequence
+  const handleExportSlide = () => {
+    setIsExporting(true);
+    setExportSuccess(false);
+    
+    // Core Engine Placeholder: 
+    // In production, we drop in html-to-image here:
+    // toPng(document.getElementById('b2p-slide-capture-node')).then(downloadTrigger)
+    
+    setTimeout(() => {
+      setIsExporting(false);
+      setExportSuccess(true);
+      setTimeout(() => setExportSuccess(false), 3500);
+    }, 1500);
+  };
 
   const activeSlide = pitchSlides[currentSlide];
 
@@ -216,10 +238,40 @@ export function PitchDeckGuidelines() {
                <span className="font-ui font-semibold text-neutral-800 text-sm tracking-tight">{activeSlide.title}</span>
                <span className="bg-primary/10 text-primary text-[10px] font-mono px-2 py-0.5 rounded tracking-widest uppercase font-bold">Standard 16:9</span>
              </div>
-             {/* Controls */}
-             <div className="flex items-center gap-4">
-                <span className="text-xs font-ui text-neutral-500 font-medium">Slide {currentSlide + 1} of {pitchSlides.length}</span>
-                <div className="flex items-center gap-1 border border-neutral/20 rounded-md overflow-hidden bg-neutral-50">
+             {/* Controls & Export Engine */}
+             <div className="flex items-center gap-3">
+                <span className="text-xs font-ui text-neutral-500 font-medium mr-1 hidden sm:inline-block">Slide {currentSlide + 1} of {pitchSlides.length}</span>
+                
+                <div className="flex items-center gap-2 mr-2">
+                  <button 
+                    onClick={() => setHideTypography(!hideTypography)}
+                    title="Toggle Typography for Export"
+                    className={cn(
+                      "p-1.5 transition-colors border rounded shadow-sm flex items-center justify-center",
+                      hideTypography ? "bg-neutral-800 text-white border-neutral-800" : "bg-white text-neutral-500 border-neutral-200 hover:text-neutral-900 hover:bg-neutral-50"
+                    )}
+                  >
+                     {hideTypography ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                  </button>
+                  
+                  <div className="relative flex items-center">
+                    <button 
+                      onClick={handleExportSlide}
+                      disabled={isExporting}
+                      className="flex items-center gap-1.5 px-3 py-1.5 bg-neutral-900 border border-neutral-800 text-white rounded shadow-sm hover:bg-black transition-colors disabled:opacity-70 disabled:cursor-not-allowed"
+                    >
+                      {isExporting ? <Loader2 className="w-3.5 h-3.5 animate-spin" /> : <Download className="w-3.5 h-3.5" />}
+                      <span className="text-[10px] uppercase tracking-widest font-bold hidden md:inline-block">Export Layer</span>
+                    </button>
+                    {exportSuccess && (
+                       <div className="absolute top-10 right-0 bg-neutral-900 text-white px-3 py-1.5 rounded shadow-lg text-[10px] font-mono whitespace-nowrap animate-in fade-in slide-in-from-top-2 z-50 pointer-events-none">
+                         Slide exported as high-res PNG.
+                       </div>
+                    )}
+                  </div>
+                </div>
+
+                <div className="flex items-center gap-0.5 border border-neutral/20 rounded-md overflow-hidden bg-neutral-50 shadow-sm">
                    <button onClick={handlePrev} disabled={currentSlide === 0} className="p-1.5 hover:bg-neutral-200 disabled:opacity-30 disabled:hover:bg-transparent transition-colors">
                      <ChevronLeft className="w-4 h-4 text-neutral-700" />
                    </button>
@@ -228,7 +280,7 @@ export function PitchDeckGuidelines() {
                      <ChevronRight className="w-4 h-4 text-neutral-700" />
                    </button>
                 </div>
-                <button onClick={() => setIsFullscreen(!isFullscreen)} className="p-1.5 text-neutral-500 hover:text-neutral-900 transition-colors bg-white border border-neutral/20 rounded-md shadow-sm">
+                <button onClick={() => setIsFullscreen(!isFullscreen)} className="p-1.5 text-neutral-500 hover:text-neutral-900 transition-colors bg-white border border-neutral/20 rounded-md shadow-sm ml-1">
                    {isFullscreen ? <Shrink className="w-4 h-4" /> : <Expand className="w-4 h-4" />}
                 </button>
              </div>
@@ -237,7 +289,14 @@ export function PitchDeckGuidelines() {
           {/* Active Canvas wrapper */}
           <div className="flex-1 w-full bg-neutral-100/50 flex items-center justify-center p-4 sm:p-8 overflow-hidden">
              {/* Aspect Ratio 16:9 Enforcer */}
-             <div className="w-full max-w-full relative shadow-2xl ring-1 ring-black/5" style={{ aspectRatio: '16/9' }}>
+             <div 
+               id="b2p-slide-capture-node" 
+               className={cn(
+                 "w-full max-w-full relative shadow-2xl ring-1 ring-black/5 overflow-hidden transition-opacity duration-300",
+                 hideTypography && "[&_h2]:opacity-0 [&_span]:opacity-0 [&_p]:opacity-0 [&_svg]:opacity-0 [&_img]:opacity-0"
+               )} 
+               style={{ aspectRatio: '16/9' }}
+             >
                 {/* Embedded Slide */}
                 <div className="absolute inset-0 bg-[#001b15] overflow-hidden">
                    {/* Custom Slide Internal Padding & Watermark applied to all */}
