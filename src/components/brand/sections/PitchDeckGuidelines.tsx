@@ -90,23 +90,36 @@ const getPitchSlides = (slideOneCopy: string) => [
     title: "The Stakes",
     concept: "The Risk Inversion. You must destroy the illusion that doing nothing is the 'safe' option. We are taking their fear of operational risk and replacing it with the much more dangerous reality of active market share loss.",
     speakerNotes: "Look the champion in the eye. 'Every quarter you push this project back because of internal friction, your headcount rises to manage the legacy mess, and your best customers migrate to better tech. Doing nothing is actively costing you market share.'",
-    visualRules: "A stark Cause-and-Effect layout. Reading left to right, the muted left side represents their internal inertia, while the right side uses Luminous Lime to make the external financial threat visually undeniable.",
+    visualRules: "A single, full-screen, high-impact cinematic image with direct text overlay to maximize raw emotional punch. Deep shadows, forced vertical stacking.",
     aiPersona: "Conservative CFO",
     aiObjection: "Our current tech debt is manageable. Shifting to a new modular methodology seems like a massive capital expenditure for unproven ROI. How do you justify the initial burn?",
     slideContent: (
-      <div className="w-full h-full grid grid-cols-2 bg-black relative overflow-hidden z-30">
-         {/* Left Side: The Inaction */}
-         <div className="bg-neutral-950 flex flex-col justify-center p-[6cqw] border-r border-white/5 relative">
-            <h2 className="font-display font-black text-[4.5cqw] tracking-tight leading-[1.1] text-white/40 flex flex-col drop-shadow-sm">
-              <span>Delaying</span>
-              <span>Modernization</span>
-            </h2>
-         </div>
-         {/* Right Side: The Consequence */}
-         <div className="bg-gradient-to-br from-[#0a110f] to-neutral-900 flex flex-col justify-center p-[6cqw] relative">
-            <h2 className="font-display font-black text-[4.5cqw] tracking-tight leading-[1.1] text-white flex flex-col drop-shadow-sm">
-              <span>Funds Your</span>
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#98cc67] to-[#7bb050] drop-shadow-[0_0_20px_rgba(152,204,103,0.3)]">Competitors.</span>
+      <div className="w-full h-full bg-[#050908] relative flex flex-col justify-center p-[6cqw] overflow-hidden group z-30">
+         {/* Background Image Layer */}
+         <div 
+           className="absolute inset-0 bg-cover bg-center bg-no-repeat z-0" 
+           style={{ backgroundImage: `url("/images/slide_2_chains.png")` }}
+         />
+
+         {/* Cinematic Background Overlay */}
+         <div 
+           className="absolute inset-0 w-full h-full min-w-full min-h-full pointer-events-none z-0 mix-blend-multiply" 
+           style={{
+             backgroundImage: `
+               linear-gradient(90deg, rgba(5, 9, 8, 0.95) 0%, rgba(5, 9, 8, 0.7) 45%, transparent 100%),
+               linear-gradient(0deg, rgba(5, 9, 8, 0.9) 0%, transparent 40%)
+             `
+           }}
+         />
+         
+         {/* Stacked Left-Aligned Typography */}
+         <div className="relative z-10 w-[85cqw] flex flex-col gap-[1.5cqw] b2p-narrative-text transition-opacity duration-300 overflow-visible">
+            <h2 className="font-display font-black text-[5.5cqw] tracking-tight text-transparent bg-clip-text bg-gradient-to-br from-white to-neutral-300 drop-shadow-md flex flex-col leading-[1.05] overflow-visible border-b-[1.5cqw] border-transparent pb-0">
+              <span>Delaying modernization</span>
+              <span>funds your</span>
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#98cc67] to-[#7bb050] drop-shadow-[0_0_20px_rgba(152,204,103,0.3)] leading-normal">
+                Competitors.
+              </span>
             </h2>
          </div>
 
@@ -115,11 +128,11 @@ const getPitchSlides = (slideOneCopy: string) => [
            <img 
              src={`/api/proxy-image?url=${encodeURIComponent('https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2FBridge2Partners_Favicon.png?alt=media&token=8281d312-5968-4fa1-9e37-347481934b95')}`}
              alt="B2P Logo" 
-             className="w-[2.5cqw] h-[2.5cqw] rounded-[0.5cqw] opacity-40 shadow-[0_0_15px_rgba(255,255,255,0.05)] mix-blend-luminosity grayscale transition-all duration-500"
+             className="w-[2.5cqw] h-[2.5cqw] rounded-[0.5cqw] opacity-90 shadow-[0_0_15px_rgba(152,204,103,0.2)] grayscale"
            />
-           <span className="font-ui text-[1.2cqw] text-white/20 tracking-widest uppercase font-bold">Bridge2Partners</span>
+           <span className="font-ui text-[1.2cqw] text-white/50 tracking-widest uppercase font-bold">Bridge2Partners</span>
          </div>
-         <div className="absolute bottom-[3cqw] right-[4cqw] font-ui text-[1.2cqw] text-[#98cc67]/70 tracking-widest font-bold z-20">
+         <div className="absolute bottom-[3cqw] right-[4cqw] font-ui text-[1.2cqw] text-white/50 tracking-widest font-bold z-20">
            02
          </div>
       </div>
