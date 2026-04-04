@@ -260,34 +260,7 @@ export function PitchDeckGuidelines() {
              <div className="flex items-center gap-3">
                 <span className="text-xs font-ui text-neutral-500 font-medium mr-1 hidden sm:inline-block">Slide {currentSlide + 1} of {pitchSlides.length}</span>
                 
-                <div className="flex items-center gap-2 mr-2">
-                  <button 
-                    onClick={() => setHideTypography(!hideTypography)}
-                    title="Toggle Typography for Export"
-                    className={cn(
-                      "p-1.5 transition-colors border rounded shadow-sm flex items-center justify-center",
-                      hideTypography ? "bg-neutral-800 text-white border-neutral-800" : "bg-white text-neutral-500 border-neutral-200 hover:text-neutral-900 hover:bg-neutral-50"
-                    )}
-                  >
-                     {hideTypography ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
-                  </button>
-                  
-                  <div className="relative flex items-center">
-                    <button 
-                      onClick={handleExportSlide}
-                      disabled={isExporting}
-                      className="flex items-center gap-1.5 px-3 py-1.5 bg-neutral-900 border border-neutral-800 text-white rounded shadow-sm hover:bg-black transition-colors disabled:opacity-70 disabled:cursor-not-allowed"
-                    >
-                      {isExporting ? <Loader2 className="w-3.5 h-3.5 animate-spin" /> : <Download className="w-3.5 h-3.5" />}
-                      <span className="text-[10px] uppercase tracking-widest font-bold hidden md:inline-block">Export Layer</span>
-                    </button>
-                    {exportSuccess && (
-                       <div className="absolute top-10 right-0 bg-neutral-900 text-white px-3 py-1.5 rounded shadow-lg text-[10px] font-mono whitespace-nowrap animate-in fade-in slide-in-from-top-2 z-50 pointer-events-none">
-                         Slide exported as high-res PNG.
-                       </div>
-                    )}
-                  </div>
-                </div>
+
 
                 <div className="flex items-center gap-0.5 border border-neutral/20 rounded-md overflow-hidden bg-neutral-50 shadow-sm">
                    <button onClick={handlePrev} disabled={currentSlide === 0} className="p-1.5 hover:bg-neutral-200 disabled:opacity-30 disabled:hover:bg-transparent transition-colors">
@@ -338,7 +311,7 @@ export function PitchDeckGuidelines() {
         {/* Right Sidebar: Interactive Training Panel (30-40%) */}
         <div className={cn(
           "flex flex-col bg-white",
-          isFullscreen ? "w-full h-[40vh] landscape:w-[400px] landscape:h-full shrink-0 overflow-y-auto z-10 border-t landscape:border-t-0 landscape:border-l border-neutral-200 shadow-2xl" : "w-full lg:w-[35%] min-w-[320px]"
+          isFullscreen ? "w-full h-[40vh] landscape:w-[400px] landscape:h-full shrink-0 z-10 border-t landscape:border-t-0 landscape:border-l border-neutral-200 shadow-2xl" : "w-full lg:w-[35%] min-w-[320px]"
         )}>
           {/* Glassmorphic Tab Toggle */}
           <div className="h-14 border-b border-neutral/10 px-4 flex items-center justify-center bg-neutral-50/50 shrink-0">
@@ -365,7 +338,7 @@ export function PitchDeckGuidelines() {
           </div>
 
           {/* Tab Content Area */}
-          <div className="flex-1 overflow-y-auto p-6 flex flex-col">
+          <div className="flex-1 overflow-y-auto p-6 flex flex-col h-full">
             
             {/* Strategy Tab */}
             {sidebarTab === 'strategy' && (
@@ -409,7 +382,7 @@ export function PitchDeckGuidelines() {
 
             {/* B2P Intelligence Tab (Socratic Chat) */}
             {sidebarTab === 'roleplay' && (
-              <div className="flex flex-col flex-1 animate-in fade-in slide-in-from-left-4 duration-300 h-full max-h-[600px] pb-4">
+              <div className="flex flex-col flex-1 animate-in fade-in slide-in-from-left-4 duration-300 h-full pb-4">
                  
                  {/* Intelligence Header */}
                  <div className="space-y-1 mb-4 shrink-0">
@@ -477,41 +450,7 @@ export function PitchDeckGuidelines() {
 
                  </div>
 
-                 {/* State-Bound Slide Customizer */}
-                 {currentSlide === 0 && (
-                   <div className="shrink-0 py-4 border-t border-neutral/10 select-none bg-neutral-50/50 -mx-4 px-4">
-                     <label className="text-[11px] font-ui font-bold text-neutral-800 uppercase tracking-widest flex items-center justify-between mb-2">
-                       Customize Hook (Max 10 Words)
-                       <span className={cn("text-[9px] bg-white border border-neutral-200 px-1.5 py-0.5 rounded shadow-sm", slideOneCopy.split(/\s+/).filter(w=>w.trim()!=='').length >= 10 ? "text-red-500 font-bold border-red-200 bg-red-50" : "text-neutral-500")}>
-                         {slideOneCopy.split(/\s+/).filter(w=>w.trim()!=='').length} / 10
-                       </span>
-                     </label>
-                     <textarea 
-                       value={slideOneCopy}
-                       onChange={(e) => {
-                         const copy = e.target.value;
-                         const words = copy.split(/\s+/).filter(w => w.trim() !== "");
-                         
-                         // Enforce 10 words strict limitation
-                         if (words.length <= 10) {
-                           setSlideOneCopy(copy);
-                           setWordLimitWarning(false);
-                         } else {
-                           setWordLimitWarning(true);
-                           setTimeout(() => setWordLimitWarning(false), 2500); // clear flash
-                         }
-                       }}
-                       className="w-full text-sm font-sans resize-none p-3 bg-white border border-neutral-200 rounded-lg shadow-inner focus:border-primary focus:ring-1 focus:ring-primary/20 outline-none transition-all placeholder:text-neutral-400"
-                       rows={3}
-                       placeholder="Enter new multiline hook text here..."
-                     />
-                     {wordLimitWarning && (
-                       <p className="text-[10px] text-red-500 font-bold mt-1.5 animate-in fade-in slide-in-from-top-1 bg-red-50 px-2 py-1 rounded-sm border border-red-100 flex items-center gap-1.5">
-                         <ShieldAlert className="w-3.5 h-3.5" /> Max word count reached. Protect the prospect's cognitive load.
-                       </p>
-                     )}
-                   </div>
-                 )}
+
 
                  {/* Mock Chat Input Area */}
                  <div className="shrink-0 pt-3 border-t border-neutral/10 mt-2">
@@ -533,6 +472,75 @@ export function PitchDeckGuidelines() {
               </div>
             )}
 
+          </div>
+          
+          {/* Persistent Customization & Export Dock */}
+          <div className="shrink-0 p-4 border-t border-neutral-200 bg-white/95 backdrop-blur z-20 flex flex-col gap-4">
+             {/* Dynamic Command Center (Only visible on Custom Slides) */}
+             {currentSlide === 0 && (
+               <div className="select-none flex flex-col">
+                 <label className="text-[11px] font-ui font-bold text-neutral-800 uppercase tracking-widest flex items-center justify-between mb-2">
+                   Customize Hook (Max 10 Words)
+                   <span className={cn("text-[9px] bg-neutral-100 px-1.5 py-0.5 rounded font-mono font-bold border", slideOneCopy.split(/\s+/).filter(w=>w.trim()!=='').length >= 10 ? "text-red-500 border-red-200 bg-red-50" : "text-neutral-500 border-neutral-200/50")}>
+                     {slideOneCopy.split(/\s+/).filter(w=>w.trim()!=='').length} / 10
+                   </span>
+                 </label>
+                 <textarea 
+                   value={slideOneCopy}
+                   onChange={(e) => {
+                     const copy = e.target.value;
+                     const words = copy.split(/\s+/).filter(w => w.trim() !== "");
+                     if (words.length <= 10) {
+                       setSlideOneCopy(copy);
+                       setWordLimitWarning(false);
+                     } else {
+                       setWordLimitWarning(true);
+                       setTimeout(() => setWordLimitWarning(false), 2500);
+                     }
+                   }}
+                   className="w-full text-sm font-sans resize-none p-2.5 bg-neutral-50 border border-neutral-200 rounded-lg shadow-inner focus:bg-white focus:border-primary focus:ring-1 focus:ring-primary/20 outline-none transition-all placeholder:text-neutral-400"
+                   rows={3}
+                   placeholder="Enter new multiline hook text here..."
+                 />
+                 {wordLimitWarning && (
+                   <p className="text-[10px] text-red-500 font-bold mt-1.5 animate-in fade-in slide-in-from-top-1 bg-red-50 px-2 py-1 rounded-sm border border-red-100 flex items-center gap-1.5">
+                     <ShieldAlert className="w-3.5 h-3.5" /> Max word count reached. Protect the prospect's cognitive load.
+                   </p>
+                 )}
+               </div>
+             )}
+
+             {/* Export Engine */}
+             <div className="flex items-center justify-between gap-3 pt-1">
+                <button 
+                  onClick={() => setHideTypography(!hideTypography)}
+                  title="Toggle Typography for Export"
+                  className={cn(
+                    "flex-1 py-2 px-3 transition-colors border rounded-md shadow-sm flex items-center justify-center gap-2 text-[10px] sm:text-xs font-semibold uppercase tracking-widest",
+                    hideTypography ? "bg-neutral-800 text-white border-neutral-800" : "bg-white text-neutral-600 border-neutral-200 hover:text-neutral-900 hover:bg-neutral-50"
+                  )}
+                >
+                   {hideTypography ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                   <span className="hidden sm:inline-block">Toggle Text</span>
+                </button>
+                
+                <div className="flex-1 relative">
+                  <button 
+                    onClick={handleExportSlide}
+                    disabled={isExporting}
+                    className="w-full relative overflow-hidden group flex items-center justify-center gap-2 py-2 px-3 bg-primary border border-primary-dark text-white rounded-md shadow-sm hover:brightness-110 transition-all disabled:opacity-70 disabled:cursor-not-allowed"
+                  >
+                    <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
+                    {isExporting ? <Loader2 className="w-4 h-4 animate-spin relative z-10" /> : <Download className="w-4 h-4 relative z-10" />}
+                    <span className="text-[10px] sm:text-xs uppercase tracking-widest font-bold relative z-10">Export PNG</span>
+                  </button>
+                  {exportSuccess && (
+                     <div className="absolute bottom-full mb-3 right-0 bg-neutral-900 border border-neutral-700 text-white px-3 py-2 rounded shadow-lg text-[10px] font-mono whitespace-nowrap animate-in fade-in slide-in-from-bottom-2 pointer-events-none">
+                       Asset downloaded successfully.
+                     </div>
+                  )}
+                </div>
+             </div>
           </div>
         </div>
       </div>
