@@ -49,13 +49,10 @@ export default function BrandDashboard() {
             </h1>
             
             <div className="inline-flex shrink-0 items-start justify-center self-end md:self-auto pt-0.5">
-              <Image 
-                src="/images/Bridge2Partners_Brand_Logo_v7.png" 
+              <img 
+                src="https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2FBridge2Partners_Brand_Logo_v7.webp?alt=media&token=a90040bc-3446-408d-8794-cab07568de66" 
                 alt="Bridge2Partners Logo" 
-                width={300} 
-                height={80} 
                 className="w-auto h-10 md:h-14 object-contain drop-shadow-sm" 
-                priority
               />
             </div>
           </div>

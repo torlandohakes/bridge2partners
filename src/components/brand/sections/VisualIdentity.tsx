@@ -1,5 +1,4 @@
 import { HelpCircle, CheckCircle, AlertTriangle, XCircle, Download } from "lucide-react";
-import Image from "next/image";
 
 export function VisualIdentity() {
   return (
@@ -26,7 +25,7 @@ export function VisualIdentity() {
                {/* Left Column (Light Mode) */}
                <div className="flex flex-col gap-2">
                  <div className="bg-white p-6 rounded-lg flex items-center justify-center border border-neutral/10 shadow-sm min-h-[140px]">
-                   <Image src="/images/Bridge2Partners_Brand_Logo_v7.webp" alt="Bridge2Partners Primary Logo" width={200} height={60} className="w-full max-w-[160px] h-auto object-contain" />
+                   <img src="https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2FBridge2Partners_Brand_Logo_v7.webp?alt=media&token=a90040bc-3446-408d-8794-cab07568de66" alt="Bridge2Partners Primary Logo" className="w-full max-w-[160px] h-auto object-contain" />
                  </div>
                  <a href="/images/Bridge2Partners_Brand_Logo_v7.webp" download className="flex items-center justify-center gap-2 text-xs font-medium text-neutral/70 hover:text-primary transition-colors py-2 bg-neutral/5 rounded-md border border-neutral/10">
                    <Download className="w-3.5 h-3.5" /> Primary
@@ -36,7 +35,7 @@ export function VisualIdentity() {
                {/* Right Column (Dark/Glass Mode) */}
                <div className="flex flex-col gap-2">
                  <div className="bg-[#005642] p-6 rounded-lg flex items-center justify-center border border-primary/20 shadow-inner min-h-[140px]">
-                   <Image src="/images/Bridge2Partners_Logo-3-White.png" alt="Bridge2Partners Reversed Logo" width={200} height={60} className="w-full max-w-[160px] h-auto object-contain" />
+                   <img src="https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2FBridge2Partners%20Logo-3-White.png?alt=media&token=0a8d7276-834f-4ff8-971d-63f079efb214" alt="Bridge2Partners Reversed Logo" className="w-full max-w-[160px] h-auto object-contain" />
                  </div>
                  <a href="/images/Bridge2Partners_Logo-3-White.png" download className="flex items-center justify-center gap-2 text-xs font-medium text-neutral/70 hover:text-primary transition-colors py-2 bg-neutral/5 rounded-md border border-neutral/10">
                    <Download className="w-3.5 h-3.5" /> Reversed
@@ -53,7 +52,7 @@ export function VisualIdentity() {
               <span className="block text-xs font-bold text-neutral/50 uppercase tracking-widest">Secondary Assets</span>
               <div className="flex flex-wrap items-center gap-3">
                 <div className="bg-white rounded overflow-hidden flex items-center justify-center border border-neutral/10 shadow-sm w-10 h-10 shrink-0">
-                  <Image src="/icon-brand.png" alt="Bridge2Partners Icon" width={40} height={40} className="w-full h-full object-contain" />
+                  <img src="/icon-brand.png" alt="Bridge2Partners Icon" className="w-full h-full object-contain" />
                 </div>
                 <a href="/icon-brand.png" download className="flex items-center justify-center gap-2 text-xs font-medium text-neutral/70 hover:text-primary transition-colors px-3 bg-neutral/5 rounded border border-neutral/10 outline-none focus-visible:ring-2 focus-visible:ring-primary/50 h-10">
                   <Download className="w-3.5 h-3.5" /> Icon Mark
@@ -75,7 +74,7 @@ export function VisualIdentity() {
                    <CheckCircle className="w-4 h-4" /> APPROVED
                  </div>
                  <div className="relative w-24 h-24 rounded-full overflow-hidden border-2 border-white grayscale pointer-events-none shadow-md ring-4 ring-[#059669]/20">
-                   <Image src="/images/Gemini_Generated_Image_d6dv7zd6dv7zd6dv.jpeg" alt="Approved Cropping Example" fill className="object-cover" />
+                   <img src="/images/Gemini_Generated_Image_d6dv7zd6dv7zd6dv.jpeg" alt="Approved Cropping Example" className="absolute inset-0 w-full h-full object-cover" />
                  </div>
                </div>
                
@@ -85,7 +84,7 @@ export function VisualIdentity() {
                    <XCircle className="w-4 h-4" /> TIGHT CROP
                  </div>
                  <div className="relative w-24 h-24 rounded-full overflow-hidden border-2 border-white mix-blend-luminosity pointer-events-none shadow-md ring-4 ring-[#dc2626]/20">
-                   <Image src="/images/Tony_Lockhard_Bridge2Partners_Classic_Headshot.jpeg" alt="Incorrect Cropping Example" fill className="object-cover" />
+                   <img src="/images/Tony_Lockhard_Bridge2Partners_Classic_Headshot.jpeg" alt="Incorrect Cropping Example" className="absolute inset-0 w-full h-full object-cover" />
                  </div>
                </div>
             </div>
