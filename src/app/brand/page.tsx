@@ -43,18 +43,18 @@ export default function BrandDashboard() {
         
         {/* Top Header */}
         <header className="pt-12 md:pt-16 pb-8 border-b border-neutral/10">
-          <div className="flex flex-col-reverse md:flex-row justify-between items-start md:items-center gap-6 mb-6">
-            <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight font-display max-w-3xl">
+          <div className="flex flex-col-reverse md:flex-row justify-between items-start gap-6 mb-6">
+            <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight font-display max-w-3xl leading-none">
               <span className="text-primary">Bridge2Partners</span> <span className="text-neutral/50 font-light">Brand Guidelines</span>
             </h1>
             
-            <div className="inline-flex shrink-0 items-center justify-center self-end md:self-auto py-2">
+            <div className="inline-flex shrink-0 items-start justify-center self-end md:self-auto pt-0.5">
               <Image 
                 src="/images/Bridge2Partners_Brand_Logo_v7.png" 
                 alt="Bridge2Partners Logo" 
                 width={300} 
                 height={80} 
-                className="w-auto h-8 md:h-12 object-contain drop-shadow-sm" 
+                className="w-auto h-10 md:h-14 object-contain drop-shadow-sm" 
                 priority
               />
             </div>
