@@ -22,7 +22,7 @@ export function VisualIdentity() {
           <div className="bg-white/60 backdrop-blur-md rounded-lg border border-neutral/10 p-6 shadow-sm overflow-hidden mix-blend-normal">
             <h4 className="font-ui font-bold text-primary tracking-tight text-lg mb-2">The Canonical Mark</h4>
             
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
                {/* Left Column (Light Mode) */}
                <div className="flex flex-col gap-2">
                  <div className="bg-white p-6 rounded-lg flex items-center justify-center border border-neutral/10 shadow-sm min-h-[140px]">
@@ -33,7 +33,7 @@ export function VisualIdentity() {
                  </a>
                </div>
                
-               {/* Middle Column (Dark/Glass Mode) */}
+               {/* Right Column (Dark/Glass Mode) */}
                <div className="flex flex-col gap-2">
                  <div className="bg-[#005642] p-6 rounded-lg flex items-center justify-center border border-primary/20 shadow-inner min-h-[140px]">
                    <Image src="/images/Bridge2Partners_Logo-3-White.png" alt="Bridge2Partners Reversed Logo" width={200} height={60} className="w-full max-w-[160px] h-auto object-contain" />
@@ -42,22 +42,23 @@ export function VisualIdentity() {
                    <Download className="w-3.5 h-3.5" /> Reversed
                  </a>
                </div>
-
-               {/* Right Column (Icon) */}
-               <div className="flex flex-col gap-2">
-                 <div className="bg-white p-6 rounded-lg flex items-center justify-center border border-neutral/10 shadow-sm min-h-[140px]">
-                   <Image src="/icon-brand.png" alt="Bridge2Partners Icon" width={60} height={60} className="w-full max-w-[60px] h-auto object-contain" />
-                 </div>
-                 <a href="/icon-brand.png" download className="flex items-center justify-center gap-2 text-xs font-medium text-neutral/70 hover:text-primary transition-colors py-2 bg-neutral/5 rounded-md border border-neutral/10">
-                   <Download className="w-3.5 h-3.5" /> Icon Mark
-                 </a>
-               </div>
             </div>
 
-            <div className="mt-4 pt-4 border-t border-neutral/10 flex justify-end">
-              <a href="https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2FBridge2Partners%20Logo-2-Black.png?alt=media&token=8bc5af5c-85fb-4782-acf5-73f9db67f1f8" download target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-2 text-xs font-medium text-neutral/70 hover:text-neutral transition-colors py-1.5 px-3 bg-neutral/5 rounded border border-neutral/10">
-                <Download className="w-3.5 h-3.5" /> Download Black Version (PNG)
-              </a>
+            <div className="mt-4 pt-4 border-t border-neutral/10 flex flex-wrap items-center justify-between gap-4">
+              <div className="flex items-center gap-3">
+                 <div className="bg-white p-2 rounded flex items-center justify-center border border-neutral/10 shadow-sm w-[44px] h-[44px]">
+                   <Image src="/icon-brand.png" alt="Bridge2Partners Icon" width={32} height={32} className="w-full h-auto object-contain" />
+                 </div>
+                 <span className="text-xs font-bold text-neutral/50 uppercase tracking-widest leading-tight">Secondary<br/>Assets</span>
+              </div>
+              <div className="flex flex-wrap items-center gap-2">
+                <a href="/icon-brand.png" download className="flex items-center justify-center gap-2 text-xs font-medium text-neutral/70 hover:text-primary transition-colors py-1.5 px-3 bg-neutral/5 rounded border border-neutral/10">
+                  <Download className="w-3.5 h-3.5" /> Icon Mark
+                </a>
+                <a href="https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2FBridge2Partners%20Logo-2-Black.png?alt=media&token=8bc5af5c-85fb-4782-acf5-73f9db67f1f8" download target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-2 text-xs font-medium text-neutral/70 hover:text-neutral transition-colors py-1.5 px-3 bg-neutral/5 rounded border border-neutral/10">
+                  <Download className="w-3.5 h-3.5" /> Black Version (PNG)
+                </a>
+              </div>
             </div>
 
             <p className="text-sm text-neutral/80 mt-6 leading-relaxed font-sans pb-2">
