@@ -47,8 +47,13 @@ export function PitchDeckGuidelines() {
     "We Are Bankers, Like You.\nWe have worked at the banks we serve. Dedicated specialists with tenure at the top 100 financial institutions.",
     "The Simplified\nMiddleware Layer.",
     "Execution at Scale.",
+    "The Enterprise Architecture Assessment.",
+    "Bridge2Partners",
     "Appendix A: Playbooks & Capabilities",
-    "Appendix B: Seamless Migration Lifecycle",
+    "Appendix B1: $80B Commercial Lending",
+    "Appendix B2: $32B Deposit Onboarding",
+    "Appendix B3: $250B M&A Integration",
+    "Appendix B4: Enterprise PMO",
     "Appendix C: Integration Matrix",
   ]);
   const [currentSlide, setCurrentSlide] = useState(0);
