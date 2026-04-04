@@ -18,6 +18,7 @@ export function WireframeHomepage() {
         >
            {/* Contrast Overlay (Gradient) */}
            <div className="absolute inset-0 bg-gradient-to-r from-[#001b15]/90 via-[#001b15]/50 to-transparent" />
+           <div className="absolute inset-x-0 bottom-0 h-[60%] bg-gradient-to-t from-[#001b15] via-[#001b15]/50 to-transparent pointer-events-none" />
            
            {/* Mock Header Nav */}
            <div className="relative z-10 w-full flex items-center justify-between px-6 pt-6 pb-4">

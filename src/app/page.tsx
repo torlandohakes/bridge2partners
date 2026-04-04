@@ -16,6 +16,7 @@ export default function Home() {
       >
          {/* Contrast Overlay (Gradient) */}
          <div className="absolute inset-0 bg-gradient-to-r from-[#001b15]/90 via-[#001b15]/50 to-transparent" />
+         <div className="absolute inset-x-0 bottom-0 h-[60%] bg-gradient-to-t from-[#001b15] via-[#001b15]/50 to-transparent pointer-events-none" />
          
          {/* Header Nav */}
          <div className="relative z-10 w-full flex flex-col sm:flex-row items-center justify-between px-6 md:px-12 pt-8 pb-4 gap-6 sm:gap-0">
