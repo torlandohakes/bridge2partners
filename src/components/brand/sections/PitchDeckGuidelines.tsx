@@ -13,7 +13,10 @@ import {
   ShieldAlert,
   MessageSquare,
   Network,
-  CheckCircle2
+  CheckCircle2,
+  Wand2,
+  Loader2,
+  Globe
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -171,8 +174,18 @@ const pitchSlides = [
 
 export function PitchDeckGuidelines() {
   const [currentSlide, setCurrentSlide] = useState(0);
-  const [sidebarTab, setSidebarTab] = useState<'strategy' | 'roleplay'>('strategy');
+  const [sidebarTab, setSidebarTab] = useState<'strategy' | 'roleplay' | 'custom-builder'>('strategy');
   const [isFullscreen, setIsFullscreen] = useState(false);
+  const [isGeneratingDeck, setIsGeneratingDeck] = useState(false);
+  const [hasGeneratedDeck, setHasGeneratedDeck] = useState(false);
+
+  const handleGenerateDeck = () => {
+    setIsGeneratingDeck(true);
+    setTimeout(() => {
+      setIsGeneratingDeck(false);
+      setHasGeneratedDeck(true);
+    }, 2500);
+  };
 
   const activeSlide = pitchSlides[currentSlide];
 
@@ -264,7 +277,7 @@ export function PitchDeckGuidelines() {
                <button 
                  onClick={() => setSidebarTab('strategy')}
                  className={cn(
-                   "flex-1 flex items-center justify-center gap-2 py-1.5 text-xs font-semibold rounded-md transition-all",
+                   "flex-1 flex items-center justify-center gap-1.5 py-1.5 text-[10px] sm:text-xs font-semibold rounded-md transition-all",
                    sidebarTab === 'strategy' ? "bg-white text-neutral-900 shadow-sm" : "text-neutral-500 hover:text-neutral-700"
                  )}
                >
@@ -273,11 +286,20 @@ export function PitchDeckGuidelines() {
                <button 
                  onClick={() => setSidebarTab('roleplay')}
                  className={cn(
-                   "flex-1 flex items-center justify-center gap-2 py-1.5 text-xs font-semibold rounded-md transition-all",
+                   "flex-1 flex items-center justify-center gap-1.5 py-1.5 text-[10px] sm:text-xs font-semibold rounded-md transition-all",
                    sidebarTab === 'roleplay' ? "bg-primary text-white shadow-sm" : "text-neutral-500 hover:text-neutral-700"
                  )}
                >
-                 <BrainCircuit className="w-3.5 h-3.5" /> AI Roleplay
+                 <BrainCircuit className="w-3.5 h-3.5" /> Roleplay
+               </button>
+               <button 
+                 onClick={() => setSidebarTab('custom-builder')}
+                 className={cn(
+                   "flex-1 flex items-center justify-center gap-1.5 py-1.5 text-[10px] sm:text-xs font-semibold rounded-md transition-all",
+                   sidebarTab === 'custom-builder' ? "bg-neutral-800 text-white shadow-sm" : "text-neutral-500 hover:text-neutral-700"
+                 )}
+               >
+                 <Wand2 className="w-3.5 h-3.5" /> Custom
                </button>
              </div>
           </div>
@@ -380,6 +402,102 @@ export function PitchDeckGuidelines() {
                     </span>
                  </div>
                  
+              </div>
+            )}
+
+            {/* Custom Engine Tab */}
+            {sidebarTab === 'custom-builder' && (
+              <div className="flex flex-col flex-1 gap-5 animate-in fade-in slide-in-from-bottom-4 duration-300 pb-8">
+                 
+                 <div className="space-y-1">
+                   <h4 className="font-ui font-bold text-neutral-900 tracking-tight text-lg flex items-center gap-2">
+                     <Wand2 className="w-5 h-5 text-neutral-600" /> AI Strategic Builder
+                   </h4>
+                   <p className="text-xs font-sans text-neutral-500">
+                     Generate a dynamically tailored 4-slide structure by pointing our pipeline at a target domain.
+                   </p>
+                 </div>
+
+                 {/* Inputs */}
+                 <div className="space-y-4 bg-neutral-50 border border-neutral-100 p-4 rounded-xl">
+                   <div className="space-y-1.5">
+                     <label className="font-ui text-[10px] uppercase tracking-widest font-bold text-neutral-700">Target Bank Domain</label>
+                     <div className="relative">
+                       <Globe className="absolute left-3 top-2.5 w-4 h-4 text-neutral-400" />
+                       <input 
+                         type="text" 
+                         defaultValue="firsthorizon.com"
+                         className="w-full bg-white border border-neutral-200 rounded-md py-2 pl-9 pr-3 text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all font-mono text-neutral-800 shadow-sm"
+                       />
+                     </div>
+                   </div>
+                   
+                   <div className="space-y-1.5">
+                     <label className="font-ui text-[10px] uppercase tracking-widest font-bold text-neutral-700">Hypothesized Pain Point</label>
+                     <textarea 
+                       rows={3}
+                       defaultValue="Struggling with digital onboarding drop-off and high abandonment rates among Gen-Z wealth transfer targets."
+                       className="w-full bg-white border border-neutral-200 rounded-md p-3 text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all font-sans text-neutral-700 resize-none shadow-sm"
+                     />
+                   </div>
+                 </div>
+
+                 {/* CTA */}
+                 {!hasGeneratedDeck && (
+                   <button 
+                     onClick={handleGenerateDeck}
+                     disabled={isGeneratingDeck}
+                     className={cn(
+                       "w-full py-3 rounded-lg font-ui font-bold uppercase tracking-widest text-[11px] transition-all flex items-center justify-center gap-2 mt-2",
+                       isGeneratingDeck ? "bg-primary/50 text-white cursor-not-allowed" : "bg-primary hover:bg-primary-dark text-white shadow-md active:scale-[0.98]"
+                     )}
+                   >
+                     {isGeneratingDeck ? <Loader2 className="w-4 h-4 animate-spin" /> : <Wand2 className="w-4 h-4" />}
+                     {isGeneratingDeck ? "Running Web Analysis..." : "Run Web Analysis & Generate Narrative"}
+                   </button>
+                 )}
+
+                 {/* Output State */}
+                 {hasGeneratedDeck && (
+                   <div className="flex flex-col gap-4 animate-in zoom-in-95 duration-500 mt-2">
+                      <div className="bg-[#98cc67]/10 border border-[#98cc67]/30 rounded-lg p-3 flex items-center justify-between shadow-sm">
+                         <span className="font-mono text-xs text-[#98cc67] font-semibold flex items-center gap-2 drop-shadow-sm">
+                           <CheckCircle2 className="w-4 h-4" /> Analysis Complete
+                         </span>
+                         <button onClick={() => setHasGeneratedDeck(false)} className="text-[10px] text-neutral-500 font-ui uppercase tracking-widest hover:text-neutral-900 transition-colors">Reset</button>
+                      </div>
+                      
+                      <div className="space-y-3 pb-8">
+                         <p className="font-ui text-sm font-semibold text-neutral-800 border-b border-neutral-100 pb-2">
+                           Recommended 4-Slide Structure for <span className="text-primary font-bold">First Horizon</span>:
+                         </p>
+                         
+                         {/* Slide 1 */}
+                         <div className="bg-white border border-neutral-200 p-3.5 rounded-lg shadow-sm group hover:border-[#98cc67] hover:shadow-md transition-all relative overflow-hidden">
+                            <div className="absolute left-0 top-0 bottom-0 w-1 bg-[#98cc67] opacity-0 group-hover:opacity-100 transition-opacity" />
+                            <span className="font-ui font-bold text-xs text-neutral-800 block mb-1">Slide 1: Custom Hook</span>
+                            <span className="font-display font-medium text-xl text-primary leading-tight block mb-2">"70% Drop-Off is Not a UX Problem."</span>
+                            <p className="font-sans text-[11px] text-neutral-600 font-medium">Use <code className="font-mono bg-neutral-100 px-1 py-0.5 rounded border border-neutral-200 text-[10px]">font-display</code> to reframe the onboarding crisis as a core systems integration failure.</p>
+                         </div>
+
+                         {/* Slide 2 */}
+                         <div className="bg-white border border-neutral-200 p-3.5 rounded-lg shadow-sm group hover:border-[#98cc67] hover:shadow-md transition-all relative overflow-hidden">
+                            <div className="absolute left-0 top-0 bottom-0 w-1 bg-[#98cc67] opacity-0 group-hover:opacity-100 transition-opacity" />
+                            <span className="font-ui font-bold text-xs text-neutral-800 block mb-1">Slide 2: Custom Pattern Interrupt</span>
+                            <p className="font-sans text-[11px] text-neutral-600 font-medium">Map their exact Wealth Management silo against the new API standard. No bullets. 1 graphic.</p>
+                         </div>
+
+                         {/* Slide 3 */}
+                         <div className="bg-white border border-neutral-200 p-3.5 rounded-lg shadow-sm group hover:border-[#98cc67] hover:shadow-md transition-all relative overflow-hidden">
+                            <div className="absolute left-0 top-0 bottom-0 w-1 bg-[#98cc67] opacity-0 group-hover:opacity-100 transition-opacity" />
+                            <span className="font-ui font-bold text-xs text-neutral-800 block mb-1">Slide 3: Custom Proof</span>
+                            <span className="font-data font-semibold text-2xl text-neutral-800 block mb-1.5 tracking-tight">2.4x Conversion</span>
+                            <p className="font-sans text-[11px] text-neutral-600 font-medium">Use <code className="font-mono bg-neutral-100 px-1 py-0.5 rounded border border-neutral-200 text-[10px]">font-data</code> citing our Q3 integration metric for seamless account transfers.</p>
+                         </div>
+                      </div>
+                   </div>
+                 )}
+
               </div>
             )}
 
