@@ -180,7 +180,7 @@ const getPitchSlides = (slideCopies: string[], customBg: string | null) => [
          )}
 
          {/* The Silhouette Schematic */}
-         <div className="absolute bottom-[5.65cqw] right-[4cqw] w-[60cqw] h-[15cqw] z-10 pointer-events-none flex items-end justify-end">
+         <div className="absolute bottom-[5.5cqw] right-[4cqw] w-[60cqw] h-[15cqw] z-30 pointer-events-none flex items-end justify-end">
            <img 
              src="/images/slide_3_bridge_v3.png" 
              alt="Bridge Architectural Schematic"
