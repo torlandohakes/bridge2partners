@@ -330,7 +330,7 @@ export const getPitchSlides = (slideCopies: string[], customBg: string | null) =
          </div>
 
          {/* Right Side (65%): The Sonar Diagram */}
-         <div className="w-[65%] relative h-full flex items-center justify-center z-10 scale-[1.0] -ml-[2cqw]">
+         <div className="w-[65%] relative h-full flex items-center justify-center z-10 scale-[1.0] -ml-[2cqw] -mt-[4cqw]">
             {/* Background Sonar Grid */}
             <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:2cqw_2cqw] [mask-image:radial-gradient(ellipse_70%_70%_at_50%_50%,#000_20%,transparent_100%)] pointer-events-none" />
 
@@ -356,7 +356,7 @@ export const getPitchSlides = (slideCopies: string[], customBg: string | null) =
 
             {/* Glassmorphic Nodes positioning manually */}
             {/* Node 1 Top (Online Portal & Mobile) */}
-            <div className="absolute top-[calc(50%-22cqw)] left-[calc(50%-10cqw)] w-[20cqw] h-[4cqw] rounded-xl border-[0.15cqw] border-white/30 bg-neutral-900/90 flex items-center justify-center z-40 backdrop-blur-md shadow-2xl">
+            <div className="absolute top-[calc(50%-24.5cqw)] left-[calc(50%-10cqw)] w-[20cqw] h-[4cqw] rounded-xl border-[0.15cqw] border-white/30 bg-neutral-900/90 flex items-center justify-center z-40 backdrop-blur-md shadow-2xl">
               <span className="font-ui text-[0.9cqw] text-white tracking-widest font-bold uppercase text-center w-full px-2">Online Portal & Mobile</span>
             </div>
 
