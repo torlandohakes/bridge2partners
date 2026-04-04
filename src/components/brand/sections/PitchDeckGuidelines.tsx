@@ -50,11 +50,12 @@ export function PitchDeckGuidelines() {
     "The Enterprise Architecture Assessment.",
     "Bridge2Partners",
     "Appendix A: Playbooks & Capabilities",
-    "Appendix B1: $80B Commercial Lending",
-    "Appendix B2: $32B Deposit Onboarding",
-    "Appendix B3: $250B M&A Integration",
-    "Appendix B4: Enterprise PMO",
+    "Seamless Migration Protocol",
     "Appendix C: Integration Matrix",
+    "Case Study: $80B Commercial Lending",
+    "Case Study: $32B Deposit Onboarding",
+    "Case Study: $250B M&A Integration",
+    "Case Study: Enterprise PMO",
   ]);
   const [currentSlide, setCurrentSlide] = useState(0);
   const [sidebarTab, setSidebarTab] = useState<'strategy' | 'roleplay'>('strategy');

@@ -594,185 +594,64 @@ export const getPitchSlides = (slideCopies: string[], customBg: string | null) =
            </div>
          </div>
          <div className="absolute bottom-[3cqw] right-[4cqw] font-ui text-[1cqw] text-neutral-300 tracking-widest font-bold z-30">
-           07
+           09
          </div>
       </div>
     )
   },
   {
     id: 10,
-    title: "Appx B1",
-    concept: "Prospectus Data Grid",
-    speakerNotes: "Use only if requested to validate experience.",
-    visualRules: "Light mode 25/75 grid. 3-column data architecture.",
-    aiPersona: "Varies",
-    aiObjection: "Show me proof.",
+    title: "Appendix B",
+    concept: "Seamless Migration Lifecycle",
+    speakerNotes: "Prove the 'build in parallel' concept with an actual timeline.",
+    visualRules: "Light mode layout tracking a horizontal timeline layout across columns.",
+    aiPersona: "Chief Information Officer",
+    aiObjection: "Can you guarantee zero downtime during cutover?",
     slideContent: (
       <div className="w-full h-full bg-white relative flex flex-row group z-30 overflow-hidden text-neutral-900 border-2 border-neutral-100">
          <div className="w-[25%] h-[90%] my-auto relative border-r border-[#98cc67]/30 flex flex-col justify-between ml-[2cqw]">
-           <div className="absolute left-[3cqw] top-[6cqw] origin-top-left -rotate-90 translate-y-[22cqw]">
-             <span className="font-ui text-[1.2cqw] uppercase tracking-[0.3em] font-bold text-neutral-400">APPX B1</span>
+           <div className="absolute left-[3cqw] top-[6cqw] origin-top-left -rotate-90 translate-y-[28cqw]">
+             <span className="font-ui text-[1.2cqw] uppercase tracking-[0.3em] font-bold text-neutral-400">Appendix B // Migration Timeline</span>
            </div>
            <div className="absolute bottom-[2cqw] left-[3cqw] flex items-center gap-[1cqw]">
-             <img src={`/api/proxy-image?url=${encodeURIComponent('https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2FBridge2Partners_Favicon.png?alt=media&token=8281d312-5968-4fa1-9e37-347481934b95')}`} alt="B2P Logo" className="w-[2cqw] h-[2cqw] object-contain opacity-50 contrast-200 grayscale" />
+             <img 
+               src={`/api/proxy-image?url=${encodeURIComponent('https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2FBridge2Partners_Favicon.png?alt=media&token=8281d312-5968-4fa1-9e37-347481934b95')}`}
+               alt="B2P Logo" 
+               className="w-[2cqw] h-[2cqw] object-contain opacity-50 contrast-200 grayscale"
+             />
              <span className="font-ui text-[0.9cqw] text-neutral-400/80 tracking-widest uppercase font-bold">Bridge2Partners</span>
            </div>
          </div>
          <div className="w-[75%] h-full flex flex-col p-[6cqw] pt-[8cqw] justify-start">
-           <h2 className="font-display font-black text-[3.5cqw] leading-[1.05] tracking-tight mb-[4cqw] text-neutral-900">$80B Commercial Lending</h2>
+           <h2 className="font-display font-black text-[3.5cqw] leading-[1.05] tracking-tight mb-[4cqw] text-neutral-900">Seamless Migration<br/>Protocol</h2>
            
-           <div className="grid grid-cols-3 gap-[3cqw] font-sans text-[1.1cqw] text-neutral-600">
-              <div className="flex flex-col border-t-2 border-[#98cc67] pt-[2cqw] relative">
-                 <h3 className="font-ui font-black text-[1.2cqw] uppercase text-neutral-900 mb-[1cqw]">Client Challenge</h3>
-                 <p className="leading-relaxed">Massive technical debt across origination channels slowing downstream fulfillment to a crawl.</p>
-                 <span className="text-[#98cc67] font-bold mt-auto pt-[2cqw]">[40+ Interfaces Required]</span>
+           <div className="flex flex-col gap-[2cqw]">
+              <div className="flex items-start gap-[3cqw] border-l-2 border-[#98cc67] pl-[2cqw] py-1">
+                 <div className="w-[12cqw] shrink-0 font-ui font-black text-[1.3cqw] text-neutral-900 uppercase leading-snug">Pre-Flight<br/><span className="text-[#98cc67] text-[1cqw] tracking-widest font-bold">4 Weeks</span></div>
+                 <p className="font-sans text-[1.1cqw] text-neutral-600">Total Systems Audit. Deep mapping of all existing core processes, API endpoints, and undocumented legacy protocols to configure the target state architecture.</p>
               </div>
-              <div className="flex flex-col border-t-2 border-neutral-300 pt-[2cqw] relative">
-                 <h3 className="font-ui font-black text-[1.2cqw] uppercase text-neutral-900 mb-[1cqw]">Solution Delivered</h3>
-                 <p className="leading-relaxed">Designed and implemented the Simplified Middleware Layer wrapping core protocols in an agile REST envelope.</p>
-                 <span className="text-secondary font-bold mt-auto pt-[2cqw]">[Zero Downtime Migration]</span>
+              <div className="flex items-start gap-[3cqw] border-l-2 border-neutral-200 pl-[2cqw] py-1">
+                 <div className="w-[12cqw] shrink-0 font-ui font-black text-[1.3cqw] text-neutral-900 uppercase leading-snug">Core Wrap<br/><span className="text-neutral-400 text-[1cqw] tracking-widest font-bold">8 Weeks</span></div>
+                 <p className="font-sans text-[1.1cqw] text-neutral-600">Construction of the abstraction layer. The legacy core is containerized behind secure REST interfaces allowing external systems to interact without direct core contact.</p>
               </div>
-              <div className="flex flex-col border-t-2 border-neutral-300 pt-[2cqw] relative">
-                 <h3 className="font-ui font-black text-[1.2cqw] uppercase text-neutral-900 mb-[1cqw]">Realized Value</h3>
-                 <p className="leading-relaxed">Achieved 100% automated decisioning on standard CRE loans while drastically reducing IT SLA loads.</p>
-                 <span className="text-primary font-bold mt-auto pt-[2cqw]">[$80B Balance Sheet Secured]</span>
+              <div className="flex items-start gap-[3cqw] border-l-2 border-neutral-200 pl-[2cqw] py-1">
+                 <div className="w-[12cqw] shrink-0 font-ui font-black text-[1.3cqw] text-neutral-900 uppercase leading-snug">Shadow Node<br/><span className="text-neutral-400 text-[1cqw] tracking-widest font-bold">6 Weeks</span></div>
+                 <p className="font-sans text-[1.1cqw] text-neutral-600">Parallel event routing. Transactions flow simultaneously through the legacy stack and the new middleware. Complete data verification without operational disruption.</p>
               </div>
-           </div>
-         </div>
-      </div>
-    )
-  },
-  {
-    id: 11,
-    title: "Appx B2",
-    concept: "Prospectus Data Grid",
-    speakerNotes: "Use only if requested to validate experience.",
-    visualRules: "Light mode 25/75 grid. 3-column data architecture.",
-    aiPersona: "Varies",
-    aiObjection: "Show me proof.",
-    slideContent: (
-      <div className="w-full h-full bg-white relative flex flex-row group z-30 overflow-hidden text-neutral-900 border-2 border-neutral-100">
-         <div className="w-[25%] h-[90%] my-auto relative border-r border-[#98cc67]/30 flex flex-col justify-between ml-[2cqw]">
-           <div className="absolute left-[3cqw] top-[6cqw] origin-top-left -rotate-90 translate-y-[22cqw]">
-             <span className="font-ui text-[1.2cqw] uppercase tracking-[0.3em] font-bold text-neutral-400">APPX B2</span>
-           </div>
-           <div className="absolute bottom-[2cqw] left-[3cqw] flex items-center gap-[1cqw]">
-             <img src={`/api/proxy-image?url=${encodeURIComponent('https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2FBridge2Partners_Favicon.png?alt=media&token=8281d312-5968-4fa1-9e37-347481934b95')}`} alt="B2P Logo" className="w-[2cqw] h-[2cqw] object-contain opacity-50 contrast-200 grayscale" />
-             <span className="font-ui text-[0.9cqw] text-neutral-400/80 tracking-widest uppercase font-bold">Bridge2Partners</span>
-           </div>
-         </div>
-         <div className="w-[75%] h-full flex flex-col p-[6cqw] pt-[8cqw] justify-start">
-           <h2 className="font-display font-black text-[3.5cqw] leading-[1.05] tracking-tight mb-[4cqw] text-neutral-900">$32B Deposit Onboarding</h2>
-           
-           <div className="grid grid-cols-3 gap-[3cqw] font-sans text-[1.1cqw] text-neutral-600">
-              <div className="flex flex-col border-t-2 border-[#98cc67] pt-[2cqw] relative">
-                 <h3 className="font-ui font-black text-[1.2cqw] uppercase text-neutral-900 mb-[1cqw]">Client Challenge</h3>
-                 <p className="leading-relaxed">Customer acquisition was crippled by manual document validation resulting in 40% application drop-off.</p>
-                 <span className="text-[#98cc67] font-bold mt-auto pt-[2cqw]">[Severe Friction Points]</span>
-              </div>
-              <div className="flex flex-col border-t-2 border-neutral-300 pt-[2cqw] relative">
-                 <h3 className="font-ui font-black text-[1.2cqw] uppercase text-neutral-900 mb-[1cqw]">Solution Delivered</h3>
-                 <p className="leading-relaxed">Integrated complete eSign automation and live identity verification APIs via the parallel node structure.</p>
-                 <span className="text-secondary font-bold mt-auto pt-[2cqw]">[End-to-end DAO Pipeline]</span>
-              </div>
-              <div className="flex flex-col border-t-2 border-neutral-300 pt-[2cqw] relative">
-                 <h3 className="font-ui font-black text-[1.2cqw] uppercase text-neutral-900 mb-[1cqw]">Realized Value</h3>
-                 <p className="leading-relaxed">Application time plummeted from 4 days to 6 minutes, driving unprecedented conversion ratios.</p>
-                 <span className="text-primary font-bold mt-auto pt-[2cqw]">[Reduced Application Time]</span>
+              <div className="flex items-start gap-[3cqw] border-l-2 border-neutral-200 pl-[2cqw] py-1">
+                 <div className="w-[12cqw] shrink-0 font-ui font-black text-[1.3cqw] text-neutral-900 uppercase leading-snug">Go-Live Cut<br/><span className="text-neutral-400 text-[1cqw] tracking-widest font-bold">0 Downtime</span></div>
+                 <p className="font-sans text-[1.1cqw] text-neutral-600">Atomic transition. Shadow routing is finalized and primary logic flows through the accelerated architecture with 24/7 hypercare support attached.</p>
               </div>
            </div>
          </div>
-      </div>
-    )
-  },
-  {
-    id: 12,
-    title: "Appx B3",
-    concept: "Prospectus Data Grid",
-    speakerNotes: "Use only if requested to validate experience.",
-    visualRules: "Light mode 25/75 grid. 3-column data architecture.",
-    aiPersona: "Varies",
-    aiObjection: "Show me proof.",
-    slideContent: (
-      <div className="w-full h-full bg-white relative flex flex-row group z-30 overflow-hidden text-neutral-900 border-2 border-neutral-100">
-         <div className="w-[25%] h-[90%] my-auto relative border-r border-[#98cc67]/30 flex flex-col justify-between ml-[2cqw]">
-           <div className="absolute left-[3cqw] top-[6cqw] origin-top-left -rotate-90 translate-y-[22cqw]">
-             <span className="font-ui text-[1.2cqw] uppercase tracking-[0.3em] font-bold text-neutral-400">APPX B3</span>
-           </div>
-           <div className="absolute bottom-[2cqw] left-[3cqw] flex items-center gap-[1cqw]">
-             <img src={`/api/proxy-image?url=${encodeURIComponent('https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2FBridge2Partners_Favicon.png?alt=media&token=8281d312-5968-4fa1-9e37-347481934b95')}`} alt="B2P Logo" className="w-[2cqw] h-[2cqw] object-contain opacity-50 contrast-200 grayscale" />
-             <span className="font-ui text-[0.9cqw] text-neutral-400/80 tracking-widest uppercase font-bold">Bridge2Partners</span>
-           </div>
-         </div>
-         <div className="w-[75%] h-full flex flex-col p-[6cqw] pt-[8cqw] justify-start">
-           <h2 className="font-display font-black text-[3.5cqw] leading-[1.05] tracking-tight mb-[4cqw] text-neutral-900">$250B Post-Merger Integration</h2>
-           
-           <div className="grid grid-cols-3 gap-[3cqw] font-sans text-[1.1cqw] text-neutral-600">
-              <div className="flex flex-col border-t-2 border-[#98cc67] pt-[2cqw] relative">
-                 <h3 className="font-ui font-black text-[1.2cqw] uppercase text-neutral-900 mb-[1cqw]">Client Challenge</h3>
-                 <p className="leading-relaxed">Legally mandated day-one operational benchmarks required immediate consolidation of highly disparate banking cores.</p>
-                 <span className="text-[#98cc67] font-bold mt-auto pt-[2cqw]">[Legal Day One Complexity]</span>
-              </div>
-              <div className="flex flex-col border-t-2 border-neutral-300 pt-[2cqw] relative">
-                 <h3 className="font-ui font-black text-[1.2cqw] uppercase text-neutral-900 mb-[1cqw]">Solution Delivered</h3>
-                 <p className="leading-relaxed">Deployed advanced routing middleware to unify customer portals without touching the underlying warring databases.</p>
-                 <span className="text-secondary font-bold mt-auto pt-[2cqw]">[Shadow Node Routing]</span>
-              </div>
-              <div className="flex flex-col border-t-2 border-neutral-300 pt-[2cqw] relative">
-                 <h3 className="font-ui font-black text-[1.2cqw] uppercase text-neutral-900 mb-[1cqw]">Realized Value</h3>
-                 <p className="leading-relaxed">Eliminated massive potential attrition by creating seamless digital continuity across borders.</p>
-                 <span className="text-primary font-bold mt-auto pt-[2cqw]">[Optimized Call Center Volume]</span>
-              </div>
-           </div>
-         </div>
-      </div>
-    )
-  },
-  {
-    id: 13,
-    title: "Appx B4",
-    concept: "Prospectus Data Grid",
-    speakerNotes: "Use only if requested to validate experience.",
-    visualRules: "Light mode 25/75 grid. 3-column data architecture.",
-    aiPersona: "Varies",
-    aiObjection: "Show me proof.",
-    slideContent: (
-      <div className="w-full h-full bg-white relative flex flex-row group z-30 overflow-hidden text-neutral-900 border-2 border-neutral-100">
-         <div className="w-[25%] h-[90%] my-auto relative border-r border-[#98cc67]/30 flex flex-col justify-between ml-[2cqw]">
-           <div className="absolute left-[3cqw] top-[6cqw] origin-top-left -rotate-90 translate-y-[22cqw]">
-             <span className="font-ui text-[1.2cqw] uppercase tracking-[0.3em] font-bold text-neutral-400">APPX B4</span>
-           </div>
-           <div className="absolute bottom-[2cqw] left-[3cqw] flex items-center gap-[1cqw]">
-             <img src={`/api/proxy-image?url=${encodeURIComponent('https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2FBridge2Partners_Favicon.png?alt=media&token=8281d312-5968-4fa1-9e37-347481934b95')}`} alt="B2P Logo" className="w-[2cqw] h-[2cqw] object-contain opacity-50 contrast-200 grayscale" />
-             <span className="font-ui text-[0.9cqw] text-neutral-400/80 tracking-widest uppercase font-bold">Bridge2Partners</span>
-           </div>
-         </div>
-         <div className="w-[75%] h-full flex flex-col p-[6cqw] pt-[8cqw] justify-start">
-           <h2 className="font-display font-black text-[3.5cqw] leading-[1.05] tracking-tight mb-[4cqw] text-neutral-900">Enterprise Program Management</h2>
-           
-           <div className="grid grid-cols-3 gap-[3cqw] font-sans text-[1.1cqw] text-neutral-600">
-              <div className="flex flex-col border-t-2 border-[#98cc67] pt-[2cqw] relative">
-                 <h3 className="font-ui font-black text-[1.2cqw] uppercase text-neutral-900 mb-[1cqw]">Client Challenge</h3>
-                 <p className="leading-relaxed">A major CRE Lender lacked the structural agility to execute parallel integrations, causing massive budget overruns.</p>
-                 <span className="text-[#98cc67] font-bold mt-auto pt-[2cqw]">[Vendor Sprawl]</span>
-              </div>
-              <div className="flex flex-col border-t-2 border-neutral-300 pt-[2cqw] relative">
-                 <h3 className="font-ui font-black text-[1.2cqw] uppercase text-neutral-900 mb-[1cqw]">Solution Delivered</h3>
-                 <p className="leading-relaxed">Installed a robust PMO and Governance structure enforcing strict agile ceremonies and strategic vendor alignment.</p>
-                 <span className="text-secondary font-bold mt-auto pt-[2cqw]">[PMO Execution Deployed]</span>
-              </div>
-              <div className="flex flex-col border-t-2 border-neutral-300 pt-[2cqw] relative">
-                 <h3 className="font-ui font-black text-[1.2cqw] uppercase text-neutral-900 mb-[1cqw]">Realized Value</h3>
-                 <p className="leading-relaxed">Saved millions in wasted engineering cycles by forcing architectural compliance and parallel construction.</p>
-                 <span className="text-primary font-bold mt-auto pt-[2cqw]">[Unified Governance Structure]</span>
-              </div>
-           </div>
+         <div className="absolute bottom-[3cqw] right-[4cqw] font-ui text-[1cqw] text-neutral-300 tracking-widest font-bold z-30">
+           10
          </div>
       </div>
     )
   },
 {
-    id: 14,
+    id: 11,
     title: "Appendix C",
     concept: "Integration Catalog",
     speakerNotes: "The massive footprint of our integration experience.",
@@ -807,9 +686,182 @@ export const getPitchSlides = (slideCopies: string[], customBg: string | null) =
            </div>
          </div>
          <div className="absolute bottom-[3cqw] right-[4cqw] font-ui text-[1cqw] text-neutral-300 tracking-widest font-bold z-30">
-           09
+           11
+         </div>
+      </div>
+    )
+  },
+  {
+    id: 12,
+    title: "Case Study",
+    concept: "Prospectus Data Grid",
+    speakerNotes: "Use only if requested to validate experience.",
+    visualRules: "Light mode 25/75 grid. 3-column data architecture.",
+    aiPersona: "Varies",
+    aiObjection: "Show me proof.",
+    slideContent: (
+      <div className="w-full h-full bg-white relative flex flex-row group z-30 overflow-hidden text-neutral-900 border-2 border-neutral-100">
+         <div className="w-[25%] h-[90%] my-auto relative border-r border-[#98cc67]/30 flex flex-col justify-between ml-[2cqw]">
+           <div className="absolute left-[3cqw] top-[6cqw] origin-top-left -rotate-90 translate-y-[22cqw]">
+             <span className="font-ui text-[1.2cqw] uppercase tracking-[0.3em] font-bold text-neutral-400">CASE STUDY</span>
+           </div>
+           <div className="absolute bottom-[2cqw] left-[3cqw] flex items-center gap-[1cqw]">
+             <img src={`/api/proxy-image?url=${encodeURIComponent('https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2FBridge2Partners_Favicon.png?alt=media&token=8281d312-5968-4fa1-9e37-347481934b95')}`} alt="B2P Logo" className="w-[2cqw] h-[2cqw] object-contain opacity-50 contrast-200 grayscale" />
+             <span className="font-ui text-[0.9cqw] text-neutral-400/80 tracking-widest uppercase font-bold">Bridge2Partners</span>
+           </div>
+         </div>
+         <div className="w-[75%] h-full flex flex-col p-[6cqw] pt-[8cqw] justify-start">
+           <h2 className="font-display font-black text-[3.5cqw] leading-[1.05] tracking-tight mb-[4cqw] text-neutral-900">$80B Commercial Lending</h2>
+           
+           <div className="grid grid-cols-3 gap-[3cqw] font-sans text-[1.1cqw] text-neutral-600">
+              <div className="flex flex-col border-t-2 border-[#98cc67] pt-[2cqw] relative">
+                 <h3 className="font-ui font-black text-[1.2cqw] uppercase text-neutral-900 mb-[1cqw]">Client Challenge</h3>
+                 <p className="leading-relaxed">Massive technical debt across origination channels slowing downstream fulfillment to a crawl.</p>
+                 <span className="text-[#98cc67] font-bold mt-auto pt-[2cqw]">[40+ Interfaces Required]</span>
+              </div>
+              <div className="flex flex-col border-t-2 border-neutral-300 pt-[2cqw] relative">
+                 <h3 className="font-ui font-black text-[1.2cqw] uppercase text-neutral-900 mb-[1cqw]">Solution Delivered</h3>
+                 <p className="leading-relaxed">Designed and implemented the Simplified Middleware Layer wrapping core protocols in an agile REST envelope.</p>
+                 <span className="text-secondary font-bold mt-auto pt-[2cqw]">[Zero Downtime Migration]</span>
+              </div>
+              <div className="flex flex-col border-t-2 border-neutral-300 pt-[2cqw] relative">
+                 <h3 className="font-ui font-black text-[1.2cqw] uppercase text-neutral-900 mb-[1cqw]">Realized Value</h3>
+                 <p className="leading-relaxed">Achieved 100% automated decisioning on standard CRE loans while drastically reducing IT SLA loads.</p>
+                 <span className="text-primary font-bold mt-auto pt-[2cqw]">[$80B Balance Sheet Secured]</span>
+              </div>
+           </div>
+         </div>
+      </div>
+    )
+  },
+  {
+    id: 13,
+    title: "Case Study",
+    concept: "Prospectus Data Grid",
+    speakerNotes: "Use only if requested to validate experience.",
+    visualRules: "Light mode 25/75 grid. 3-column data architecture.",
+    aiPersona: "Varies",
+    aiObjection: "Show me proof.",
+    slideContent: (
+      <div className="w-full h-full bg-white relative flex flex-row group z-30 overflow-hidden text-neutral-900 border-2 border-neutral-100">
+         <div className="w-[25%] h-[90%] my-auto relative border-r border-[#98cc67]/30 flex flex-col justify-between ml-[2cqw]">
+           <div className="absolute left-[3cqw] top-[6cqw] origin-top-left -rotate-90 translate-y-[22cqw]">
+             <span className="font-ui text-[1.2cqw] uppercase tracking-[0.3em] font-bold text-neutral-400">CASE STUDY</span>
+           </div>
+           <div className="absolute bottom-[2cqw] left-[3cqw] flex items-center gap-[1cqw]">
+             <img src={`/api/proxy-image?url=${encodeURIComponent('https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2FBridge2Partners_Favicon.png?alt=media&token=8281d312-5968-4fa1-9e37-347481934b95')}`} alt="B2P Logo" className="w-[2cqw] h-[2cqw] object-contain opacity-50 contrast-200 grayscale" />
+             <span className="font-ui text-[0.9cqw] text-neutral-400/80 tracking-widest uppercase font-bold">Bridge2Partners</span>
+           </div>
+         </div>
+         <div className="w-[75%] h-full flex flex-col p-[6cqw] pt-[8cqw] justify-start">
+           <h2 className="font-display font-black text-[3.5cqw] leading-[1.05] tracking-tight mb-[4cqw] text-neutral-900">$32B Deposit Onboarding</h2>
+           
+           <div className="grid grid-cols-3 gap-[3cqw] font-sans text-[1.1cqw] text-neutral-600">
+              <div className="flex flex-col border-t-2 border-[#98cc67] pt-[2cqw] relative">
+                 <h3 className="font-ui font-black text-[1.2cqw] uppercase text-neutral-900 mb-[1cqw]">Client Challenge</h3>
+                 <p className="leading-relaxed">Customer acquisition was crippled by manual document validation resulting in 40% application drop-off.</p>
+                 <span className="text-[#98cc67] font-bold mt-auto pt-[2cqw]">[Severe Friction Points]</span>
+              </div>
+              <div className="flex flex-col border-t-2 border-neutral-300 pt-[2cqw] relative">
+                 <h3 className="font-ui font-black text-[1.2cqw] uppercase text-neutral-900 mb-[1cqw]">Solution Delivered</h3>
+                 <p className="leading-relaxed">Integrated complete eSign automation and live identity verification APIs via the parallel node structure.</p>
+                 <span className="text-secondary font-bold mt-auto pt-[2cqw]">[End-to-end DAO Pipeline]</span>
+              </div>
+              <div className="flex flex-col border-t-2 border-neutral-300 pt-[2cqw] relative">
+                 <h3 className="font-ui font-black text-[1.2cqw] uppercase text-neutral-900 mb-[1cqw]">Realized Value</h3>
+                 <p className="leading-relaxed">Application time plummeted from 4 days to 6 minutes, driving unprecedented conversion ratios.</p>
+                 <span className="text-primary font-bold mt-auto pt-[2cqw]">[Reduced Application Time]</span>
+              </div>
+           </div>
+         </div>
+      </div>
+    )
+  },
+  {
+    id: 14,
+    title: "Case Study",
+    concept: "Prospectus Data Grid",
+    speakerNotes: "Use only if requested to validate experience.",
+    visualRules: "Light mode 25/75 grid. 3-column data architecture.",
+    aiPersona: "Varies",
+    aiObjection: "Show me proof.",
+    slideContent: (
+      <div className="w-full h-full bg-white relative flex flex-row group z-30 overflow-hidden text-neutral-900 border-2 border-neutral-100">
+         <div className="w-[25%] h-[90%] my-auto relative border-r border-[#98cc67]/30 flex flex-col justify-between ml-[2cqw]">
+           <div className="absolute left-[3cqw] top-[6cqw] origin-top-left -rotate-90 translate-y-[22cqw]">
+             <span className="font-ui text-[1.2cqw] uppercase tracking-[0.3em] font-bold text-neutral-400">CASE STUDY</span>
+           </div>
+           <div className="absolute bottom-[2cqw] left-[3cqw] flex items-center gap-[1cqw]">
+             <img src={`/api/proxy-image?url=${encodeURIComponent('https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2FBridge2Partners_Favicon.png?alt=media&token=8281d312-5968-4fa1-9e37-347481934b95')}`} alt="B2P Logo" className="w-[2cqw] h-[2cqw] object-contain opacity-50 contrast-200 grayscale" />
+             <span className="font-ui text-[0.9cqw] text-neutral-400/80 tracking-widest uppercase font-bold">Bridge2Partners</span>
+           </div>
+         </div>
+         <div className="w-[75%] h-full flex flex-col p-[6cqw] pt-[8cqw] justify-start">
+           <h2 className="font-display font-black text-[3.5cqw] leading-[1.05] tracking-tight mb-[4cqw] text-neutral-900">$250B Post-Merger Integration</h2>
+           
+           <div className="grid grid-cols-3 gap-[3cqw] font-sans text-[1.1cqw] text-neutral-600">
+              <div className="flex flex-col border-t-2 border-[#98cc67] pt-[2cqw] relative">
+                 <h3 className="font-ui font-black text-[1.2cqw] uppercase text-neutral-900 mb-[1cqw]">Client Challenge</h3>
+                 <p className="leading-relaxed">Legally mandated day-one operational benchmarks required immediate consolidation of highly disparate banking cores.</p>
+                 <span className="text-[#98cc67] font-bold mt-auto pt-[2cqw]">[Legal Day One Complexity]</span>
+              </div>
+              <div className="flex flex-col border-t-2 border-neutral-300 pt-[2cqw] relative">
+                 <h3 className="font-ui font-black text-[1.2cqw] uppercase text-neutral-900 mb-[1cqw]">Solution Delivered</h3>
+                 <p className="leading-relaxed">Deployed advanced routing middleware to unify customer portals without touching the underlying warring databases.</p>
+                 <span className="text-secondary font-bold mt-auto pt-[2cqw]">[Shadow Node Routing]</span>
+              </div>
+              <div className="flex flex-col border-t-2 border-neutral-300 pt-[2cqw] relative">
+                 <h3 className="font-ui font-black text-[1.2cqw] uppercase text-neutral-900 mb-[1cqw]">Realized Value</h3>
+                 <p className="leading-relaxed">Eliminated massive potential attrition by creating seamless digital continuity across borders.</p>
+                 <span className="text-primary font-bold mt-auto pt-[2cqw]">[Optimized Call Center Volume]</span>
+              </div>
+           </div>
+         </div>
+      </div>
+    )
+  },
+  {
+    id: 15,
+    title: "Case Study",
+    concept: "Prospectus Data Grid",
+    speakerNotes: "Use only if requested to validate experience.",
+    visualRules: "Light mode 25/75 grid. 3-column data architecture.",
+    aiPersona: "Varies",
+    aiObjection: "Show me proof.",
+    slideContent: (
+      <div className="w-full h-full bg-white relative flex flex-row group z-30 overflow-hidden text-neutral-900 border-2 border-neutral-100">
+         <div className="w-[25%] h-[90%] my-auto relative border-r border-[#98cc67]/30 flex flex-col justify-between ml-[2cqw]">
+           <div className="absolute left-[3cqw] top-[6cqw] origin-top-left -rotate-90 translate-y-[22cqw]">
+             <span className="font-ui text-[1.2cqw] uppercase tracking-[0.3em] font-bold text-neutral-400">CASE STUDY</span>
+           </div>
+           <div className="absolute bottom-[2cqw] left-[3cqw] flex items-center gap-[1cqw]">
+             <img src={`/api/proxy-image?url=${encodeURIComponent('https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2FBridge2Partners_Favicon.png?alt=media&token=8281d312-5968-4fa1-9e37-347481934b95')}`} alt="B2P Logo" className="w-[2cqw] h-[2cqw] object-contain opacity-50 contrast-200 grayscale" />
+             <span className="font-ui text-[0.9cqw] text-neutral-400/80 tracking-widest uppercase font-bold">Bridge2Partners</span>
+           </div>
+         </div>
+         <div className="w-[75%] h-full flex flex-col p-[6cqw] pt-[8cqw] justify-start">
+           <h2 className="font-display font-black text-[3.5cqw] leading-[1.05] tracking-tight mb-[4cqw] text-neutral-900">Enterprise Program Management</h2>
+           
+           <div className="grid grid-cols-3 gap-[3cqw] font-sans text-[1.1cqw] text-neutral-600">
+              <div className="flex flex-col border-t-2 border-[#98cc67] pt-[2cqw] relative">
+                 <h3 className="font-ui font-black text-[1.2cqw] uppercase text-neutral-900 mb-[1cqw]">Client Challenge</h3>
+                 <p className="leading-relaxed">A major CRE Lender lacked the structural agility to execute parallel integrations, causing massive budget overruns.</p>
+                 <span className="text-[#98cc67] font-bold mt-auto pt-[2cqw]">[Vendor Sprawl]</span>
+              </div>
+              <div className="flex flex-col border-t-2 border-neutral-300 pt-[2cqw] relative">
+                 <h3 className="font-ui font-black text-[1.2cqw] uppercase text-neutral-900 mb-[1cqw]">Solution Delivered</h3>
+                 <p className="leading-relaxed">Installed a robust PMO and Governance structure enforcing strict agile ceremonies and strategic vendor alignment.</p>
+                 <span className="text-secondary font-bold mt-auto pt-[2cqw]">[PMO Execution Deployed]</span>
+              </div>
+              <div className="flex flex-col border-t-2 border-neutral-300 pt-[2cqw] relative">
+                 <h3 className="font-ui font-black text-[1.2cqw] uppercase text-neutral-900 mb-[1cqw]">Realized Value</h3>
+                 <p className="leading-relaxed">Saved millions in wasted engineering cycles by forcing architectural compliance and parallel construction.</p>
+                 <span className="text-primary font-bold mt-auto pt-[2cqw]">[Unified Governance Structure]</span>
+              </div>
+           </div>
          </div>
       </div>
     )
   }
+
 ];
