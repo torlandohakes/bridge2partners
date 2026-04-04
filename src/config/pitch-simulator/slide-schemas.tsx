@@ -532,7 +532,7 @@ export const getPitchSlides = (slideCopies: string[], customBg: string | null) =
     aiPersona: "All Deciders",
     aiObjection: "N/A",
     slideContent: (
-      <div className="w-full h-full bg-[#001b15] relative flex flex-col items-center justify-center overflow-hidden z-30">
+      <div className="w-full h-full bg-white relative flex flex-col items-center justify-center overflow-hidden z-30">
          <div className="flex flex-col items-center justify-center">
            <img src={`/api/proxy-image?url=${encodeURIComponent('https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2FBridge2Partners_Brand_Logo_v7.webp?alt=media&token=a90040bc-3446-408d-8794-cab07568de66')}`} alt="B2P Brand Logo" className="w-[24cqw] object-contain drop-shadow-sm" />
          </div>
