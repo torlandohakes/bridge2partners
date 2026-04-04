@@ -25,7 +25,7 @@ import {
   Eye,
   EyeOff,
   ImagePlus,
-  X
+  X,
   MonitorSmartphone,
   CreditCard,
   Database,
