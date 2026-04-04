@@ -44,7 +44,7 @@ const pitchSlides = [
            className="absolute inset-0 pointer-events-none z-0" 
            style={{
              backgroundImage: `
-               linear-gradient(110deg, rgba(10, 17, 15, 0.95) 0%, rgba(10, 17, 15, 0.4) 20%, transparent 60%),
+               linear-gradient(110deg, rgba(10, 17, 15, 0.95) 0%, rgba(10, 17, 15, 0.4) 40%, transparent 80%),
                linear-gradient(20deg, rgba(4, 43, 38, 0.9) 0%, rgba(4, 43, 38, 0.5) 45%, transparent 100%)
              `
            }}
