@@ -180,16 +180,16 @@ const getPitchSlides = (slideCopies: string[], customBg: string | null) => [
          )}
 
          {/* The Silhouette Schematic */}
-         <div className="absolute bottom-[6cqw] right-[4cqw] w-[35cqw] h-[10cqw] z-10 mix-blend-screen pointer-events-none flex items-end justify-end">
+         <div className="absolute bottom-[5.5cqw] right-[4cqw] w-[35cqw] h-[10cqw] z-10 mix-blend-screen pointer-events-none flex items-end justify-end">
            <img 
-             src="/images/slide_3_bridge.png" 
+             src="/images/slide_3_bridge_v2.png" 
              alt="Bridge Architectural Schematic"
              className="w-full h-full object-contain object-right-bottom opacity-90 invert sepia hue-rotate-180 saturate-200 brightness-110"
            />
          </div>
 
-         {/* The Crisp Luminous Line Anchor */}
-         <div className="absolute bottom-[5.5cqw] left-0 w-full h-[0.15cqw] bg-primary z-20 shadow-[0_0_10px_rgba(152,204,103,0.5)]" />
+         {/* The Crisp Secondary Line Anchor */}
+         <div className="absolute bottom-[5.5cqw] left-0 w-full h-[0.15cqw] bg-secondary z-20 shadow-[0_0_10px_rgba(0,150,119,0.5)]" />
          
          {/* Center-Left Typography */}
          <div className="relative z-30 w-[60cqw] flex flex-col items-start gap-[1.5cqw] b2p-narrative-text transition-opacity duration-300 overflow-visible text-left">
