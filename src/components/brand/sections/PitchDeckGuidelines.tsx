@@ -40,11 +40,19 @@ const getPitchSlides = (slideCopies: string[], customBg: string | null) => [
     aiObjection: "Look, we've integrated three banks in the last five years using legacy methods. It's slow, but it works. Why do I need to change?",
     slideContent: (
       <div className="w-full h-full bg-[#0a110f] relative flex flex-col justify-center p-[6cqw] overflow-hidden group z-30">
-         {/* Remote Image Background Layer */}
-         <div 
-           className="absolute inset-0 bg-cover bg-right bg-no-repeat opacity-50 mix-blend-luminosity z-0" 
-           style={{ backgroundImage: customBg ? `url(${customBg})` : `url("/api/proxy-image?url=${encodeURIComponent('https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2Fbridge2partners-hero-1.webp?alt=media&token=bb05e1e4-8f2d-4a75-8880-ddd7bbfa2797')}")` }}
-         />
+         {/* Background Image Layer */}
+         {customBg ? (
+           <img 
+             src={customBg} 
+             alt="Custom Background" 
+             className="absolute inset-0 w-full h-full object-cover object-right opacity-50 mix-blend-luminosity z-0" 
+           />
+         ) : (
+           <div 
+             className="absolute inset-0 bg-cover bg-right bg-no-repeat opacity-50 mix-blend-luminosity z-0" 
+             style={{ backgroundImage: `url("/api/proxy-image?url=${encodeURIComponent('https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2Fbridge2partners-hero-1.webp?alt=media&token=bb05e1e4-8f2d-4a75-8880-ddd7bbfa2797')}")` }}
+           />
+         )}
 
 
          {/* Organic Cinematic Background Overlay */}
@@ -98,10 +106,18 @@ const getPitchSlides = (slideCopies: string[], customBg: string | null) => [
     slideContent: (
       <div className="w-full h-full bg-[#050908] relative flex flex-col justify-center p-[6cqw] overflow-hidden group z-30">
          {/* Background Image Layer */}
-         <div 
-           className="absolute inset-0 bg-cover bg-center bg-no-repeat z-0" 
-           style={{ backgroundImage: customBg ? `url(${customBg})` : `url("/images/slide_2_chains.png")` }}
-         />
+         {customBg ? (
+           <img 
+             src={customBg} 
+             alt="Custom Background" 
+             className="absolute inset-0 w-full h-full object-cover object-center z-0" 
+           />
+         ) : (
+           <div 
+             className="absolute inset-0 bg-cover bg-center bg-no-repeat z-0" 
+             style={{ backgroundImage: `url("/images/slide_2_chains.png")` }}
+           />
+         )}
 
          {/* Cinematic Background Overlay */}
          <div 
