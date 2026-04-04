@@ -72,7 +72,7 @@ const getPitchSlides = (slideCopies: string[], customBg: string | null) => [
               {slideCopies[0].split('\n').map((line, index, array) => {
                  const isLastLine = index === array.length - 1 && line.trim() !== "";
                  return (
-                   <span key={index} className={cn(isLastLine ? "text-transparent bg-clip-text bg-gradient-to-r from-[#98cc67] to-[#7bb050] drop-shadow-[0_0_20px_rgba(152,204,103,0.3)] leading-normal" : "")}>
+                   <span key={index} className={cn(isLastLine ? "text-transparent bg-clip-text bg-gradient-to-r from-secondary to-secondary/70 drop-shadow-[0_0_20px_rgba(0,150,119,0.3)] leading-normal" : "")}>
                      {line}
                    </span>
                  );
@@ -136,7 +136,7 @@ const getPitchSlides = (slideCopies: string[], customBg: string | null) => [
               {slideCopies[1].split('\n').map((line, index, array) => {
                  const isLastLine = index === array.length - 1 && line.trim() !== "";
                  return (
-                   <span key={index} className={cn(isLastLine ? "text-transparent bg-clip-text bg-gradient-to-r from-[#98cc67] to-[#7bb050] drop-shadow-[0_0_20px_rgba(152,204,103,0.3)] leading-normal" : "")}>
+                   <span key={index} className={cn(isLastLine ? "text-transparent bg-clip-text bg-gradient-to-r from-secondary to-secondary/70 drop-shadow-[0_0_20px_rgba(0,150,119,0.3)] leading-normal" : "")}>
                      {line}
                    </span>
                  );
@@ -164,29 +164,38 @@ const getPitchSlides = (slideCopies: string[], customBg: string | null) => [
     title: "The Reframe",
     concept: "The Paradigm Shift. They are terrified of a 'rip and replace' demolition. Relieve that anxiety instantly. You are shifting their mental model from risky destruction to a safe, surgical parallel build.",
     speakerNotes: "Drop the pitch tone and speak like a partner. 'You don't need a wrecking ball, and you don't need an army. We act as your elite task force. Your legacy systems keep making money, while we surgically build your modern architecture alongside it.'",
-    visualRules: "Clean and authoritative. Perfectly centered typography anchoring the concept of precision engineering over brute-force destruction.",
+    visualRules: "Clean, minimalist design transitioning from weight to precision. Center-left typography with an anchoring horizontal line and a dark silhouette schematic illustrating parallel engineering.",
     aiPersona: "Chief Information Officer",
     aiObjection: "You're oversimplifying. We have 40+ legacy systems tied directly into our core banking platform. A clean 'hub and spoke' is a consultant's pipe dream.",
     slideContent: (
-      <div className="w-full h-full bg-neutral-950 relative flex flex-col items-center justify-center p-[6cqw] overflow-hidden group z-30">
-         {/* Background Image Layer */}
+      <div className="w-full h-full bg-neutral-900 relative flex flex-col justify-center p-[6cqw] pl-[8cqw] overflow-hidden group z-30">
+         {/* Background Layer: Gradient Sweep with Conditional Custombg Handling */}
          {customBg ? (
-           <img 
-             src={customBg} 
-             alt="Custom Background" 
-             className="absolute inset-0 w-full h-full object-cover object-center z-0" 
-           />
-         ) : null}
+           <div className="absolute inset-0 z-0">
+             <img src={customBg} className="w-full h-full object-cover object-center" />
+             <div className="absolute inset-0 bg-gradient-to-br from-neutral-700 via-neutral-900 to-neutral-950 opacity-70 mix-blend-multiply" />
+           </div>
+         ) : (
+           <div className="absolute inset-0 bg-gradient-to-br from-neutral-800 via-neutral-900 to-neutral-950 z-0" />
+         )}
 
-         {/* Cinematic Background Overlay */}
-         <div 
-           className="absolute inset-0 w-full h-full min-w-full min-h-full pointer-events-none z-0 mix-blend-multiply bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-neutral-700/70 via-neutral-900/90 to-neutral-950/95" 
-         />
+         {/* The Silhouette Schematic */}
+         <div className="absolute bottom-[6.5cqw] right-0 w-[55cqw] h-[45cqw] z-10 mix-blend-multiply pointer-events-none flex items-end justify-end">
+           <img 
+             src="/images/slide_3_bridge.png" 
+             alt="Bridge Architectural Schematic"
+             className="w-full h-full object-contain object-bottom opacity-80 grayscale contrast-125"
+           />
+         </div>
+
+         {/* The Crisp Luminous Line Anchor */}
+         <div className="absolute bottom-[5.5cqw] left-0 w-full h-[0.15cqw] bg-primary z-20 shadow-[0_0_10px_rgba(152,204,103,0.5)]" />
          
-         {/* Centered Typography */}
-         <div className="relative z-10 w-[85cqw] flex flex-col items-center gap-[1.5cqw] b2p-narrative-text transition-opacity duration-300 overflow-visible text-center">
+         {/* Center-Left Typography */}
+         <div className="relative z-30 w-[60cqw] flex flex-col items-start gap-[1.5cqw] b2p-narrative-text transition-opacity duration-300 overflow-visible text-left">
             <h2 className="font-display font-black text-[5cqw] tracking-tight text-transparent bg-clip-text bg-gradient-to-br from-white to-neutral-300 drop-shadow-md flex flex-col leading-[1.1] overflow-visible pb-0">
-              {slideCopies[2].split('\n').map((line, index, array) => {
+              {slideCopies[2].split('
+').map((line, index, array) => {
                  const isLastLine = index === array.length - 1 && line.trim() !== "";
                  return (
                    <span key={index} className={cn(isLastLine ? "text-transparent bg-clip-text bg-gradient-to-r from-secondary to-secondary/70 drop-shadow-[0_0_20px_rgba(0,150,119,0.3)] leading-normal" : "")}>
@@ -198,20 +207,21 @@ const getPitchSlides = (slideCopies: string[], customBg: string | null) => [
          </div>
 
          {/* Custom Slide Anchors */}
-         <div className="absolute bottom-[3cqw] left-[4cqw] flex items-center gap-[1cqw] z-20">
+         <div className="absolute bottom-[2cqw] left-[4cqw] flex items-center gap-[1cqw] z-30">
            <img 
              src={`/api/proxy-image?url=${encodeURIComponent('https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2FBridge2Partners_Favicon.png?alt=media&token=8281d312-5968-4fa1-9e37-347481934b95')}`}
              alt="B2P Logo" 
-             className="w-[2.5cqw] h-[2.5cqw] rounded-[0.5cqw] opacity-90 shadow-[0_0_15px_rgba(152,204,103,0.2)]"
+             className="w-[2cqw] h-[2cqw] rounded-[0.4cqw] opacity-90 shadow-[0_0_15px_rgba(152,204,103,0.2)]"
            />
-           <span className="font-ui text-[1.2cqw] text-white/50 tracking-widest uppercase font-bold">Bridge2Partners</span>
+           <span className="font-ui text-[1cqw] text-white/50 tracking-widest uppercase font-bold">Bridge2Partners</span>
          </div>
-         <div className="absolute bottom-[3cqw] right-[4cqw] font-ui text-[1.2cqw] text-white/50 tracking-widest font-bold z-20">
+         <div className="absolute bottom-[2cqw] right-[4cqw] font-ui text-[1cqw] text-white/50 tracking-widest font-bold z-30">
            03
          </div>
       </div>
     )
   },
+
   {
     id: 4,
     title: "The Promised Land",
