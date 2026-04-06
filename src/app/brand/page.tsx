@@ -65,7 +65,7 @@ export default function BrandDashboard() {
         </aside>
 
         {/* Tab Router Content Canvas */}
-        <main className="flex-1 w-full min-w-0 px-5 lg:px-[60px] py-8 overflow-y-auto custom-scrollbar relative scroll-smooth h-full">
+        <main className="flex-1 w-full min-w-0 px-5 lg:pl-[60px] lg:pr-[100px] py-8 overflow-y-auto custom-scrollbar relative scroll-smooth h-full">
           <div className="w-full max-w-none pb-32">
             <Suspense fallback={<div className="flex-1 animate-pulse bg-neutral/5 h-[80vh] rounded-xl border border-border/10 shadow-sm" />}>
               <TabContent />
