@@ -26,7 +26,7 @@ export function SidebarNav({ className }: { className?: string }) {
       className={cn(
         "fixed bottom-0 left-0 w-full z-50 flex items-center overflow-x-auto overscroll-x-contain pb-6 pt-3 px-4 bg-white/85 backdrop-blur-xl border-t border-neutral/10 shadow-[0_-10px_40px_rgba(0,0,0,0.05)]",
         "[-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden",
-        "md:sticky md:top-12 md:bottom-auto md:left-auto md:z-10 md:flex-col md:items-stretch md:overflow-visible md:bg-transparent md:p-0 md:backdrop-blur-none md:border-none md:shadow-none md:pb-0",
+        "md:static md:bottom-auto md:left-auto md:z-auto md:flex-col md:items-stretch md:overflow-visible md:bg-transparent md:p-0 md:backdrop-blur-none md:border-none md:shadow-none md:pb-0",
         isExpanded ? "md:w-64" : "md:w-[72px]",
         "shrink-0 transition-all duration-300 ease-[cubic-bezier(0.23,1,0.32,1)]",
         className

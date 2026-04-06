@@ -129,7 +129,7 @@ export function PitchDeckGuidelines() {
   };
 
   return (
-    <section className="animate-in fade-in duration-500 flex flex-col gap-8 w-full max-w-7xl mx-auto">
+    <section className="w-full flex flex-col gap-8 animate-in fade-in duration-500">
       
       {/* Header Context */}
       <div className="border-b border-primary/10 pb-6 w-full flex flex-col gap-2">
@@ -145,7 +145,7 @@ export function PitchDeckGuidelines() {
       {/* Simulator Interface */}
       <div className={cn(
         "bg-white/40 backdrop-blur-sm border border-primary/10 rounded-2xl overflow-hidden shadow-xl transition-all duration-300",
-        isFullscreen ? "fixed inset-0 z-50 flex flex-col landscape:flex-row h-screen w-screen overflow-hidden bg-neutral-50/95 backdrop-blur" : "flex flex-col lg:flex-row relative min-h-[600px]"
+        isFullscreen ? "fixed inset-0 z-[100] flex flex-col landscape:flex-row h-screen w-screen overflow-hidden bg-neutral-50/95 backdrop-blur" : "flex flex-col lg:flex-row relative min-h-[600px]"
       )}>
         
         {/* Left Stage: 16:9 Slide Viewer (60-70%) */}

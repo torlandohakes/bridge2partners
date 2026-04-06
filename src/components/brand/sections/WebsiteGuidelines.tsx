@@ -43,7 +43,7 @@ export function WebsiteGuidelines() {
   const [expandedTrigger, setExpandedTrigger] = useState<string | null>("stakes");
 
   return (
-    <section id="website-guidelines" className="space-y-16 pt-8 scroll-mt-20">
+    <section id="website-guidelines" className="w-full space-y-16 animate-in fade-in duration-500">
       
       {/* 1. The Header & Strategy */}
       <div className="space-y-4 border-b border-primary/10 pb-8">

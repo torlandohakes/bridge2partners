@@ -2,7 +2,7 @@ import { HelpCircle, CheckCircle, AlertTriangle, XCircle, Download } from "lucid
 
 export function VisualIdentity() {
   return (
-    <section id="visual-identity" className="space-y-8 pt-8 scroll-mt-20">
+    <section id="visual-identity" className="w-full space-y-12 animate-in fade-in duration-500">
       <div className="space-y-2 border-b border-primary/10 pb-4">
         <h2 className="text-3xl font-semibold tracking-tighter text-primary font-heading">
           Visual Identity

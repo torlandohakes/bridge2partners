@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
-import { ChevronDown, Calendar, Users, Target, CheckCircle2, QrCode, Mail, Video, LayoutTemplate, Coffee, ArrowRight, Send, Briefcase } from "lucide-react";
+import { ChevronDown, Calendar, Users, Target, CheckCircle2, QrCode, Mail, Video, LayoutTemplate, Coffee, ArrowRight, Send, Briefcase, Download } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 // -------------------------------------------------------------
@@ -306,10 +306,10 @@ export function EventPresenceGuidelines() {
   const payload = EVENT_MATRIX[activeTier][activeStep];
 
   return (
-    <section id="event-presence-guidelines" className="space-y-12 pt-8 scroll-mt-20">
+    <section id="event-presence-guidelines" className="w-full space-y-12 animate-in fade-in duration-500">
       
       {/* 1. Header Area */}
-      <div className="space-y-4 border-b border-primary/10 pb-8">
+      <div className="space-y-3 pb-2">
         <h2 className="text-3xl font-semibold tracking-tighter text-primary font-heading">
           Event Presence & Field Operations
         </h2>
@@ -318,13 +318,13 @@ export function EventPresenceGuidelines() {
         </p>
       </div>
 
-      {/* 2. Macro Filter (Tiers) */}
-      <div className="w-full flex justify-center">
+      {/* 2. Macro Filter (Tiers) - Underline Tabs */}
+      <div className="w-full mb-8">
          <Tabs value={activeTier} onValueChange={(val) => handleTierChange(val as EventTier)} className="w-full">
-            <TabsList className="grid grid-cols-3 w-full bg-white/40 dark:bg-background/40 backdrop-blur-xl border border-primary/10 rounded-full h-auto p-1 shadow-sm">
-               <TabsTrigger value="tradeshows" className="rounded-full py-2.5 text-xs sm:text-sm font-semibold tracking-wide data-[state=active]:bg-primary data-[state=active]:text-white data-[state=active]:shadow-md transition-all">🎪 Tradeshows</TabsTrigger>
-               <TabsTrigger value="roundtables" className="rounded-full py-2.5 text-xs sm:text-sm font-semibold tracking-wide data-[state=active]:bg-primary data-[state=active]:text-white data-[state=active]:shadow-md transition-all">🎙️ Roundtables</TabsTrigger>
-               <TabsTrigger value="vip" className="rounded-full py-2.5 text-xs sm:text-sm font-semibold tracking-wide data-[state=active]:bg-primary data-[state=active]:text-white data-[state=active]:shadow-md transition-all">🍸 VIP Experiences</TabsTrigger>
+            <TabsList className="flex items-center justify-start gap-8 border-b border-primary/10 w-full rounded-none bg-transparent p-0 h-auto overflow-x-auto custom-scrollbar">
+               <TabsTrigger value="tradeshows" className="rounded-none border-b-2 border-transparent py-3 px-0 text-sm md:text-base font-semibold tracking-wide data-[state=active]:border-primary data-[state=active]:text-primary data-[state=active]:shadow-none data-[state=active]:bg-transparent transition-all text-muted-foreground hover:text-foreground">🎪 Tradeshows</TabsTrigger>
+               <TabsTrigger value="roundtables" className="rounded-none border-b-2 border-transparent py-3 px-0 text-sm md:text-base font-semibold tracking-wide data-[state=active]:border-primary data-[state=active]:text-primary data-[state=active]:shadow-none data-[state=active]:bg-transparent transition-all text-muted-foreground hover:text-foreground">🎙️ Roundtables</TabsTrigger>
+               <TabsTrigger value="vip" className="rounded-none border-b-2 border-transparent py-3 px-0 text-sm md:text-base font-semibold tracking-wide data-[state=active]:border-primary data-[state=active]:text-primary data-[state=active]:shadow-none data-[state=active]:bg-transparent transition-all text-muted-foreground hover:text-foreground">🍸 VIP Experiences</TabsTrigger>
             </TabsList>
          </Tabs>
       </div>
@@ -332,25 +332,30 @@ export function EventPresenceGuidelines() {
       {/* 3. The Playbook Matrix Payload */}
       <div className="flex flex-col space-y-8 animate-in fade-in zoom-in-95 duration-500" key={activeTier}>
          
-         {/* Internal Timeline Stepper */}
-         <div className="flex items-center justify-between bg-neutral-50/50 p-2 rounded-xl border border-neutral-200">
-            {[{id: "pre", label: "Pre-Event", date: "T-Minus 30"}, {id: "live", label: "Live Execution", date: "The Floor"}, {id: "post", label: "Post-Event", date: "The Sequence"}].map((step, idx) => {
-               const isActive = activeStep === step.id;
-               return (
-                 <button 
-                   key={step.id}
-                   onClick={() => handleStepChange(step.id as MatrixStep)}
-                   className={cn(
-                      "flex-1 flex flex-col items-center justify-center p-3 sm:py-4 rounded-lg transition-all border outline-none group focus-visible:ring-2 focus-visible:ring-primary/50 relative overflow-hidden",
-                      isActive ? "bg-white border-primary/20 shadow-sm" : "border-transparent hover:bg-neutral-100/50"
-                   )}
-                 >
-                    {isActive && <div className="absolute top-0 inset-x-0 h-1 bg-primary" />}
-                    <span className={cn("text-[9px] sm:text-[10px] font-mono tracking-widest uppercase mb-1 font-bold", isActive ? "text-primary" : "text-muted-foreground group-hover:text-foreground/70")}>{step.date}</span>
-                    <span className={cn("text-xs sm:text-sm font-ui font-semibold", isActive ? "text-foreground" : "text-muted-foreground group-hover:text-foreground")}>{step.label}</span>
-                 </button>
-               )
-            })}
+         {/* Internal Timeline Stepper (Glass Navigation Pill) */}
+         <div className="w-full mb-8 flex justify-start">
+            <div className="flex items-center gap-1 sm:gap-2 px-2.5 py-2 border border-white/40 dark:border-primary/20 bg-white/30 dark:bg-background/40 backdrop-blur-xl shadow-md rounded-full w-max">
+               <span className="font-ui font-bold text-[10px] md:text-xs uppercase tracking-widest mx-2 text-foreground/50 hidden sm:inline-block">Phase</span>
+               {[{id: "pre", label: "Pre-Event", date: "T-Minus 30"}, {id: "live", label: "Live Execution", date: "The Floor"}, {id: "post", label: "Post-Event", date: "The Sequence"}].map((step, idx) => {
+                  const isActive = activeStep === step.id;
+                  return (
+                    <button 
+                      key={step.id}
+                      onClick={() => handleStepChange(step.id as MatrixStep)}
+                      className={cn(
+                         "flex items-center gap-2.5 rounded-full py-2 px-4 transition-all outline-none focus-visible:ring-2 focus-visible:ring-primary/50",
+                         isActive 
+                           ? "bg-primary text-white shadow-sm" 
+                           : "text-foreground/70 hover:bg-white/50 dark:hover:bg-neutral-800 hover:text-foreground"
+                      )}
+                    >
+                       <span className={cn("text-[9px] font-mono tracking-widest uppercase font-bold hidden md:inline-block", isActive ? "text-white/70" : "text-muted-foreground")}>{step.date}</span>
+                       <div className={cn("w-1 h-1 rounded-full hidden md:block", isActive ? "bg-white/50" : "bg-neutral-300")} />
+                       <span className="text-xs md:text-sm font-ui font-semibold">{step.label}</span>
+                    </button>
+                  )
+               })}
+            </div>
          </div>
 
          {/* 60/40 Split Content Area */}

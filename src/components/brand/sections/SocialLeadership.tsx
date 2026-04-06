@@ -34,7 +34,7 @@ export function SocialLeadership() {
   const [expandedTrigger, setExpandedTrigger] = useState<string | null>("ingestion");
 
   return (
-    <section id="social-leadership" className="space-y-16 pt-8 scroll-mt-20">
+    <section id="social-leadership" className="w-full space-y-16 animate-in fade-in duration-500">
       
       {/* 1. The Header */}
       <div className="space-y-4 border-b border-primary/10 pb-8">

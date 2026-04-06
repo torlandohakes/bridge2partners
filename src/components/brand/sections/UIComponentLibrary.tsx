@@ -32,7 +32,7 @@ function ShowcaseBlock({ title, promptId, children }: { title: string; promptId:
 
 export function UIComponentLibrary() {
   return (
-    <section id="ui-component-library" className="space-y-12 pt-8 pb-32 scroll-mt-20 max-w-6xl mx-auto">
+    <section id="ui-component-library" className="w-full space-y-12 animate-in fade-in duration-500">
       <div className="space-y-4 border-b border-primary/10 pb-6">
         <h2 className="text-4xl font-semibold tracking-tighter text-primary font-display">
           UI Component Library
@@ -131,6 +131,20 @@ export function UIComponentLibrary() {
                <TabsTrigger value="metrics">Metrics</TabsTrigger>
              </TabsList>
            </Tabs>
+        </ShowcaseBlock>
+
+        <ShowcaseBlock title="Underline Navigation Tabs" promptId="[Nav: Underline Tabs]">
+           <div className="flex items-center gap-6 border-b border-border/40 w-full max-w-sm px-2">
+              <div className="pb-3 border-b-2 border-primary text-sm font-semibold text-primary cursor-pointer transition-all">
+                 Overview
+              </div>
+              <div className="pb-3 border-b-2 border-transparent text-sm font-medium text-muted-foreground hover:text-foreground transition-all cursor-pointer">
+                 Integrations
+              </div>
+              <div className="pb-3 border-b-2 border-transparent text-sm font-medium text-muted-foreground hover:text-foreground transition-all cursor-pointer">
+                 Analytics
+              </div>
+           </div>
         </ShowcaseBlock>
 
         <ShowcaseBlock title="Dropdown Menu Mock" promptId="[Nav: Dropdown Menu]">

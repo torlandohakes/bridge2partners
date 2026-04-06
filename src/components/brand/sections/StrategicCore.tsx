@@ -63,7 +63,7 @@ export function StrategicCore() {
   const Icon = activePrinciple.icon;
 
   return (
-    <section className="animate-in fade-in duration-500 space-y-12">
+    <section className="w-full space-y-12 animate-in fade-in duration-500">
       
       <div className="space-y-4 max-w-4xl border-b border-primary/10 pb-6">
         <h2 className="text-3xl font-semibold tracking-tighter text-primary font-heading">
