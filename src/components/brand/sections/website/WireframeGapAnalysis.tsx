@@ -3,7 +3,7 @@ import { Database, BarChart3 } from "lucide-react";
 export function WireframeGapAnalysis() {
   return (
     <div className="bg-white/60 backdrop-blur-md rounded-xl border border-neutral/10 p-6 shadow-sm space-y-6 flex-1 flex flex-col">
-      <h4 className="font-ui font-bold text-primary tracking-tight pb-2 border-b border-neutral/10 shrink-0">Wireframe 3: The Gap Analysis Tool</h4>
+      <h4 className="font-ui font-bold text-primary tracking-tight pb-2 border-b border-neutral/10 shrink-0">Wireframe 3: Gap Analysis/Discovery Tool</h4>
       
       <div className="bg-neutral/5 rounded-lg p-6 space-y-6 font-mono text-xs text-neutral-700 uppercase tracking-wider font-semibold flex flex-col justify-center flex-1 overflow-hidden">
         {/* Central Interactive Card */}

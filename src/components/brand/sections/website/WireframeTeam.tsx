@@ -3,7 +3,7 @@ import { Users, ImageIcon } from "lucide-react";
 export function WireframeTeam() {
   return (
     <div className="bg-white/60 backdrop-blur-md rounded-xl border border-neutral/10 p-6 shadow-sm space-y-6 flex flex-col">
-      <h4 className="font-ui font-bold text-primary tracking-tight pb-2 border-b border-neutral/10 shrink-0">Wireframe 5: The Institutional Team Page</h4>
+      <h4 className="font-ui font-bold text-primary tracking-tight pb-2 border-b border-neutral/10 shrink-0">Wireframe 5: Team Page</h4>
       
       <div className="bg-neutral/5 rounded-lg p-5 space-y-5 font-mono text-xs text-neutral-700 uppercase tracking-wider font-semibold flex-1 flex flex-col">
         <div className="border-dashed border-2 border-neutral-300 flex items-center justify-center p-4 rounded bg-black/5 shrink-0">

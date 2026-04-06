@@ -3,7 +3,7 @@ import { Smartphone, UserCircle, Download, Mail, Phone, Globe } from "lucide-rea
 export function WireframeBusinessCard() {
   return (
     <div className="bg-white/60 backdrop-blur-md rounded-xl border border-neutral/10 p-6 shadow-sm space-y-6">
-      <h4 className="font-ui font-bold text-primary tracking-tight pb-2 border-b border-neutral/10">Wireframe 6: The Digital Business Card (Mobile-First)</h4>
+      <h4 className="font-ui font-bold text-primary tracking-tight pb-2 border-b border-neutral/10">Wireframe 6: Digital Business Cards</h4>
       
       <div className="bg-neutral/5 rounded-lg p-5 flex items-center justify-center h-[500px]">
          {/* Mobile Container */}

@@ -3,7 +3,7 @@ import { ShieldCheck, Server, Code, TableProperties } from "lucide-react";
 export function WireframeProcurement() {
   return (
     <div className="bg-white/60 backdrop-blur-md rounded-xl border border-neutral/10 p-6 shadow-sm space-y-6">
-      <h4 className="font-ui font-bold text-primary tracking-tight pb-2 border-b border-neutral/10">Wireframe 4: The Procurement Vanguard</h4>
+      <h4 className="font-ui font-bold text-primary tracking-tight pb-2 border-b border-neutral/10">Wireframe 4: Procurement Page</h4>
       
       <div className="bg-neutral/5 rounded-lg p-5 space-y-5 font-mono text-xs text-neutral-700 uppercase tracking-wider font-semibold">
         {/* Top Block */}

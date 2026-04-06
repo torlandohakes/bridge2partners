@@ -4,7 +4,7 @@ import Image from "next/image";
 export function WireframeHomepage() {
   return (
     <div className="bg-white/60 backdrop-blur-md rounded-xl border border-neutral/10 p-6 shadow-sm space-y-6">
-      <h4 className="font-ui font-bold text-primary tracking-tight pb-2 border-b border-neutral/10">Wireframe 1: The Homepage (Category Entry Point)</h4>
+      <h4 className="font-ui font-bold text-primary tracking-tight pb-2 border-b border-neutral/10">Wireframe 1: Homepage</h4>
       
       <div className="bg-neutral/5 rounded-lg p-5 space-y-4 font-mono text-xs text-neutral-700 uppercase tracking-wider font-semibold">
         {/* Hero Block / Production Asset Preview */}

@@ -50,14 +50,17 @@ export function WebsiteGuidelines() {
         <h2 className="text-3xl font-semibold tracking-tighter text-primary font-heading">
           Website Wireframes & BrandScript
         </h2>
-        <p className="text-lg text-muted-foreground font-sans max-w-3xl leading-relaxed">
-          The Bridge2Partners website operates on a Hub-and-Spoke StoryBrand methodology. Our Hub is Change Management & Digital Transformation. Our Category Entry Point (the burning pain) is M&A integration.
-        </p>
+        <div className="flex flex-col gap-2 mt-2">
+           <span className="text-xs font-mono font-bold tracking-[0.2em] uppercase text-primary">Website Core Purpose</span>
+           <p className="text-lg text-slate-800 dark:text-slate-200 font-sans max-w-3xl leading-relaxed font-medium">
+             Executive and Institutional Validation. The site exists to prove to the market that Bridge2Partners possesses specialized human expertise, a future-focused methodology, and uncompromising adherence to enterprise banking compliance. It is engineered to satisfy the most stringent procurement standards.
+           </p>
+        </div>
       </div>
 
-      {/* 2. The BrandScript Matrix (Focus Index Accordion) */}
+      {/* 2. B2P BrandScript (Focus Index Accordion) */}
       <div className="space-y-6 pt-4">
-        <h3 className="text-xl font-semibold font-heading text-foreground">The BrandScript Matrix</h3>
+        <h3 className="text-xl font-semibold font-heading text-foreground">B2P BrandScript</h3>
         
         <div className="bg-white/40 backdrop-blur-md rounded-xl border border-primary/10 p-2 shadow-sm flex flex-col gap-1 inline-block w-full">
           {brandScriptTriggers.map((trigger) => {
