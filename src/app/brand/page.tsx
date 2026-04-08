@@ -11,6 +11,7 @@ import { PitchDeckGuidelines } from "@/components/brand/sections/PitchDeckGuidel
 import { EventPresenceGuidelines } from "@/components/brand/sections/EventPresenceGuidelines";
 import { WebsiteGuidelines } from "@/components/brand/sections/WebsiteGuidelines";
 import { SocialLeadership } from "@/components/brand/sections/SocialLeadership";
+import { MessagingArchitecture } from "@/components/brand/sections/MessagingArchitecture";
 
 function TabContent() {
   const searchParams = useSearchParams();
@@ -19,6 +20,7 @@ function TabContent() {
   return (
     <main className="min-w-0 flex-1">
       {tab === "strategic-core" && <StrategicCore />}
+      {tab === "messaging" && <MessagingArchitecture />}
       {tab === "visual-identity" && <VisualIdentity />}
       {tab === "ui-component-library" && <UIComponentLibrary />}
       {tab === "pitch-deck-guidelines" && <PitchDeckGuidelines />}

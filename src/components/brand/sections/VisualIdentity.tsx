@@ -1,4 +1,6 @@
 import { HelpCircle, CheckCircle, AlertTriangle, XCircle, Download } from "lucide-react";
+import { colors, textColors, shapeVariants, layouts } from "@/lib/design-tokens";
+import { cn } from "@/lib/utils";
 
 export function VisualIdentity() {
   return (
@@ -185,7 +187,98 @@ export function VisualIdentity() {
 
       </div>
 
-      <div className="space-y-4 pt-4">
+      <div className="hidden space-y-6 pt-12 border-t border-primary/10">
+        <div className="space-y-2">
+          <h3 className="text-xl font-semibold font-heading text-foreground">Tokenized AI Dictionary</h3>
+          <p className="text-sm text-muted-foreground">
+            The generative Social Asset engine acts as a restricted Art Director. It composes UI by combining these explicit string keys mapped to safe, pre-approved structural Tailwind variants.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          
+          <div className="space-y-4">
+            <h4 className="text-md font-bold font-heading text-foreground uppercase tracking-widest">Card & Shape Tokens</h4>
+            <div className="flex flex-col gap-4">
+              {Object.entries(shapeVariants).map(([token, twClass]) => (
+                <div key={token} className="p-4 rounded-lg bg-neutral/5 border border-primary/10 flex flex-col sm:flex-row gap-4 items-center">
+                  <div className="w-full sm:w-1/3 shrink-0 flex flex-col">
+                    <code className="text-xs font-mono font-bold text-primary bg-primary/10 px-2 py-1 rounded inline-block w-fit mb-2">"{token}"</code>
+                  </div>
+                  <div className="flex-1 w-full bg-[url('https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2FBridge2Partners_Brand_Logo_v7.webp?alt=media')] bg-cover bg-center rounded-md relative overflow-hidden flex items-center justify-center p-6 border border-black/5 min-h-[120px]">
+                     {/* Overlay for contrast against image */}
+                     <div className="absolute inset-0 bg-[#001b15]/40" />
+                     <div className={cn("w-full relative z-10 flex items-center justify-center min-h-[80px]", twClass)}>
+                       <span className={cn("text-xs font-bold uppercase", twClass.includes('text-white') ? 'text-white' : 'text-slate-900')}>Preview Element</span>
+                     </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+          
+          <div className="space-y-4">
+            <h4 className="text-md font-bold font-heading text-foreground uppercase tracking-widest">Headline Typographic Tokens</h4>
+            <div className="flex flex-col gap-4">
+              {Object.entries(textColors).map(([token, twClass]) => (
+                <div key={token} className="p-4 rounded-lg bg-neutral/5 border border-primary/10 flex flex-col sm:flex-row gap-4 items-center">
+                  <div className="w-full sm:w-1/3 shrink-0 flex flex-col">
+                    <code className="text-xs font-mono font-bold text-secondary bg-secondary/10 px-2 py-1 rounded inline-block w-fit mb-2">"{token}"</code>
+                  </div>
+                  <div className="flex-1 w-full flex items-center justify-center rounded-md p-6 min-h-[120px] bg-[#001b15] shadow-inner border border-primary/20">
+                     <span className={cn("text-3xl font-display font-medium tracking-tight whitespace-nowrap", twClass)}>
+                       Sample Hook
+                     </span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="space-y-4">
+            <h4 className="text-md font-bold font-heading text-foreground uppercase tracking-widest">Background Surface Tokens</h4>
+            <div className="flex flex-col gap-4">
+              {Object.entries(colors).map(([token, twClass]) => (
+                <div key={token} className="p-4 rounded-lg bg-neutral/5 border border-primary/10 flex flex-col sm:flex-row gap-4 items-center">
+                  <div className="w-full sm:w-1/3 shrink-0 flex flex-col">
+                    <code className="text-xs font-mono font-bold text-[#98cc67] bg-[#98cc67]/10 px-2 py-1 rounded inline-block w-fit mb-2">"{token}"</code>
+                  </div>
+                  <div className="flex-1 w-full rounded-md h-[120px] shadow-sm relative overflow-hidden border border-primary/20">
+                     <div className={cn("absolute inset-0", twClass)} />
+                     <span className={cn(
+                       "relative z-10 text-xs font-bold uppercase",
+                       ['primary', 'neutral', 'dark'].includes(token) ? 'text-white/80' : 'text-slate-900/80'
+                     )}>
+                       {token}
+                     </span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="space-y-4">
+            <h4 className="text-md font-bold font-heading text-foreground uppercase tracking-widest">Constraint Mapping</h4>
+            <div className="flex flex-col gap-4 h-full">
+              <div className="flex-1 rounded-lg bg-white/60 backdrop-blur-md border border-primary/10 p-6 flex flex-col space-y-4">
+                <p className="text-sm text-foreground font-sans leading-relaxed">
+                  The AI is strictly blocked from generating raw CSS objects. It cannot write custom Tailwind classes. 
+                  It can only emit JSON payloads utilizing these exact string constants, ensuring 100% adherence to Bridge2Partners brand standards.
+                </p>
+                <div className="mt-4 p-4 bg-slate-900 rounded-md text-white/80 font-mono text-xs overflow-x-auto border border-white/10 shadow-inner">
+                  <span className="text-[#98cc67]">"backgroundColorToken"</span>: <span className="text-white">"dark"</span>,<br/>
+                  <span className="text-[#98cc67]">"layoutToken"</span>: <span className="text-white">"center"</span>,<br/>
+                  <span className="text-[#98cc67]">"cardVariantToken"</span>: <span className="text-white">"glass"</span>,<br/>
+                  <span className="text-[#98cc67]">"headlineColorToken"</span>: <span className="text-white">"text-accent"</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div className="space-y-4 pt-12 border-t border-primary/10">
         <h3 className="text-xl font-semibold font-heading text-foreground">Semantic States</h3>
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
           
