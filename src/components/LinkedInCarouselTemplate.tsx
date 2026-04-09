@@ -9,6 +9,9 @@ export type SlideType = 'hook' | 'thesis' | 'solution' | 'validation' | 'cta';
 export interface TextConfig {
   visible: boolean;
   align: 'left' | 'center' | 'right';
+  size?: 'sm' | 'md' | 'lg';
+  colorToken?: 'text-dark' | 'text-primary' | 'text-light' | 'text-neutral';
+  opacity?: '100' | '80' | '50';
 }
 
 export interface SlideData {
@@ -43,7 +46,10 @@ export interface SlideData {
   bodyColorToken?: keyof typeof bodyColors;
   imageStyleToken?: keyof typeof imageStyles;
   buttonStyleToken?: keyof typeof buttonStyles;
-  watermarkColorToken?: keyof typeof textColors;
+  watermarkColorToken?: string;
+  brandMarkType?: 'watermark' | 'logo' | 'icon';
+  brandMarkSize?: 'sm' | 'md' | 'lg';
+  brandMarkOpacity?: '50' | '80' | '100';
 }
 
 interface LinkedInCarouselTemplateProps {
@@ -69,11 +75,12 @@ export function LinkedInCarouselTemplate({ slide, onUpdate }: LinkedInCarouselTe
     if (!slide.imageUrl) return null;
     
     const style = slide.imageStyleToken || 'none';
+    const safeImageUrl = slide.imageUrl.startsWith('http') ? `/api/proxy-image?url=${encodeURIComponent(slide.imageUrl)}` : slide.imageUrl;
     
     if (['full-bleed-dark-overlay', 'full-bleed-green-overlay', 'overlay-gradient-institutional', 'overlay-gradient-teal', 'overlay-frosted-glass'].includes(style) || style === 'none') {
        return (
          <div className="absolute inset-0 z-0">
-           <img src={slide.imageUrl} alt="Slide background" className="w-full h-full object-cover" />
+           <img src={safeImageUrl} alt="Slide background" className="w-full h-full object-cover" />
            <div className={imageStyles[style as keyof typeof imageStyles]} />
          </div>
        );
@@ -82,7 +89,7 @@ export function LinkedInCarouselTemplate({ slide, onUpdate }: LinkedInCarouselTe
     if (style === 'overlay-aurora-spots') {
        return (
          <div className="absolute inset-0 z-0">
-           <img src={slide.imageUrl} alt="Slide background" className="w-full h-full object-cover" />
+           <img src={safeImageUrl} alt="Slide background" className="w-full h-full object-cover" />
            <div className="absolute inset-0 bg-black/40 z-0 mix-blend-multiply" />
            <div className="absolute -top-[20%] -left-[10%] w-[60%] h-[60%] bg-[#009677] rounded-full blur-[100px] opacity-60 mix-blend-screen pointer-events-none z-10" />
            <div className="absolute -bottom-[20%] -right-[10%] w-[60%] h-[60%] bg-[#00573f] rounded-full blur-[100px] opacity-70 mix-blend-screen pointer-events-none z-10" />
@@ -93,7 +100,7 @@ export function LinkedInCarouselTemplate({ slide, onUpdate }: LinkedInCarouselTe
     if (style === 'cutout') {
       return (
          <div className="absolute inset-0 z-0 flex items-end justify-end p-8">
-           <img src={slide.imageUrl} alt="Cutout" className="w-[80%] h-[80%] object-contain object-bottom right-0 mix-blend-normal" />
+           <img src={safeImageUrl} alt="Cutout" className="w-[80%] h-[80%] object-contain object-bottom right-0 mix-blend-normal" />
          </div>
       );
     }
@@ -101,7 +108,7 @@ export function LinkedInCarouselTemplate({ slide, onUpdate }: LinkedInCarouselTe
     if (style === 'framed') {
        return (
          <div className="absolute inset-0 z-0 flex items-center justify-center p-12">
-            <img src={slide.imageUrl} alt="Framed" className="w-full h-full object-cover p-2 border border-neutral-200 bg-white shadow-sm" />
+            <img src={safeImageUrl} alt="Framed" className="w-full h-full object-cover p-2 border border-neutral-200 bg-white shadow-sm" />
          </div>
        );
     }
@@ -110,15 +117,64 @@ export function LinkedInCarouselTemplate({ slide, onUpdate }: LinkedInCarouselTe
   };
 
   const renderGlobalBranding = () => {
-    const wmColorCSS = textColors[slide.watermarkColorToken || slide.headlineColorToken as keyof typeof textColors || 'text-light'];
+    const wmColorToken = slide.watermarkColorToken || slide.headlineColorToken as string || 'text-light';
+    const wmColorCSS = wmColorToken === 'original' ? '' : (textColors[wmColorToken as keyof typeof textColors] || 'text-white');
+    const brandMarkType = slide.brandMarkType || 'watermark';
+    const brandMarkSize = slide.brandMarkSize || 'md';
+    const brandMarkOpacity = slide.brandMarkOpacity || '80';
+
+    let logoUrl = 'https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2FBridge2Partners_Brand_Logo_v7.webp?alt=media&token=a90040bc-3446-408d-8794-cab07568de66'; // Primary Logo (Color)
     
+    if (wmColorToken === 'text-light') {
+      logoUrl = 'https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2FBridge2Partners%20Logo-3-White.png?alt=media&token=0a8d7276-834f-4ff8-971d-63f079efb214';
+    } else if (wmColorToken === 'text-dark') {
+      logoUrl = 'https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2FBridge2Partners%20Logo-2-Black.png?alt=media&token=8bc5af5c-85fb-4782-acf5-73f9db67f1f8';
+    }
+
+    const iconUrl = 'https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2FBridge2Partners_Favicon.png?alt=media&token=8281d312-5968-4fa1-9e37-347481934b95';
+
+    const safeLogoUrl = `/api/proxy-image?url=${encodeURIComponent(logoUrl)}`;
+    const safeIconUrl = `/api/proxy-image?url=${encodeURIComponent(iconUrl)}`;
+
+    const wmTextSizeClass = {
+      sm: 'text-[12px]',
+      md: 'text-[16px]',
+      lg: 'text-[24px]'
+    }[brandMarkSize];
+
+    const logoSizeClass = {
+      sm: 'h-5',
+      md: 'h-8',
+      lg: 'h-12'
+    }[brandMarkSize];
+
+    const iconSizeClass = {
+      sm: 'h-7 w-7',
+      md: 'h-11 w-11',
+      lg: 'h-16 w-16'
+    }[brandMarkSize];
+
+    const opacityClass = {
+      '50': 'opacity-50',
+      '80': 'opacity-80',
+      '100': 'opacity-100'
+    }[brandMarkOpacity];
+
     return (
       <div className="absolute bottom-6 left-8 right-8 flex justify-between items-end z-20 pointer-events-none">
-         <span className={cn("font-ui text-[9px] font-bold tracking-[0.25em] uppercase opacity-40", wmColorCSS)}>
-           BRIDGE<span className="opacity-50">2</span>PARTNERS
-         </span>
+         {brandMarkType === 'watermark' && (
+           <span className={cn("font-ui font-bold tracking-[0.25em] uppercase", opacityClass, wmTextSizeClass, wmColorCSS)}>
+             BRIDGE<span className="opacity-50">2</span>PARTNERS
+           </span>
+         )}
+         {brandMarkType === 'logo' && (
+           <img src={safeLogoUrl} alt="Bridge2Partners Logo" className={cn("w-auto object-contain", opacityClass, logoSizeClass)} />
+         )}
+         {brandMarkType === 'icon' && (
+           <img src={safeIconUrl} alt="Bridge2Partners Icon" className={cn("object-contain", opacityClass, iconSizeClass, wmColorToken === 'text-light' ? 'brightness-200 grayscale' : (wmColorToken === 'text-dark' ? 'brightness-0 grayscale' : ''))} />
+         )}
          {['thesis', 'solution'].includes(slide.type) && (
-           <ArrowRight className={cn("w-5 h-5 opacity-40", wmColorCSS)} strokeWidth={1.5} />
+           <ArrowRight className={cn("w-5 h-5", opacityClass, wmColorCSS)} strokeWidth={1.5} />
          )}
       </div>
     );
@@ -145,7 +201,14 @@ export function LinkedInCarouselTemplate({ slide, onUpdate }: LinkedInCarouselTe
                value={slide.eyebrow || slide.kicker || ''}
                onChange={(val) => onUpdate?.({ eyebrow: val })}
                placeholder="01 / Enter Eyebrow..."
-               className={cn("font-ui text-xs font-semibold tracking-[0.15em] uppercase opacity-50 block", textTokenCSS)}
+               className={cn("font-ui font-semibold tracking-[0.15em] uppercase block", 
+                 { '100': 'opacity-100', '80': 'opacity-80', '50': 'opacity-50' }[slide.eyebrowConfig.opacity || '80'],
+                 slide.eyebrowConfig.colorToken ? ((textColors as Record<string,string>)[slide.eyebrowConfig.colorToken] || (bodyColors as Record<string,string>)[slide.eyebrowConfig.colorToken]) : textTokenCSS,
+               {
+                 'sm': 'text-xs',
+                 'md': 'text-sm',
+                 'lg': 'text-base'
+               }[slide.eyebrowConfig.size || 'md'])}
              />
           </div>
         )}
@@ -157,7 +220,14 @@ export function LinkedInCarouselTemplate({ slide, onUpdate }: LinkedInCarouselTe
                value={slide.headline || slide.text || ''}
                onChange={(val) => onUpdate?.({ headline: val })}
                placeholder="Enter Core Headline..."
-               className={cn("font-display text-4xl leading-tight font-medium tracking-tight drop-shadow-sm", textTokenCSS)}
+               className={cn("font-display leading-tight font-medium tracking-tight drop-shadow-sm", 
+                 { '100': 'opacity-100', '80': 'opacity-80', '50': 'opacity-50' }[slide.headlineConfig.opacity || '100'],
+                 slide.headlineConfig.colorToken ? ((textColors as Record<string,string>)[slide.headlineConfig.colorToken] || (bodyColors as Record<string,string>)[slide.headlineConfig.colorToken]) : textTokenCSS,
+               {
+                 'sm': 'text-4xl',
+                 'md': 'text-5xl',
+                 'lg': 'text-6xl'
+               }[slide.headlineConfig.size || 'md'])}
              />
           </div>
         )}
@@ -169,7 +239,14 @@ export function LinkedInCarouselTemplate({ slide, onUpdate }: LinkedInCarouselTe
                value={slide.subheadline || slide.metric || ''}
                onChange={(val) => onUpdate?.({ subheadline: val })}
                placeholder="Enter structural subheadline details..."
-               className={cn("font-heading text-2xl leading-snug font-medium drop-shadow-sm opacity-90", textTokenCSS)}
+               className={cn("font-heading leading-snug font-medium drop-shadow-sm", 
+                 { '100': 'opacity-100', '80': 'opacity-80', '50': 'opacity-50' }[slide.subheadlineConfig.opacity || '80'],
+                 slide.subheadlineConfig.colorToken ? ((textColors as Record<string,string>)[slide.subheadlineConfig.colorToken] || (bodyColors as Record<string,string>)[slide.subheadlineConfig.colorToken]) : textTokenCSS,
+               {
+                 'sm': 'text-2xl',
+                 'md': 'text-3xl',
+                 'lg': 'text-4xl'
+               }[slide.subheadlineConfig.size || 'md'])}
              />
           </div>
         )}
@@ -181,7 +258,14 @@ export function LinkedInCarouselTemplate({ slide, onUpdate }: LinkedInCarouselTe
                value={slide.body || ''}
                onChange={(val) => onUpdate?.({ body: val })}
                placeholder="Enter comprehensive supporting arguments or analytical context..."
-               className={cn("font-sans text-sm leading-relaxed", bodyTokenCSS)}
+               className={cn("font-sans leading-relaxed", 
+                 { '100': 'opacity-100', '80': 'opacity-80', '50': 'opacity-50' }[slide.bodyConfig.opacity || '100'],
+                 slide.bodyConfig.colorToken ? ((textColors as Record<string,string>)[slide.bodyConfig.colorToken] || (bodyColors as Record<string,string>)[slide.bodyConfig.colorToken]) : bodyTokenCSS,
+               {
+                 'sm': 'text-sm',
+                 'md': 'text-base',
+                 'lg': 'text-lg'
+               }[slide.bodyConfig.size || 'md'])}
              />
           </div>
         )}
@@ -189,7 +273,11 @@ export function LinkedInCarouselTemplate({ slide, onUpdate }: LinkedInCarouselTe
         {slide.ctaConfig?.visible && (
           <div className={cn("w-full mt-4", `text-${slide.ctaConfig.align}`)}>     
              {/* Wrapped Button inline-block for proper alignment targeting */}
-             <div className={cn("inline-block px-6 py-3.5 font-ui font-bold text-[10px] tracking-widest uppercase rounded shadow-sm pointer-events-auto transition-all", buttonStyles[slide.buttonStyleToken as keyof typeof buttonStyles || 'teal-solid'])}>
+             <div className={cn("inline-block font-ui font-bold tracking-widest uppercase rounded shadow-sm pointer-events-auto transition-all", {
+               'sm': 'px-6 py-3.5 text-[10px]',
+               'md': 'px-8 py-4 text-xs',
+               'lg': 'px-10 py-5 text-sm'
+             }[slide.ctaConfig.size || 'md'], buttonStyles[slide.buttonStyleToken as keyof typeof buttonStyles || 'teal-solid'])}>
                 <InlineEditableText 
                   as="div"
                   value={slide.cta || ''}
@@ -210,7 +298,14 @@ export function LinkedInCarouselTemplate({ slide, onUpdate }: LinkedInCarouselTe
                value={slide.footer || slide.footnote || ''}
                onChange={(val) => onUpdate?.({ footer: val })}
                placeholder="Enter citation or footer detail..."
-               className={cn("font-sans text-[8px] tracking-wide uppercase opacity-30 pointer-events-auto block", textTokenCSS)}
+               className={cn("font-sans tracking-wide uppercase pointer-events-auto block", 
+                 { '100': 'opacity-100', '80': 'opacity-80', '50': 'opacity-50' }[slide.footerConfig.opacity || '50'],
+                 slide.footerConfig.colorToken ? ((textColors as Record<string,string>)[slide.footerConfig.colorToken] || (bodyColors as Record<string,string>)[slide.footerConfig.colorToken]) : textTokenCSS,
+               {
+                 'sm': 'text-[8px]',
+                 'md': 'text-[10px]',
+                 'lg': 'text-[12px]'
+               }[slide.footerConfig.size || 'md'])}
              />
         </div>
       )}
