@@ -1,0 +1,81 @@
+'use client';
+
+import React from 'react';
+import ReactMarkdown from 'react-markdown';
+import { ShieldAlert, X, Loader2, FileText } from 'lucide-react';
+
+interface GapAnalysisModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+  reportMarkdown: string | null;
+  isLoading: boolean;
+  theme: 'dark' | 'medium' | 'light';
+}
+
+export default function GapAnalysisModal({ isOpen, onClose, reportMarkdown, isLoading, theme }: GapAnalysisModalProps) {
+  if (!isOpen) return null;
+
+  // Theme-aware styles for the modal
+  const modalBg = theme === 'light' ? 'bg-white text-slate-900 border-slate-200' : 
+                  theme === 'medium' ? 'bg-[#001b15] text-white border-white/10' : 
+                  'bg-slate-900 text-white border-white/10';
+  
+  const backdropBg = theme === 'light' ? 'bg-slate-900/40 backdrop-blur-md' : 'bg-[#001b15]/60 backdrop-blur-md';
+  const overlayText = theme === 'light' ? 'text-slate-500' : 'text-white/60';
+  
+  return (
+    <div className={`fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 md:p-12 ${backdropBg}`}>
+      <div className={`relative w-full max-w-4xl max-h-[90vh] min-h-[50vh] flex flex-col rounded-3xl border shadow-2xl overflow-hidden ${modalBg} animate-in fade-in zoom-in duration-300`}>
+        {/* Header */}
+        <div className={`flex items-center justify-between p-6 border-b ${theme === 'light' ? 'border-slate-100' : 'border-white/10 bg-white/5'}`}>
+          <div className="flex items-center gap-4">
+             <div className={`w-12 h-12 rounded-full flex items-center justify-center ${theme === 'light' ? 'bg-[#98cc67]/10' : 'bg-transparent border border-white/10'}`}>
+               <ShieldAlert className="w-6 h-6 text-[#98cc67]" />
+             </div>
+             <div>
+               <h3 className="font-display font-bold text-2xl">Gap Analysis Report</h3>
+               <p className={`font-ui text-xs tracking-wider uppercase mt-1 ${overlayText}`}>B2P Intelligence • Automated Consultant</p>
+             </div>
+          </div>
+          <button onClick={onClose} className={`p-3 rounded-full hover:bg-black/10 transition-colors ${overlayText}`}>
+            <X className="w-6 h-6" />
+          </button>
+        </div>
+
+        {/* Scrollable Content */}
+        <div className="flex-1 overflow-y-auto p-6 md:p-10 font-reading">
+           {isLoading ? (
+             <div className="h-full flex flex-col items-center justify-center min-h-[300px] gap-6">
+                <Loader2 className="w-12 h-12 text-[#98cc67] animate-spin" />
+                <div className="text-center">
+                  <p className="font-display font-bold text-xl mb-2">Architecting Transformation...</p>
+                  <p className={`text-sm ${overlayText}`}>Gemini 3.1 Pro is analyzing your infrastructure liabilities.</p>
+                </div>
+             </div>
+           ) : reportMarkdown ? (
+             <article className="max-w-none">
+               <div className={`markdown-body ${theme === 'light' ? 'text-slate-800' : 'text-white/90'}`}>
+                  <ReactMarkdown
+                    components={{
+                       h1: ({node, ...props}) => <h1 className="text-3xl font-display font-bold text-[#98cc67] mb-6 pb-2 border-b border-[#98cc67]/20" {...props} />,
+                       h2: ({node, ...props}) => <h2 className="text-2xl font-display font-bold mt-8 mb-4 border-b border-white/10 pb-2" {...props} />,
+                       h3: ({node, ...props}) => <h3 className="text-xl font-display font-bold mt-6 mb-3 text-[#98cc67]" {...props} />,
+                       ul: ({node, ...props}) => <ul className="list-disc pl-6 mb-6 pt-2 space-y-3 opacity-90" {...props} />,
+                       ol: ({node, ...props}) => <ol className="list-decimal pl-6 mb-6 space-y-3 opacity-90" {...props} />,
+                       strong: ({node, ...props}) => <strong className="font-bold text-[#98cc67]" {...props} />,
+                       p: ({node, ...props}) => <p className="mb-5 leading-loose text-lg" {...props} />
+                    }}
+                  >{reportMarkdown}</ReactMarkdown>
+               </div>
+             </article>
+           ) : (
+             <div className="h-full flex flex-col items-center justify-center min-h-[300px] text-center">
+                <FileText className={`w-16 h-16 mb-4 ${overlayText} opacity-30`} />
+                <p className={overlayText}>No analysis detected. Please provide a scenario to begin.</p>
+             </div>
+           )}
+        </div>
+      </div>
+    </div>
+  );
+}

@@ -45,7 +45,7 @@ export default function RootLayout({
       suppressHydrationWarning
       className={`${inter.variable} ${publicSans.variable} ${montserrat.variable} ${barlow.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col bg-[#000d0a]">{children}</body>
     </html>
   );
 }
