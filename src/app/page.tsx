@@ -160,7 +160,7 @@ export default function Home() {
   };
 
   return (
-    <div className={`min-h-screen ${t.globalBg} selection:bg-primary/30 flex flex-col font-sans relative transition-colors duration-500`}>
+    <div className={`min-h-screen ${t.globalBg} selection:bg-white/80 selection:text-[#001b15] flex flex-col font-sans relative transition-colors duration-500`}>
       <GapAnalysisModal 
          isOpen={isModalOpen} 
          onClose={() => setIsModalOpen(false)} 
@@ -270,7 +270,7 @@ export default function Home() {
               <Button variant="outline" className="hidden md:flex border-white/20 hover:bg-white/10 text-white font-normal bg-white/5">
                 <EditableButtonText contentId="nav_btn_1" defaultText="View Procurement Docs" isAdmin={isAdmin} value={cmsContent.nav_btn_1} />
               </Button>
-              <Button variant="default" className="bg-primary hover:bg-primary/90 text-white font-bold">
+              <Button variant="default" className="bg-primary/80 backdrop-blur-[10px] border border-white/20 hover:bg-primary/90 text-white font-bold">
                 <EditableButtonText contentId="nav_btn_2" defaultText="Schedule a Strategy Call" isAdmin={isAdmin} value={cmsContent.nav_btn_2} />
               </Button>
             </div>
@@ -293,7 +293,7 @@ export default function Home() {
                </label>
                <div className={`relative w-full flex flex-col sm:flex-row items-center ${theme === 'light' ? 'bg-white' : 'bg-white/5'} backdrop-blur-[12px] border ${t.borderStrong} rounded-3xl sm:rounded-full shadow-2xl overflow-hidden p-2 group transition-all`}>
                   <div className={`hidden sm:flex w-12 h-12 shrink-0 items-center justify-center ${theme === 'light' ? 'bg-slate-50' : 'bg-white/10'} rounded-full ml-1 backdrop-blur-md border ${t.borderBase} shadow-inner transition-colors`}>
-                     <BrainCircuit className="w-5 h-5 text-primary" />
+                     <BrainCircuit className="w-5 h-5 text-[#98cc67]" />
                   </div>
                   <input 
                     type="text" 
@@ -302,7 +302,7 @@ export default function Home() {
                     placeholder='E.g., "We are migrating to a unified FIS core and need to align our commercial lending teams..."' 
                     className={`flex-1 w-full bg-transparent border-none outline-none ${t.textPrimary} placeholder:${t.textMuted} px-4 sm:px-6 py-4 sm:py-3 font-ui text-sm sm:text-base h-full focus:outline-none focus:ring-0 transition-colors`}
                   />
-                  <button onClick={() => handleGenerateAnalysis()} className="w-full sm:w-auto h-full sm:min-h-[48px] bg-primary text-white px-8 py-3 sm:py-0 rounded-2xl sm:rounded-full transition-transform font-bold shadow-md hover:scale-[1.02] active:scale-95 ml-0 sm:ml-2 flex items-center justify-center gap-2">
+                  <button onClick={() => handleGenerateAnalysis()} className="w-full sm:w-auto h-full sm:min-h-[48px] bg-primary/80 backdrop-blur-[10px] border border-white/20 text-white px-8 py-3 sm:py-0 rounded-2xl sm:rounded-full transition-all font-bold hover:bg-primary/90 hover:scale-[1.02] active:scale-95 ml-0 sm:ml-2 flex items-center justify-center gap-2">
                     Generate Gap Analysis <ArrowRight className="w-4 h-4" />
                   </button>
                </div>
@@ -333,12 +333,12 @@ export default function Home() {
               </h2>
               <EditableText element="p" contentId="problem_p" defaultText="Modernizing massive, interconnected bank ecosystems is overwhelmingly complex. You need practical operators who do the heavy lifting, not just high-level advisors." isAdmin={isAdmin} value={cmsContent.problem_p} className={`font-reading text-lg mb-6 leading-relaxed ${t.textSecondary} transition-colors`} />
               
-              <div className={`p-6 ${theme === 'light' ? 'bg-red-50' : 'bg-[#00120e]/50'} border border-red-500/20 rounded-xl backdrop-blur-sm transition-colors`}>
-                <EditableText element="p" contentId="problem_red_p" defaultText="And when digital migrations fail or M&A integrations fracture, it puts your institution’s stability and bottom line directly at risk." isAdmin={isAdmin} value={cmsContent.problem_red_p} className={`font-ui ${theme === 'light' ? 'text-red-700' : 'text-red-400'} font-medium leading-relaxed transition-colors`} />
+              <div className={`p-6 bg-[#001b15] shadow-xl rounded-xl transition-colors`}>
+                <EditableText element="p" contentId="problem_red_p" defaultText="And when digital migrations fail or M&A integrations fracture, it puts your institution’s stability and bottom line directly at risk." isAdmin={isAdmin} value={cmsContent.problem_red_p} className={`font-ui text-white/90 font-medium leading-relaxed transition-colors`} />
               </div>
               
               <div className="mt-8 flex flex-col sm:flex-row gap-4">
-                 <Button size="lg" className="bg-primary hover:bg-primary/90 text-white font-bold shadow-[0_0_20px_rgba(152,204,103,0.2)]">
+                 <Button size="lg" className="bg-primary/80 backdrop-blur-[10px] border border-white/20 hover:bg-primary/90 text-white font-bold">
                    <EditableButtonText contentId="problem_btn_1" defaultText="Schedule a Strategy Call" isAdmin={isAdmin} value={cmsContent.problem_btn_1} />
                  </Button>
                  <Button size="lg" variant="outline" onClick={() => handleGenerateAnalysis()} className={t.outlineBtn}>
@@ -387,7 +387,7 @@ export default function Home() {
             </div>
 
             <div className="mt-16 flex flex-col sm:flex-row justify-center gap-4">
-              <Button size="lg" className="bg-primary hover:bg-primary/90 text-white font-bold px-8 shadow-[0_0_20px_rgba(152,204,103,0.2)]">
+              <Button size="lg" className="bg-primary/80 backdrop-blur-[10px] border border-white/20 hover:bg-primary/90 text-white font-bold px-8">
                 <EditableButtonText contentId="value_btn_1" defaultText="Schedule a Strategy Call" isAdmin={isAdmin} value={cmsContent.value_btn_1} />
               </Button>
               <Button size="lg" variant="outline" onClick={() => handleGenerateAnalysis()} className={`${t.outlineBtn} px-8`}>
@@ -458,7 +458,7 @@ export default function Home() {
             </div>
 
             <div className="mt-20 flex flex-col sm:flex-row justify-center gap-4">
-              <Button size="lg" className="bg-primary hover:bg-primary/90 text-white font-bold px-10 py-6 text-lg shadow-[0_0_25px_rgba(152,204,103,0.25)] hover:scale-105 transition-transform">
+              <Button size="lg" className="bg-primary/80 backdrop-blur-[10px] border border-white/20 hover:bg-primary/90 text-white font-bold px-10 py-6 text-lg hover:scale-105 transition-all">
                 <EditableButtonText contentId="plan_btn_1" defaultText="Schedule a Strategy Call" isAdmin={isAdmin} value={cmsContent.plan_btn_1} />
               </Button>
               <Button size="lg" variant="outline" onClick={() => handleGenerateAnalysis()} className={`${t.outlineBtn} px-10 py-6 text-lg`}>
@@ -498,7 +498,7 @@ export default function Home() {
           <div className="max-w-6xl mx-auto flex flex-col items-center text-center mb-24">
             <EditableText element="h2" contentId="footer_cta_h2" defaultText="Ready to stop planning and start executing?" isAdmin={isAdmin} value={cmsContent.footer_cta_h2} className={`font-display text-5xl md:text-6xl font-bold mb-8 ${t.textPrimary} transition-colors`} />
             <div className="flex flex-col sm:flex-row gap-4">
-              <Button size="lg" className="bg-primary hover:bg-primary/90 text-white font-bold px-8">
+              <Button size="lg" className="bg-primary/80 backdrop-blur-[10px] border border-white/20 hover:bg-primary/90 text-white font-bold px-8">
                 <EditableButtonText contentId="footer_btn_1" defaultText="Schedule a Strategy Call" isAdmin={isAdmin} value={cmsContent.footer_btn_1} />
               </Button>
               <Button size="lg" variant="outline" onClick={() => handleGenerateAnalysis()} className={`bg-white text-[#001b15] hover:bg-white/90 font-bold ${theme === 'light' ? 'border border-[#001b15]/10' : 'border-none'}`}>

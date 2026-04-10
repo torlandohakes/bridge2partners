@@ -48,16 +48,30 @@ export default function EditableText({
     }
   };
 
-  const adminStyles = isAdmin 
-    ? 'p-1 -m-1 hover:ring-1 hover:ring-white/50 hover:bg-white/5 rounded-md transition-all cursor-text outline-none focus:ring-1 focus:ring-white focus:bg-white/10'
-    : '';
+  // Provide seamless transition between native selection and edit mode
+  const handleClick = (e: React.MouseEvent) => {
+    if (!isAdmin || isEditing) return;
+    
+    // If the user highlighted text to copy it, do not intercept the interaction
+    const selection = window.getSelection();
+    if (selection && selection.toString().length > 0) return;
+    
+    setIsEditing(true);
+    setTimeout(() => textRef.current?.focus(), 50);
+  };
+
+  const adminStyles = (isAdmin && !isEditing)
+    ? 'p-1 -m-1 hover:ring-2 hover:ring-white/80 hover:bg-black/30 rounded-md transition-all cursor-text'
+    : isEditing 
+      ? 'p-1 -m-1 outline-none ring-2 ring-white bg-black/60 shadow-[0_0_15px_rgba(255,255,255,0.2)] rounded-md cursor-text transition-all'
+      : '';
 
   return (
     <Element
       ref={textRef as any}
-      contentEditable={isAdmin}
+      contentEditable={isEditing}
       suppressContentEditableWarning={true}
-      onFocus={() => isAdmin && setIsEditing(true)}
+      onClick={handleClick}
       onBlur={handleBlur}
       className={`${className} ${adminStyles}`}
       // dangerouslySetInnerHTML to persist <br/> tags from raw strings
