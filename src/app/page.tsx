@@ -1,12 +1,19 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { ChevronDown, ArrowRight, BrainCircuit, ShieldAlert, Zap, Landmark, Handshake, ShieldCheck, FileText, CheckCircle2 } from "lucide-react";
+import { ChevronDown, ArrowRight, BrainCircuit, ShieldAlert, Zap, Landmark, Handshake, ShieldCheck, FileText, CheckCircle2, LogOut } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import GapAnalysisModal from "@/components/GapAnalysisModal";
+import LoginModal from "@/components/LoginModal";
+import EditableText from "@/components/EditableText";
+import EditableButtonText from "@/components/EditableButtonText";
+import EditableImage from "@/components/EditableImage";
+import { auth, db } from "@/lib/firebase";
+import { onAuthStateChanged, signOut, User } from "firebase/auth";
+import { doc, onSnapshot } from "firebase/firestore";
 
 type ThemeMode = 'dark' | 'medium' | 'light';
 
@@ -100,6 +107,31 @@ export default function Home() {
   const [modalLoading, setModalLoading] = useState(false);
   const [modalReport, setModalReport] = useState<string | null>(null);
 
+  // Authentication State
+  const [user, setUser] = useState<User | null>(null);
+  const [showLoginModal, setShowLoginModal] = useState(false);
+  const isAdmin = user !== null;
+
+  // Real-time CMS State
+  const [cmsContent, setCmsContent] = useState<Record<string, string>>({});
+
+  // Bind Firestore Real-time Sync
+  useEffect(() => {
+    if (!db) return;
+    const unsub = onSnapshot(doc(db, 'site-content', 'home'), (docSnapshot) => {
+      if (docSnapshot.exists()) setCmsContent(docSnapshot.data() as Record<string, string>);
+    });
+    return () => unsub();
+  }, []);
+
+  useEffect(() => {
+    if (!auth) return;
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser);
+    });
+    return () => unsubscribe();
+  }, []);
+
   const handleGenerateAnalysis = async (fallbackPrompt?: string) => {
     const finalPrompt = promptText.trim() || fallbackPrompt || "Analyze a generic core system migration risk and produce a strategic action plan.";
     
@@ -137,6 +169,12 @@ export default function Home() {
          theme={theme}
       />
       
+      <LoginModal 
+         isOpen={showLoginModal}
+         onClose={() => setShowLoginModal(false)}
+         theme={theme}
+      />
+      
       {/* Dynamic Scrolling Aurora Canvas (For Light Theme Only) */}
       <div className={`absolute inset-0 z-0 pointer-events-none overflow-hidden transition-opacity duration-700 ${theme === 'light' ? 'opacity-100' : 'opacity-0'}`}>
         {/* Core Teal Base */}
@@ -171,22 +209,41 @@ export default function Home() {
         <div className="absolute top-[85%] right-[-20%] w-[80vw] h-[70vw] rounded-[100%] bg-[#001b15]/[0.80] blur-[150px] -rotate-6" />
       </div>
 
-      {/* Theme Toggle Widget */}
-      <div className={`fixed bottom-6 right-6 z-[999] flex items-center backdrop-blur-xl p-1.5 rounded-full shadow-2xl transition-colors duration-500 ${theme === 'light' ? 'bg-slate-200/50 border border-[#001b15]/10' : 'bg-white/10 border border-white/20'}`}>
-        <button onClick={() => setTheme('dark')} className={`px-4 py-2 rounded-full text-sm font-bold transition-all ${theme === 'dark' ? 'bg-[#001b15] text-white shadow-md' : theme === 'light' ? 'text-[#001b15]/60 hover:text-[#001b15]' : 'text-white/60 hover:text-white'}`}>Dark</button>
-        <button onClick={() => setTheme('medium')} className={`px-4 py-2 rounded-full text-sm font-bold transition-all ${theme === 'medium' ? 'bg-[#00573f] text-white shadow-md' : theme === 'light' ? 'text-[#001b15]/60 hover:text-[#001b15]' : 'text-white/60 hover:text-white'}`}>Med</button>
-        <button onClick={() => setTheme('light')} className={`px-4 py-2 rounded-full text-sm font-bold transition-all ${theme === 'light' ? 'bg-white text-[#001b15] shadow-sm' : 'text-white/60 hover:text-white'}`}>Light</button>
-      </div>
+      {/* Theme Toggle Widget (Admin Only) */}
+      {user && (
+        <div className={`fixed bottom-6 right-6 z-[999] flex items-center backdrop-blur-xl p-1.5 rounded-full shadow-2xl transition-colors duration-500 animate-in slide-in-from-bottom-8 ${theme === 'light' ? 'bg-slate-200/50 border border-[#001b15]/10' : 'bg-white/10 border border-white/20'}`}>
+          <div className="flex px-1 border-r border-[#001b15]/20 mr-1 pr-2">
+             <button onClick={() => setTheme('dark')} className={`px-4 py-2 rounded-full text-sm font-bold transition-all ${theme === 'dark' ? 'bg-[#001b15] text-white shadow-md' : theme === 'light' ? 'text-[#001b15]/60 hover:text-[#001b15]' : 'text-white/60 hover:text-white'}`}>Dark</button>
+             <button onClick={() => setTheme('medium')} className={`px-4 py-2 rounded-full text-sm font-bold transition-all ${theme === 'medium' ? 'bg-[#00573f] text-white shadow-md' : theme === 'light' ? 'text-[#001b15]/60 hover:text-[#001b15]' : 'text-white/60 hover:text-white'}`}>Med</button>
+             <button onClick={() => setTheme('light')} className={`px-4 py-2 rounded-full text-sm font-bold transition-all ${theme === 'light' ? 'bg-white text-[#001b15] shadow-sm' : 'text-white/60 hover:text-white'}`}>Light</button>
+          </div>
+          <button onClick={() => auth && signOut(auth)} className={`px-3 py-2 rounded-full transition-colors flex items-center justify-center opacity-70 hover:opacity-100 hover:bg-black/10`} title="Sign Out">
+             <LogOut className={`w-4 h-4 ${theme === 'light' ? 'text-[#001b15]' : 'text-white'}`} />
+          </button>
+        </div>
+      )}
 
       {/* ================= HERO SECTION ================= */}
       <div 
         className={`relative w-full min-h-[110vh] z-10 transition-all duration-700`}
         style={{ 
-          backgroundImage: 'url("https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2Fbridge2partners-hero-1.webp?alt=media&token=bb05e1e4-8f2d-4a75-8880-ddd7bbfa2797")', 
+          backgroundImage: `url("${cmsContent.hero_bg || 'https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2Fbridge2partners-hero-1.webp?alt=media&token=bb05e1e4-8f2d-4a75-8880-ddd7bbfa2797'}")`, 
           backgroundSize: 'cover', 
           backgroundPosition: 'top'
         }}
       >
+         {isAdmin && (
+           <div className="absolute top-8 left-8 z-50 flex items-center">
+             <EditableImage 
+               contentId="hero_bg" 
+               defaultSrc="https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2Fbridge2partners-hero-1.webp?alt=media&token=bb05e1e4-8f2d-4a75-8880-ddd7bbfa2797" 
+               isAdmin={isAdmin} 
+               value={cmsContent.hero_bg} 
+               alt="Hero Background" 
+               triggerOnly={true}
+             />
+           </div>
+         )}
          {/* Contrast Overlay (Gradient) - Top is unconditionally dark for image/nav contrast */}
          <div className="absolute inset-0 bg-gradient-to-r from-[#001b15]/90 via-[#001b15]/50 to-transparent backdrop-blur-[1px] z-0" />
          <div className={`absolute inset-x-0 bottom-0 h-[40vh] bg-gradient-to-t ${t.heroOverlayBottom} pointer-events-none transition-colors duration-500 z-0`} />
@@ -211,25 +268,21 @@ export default function Home() {
                 </div>
               </div>
               <Button variant="outline" className="hidden md:flex border-white/20 hover:bg-white/10 text-white font-normal bg-white/5">
-                View Procurement Docs
+                <EditableButtonText contentId="nav_btn_1" defaultText="View Procurement Docs" isAdmin={isAdmin} value={cmsContent.nav_btn_1} />
               </Button>
               <Button variant="default" className="bg-primary hover:bg-primary/90 text-white font-bold">
-                Schedule a Strategy Call
+                <EditableButtonText contentId="nav_btn_2" defaultText="Schedule a Strategy Call" isAdmin={isAdmin} value={cmsContent.nav_btn_2} />
               </Button>
             </div>
          </div>
 
          {/* Hero Content Body - Fixed White for Image Legibility */}
          <div className="relative z-10 flex flex-col items-start justify-center flex-1 px-6 md:px-12 w-full max-w-5xl gap-6 md:gap-8 mt-4 md:mt-12 text-white">
-           <span className="font-ui text-xs sm:text-sm text-secondary uppercase tracking-widest font-bold">FOR BANKING EXECUTIVES FACING DISRUPTION</span>
+           <EditableText element="span" contentId="hero_super" defaultText="FOR BANKING EXECUTIVES FACING DISRUPTION" isAdmin={isAdmin} value={cmsContent.hero_super} className="font-ui text-xs sm:text-sm text-secondary uppercase tracking-widest font-bold" />
            
-           <h1 className="font-display font-extrabold text-5xl md:text-6xl lg:text-[5.5rem] leading-[1.05] tracking-tight normal-case drop-shadow-md">
-             Bank modernization <br/>and M&A integrations
-           </h1>
+           <EditableText element="h1" contentId="hero_h1" defaultText={"Bank modernization \\nand M&A integrations"} isAdmin={isAdmin} value={cmsContent.hero_h1} className="font-display font-extrabold text-5xl md:text-6xl lg:text-[5.5rem] leading-[1.05] tracking-tight normal-case drop-shadow-md" />
            
-           <p className="font-reading text-lg md:text-xl text-white/80 max-w-3xl leading-relaxed">
-             Derisk your digital transformation. We provide the tactical team of banking experts you need to navigate complex digital integrations without disrupting everyday operations.
-           </p>
+           <EditableText element="p" contentId="hero_p" defaultText="Derisk your digital transformation. We provide the tactical team of banking experts you need to navigate complex digital integrations without disrupting everyday operations." isAdmin={isAdmin} value={cmsContent.hero_p} className="font-reading text-lg md:text-xl text-white/80 max-w-3xl leading-relaxed" />
          </div>
 
          {/* Glassmorphic AI Gap Analysis Pill */}
@@ -274,29 +327,28 @@ export default function Home() {
             <div>
               <ShieldAlert className="w-12 h-12 text-[#98cc67] mb-6" />
               <h2 className={`font-display text-4xl md:text-5xl font-bold mb-6 tracking-tight leading-tight ${t.textPrimary} transition-colors`}>
-                Strategies look flawless on paper. <br/><span className={t.textMuted}>Execution is where budgets bloat.</span>
+                <EditableText element="span" contentId="problem_h2_top" defaultText="Strategies look flawless on paper." isAdmin={isAdmin} value={cmsContent.problem_h2_top} /> 
+                <br/>
+                <EditableText element="span" contentId="problem_h2_bot" defaultText="Execution is where budgets bloat." isAdmin={isAdmin} value={cmsContent.problem_h2_bot} className={t.textMuted} />
               </h2>
-              <p className={`font-reading text-lg mb-6 leading-relaxed ${t.textSecondary} transition-colors`}>
-                Modernizing massive, interconnected bank ecosystems is overwhelmingly complex. You need practical operators who do the heavy lifting, not just high-level advisors.
-              </p>
+              <EditableText element="p" contentId="problem_p" defaultText="Modernizing massive, interconnected bank ecosystems is overwhelmingly complex. You need practical operators who do the heavy lifting, not just high-level advisors." isAdmin={isAdmin} value={cmsContent.problem_p} className={`font-reading text-lg mb-6 leading-relaxed ${t.textSecondary} transition-colors`} />
+              
               <div className={`p-6 ${theme === 'light' ? 'bg-red-50' : 'bg-[#00120e]/50'} border border-red-500/20 rounded-xl backdrop-blur-sm transition-colors`}>
-                <p className={`font-ui ${theme === 'light' ? 'text-red-700' : 'text-red-400'} font-medium leading-relaxed transition-colors`}>
-                  And when digital migrations fail or M&A integrations fracture, it puts your institution’s stability and bottom line directly at risk.
-                </p>
+                <EditableText element="p" contentId="problem_red_p" defaultText="And when digital migrations fail or M&A integrations fracture, it puts your institution’s stability and bottom line directly at risk." isAdmin={isAdmin} value={cmsContent.problem_red_p} className={`font-ui ${theme === 'light' ? 'text-red-700' : 'text-red-400'} font-medium leading-relaxed transition-colors`} />
               </div>
               
               <div className="mt-8 flex flex-col sm:flex-row gap-4">
                  <Button size="lg" className="bg-primary hover:bg-primary/90 text-white font-bold shadow-[0_0_20px_rgba(152,204,103,0.2)]">
-                   Schedule a Strategy Call
+                   <EditableButtonText contentId="problem_btn_1" defaultText="Schedule a Strategy Call" isAdmin={isAdmin} value={cmsContent.problem_btn_1} />
                  </Button>
                  <Button size="lg" variant="outline" onClick={() => handleGenerateAnalysis()} className={t.outlineBtn}>
-                   Generate Gap Analysis
+                   <EditableButtonText contentId="problem_btn_2" defaultText="Generate Gap Analysis" isAdmin={isAdmin} value={cmsContent.problem_btn_2} />
                  </Button>
               </div>
             </div>
             {/* High-Contrast Execution Team Photo */}
             <div className={`relative aspect-square rounded-2xl overflow-hidden border ${t.borderBase} shadow-2xl bg-[#002a21] transition-colors`}>
-              <Image src="/images/team_working_complex_problem.png" alt="Banking Execution Team" fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover" />
+              <EditableImage contentId="problem_img" defaultSrc="/images/team_working_complex_problem.png" isAdmin={isAdmin} value={cmsContent.problem_img} alt="Banking Execution Team" fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover" />
               <div className={`absolute inset-0 bg-gradient-to-tr ${theme === 'light' ? 'from-transparent' : 'from-[#001b15]/40'} to-transparent pointer-events-none transition-colors duration-500`}></div>
             </div>
           </div>
@@ -309,8 +361,8 @@ export default function Home() {
         <div className={`max-w-7xl mx-auto w-full ${t.sectionWrapper} relative z-10`}>
           <div className="max-w-6xl w-full mx-auto relative z-10">
             <div className="mb-16">
-              <h2 className={`font-display text-4xl md:text-5xl font-bold mb-4 ${t.textPrimary} transition-colors`}>Unifying disparate systems.</h2>
-              <p className={`font-reading text-xl ${t.textMuted} transition-colors`}>Executing change management across your core banking infrastructure.</p>
+              <EditableText element="h2" contentId="value_h2" defaultText="Unifying disparate systems." isAdmin={isAdmin} value={cmsContent.value_h2} className={`font-display text-4xl md:text-5xl font-bold mb-4 ${t.textPrimary} transition-colors`} />
+              <EditableText element="p" contentId="value_p" defaultText="Executing change management across your core banking infrastructure." isAdmin={isAdmin} value={cmsContent.value_p} className={`font-reading text-xl ${t.textMuted} transition-colors`} />
             </div>
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -323,10 +375,12 @@ export default function Home() {
                  <Card key={idx} className={`${t.cardBg} backdrop-blur-sm ${t.cardHover} transition-colors border ${t.borderBase}`}>
                    <CardHeader>
                      {item.icon}
-                     <CardTitle className={`font-display text-2xl ${t.textPrimary} transition-colors`}>{item.title}</CardTitle>
+                     <CardTitle className={`font-display text-2xl ${t.textPrimary} transition-colors`}>
+                       <EditableText element="span" contentId={`value_card_${idx}_title`} defaultText={item.title} isAdmin={isAdmin} value={cmsContent[`value_card_${idx}_title`]} />
+                     </CardTitle>
                    </CardHeader>
                    <CardContent>
-                     <p className={`${t.textSecondary} font-reading leading-relaxed transition-colors`}>{item.desc}</p>
+                     <EditableText element="p" contentId={`value_card_${idx}_desc`} defaultText={item.desc} isAdmin={isAdmin} value={cmsContent[`value_card_${idx}_desc`]} className={`${t.textSecondary} font-reading leading-relaxed transition-colors`} />
                    </CardContent>
                  </Card>
               ))}
@@ -334,10 +388,10 @@ export default function Home() {
 
             <div className="mt-16 flex flex-col sm:flex-row justify-center gap-4">
               <Button size="lg" className="bg-primary hover:bg-primary/90 text-white font-bold px-8 shadow-[0_0_20px_rgba(152,204,103,0.2)]">
-                Schedule a Strategy Call
+                <EditableButtonText contentId="value_btn_1" defaultText="Schedule a Strategy Call" isAdmin={isAdmin} value={cmsContent.value_btn_1} />
               </Button>
               <Button size="lg" variant="outline" onClick={() => handleGenerateAnalysis()} className={`${t.outlineBtn} px-8`}>
-                Generate Gap Analysis
+                <EditableButtonText contentId="value_btn_2" defaultText="Generate Gap Analysis" isAdmin={isAdmin} value={cmsContent.value_btn_2} />
               </Button>
             </div>
           </div>
@@ -349,10 +403,8 @@ export default function Home() {
         <div className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[60vw] h-[40vw] rounded-full blur-[150px] pointer-events-none transition-colors duration-500 ${t.orb3}`} />
         <div className={`max-w-7xl mx-auto w-full ${t.sectionWrapper} relative z-10`}>
           <div className="max-w-6xl w-full mx-auto text-center mb-16 relative z-10">
-            <h2 className={`font-display text-4xl md:text-5xl font-bold mb-6 ${t.textPrimary} transition-colors`}>Your modernization is in safe hands.</h2>
-            <p className={`font-reading text-xl ${t.textSecondary} max-w-3xl mx-auto leading-relaxed transition-colors`}>
-              We combine deep banking experience with modern technology expertise. Because we have the ability to operate across strategy, implementation, and execution, your modernization is always in safe hands.
-            </p>
+            <EditableText element="h2" contentId="guide_h2" defaultText="Your modernization is in safe hands." isAdmin={isAdmin} value={cmsContent.guide_h2} className={`font-display text-4xl md:text-5xl font-bold mb-6 ${t.textPrimary} transition-colors`} />
+            <EditableText element="p" contentId="guide_p" defaultText="We combine deep banking experience with modern technology expertise. Because we have the ability to operate across strategy, implementation, and execution, your modernization is always in safe hands." isAdmin={isAdmin} value={cmsContent.guide_p} className={`font-reading text-xl ${t.textSecondary} max-w-3xl mx-auto leading-relaxed transition-colors`} />
           </div>
 
           {/* Logo Banner */}
@@ -367,7 +419,7 @@ export default function Home() {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto w-full relative z-10">
             {[1,2,3,4].map(i => (
                <div key={i} className={`relative aspect-[3/4] rounded-lg border ${t.borderBase} overflow-hidden group transition-colors`}>
-                 <Image src={`/images/leadership_portrait_${i}.png`} alt={`Leadership Portrait ${i}`} fill className="object-cover transition-transform duration-700 group-hover:scale-105" />
+                 <EditableImage contentId={`leader_img_${i}`} defaultSrc={`/images/leadership_portrait_${i}.png`} isAdmin={isAdmin} value={cmsContent[`leader_img_${i}`]} alt={`Leadership Portrait ${i}`} fill className="object-cover transition-transform duration-700 group-hover:scale-105" />
                  <div className={`absolute inset-0 bg-gradient-to-t ${theme === 'light' ? 'from-slate-900/80 via-transparent' : 'from-[#001b15]/90 via-[#001b15]/20'} to-transparent pointer-events-none opacity-80 group-hover:opacity-100 transition-opacity duration-500`}></div>
                </div>
             ))}
@@ -381,7 +433,7 @@ export default function Home() {
         <div className={`max-w-7xl mx-auto w-full ${t.sectionWrapper} relative z-10`}>
           <div className="max-w-6xl w-full mx-auto relative z-10">
             <div className="text-center mb-20">
-              <h2 className={`font-display text-4xl md:text-5xl font-bold mb-4 ${t.textPrimary} transition-colors`}>Three simple steps to derisk your transformation.</h2>
+              <EditableText element="h2" contentId="plan_h2" defaultText="Three simple steps to derisk your transformation." isAdmin={isAdmin} value={cmsContent.plan_h2} className={`font-display text-4xl md:text-5xl font-bold mb-4 ${t.textPrimary} transition-colors`} />
             </div>
             
             <div className="grid grid-cols-1 md:grid-cols-3 gap-12 relative">
@@ -407,10 +459,10 @@ export default function Home() {
 
             <div className="mt-20 flex flex-col sm:flex-row justify-center gap-4">
               <Button size="lg" className="bg-primary hover:bg-primary/90 text-white font-bold px-10 py-6 text-lg shadow-[0_0_25px_rgba(152,204,103,0.25)] hover:scale-105 transition-transform">
-                Schedule a Strategy Call
+                <EditableButtonText contentId="plan_btn_1" defaultText="Schedule a Strategy Call" isAdmin={isAdmin} value={cmsContent.plan_btn_1} />
               </Button>
               <Button size="lg" variant="outline" onClick={() => handleGenerateAnalysis()} className={`${t.outlineBtn} px-10 py-6 text-lg`}>
-                Generate Gap Analysis
+                <EditableButtonText contentId="plan_btn_2" defaultText="Generate Gap Analysis" isAdmin={isAdmin} value={cmsContent.plan_btn_2} />
               </Button>
             </div>
           </div>
@@ -425,8 +477,8 @@ export default function Home() {
             <div className="flex items-center gap-4 mb-8">
               <FileText className="w-10 h-10 text-[#98cc67]" />
               <div>
-                <h2 className={`font-display text-3xl font-bold ${t.textPrimary} transition-colors`}>Procurement & Trust Center</h2>
-                <p className={`${t.textSecondary} transition-colors`}>Fast, frictionless vendor onboarding.</p>
+                <EditableText element="h2" contentId="trust_h2" defaultText="Procurement & Trust Center" isAdmin={isAdmin} value={cmsContent.trust_h2} className={`font-display text-3xl font-bold ${t.textPrimary} transition-colors`} />
+                <EditableText element="p" contentId="trust_p" defaultText="Fast, frictionless vendor onboarding." isAdmin={isAdmin} value={cmsContent.trust_p} className={`${t.textSecondary} transition-colors`} />
               </div>
             </div>
             
@@ -444,13 +496,13 @@ export default function Home() {
         {/* FINAL CTA & DYNAMIC FOOTER */}
         <footer className={`pt-24 pb-12 px-6 md:px-12 mt-auto bg-transparent`}>
           <div className="max-w-6xl mx-auto flex flex-col items-center text-center mb-24">
-            <h2 className={`font-display text-5xl md:text-6xl font-bold mb-8 ${t.textPrimary} transition-colors`}>Ready to stop planning and start executing?</h2>
+            <EditableText element="h2" contentId="footer_cta_h2" defaultText="Ready to stop planning and start executing?" isAdmin={isAdmin} value={cmsContent.footer_cta_h2} className={`font-display text-5xl md:text-6xl font-bold mb-8 ${t.textPrimary} transition-colors`} />
             <div className="flex flex-col sm:flex-row gap-4">
               <Button size="lg" className="bg-primary hover:bg-primary/90 text-white font-bold px-8">
-                Schedule a Strategy Call
+                <EditableButtonText contentId="footer_btn_1" defaultText="Schedule a Strategy Call" isAdmin={isAdmin} value={cmsContent.footer_btn_1} />
               </Button>
               <Button size="lg" variant="outline" onClick={() => handleGenerateAnalysis()} className={`bg-white text-[#001b15] hover:bg-white/90 font-bold ${theme === 'light' ? 'border border-[#001b15]/10' : 'border-none'}`}>
-                Generate a Gap Analysis
+                <EditableButtonText contentId="footer_btn_2" defaultText="Generate a Gap Analysis" isAdmin={isAdmin} value={cmsContent.footer_btn_2} />
               </Button>
             </div>
           </div>
@@ -476,6 +528,7 @@ export default function Home() {
                 <span className={`hover:${t.textHighlight} cursor-pointer transition-colors`}>Careers</span>
                 <span className={`hover:${t.textHighlight} cursor-pointer transition-colors`}>Privacy Policy</span>
                 <span className={`hover:${t.textHighlight} cursor-pointer transition-colors`}>Terms of Service</span>
+                {!user && <span onClick={() => setShowLoginModal(true)} className={`hover:${t.textHighlight} cursor-pointer transition-colors opacity-50 hover:opacity-100`}>Admin Login</span>}
               </div>
             </div>
           </div>

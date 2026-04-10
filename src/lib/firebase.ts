@@ -1,6 +1,8 @@
 import { initializeApp, getApps, getApp } from "firebase/app";
 import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+import { getFirestore } from "firebase/firestore";
 import { getAnalytics, isSupported } from "firebase/analytics";
+import { getAuth } from "firebase/auth";
 
 // Explicit placeholders for Firebase Environment Variables
 const firebaseConfig = {
@@ -27,7 +29,10 @@ if (typeof window !== "undefined") {
   });
 }
 
-export { storage, analytics, app };
+const db = getFirestore(app);
+const auth = getAuth(app);
+
+export { storage, analytics, app, db, auth };
 
 /**
  * Uploads a browser File object to Firebase Storage
