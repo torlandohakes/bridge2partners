@@ -7,6 +7,9 @@ import { ChevronDown, ArrowRight, BrainCircuit, ShieldAlert, Zap, Landmark, Hand
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import GapAnalysisModal from "@/components/GapAnalysisModal";
+import ChallengeInputModal from "@/components/ChallengeInputModal";
+import StrategyCallModal from "@/components/StrategyCallModal";
+import LinkedInFeed from "@/components/LinkedInFeed";
 import LoginModal from "@/components/LoginModal";
 import EditableText from "@/components/EditableText";
 import EditableButtonText from "@/components/EditableButtonText";
@@ -144,6 +147,8 @@ export default function Home() {
 
   const [promptText, setPromptText] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isChallengeModalOpen, setIsChallengeModalOpen] = useState(false);
+  const [isStrategyModalOpen, setIsStrategyModalOpen] = useState(false);
   const [modalLoading, setModalLoading] = useState(false);
   const [modalReport, setModalReport] = useState<string | null>(null);
 
@@ -206,6 +211,17 @@ export default function Home() {
          onClose={() => setIsModalOpen(false)} 
          reportMarkdown={modalReport} 
          isLoading={modalLoading} 
+         theme={theme}
+      />
+      <ChallengeInputModal 
+         isOpen={isChallengeModalOpen}
+         onClose={() => setIsChallengeModalOpen(false)}
+         onSubmit={handleGenerateAnalysis}
+         theme={theme}
+      />
+      <StrategyCallModal 
+         isOpen={isStrategyModalOpen}
+         onClose={() => setIsStrategyModalOpen(false)}
          theme={theme}
       />
       
@@ -310,7 +326,7 @@ export default function Home() {
               <Button variant="outline" className="hidden md:flex border-white/20 hover:bg-white/10 text-white font-normal bg-white/5">
                 <EditableButtonText contentId="nav_btn_1" defaultText="View Procurement Docs" isAdmin={isAdmin} value={cmsContent.nav_btn_1} />
               </Button>
-              <Button variant="default" className="bg-primary/80 backdrop-blur-[10px] border border-white/20 hover:bg-primary/90 text-white font-bold">
+              <Button variant="default" onClick={() => setIsStrategyModalOpen(true)} className="bg-primary/80 backdrop-blur-[10px] border border-white/20 hover:bg-primary/90 text-white font-bold">
                 <EditableButtonText contentId="nav_btn_2" defaultText="Schedule a Strategy Call" isAdmin={isAdmin} value={cmsContent.nav_btn_2} />
               </Button>
             </div>
@@ -378,10 +394,10 @@ export default function Home() {
               </div>
               
               <div className="mt-8 flex flex-col sm:flex-row gap-4">
-                 <Button size="lg" className="bg-primary/80 backdrop-blur-[10px] border border-white/20 hover:bg-primary/90 text-white font-bold">
+                 <Button size="lg" onClick={() => setIsStrategyModalOpen(true)} className="bg-primary/80 backdrop-blur-[10px] border border-white/20 hover:bg-primary/90 text-white font-bold">
                    <EditableButtonText contentId="problem_btn_1" defaultText="Schedule a Strategy Call" isAdmin={isAdmin} value={cmsContent.problem_btn_1} />
                  </Button>
-                 <Button size="lg" variant="outline" onClick={() => handleGenerateAnalysis()} className={t.outlineBtn}>
+                 <Button size="lg" variant="outline" onClick={() => setIsChallengeModalOpen(true)} className={t.outlineBtn}>
                    <EditableButtonText contentId="problem_btn_2" defaultText="Generate Gap Analysis" isAdmin={isAdmin} value={cmsContent.problem_btn_2} />
                  </Button>
               </div>
@@ -456,10 +472,10 @@ export default function Home() {
             </div>
 
             <div className="mt-16 flex flex-col sm:flex-row justify-center gap-4">
-              <Button size="lg" className="bg-primary/80 backdrop-blur-[10px] border border-white/20 hover:bg-primary/90 text-white font-bold px-8">
+              <Button size="lg" onClick={() => setIsStrategyModalOpen(true)} className="bg-primary/80 backdrop-blur-[10px] border border-white/20 hover:bg-primary/90 text-white font-bold px-8">
                 <EditableButtonText contentId="value_btn_1" defaultText="Schedule a Strategy Call" isAdmin={isAdmin} value={cmsContent.value_btn_1} />
               </Button>
-              <Button size="lg" variant="outline" onClick={() => handleGenerateAnalysis()} className={`${t.outlineBtn} px-8`}>
+              <Button size="lg" variant="outline" onClick={() => setIsChallengeModalOpen(true)} className={`${t.outlineBtn} px-8`}>
                 <EditableButtonText contentId="value_btn_2" defaultText="Generate Gap Analysis" isAdmin={isAdmin} value={cmsContent.value_btn_2} />
               </Button>
             </div>
@@ -597,10 +613,10 @@ export default function Home() {
             </div>
 
             <div className="mt-20 flex flex-col sm:flex-row justify-center gap-4">
-              <Button size="lg" className="bg-primary/80 backdrop-blur-[10px] border border-white/20 hover:bg-primary/90 text-white font-bold px-10 py-6 text-lg hover:scale-105 transition-all">
+              <Button size="lg" onClick={() => setIsStrategyModalOpen(true)} className="bg-primary/80 backdrop-blur-[10px] border border-white/20 hover:bg-primary/90 text-white font-bold px-10 py-6 text-lg hover:scale-105 transition-all">
                 <EditableButtonText contentId="plan_btn_1" defaultText="Schedule a Strategy Call" isAdmin={isAdmin} value={cmsContent.plan_btn_1} />
               </Button>
-              <Button size="lg" variant="outline" onClick={() => handleGenerateAnalysis()} className={`${t.outlineBtn} px-10 py-6 text-lg`}>
+              <Button size="lg" variant="outline" onClick={() => setIsChallengeModalOpen(true)} className={`${t.outlineBtn} px-10 py-6 text-lg`}>
                 <EditableButtonText contentId="plan_btn_2" defaultText="Generate Gap Analysis" isAdmin={isAdmin} value={cmsContent.plan_btn_2} />
               </Button>
             </div>
@@ -609,27 +625,26 @@ export default function Home() {
       </section>
 
       {/* ================= TRUST CENTER (PROCUREMENT) & FOOTER CTA ================= */}
-      <section className={`flex flex-col justify-center pt-24 ${t.bgTrust} relative z-10 transition-colors duration-500`}>
-        
-        <div className={`max-w-7xl mx-auto w-full ${t.sectionWrapper} relative z-10 mb-32`}>
-          <div className="max-w-4xl w-full mx-auto px-6 md:px-12">
-            <div className="flex items-center gap-4 mb-8">
-              <FileText className="w-10 h-10 text-[#98cc67]" />
-              <div>
-                <EditableText element="h2" contentId="trust_h2" defaultText="Procurement Documentation" isAdmin={isAdmin} value={cmsContent.trust_h2} className={`font-display text-3xl font-bold ${t.textPrimary} transition-colors`} />
-                <EditableText element="p" contentId="trust_p" defaultText="Fast, frictionless vendor onboarding." isAdmin={isAdmin} value={cmsContent.trust_p} className={`${t.textSecondary} transition-colors`} />
-              </div>
-            </div>
-            
-            <div className={`bg-white/20 backdrop-blur-2xl rounded-2xl border border-white/30 p-2 shadow-2xl transition-colors duration-500`}>
-              {['Legal Entity Overview', 'Financial Stability Indicators', 'Insurance Coverage Limits', 'Compliance Standards', 'Data Security Approach'].map((doc, i) => (
-                <div key={i} className={`flex items-center justify-between p-5 ${theme === 'light' ? 'hover:bg-slate-50 border-b border-slate-100' : 'hover:bg-white/5 border-b border-white/5'} last:border-0 cursor-pointer group transition-colors`}>
-                  <span className={`font-ui font-medium ${t.textSecondary} group-hover:${t.textHighlight} transition-colors`}>{doc}</span>
-                  <ArrowRight className={`w-4 h-4 ${t.textMuted} group-hover:text-[#98cc67] transition-colors`} />
-                </div>
-              ))}
+      <section className={`relative z-10 px-6 md:px-12 py-24 md:py-32 flex flex-col justify-center transition-colors duration-500 ${t.bgTrust}`}>
+        <div className="max-w-6xl w-full mx-auto relative z-10">
+          
+          <div className="flex items-center gap-4 mb-8">
+            <FileText className="w-10 h-10 text-[#98cc67]" />
+            <div>
+              <EditableText element="h2" contentId="trust_h2" defaultText="Procurement Documentation" isAdmin={isAdmin} value={cmsContent.trust_h2} className={`font-display text-3xl font-bold ${t.textPrimary} transition-colors`} />
+              <EditableText element="p" contentId="trust_p" defaultText="Fast, frictionless vendor onboarding." isAdmin={isAdmin} value={cmsContent.trust_p} className={`${t.textSecondary} transition-colors`} />
             </div>
           </div>
+          
+          <div className={`bg-white/20 backdrop-blur-2xl rounded-2xl border border-white/30 p-2 shadow-2xl transition-colors duration-500`}>
+            {['Legal Entity Overview', 'Financial Stability Indicators', 'Insurance Coverage Limits', 'Compliance Standards', 'Data Security Approach'].map((doc, i) => (
+              <div key={i} className={`flex items-center justify-between p-6 ${theme === 'light' ? 'hover:bg-slate-50 border-b border-slate-100' : 'hover:bg-white/5 border-b border-white/5'} last:border-0 cursor-pointer group transition-colors`}>
+                <span className={`font-ui font-medium text-lg lg:text-xl ${t.textSecondary} group-hover:${t.textHighlight} transition-colors`}>{doc}</span>
+                <ArrowRight className={`w-5 h-5 ${t.textMuted} group-hover:text-[#98cc67] transition-colors`} />
+              </div>
+            ))}
+          </div>
+
         </div>
 
         {/* FINAL CTA & DYNAMIC FOOTER */}
@@ -637,10 +652,10 @@ export default function Home() {
           <div className="max-w-6xl mx-auto flex flex-col items-center text-center mb-24">
             <EditableText element="h2" contentId="footer_cta_h2" defaultText="Ready to stop planning and start executing?" isAdmin={isAdmin} value={cmsContent.footer_cta_h2} className={`font-display text-5xl md:text-6xl font-bold mb-8 ${t.textPrimary} transition-colors`} />
             <div className="flex flex-col sm:flex-row gap-4">
-              <Button size="lg" className="bg-primary/80 backdrop-blur-[10px] border border-white/20 hover:bg-primary/90 text-white font-bold px-8">
+              <Button size="lg" onClick={() => setIsStrategyModalOpen(true)} className="bg-primary/80 backdrop-blur-[10px] border border-white/20 hover:bg-primary/90 text-white font-bold px-8">
                 <EditableButtonText contentId="footer_btn_1" defaultText="Schedule a Strategy Call" isAdmin={isAdmin} value={cmsContent.footer_btn_1} />
               </Button>
-              <Button size="lg" variant="outline" onClick={() => handleGenerateAnalysis()} className={`bg-white text-[#001b15] hover:bg-white/90 font-bold ${theme === 'light' ? 'border border-[#001b15]/10' : 'border-none'}`}>
+              <Button size="lg" variant="outline" onClick={() => setIsChallengeModalOpen(true)} className={`bg-white text-[#001b15] hover:bg-white/90 font-bold ${theme === 'light' ? 'border border-[#001b15]/10' : 'border-none'}`}>
                 <EditableButtonText contentId="footer_btn_2" defaultText="Generate a Gap Analysis" isAdmin={isAdmin} value={cmsContent.footer_btn_2} />
               </Button>
             </div>
@@ -648,19 +663,7 @@ export default function Home() {
 
           <div className={`max-w-6xl mx-auto border-t ${t.borderBase} pt-12 transition-colors`}>
             <h3 className={`font-ui text-sm ${t.textMuted} uppercase tracking-widest mb-6 font-bold transition-colors`}>Market Momentum</h3>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-               {[1,2,3].map(i => (
-                 <div key={i} className={`${theme === 'light' ? 'bg-white border-[#001b15]/10 shadow-sm' : 'bg-white/5 border-white/10'} border rounded-xl p-6 transition-colors`}>
-                   <div className="flex items-center gap-3 mb-4">
-                     <div className="w-8 h-8 rounded-full bg-blue-600/20 flex items-center justify-center"><CheckCircle2 className="w-4 h-4 text-blue-400" /></div>
-                     <div className={`text-xs font-ui ${t.textSecondary} transition-colors`}>Bridge2Partners • LinkedIn</div>
-                   </div>
-                   <div className={`h-4 ${theme === 'light' ? 'bg-slate-100' : 'bg-white/20'} rounded w-3/4 mb-2 transition-colors`}></div>
-                   <div className={`h-4 ${theme === 'light' ? 'bg-slate-100' : 'bg-white/20'} rounded w-full mb-2 transition-colors`}></div>
-                   <div className={`h-4 ${theme === 'light' ? 'bg-slate-100' : 'bg-white/20'} rounded w-5/6 transition-colors`}></div>
-                 </div>
-               ))}
-            </div>
+            <LinkedInFeed theme={theme} />
             <div className={`mt-16 flex flex-col md:flex-row items-center justify-between text-xs ${t.textMuted} font-ui transition-colors`}>
               <span>© 2026 Bridge2Partners. All rights reserved.</span>
               <div className="flex gap-6 mt-4 md:mt-0">
