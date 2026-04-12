@@ -316,15 +316,22 @@ export default function Home() {
               <div className="relative group hidden md:block">
                 <span className="flex items-center gap-1 cursor-pointer hover:text-white transition-colors tracking-normal normal-case py-4">Services <ChevronDown className="w-4 h-4 opacity-60 transition-transform group-hover:rotate-180" /></span>
                 <div className="absolute top-[85%] left-0 mt-1 w-52 bg-[#001b15]/90 backdrop-blur-xl border border-white/20 rounded-xl shadow-2xl opacity-0 translate-y-2 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto transition-all duration-300 flex flex-col p-2">
-                  {['Wealth Management', 'Commercial Lending', 'M&A Integrations', 'Treasury Solutions'].map(vertical => (
-                    <span key={vertical} className="px-3 py-2.5 text-white/80 hover:text-white hover:bg-white/10 rounded-lg cursor-pointer transition-colors text-sm font-medium tracking-normal normal-case">
-                      {vertical}
-                    </span>
+                  {[
+                    { label: 'Wealth Management', href: '/services/wealth' },
+                    { label: 'Commercial Lending', href: '/services/commercial-lending' },
+                    { label: 'M&A Integrations', href: '/services/ma-integration' },
+                    { label: 'Treasury Solutions', href: '/services/treasury' }
+                  ].map(vertical => (
+                    <Link href={vertical.href} key={vertical.label} className="px-3 py-2.5 text-white/80 hover:text-white hover:bg-white/10 rounded-lg cursor-pointer transition-colors text-sm font-medium tracking-normal normal-case block">
+                      {vertical.label}
+                    </Link>
                   ))}
                 </div>
               </div>
-              <Button variant="outline" className="hidden md:flex border-white/20 hover:bg-white/10 text-white font-normal bg-white/5">
-                <EditableButtonText contentId="nav_btn_1" defaultText="View Procurement Docs" isAdmin={isAdmin} value={cmsContent.nav_btn_1} />
+              <Button asChild variant="outline" className="hidden md:flex border-white/20 hover:bg-white/10 text-white font-normal bg-white/5">
+                <Link href="/procurement">
+                  <EditableButtonText contentId="nav_btn_1" defaultText="View Procurement Docs" isAdmin={isAdmin} value={cmsContent.nav_btn_1} />
+                </Link>
               </Button>
               <Button variant="default" onClick={() => setIsStrategyModalOpen(true)} className="bg-primary/80 backdrop-blur-[10px] border border-white/20 hover:bg-primary/90 text-white font-bold">
                 <EditableButtonText contentId="nav_btn_2" defaultText="Schedule a Strategy Call" isAdmin={isAdmin} value={cmsContent.nav_btn_2} />
