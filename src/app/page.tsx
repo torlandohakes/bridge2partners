@@ -579,6 +579,14 @@ export default function Home() {
             </div>
 
           </div>
+
+          <div className="mt-12 flex justify-center relative z-10 w-full">
+            <Link href="/team">
+              <Button size="lg" variant="outline" className={`${t.outlineBtn} px-10 py-6 text-lg hover:scale-105 transition-all`}>
+                <EditableButtonText contentId="meet_team_btn" defaultText="Meet Our Full Team" isAdmin={isAdmin} value={cmsContent.meet_team_btn} />
+              </Button>
+            </Link>
+          </div>
         </div>
       </section>
 
@@ -682,6 +690,7 @@ export default function Home() {
             <div className={`mt-16 flex flex-col md:flex-row items-center justify-between text-xs ${t.textMuted} font-ui transition-colors`}>
               <span>© 2026 Bridge2Partners. All rights reserved.</span>
               <div className="flex gap-6 mt-4 md:mt-0">
+                <Link href="/team" className={`hover:${t.textHighlight} cursor-pointer transition-colors`}>Team</Link>
                 <span className={`hover:${t.textHighlight} cursor-pointer transition-colors`}>Careers</span>
                 <span className={`hover:${t.textHighlight} cursor-pointer transition-colors`}>Privacy Policy</span>
                 <span className={`hover:${t.textHighlight} cursor-pointer transition-colors`}>Terms of Service</span>
