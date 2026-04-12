@@ -637,9 +637,22 @@ export default function Home() {
           </div>
           
           <div className={`bg-white/20 backdrop-blur-2xl rounded-2xl border border-white/30 p-2 shadow-2xl transition-colors duration-500`}>
-            {['Legal Entity Overview', 'Financial Stability Indicators', 'Insurance Coverage Limits', 'Compliance Standards', 'Data Security Approach'].map((doc, i) => (
+            {[
+              { id: 'procurement_doc_1', text: 'Legal Entity Overview' },
+              { id: 'procurement_doc_2', text: 'Financial Stability Indicators' },
+              { id: 'procurement_doc_3', text: 'Insurance Coverage Limits' },
+              { id: 'procurement_doc_4', text: 'Compliance Standards' },
+              { id: 'procurement_doc_5', text: 'Data Security Approach' }
+            ].map((doc, i) => (
               <div key={i} className={`flex items-center justify-between p-6 ${theme === 'light' ? 'hover:bg-slate-50 border-b border-slate-100' : 'hover:bg-white/5 border-b border-white/5'} last:border-0 cursor-pointer group transition-colors`}>
-                <span className={`font-ui font-medium text-lg lg:text-xl ${t.textSecondary} group-hover:${t.textHighlight} transition-colors`}>{doc}</span>
+                <EditableText 
+                  element="span" 
+                  contentId={doc.id} 
+                  defaultText={doc.text} 
+                  isAdmin={isAdmin} 
+                  value={cmsContent[doc.id as keyof typeof cmsContent]} 
+                  className={`font-ui font-medium text-lg lg:text-xl ${t.textSecondary} group-hover:${t.textHighlight} transition-colors`} 
+                />
                 <ArrowRight className={`w-5 h-5 ${t.textMuted} group-hover:text-[#98cc67] transition-colors`} />
               </div>
             ))}
