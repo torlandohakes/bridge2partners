@@ -597,18 +597,18 @@ export default function Home() {
               
               <div className="relative z-10 flex flex-col items-center text-center">
                 <div className={`w-24 h-24 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center text-3xl font-display font-bold ${theme === 'dark' ? 'text-[#98cc67] shadow-[inset_0_0_20px_rgba(255,255,255,0.05),_0_0_30px_rgba(152,204,103,0.15)]' : 'text-[#00573f] shadow-[inset_0_0_20px_rgba(255,255,255,0.05),_0_0_30px_rgba(0,87,63,0.3)]'} mb-8 transition-colors`}>1</div>
-                <h3 className={`text-2xl font-display font-bold mb-4 ${t.textPrimary} transition-colors`}>Assess your infrastructure.</h3>
-                <p className={`${t.textSecondary} font-reading leading-relaxed transition-colors`}>Using our AI-Powered Gap Analysis tool.</p>
+                <EditableText element="h3" contentId="plan_step_1_h3" defaultText="Assess your infrastructure." isAdmin={isAdmin} value={cmsContent.plan_step_1_h3} className={`text-2xl font-display font-bold mb-4 ${t.textPrimary} transition-colors`} />
+                <EditableText element="p" contentId="plan_step_1_p" defaultText="Using our AI-Powered Gap Analysis tool." isAdmin={isAdmin} value={cmsContent.plan_step_1_p} className={`${t.textSecondary} font-reading leading-relaxed transition-colors`} />
               </div>
               <div className="relative z-10 flex flex-col items-center text-center">
                 <div className={`w-24 h-24 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center text-3xl font-display font-bold ${theme === 'dark' ? 'text-[#98cc67] shadow-[inset_0_0_20px_rgba(255,255,255,0.05),_0_0_30px_rgba(152,204,103,0.15)]' : 'text-[#00573f] shadow-[inset_0_0_20px_rgba(255,255,255,0.05),_0_0_30px_rgba(0,87,63,0.3)]'} mb-8 transition-colors`}>2</div>
-                <h3 className={`text-2xl font-display font-bold mb-4 ${t.textPrimary} transition-colors`}>Schedule a Strategy Call.</h3>
-                <p className={`${t.textSecondary} font-reading leading-relaxed transition-colors`}>To map a phased integration strategy.</p>
+                <EditableText element="h3" contentId="plan_step_2_h3" defaultText="Schedule a Strategy Call." isAdmin={isAdmin} value={cmsContent.plan_step_2_h3} className={`text-2xl font-display font-bold mb-4 ${t.textPrimary} transition-colors`} />
+                <EditableText element="p" contentId="plan_step_2_p" defaultText="To map a phased integration strategy." isAdmin={isAdmin} value={cmsContent.plan_step_2_p} className={`${t.textSecondary} font-reading leading-relaxed transition-colors`} />
               </div>
               <div className="relative z-10 flex flex-col items-center text-center">
                 <div className={`w-24 h-24 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center text-3xl font-display font-bold ${theme === 'dark' ? 'text-[#98cc67] shadow-[inset_0_0_20px_rgba(255,255,255,0.05),_0_0_30px_rgba(152,204,103,0.15)]' : 'text-[#00573f] shadow-[inset_0_0_20px_rgba(255,255,255,0.05),_0_0_30px_rgba(0,87,63,0.3)]'} mb-8 transition-colors`}>3</div>
-                <h3 className={`text-2xl font-display font-bold mb-4 ${t.textPrimary} transition-colors`}>Execute the change.</h3>
-                <p className={`${t.textSecondary} font-reading leading-relaxed transition-colors`}>We embed with your team to deliver the outcomes.</p>
+                <EditableText element="h3" contentId="plan_step_3_h3" defaultText="Execute the change." isAdmin={isAdmin} value={cmsContent.plan_step_3_h3} className={`text-2xl font-display font-bold mb-4 ${t.textPrimary} transition-colors`} />
+                <EditableText element="p" contentId="plan_step_3_p" defaultText="We embed with your team to deliver the outcomes." isAdmin={isAdmin} value={cmsContent.plan_step_3_p} className={`${t.textSecondary} font-reading leading-relaxed transition-colors`} />
               </div>
             </div>
 
