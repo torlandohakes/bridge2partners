@@ -518,6 +518,12 @@ export default function Home() {
                   </button>
                 );
               })}
+              
+              <Link href="/team" className="mt-4">
+                <Button size="lg" variant="outline" className={`w-full ${t.outlineBtn} py-6 text-lg hover:scale-[1.02] transition-all`}>
+                  <EditableButtonText contentId="meet_team_btn" defaultText="Meet Our Full Team" isAdmin={isAdmin} value={cmsContent.meet_team_btn} />
+                </Button>
+              </Link>
             </div>
 
             {/* Right Column (Dynamic Pedigree Panel) */}
@@ -578,14 +584,6 @@ export default function Home() {
               })()}
             </div>
 
-          </div>
-
-          <div className="mt-12 flex justify-center relative z-10 w-full">
-            <Link href="/team">
-              <Button size="lg" variant="outline" className={`${t.outlineBtn} px-10 py-6 text-lg hover:scale-105 transition-all`}>
-                <EditableButtonText contentId="meet_team_btn" defaultText="Meet Our Full Team" isAdmin={isAdmin} value={cmsContent.meet_team_btn} />
-              </Button>
-            </Link>
           </div>
         </div>
       </section>
