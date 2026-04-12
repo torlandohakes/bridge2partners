@@ -646,13 +646,13 @@ export default function Home() {
           
           <div className={`bg-white/20 backdrop-blur-2xl rounded-2xl border border-white/30 p-2 shadow-2xl transition-colors duration-500`}>
             {[
-              { id: 'procurement_doc_1', text: 'Legal Entity Overview' },
-              { id: 'procurement_doc_2', text: 'Financial Stability Indicators' },
-              { id: 'procurement_doc_3', text: 'Insurance Coverage Limits' },
-              { id: 'procurement_doc_4', text: 'Compliance Standards' },
-              { id: 'procurement_doc_5', text: 'Data Security Approach' }
+              { id: 'procurement_doc_1', text: 'Legal Entity Overview', hash: 'legal-entity-overview' },
+              { id: 'procurement_doc_2', text: 'Financial Stability Indicators', hash: 'financial-stability-indicators' },
+              { id: 'procurement_doc_3', text: 'Insurance Coverage Limits', hash: 'insurance-coverage-limits' },
+              { id: 'procurement_doc_4', text: 'Compliance Standards', hash: 'compliance-standards' },
+              { id: 'procurement_doc_5', text: 'Data Security Approach', hash: 'data-security-approach' }
             ].map((doc, i) => (
-              <div key={i} className={`flex items-center justify-between p-6 ${theme === 'light' ? 'hover:bg-slate-50 border-b border-slate-100' : 'hover:bg-white/5 border-b border-white/5'} last:border-0 cursor-pointer group transition-colors`}>
+              <Link href={`/procurement#${doc.hash}`} key={i} className={`flex items-center justify-between p-6 ${theme === 'light' ? 'hover:bg-slate-50 border-b border-slate-100' : 'hover:bg-white/5 border-b border-white/5'} last:border-0 cursor-pointer group transition-colors block w-full`}>
                 <EditableText 
                   element="span" 
                   contentId={doc.id} 
@@ -662,7 +662,7 @@ export default function Home() {
                   className={`font-ui font-medium text-lg lg:text-xl ${t.textSecondary} group-hover:${t.textHighlight} transition-colors`} 
                 />
                 <ArrowRight className={`w-5 h-5 ${t.textMuted} group-hover:text-[#98cc67] transition-colors`} />
-              </div>
+              </Link>
             ))}
           </div>
 
