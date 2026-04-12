@@ -592,8 +592,7 @@ export default function Home() {
             </div>
             
             <div className="grid grid-cols-1 md:grid-cols-3 gap-12 relative">
-              {/* Connecting line for desktop */}
-              <div className={`hidden md:block absolute top-12 left-[16%] right-[16%] h-[2px] ${theme === 'light' ? 'bg-[#001b15]/10' : 'bg-white/10'} z-0 transition-colors`}></div>
+              {/* Removed continuous connecting line to prevent overlapping with glass circles */}
               
               <div className="relative z-10 flex flex-col items-center text-center">
                 <div className={`w-24 h-24 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center text-3xl font-display font-bold ${theme === 'dark' ? 'text-[#98cc67] shadow-[inset_0_0_20px_rgba(255,255,255,0.05),_0_0_30px_rgba(152,204,103,0.15)]' : 'text-[#00573f] shadow-[inset_0_0_20px_rgba(255,255,255,0.05),_0_0_30px_rgba(0,87,63,0.3)]'} mb-8 transition-colors`}>1</div>
@@ -601,6 +600,9 @@ export default function Home() {
                 <EditableText element="p" contentId="plan_step_1_p" defaultText="Using our AI-Powered Gap Analysis tool." isAdmin={isAdmin} value={cmsContent.plan_step_1_p} className={`${t.textSecondary} font-reading leading-relaxed transition-colors`} />
               </div>
               <div className="relative z-10 flex flex-col items-center text-center">
+                {/* Geometrically mapped connecting lines that span exactly between circle boundaries */}
+                <div className={`hidden md:block absolute top-12 right-[calc(50%+3rem)] w-[calc(100%-3rem)] h-[2px] ${theme === 'light' ? 'bg-[#001b15]/10' : 'bg-white/10'} -z-10 transition-colors`}></div>
+                <div className={`hidden md:block absolute top-12 left-[calc(50%+3rem)] w-[calc(100%-3rem)] h-[2px] ${theme === 'light' ? 'bg-[#001b15]/10' : 'bg-white/10'} -z-10 transition-colors`}></div>
                 <div className={`w-24 h-24 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center text-3xl font-display font-bold ${theme === 'dark' ? 'text-[#98cc67] shadow-[inset_0_0_20px_rgba(255,255,255,0.05),_0_0_30px_rgba(152,204,103,0.15)]' : 'text-[#00573f] shadow-[inset_0_0_20px_rgba(255,255,255,0.05),_0_0_30px_rgba(0,87,63,0.3)]'} mb-8 transition-colors`}>2</div>
                 <EditableText element="h3" contentId="plan_step_2_h3" defaultText="Schedule a Strategy Call." isAdmin={isAdmin} value={cmsContent.plan_step_2_h3} className={`text-2xl font-display font-bold mb-4 ${t.textPrimary} transition-colors`} />
                 <EditableText element="p" contentId="plan_step_2_p" defaultText="To map a phased integration strategy." isAdmin={isAdmin} value={cmsContent.plan_step_2_p} className={`${t.textSecondary} font-reading leading-relaxed transition-colors`} />
