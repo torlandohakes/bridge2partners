@@ -696,9 +696,9 @@ export default function Home() {
               <span>© 2026 Bridge2Partners. All rights reserved.</span>
               <div className="flex gap-6 mt-4 md:mt-0">
                 <Link href="/team" className={`hover:${t.textHighlight} cursor-pointer transition-colors`}>Team</Link>
-                <span className={`hover:${t.textHighlight} cursor-pointer transition-colors`}>Careers</span>
-                <span className={`hover:${t.textHighlight} cursor-pointer transition-colors`}>Privacy Policy</span>
-                <span className={`hover:${t.textHighlight} cursor-pointer transition-colors`}>Terms of Service</span>
+                <Link href="/careers" className={`hover:${t.textHighlight} cursor-pointer transition-colors`}>Careers</Link>
+                <Link href="/privacy" className={`hover:${t.textHighlight} cursor-pointer transition-colors`}>Privacy Policy</Link>
+                <Link href="/terms" className={`hover:${t.textHighlight} cursor-pointer transition-colors`}>Terms of Service</Link>
                 {!user && <span onClick={() => setShowLoginModal(true)} className={`hover:${t.textHighlight} cursor-pointer transition-colors opacity-50 hover:opacity-100`}>Admin Login</span>}
               </div>
             </div>
