@@ -10,7 +10,7 @@ export const colors = {
   dark: 'bg-[#001b15]',
   light: 'bg-white',
   'gradient-institutional': 'bg-gradient-to-br from-[#001b15] to-[#00573f]',
-  'gradient-radial-brand': 'bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-[#00573f] to-[#001b15]',
+  'gradient-radial-brand': 'bg-[radial-gradient(ellipse_at_center,_#00573f,_#001b15)]',
   'gradient-linear-teal': 'bg-gradient-to-r from-[#00573f] to-[#009677]',
   'bg-aurora-spots': 'bg-[#001b15]'
 };
