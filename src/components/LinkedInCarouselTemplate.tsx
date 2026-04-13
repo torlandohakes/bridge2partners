@@ -360,7 +360,7 @@ export function LinkedInCarouselTemplate({ slide, onUpdate }: LinkedInCarouselTe
                         value={slide.cta || ''}
                         onChange={(val) => onUpdate?.({ cta: val })}
                         placeholder="CALL TO ACTION"
-                        className="w-full text-current"
+                        className="w-full text-current whitespace-nowrap"
                       />
                    </div>
                 </div>
