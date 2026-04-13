@@ -343,7 +343,7 @@ export function LinkedInCarouselTemplate({ slide, onUpdate }: LinkedInCarouselTe
       </div>
 
       {slide.footerConfig?.visible && (
-        <div className={cn("absolute bottom-8 left-12 right-12 z-20", getVSpaceCSS(slide.footerConfig, 'mb-0'), `text-${slide.footerConfig.align}`, getIndentCSS(slide.footerConfig))}>
+        <div className={cn("absolute bottom-6 left-6 right-6 z-20", getVSpaceCSS(slide.footerConfig, 'mb-0'), `text-${slide.footerConfig.align}`, getIndentCSS(slide.footerConfig))}>
              <InlineEditableText 
                as="span"
                value={slide.footer || slide.footnote || ''}
