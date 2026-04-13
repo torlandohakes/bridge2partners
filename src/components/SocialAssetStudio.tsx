@@ -694,11 +694,11 @@ export function SocialAssetStudio({ projectId }: { projectId?: string }) {
                             onChange={e => updateActiveSlide({ imageAlign: e.target.value as SlideData['imageAlign'] })}
                             className="w-full bg-neutral-50 border border-neutral-200 text-[10px] rounded p-2 focus:ring-1 focus:ring-primary outline-none uppercase font-mono"
                           >
-                            <option value="far-left">Far Left Block</option>
-                            <option value="left">Left Flush</option>
-                            <option value="center">Centered</option>
-                            <option value="right">Right Flush</option>
-                            <option value="far-right">Far Right Bleed</option>
+                            <option value="far-left">Far Left</option>
+                            <option value="left">Left</option>
+                            <option value="center">Center</option>
+                            <option value="right">Right</option>
+                            <option value="far-right">Far Right</option>
                           </select>
                         </div>
                         

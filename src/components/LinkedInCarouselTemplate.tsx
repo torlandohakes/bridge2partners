@@ -91,11 +91,11 @@ export function LinkedInCarouselTemplate({ slide, onUpdate }: LinkedInCarouselTe
 
        if (slide.imageFit === 'cutout') {
           const cutoutAlignMap: Record<string, string> = { 
-            'far-left': '-left-[15%] bottom-0 object-left-bottom',
+            'far-left': '-left-[10%] bottom-0 object-left-bottom',
             left: 'left-0 bottom-0 object-left-bottom', 
             center: 'left-1/2 -translate-x-1/2 bottom-0 object-bottom', 
             right: 'right-0 bottom-0 object-right-bottom',
-            'far-right': '-right-[15%] bottom-0 object-right-bottom'
+            'far-right': '-right-[10%] bottom-0 object-right-bottom'
           };
           return cn("absolute max-w-[85%] max-h-[85%] object-contain", cutoutAlignMap[slide.imageAlign || 'center'], opCSS);
        }
