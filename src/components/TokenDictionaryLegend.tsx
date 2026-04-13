@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { shapeVariants, textColors, colors, layouts } from '@/lib/design-tokens';
+import { shapeVariants, typographyColors, colors, layouts } from '@/lib/design-tokens';
 import { cn } from '@/lib/utils';
 
 export function TokenDictionaryLegend() {
@@ -38,7 +38,7 @@ export function TokenDictionaryLegend() {
         <div className="space-y-2">
           <span className="text-[10px] font-mono text-[#98cc67] uppercase tracking-widest font-bold">Text Colors</span>
           <div className="flex flex-col gap-2">
-            {Object.entries(textColors).map(([token, twClass]) => {
+            {Object.entries(typographyColors).map(([token, twClass]) => {
               let fontClass = "font-serif text-sm";
               let sampleText = "Preview";
               let archetype = "Default";

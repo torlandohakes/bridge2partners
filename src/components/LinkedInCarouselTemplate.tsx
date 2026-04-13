@@ -44,8 +44,8 @@ export interface SlideData {
   backgroundColorToken?: keyof typeof colors;
   layoutToken?: keyof typeof layouts;
   cardVariantToken?: keyof typeof shapeVariants;
-  headlineColorToken?: keyof typeof textColors;
-  bodyColorToken?: keyof typeof bodyColors;
+  headlineColorToken?: keyof typeof typographyColors;
+  bodyColorToken?: keyof typeof typographyColors;
   imageStyleToken?: keyof typeof imageStyles;
   buttonStyleToken?: keyof typeof buttonStyles;
   watermarkColorToken?: string;
@@ -120,7 +120,7 @@ export function LinkedInCarouselTemplate({ slide, onUpdate }: LinkedInCarouselTe
 
   const renderGlobalBranding = () => {
     const wmColorToken = slide.watermarkColorToken || slide.headlineColorToken as string || 'text-light';
-    const wmColorCSS = wmColorToken === 'original' ? '' : (textColors[wmColorToken as keyof typeof textColors] || 'text-white');
+    const wmColorCSS = wmColorToken === 'original' ? '' : (typographyColors[wmColorToken as keyof typeof typographyColors] || 'text-white');
     const brandMarkType = slide.brandMarkType || 'watermark';
     const brandMarkSize = slide.brandMarkSize || 'md';
     const brandMarkOpacity = slide.brandMarkOpacity || '80';

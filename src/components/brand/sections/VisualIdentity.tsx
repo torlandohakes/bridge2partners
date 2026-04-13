@@ -1,5 +1,5 @@
 import { HelpCircle, CheckCircle, AlertTriangle, XCircle, Download } from "lucide-react";
-import { colors, textColors, shapeVariants, layouts } from "@/lib/design-tokens";
+import { colors, typographyColors, shapeVariants, layouts } from "@/lib/design-tokens";
 import { cn } from "@/lib/utils";
 
 export function VisualIdentity() {
@@ -220,7 +220,7 @@ export function VisualIdentity() {
           <div className="space-y-4">
             <h4 className="text-md font-bold font-heading text-foreground uppercase tracking-widest">Headline Typographic Tokens</h4>
             <div className="flex flex-col gap-4">
-              {Object.entries(textColors).map(([token, twClass]) => (
+              {Object.entries(typographyColors).map(([token, twClass]) => (
                 <div key={token} className="p-4 rounded-lg bg-neutral/5 border border-primary/10 flex flex-col sm:flex-row gap-4 items-center">
                   <div className="w-full sm:w-1/3 shrink-0 flex flex-col">
                     <code className="text-xs font-mono font-bold text-secondary bg-secondary/10 px-2 py-1 rounded inline-block w-fit mb-2">"{token}"</code>
