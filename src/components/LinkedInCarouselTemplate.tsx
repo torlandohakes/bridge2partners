@@ -244,100 +244,163 @@ export function LinkedInCarouselTemplate({ slide, onUpdate }: LinkedInCarouselTe
         {/* Dynamic Inner Wrapper for Glass Panel */}
         <div className={cn("transition-all duration-300 flex flex-col", slide.cardVariantToken === 'glass-panel' ? cardTokenCSS : "")}>
         
-        {slide.eyebrowConfig?.visible && (
-          <div className={cn("w-full", getVSpaceCSS(slide.eyebrowConfig, 'mb-3'), `text-${slide.eyebrowConfig.align}`, getIndentCSS(slide.eyebrowConfig))}>
-             <InlineEditableText 
-               as="span"
-               value={slide.eyebrow || slide.text || ''}
-               onChange={(val) => onUpdate?.({ eyebrow: val })}
-               placeholder="01 / Enter Eyebrow..."
-               className={cn("font-ui font-semibold tracking-[0.15em] uppercase block", 
-                 { '100': 'opacity-100', '80': 'opacity-80', '50': 'opacity-50' }[slide.eyebrowConfig.opacity || '80'],
-                 slide.eyebrowConfig.colorToken ? typographyColors[slide.eyebrowConfig.colorToken as keyof typeof typographyColors] : textTokenCSS,
-               {
-                 'sm': 'text-xs',
-                 'md': 'text-sm',
-                 'lg': 'text-base'
-               }[slide.eyebrowConfig.size || 'md'], getGlassCSS(slide.eyebrowConfig))}
-             />
-          </div>
-        )}
+        {(() => {
+          const typographySequence = [
+            {
+              id: 'eyebrow',
+              visible: slide.eyebrowConfig?.visible,
+              glass: slide.eyebrowConfig?.glassBackground,
+              render: (inGroup: boolean) => (
+                <div key="eyebrow" className={cn("w-full last:mb-0 leading-none", getVSpaceCSS(slide.eyebrowConfig, 'mb-3'), `text-${slide.eyebrowConfig?.align || 'left'}`, getIndentCSS(slide.eyebrowConfig))}>
+                   <InlineEditableText 
+                     as="span"
+                     value={slide.eyebrow || slide.text || ''}
+                     onChange={(val) => onUpdate?.({ eyebrow: val })}
+                     placeholder="01 / Enter Eyebrow..."
+                     className={cn("font-ui font-semibold tracking-[0.15em] uppercase block", 
+                       { '100': 'opacity-100', '80': 'opacity-80', '50': 'opacity-50' }[slide.eyebrowConfig?.opacity || '80'],
+                       slide.eyebrowConfig?.colorToken ? typographyColors[slide.eyebrowConfig.colorToken as keyof typeof typographyColors] : textTokenCSS,
+                     {
+                       'sm': 'text-xs',
+                       'md': 'text-sm',
+                       'lg': 'text-base'
+                     }[slide.eyebrowConfig?.size || 'md'], !inGroup && getGlassCSS(slide.eyebrowConfig))}
+                   />
+                </div>
+              )
+            },
+            {
+              id: 'headline',
+              visible: slide.headlineConfig?.visible,
+              glass: slide.headlineConfig?.glassBackground,
+              render: (inGroup: boolean) => (
+                <div key="headline" className={cn("w-full last:mb-0 leading-none", getVSpaceCSS(slide.headlineConfig, 'mb-5'), `text-${slide.headlineConfig?.align || 'left'}`, getIndentCSS(slide.headlineConfig))}>
+                   <InlineEditableText 
+                     as="h1"
+                     value={slide.headline || slide.text || ''}
+                     onChange={(val) => onUpdate?.({ headline: val })}
+                     placeholder="Enter Core Headline..."
+                     className={cn("font-display leading-tight font-medium tracking-tight drop-shadow-sm", 
+                       { '100': 'opacity-100', '80': 'opacity-80', '50': 'opacity-50' }[slide.headlineConfig?.opacity || '100'],
+                       slide.headlineConfig?.colorToken ? typographyColors[slide.headlineConfig.colorToken as keyof typeof typographyColors] : textTokenCSS,
+                     {
+                       'sm': 'text-4xl',
+                       'md': 'text-5xl',
+                       'lg': 'text-6xl'
+                     }[slide.headlineConfig?.size || 'md'], !inGroup && getGlassCSS(slide.headlineConfig))}
+                   />
+                </div>
+              )
+            },
+            {
+              id: 'subheadline',
+              visible: slide.subheadlineConfig?.visible,
+              glass: slide.subheadlineConfig?.glassBackground,
+              render: (inGroup: boolean) => (
+                <div key="subheadline" className={cn("w-full last:mb-0 leading-none", getVSpaceCSS(slide.subheadlineConfig, 'mb-5'), `text-${slide.subheadlineConfig?.align || 'left'}`, getIndentCSS(slide.subheadlineConfig))}>
+                   <InlineEditableText 
+                     as="h2"
+                     value={slide.subheadline || slide.metric || ''}
+                     onChange={(val) => onUpdate?.({ subheadline: val })}
+                     placeholder="Enter structural subheadline details..."
+                     className={cn("font-heading leading-snug font-medium drop-shadow-sm", 
+                       { '100': 'opacity-100', '80': 'opacity-80', '50': 'opacity-50' }[slide.subheadlineConfig?.opacity || '80'],
+                       slide.subheadlineConfig?.colorToken ? typographyColors[slide.subheadlineConfig.colorToken as keyof typeof typographyColors] : textTokenCSS,
+                     {
+                       'sm': 'text-2xl',
+                       'md': 'text-3xl',
+                       'lg': 'text-4xl'
+                     }[slide.subheadlineConfig?.size || 'md'], !inGroup && getGlassCSS(slide.subheadlineConfig))}
+                   />
+                </div>
+              )
+            },
+            {
+              id: 'body',
+              visible: slide.bodyConfig?.visible,
+              glass: slide.bodyConfig?.glassBackground,
+              render: (inGroup: boolean) => (
+                <div key="body" className={cn("w-full last:mb-0 leading-none", getVSpaceCSS(slide.bodyConfig, 'mb-0'), `text-${slide.bodyConfig?.align || 'left'}`, getIndentCSS(slide.bodyConfig))}>
+                   <InlineEditableText 
+                     as="div"
+                     value={slide.body || ''}
+                     onChange={(val) => onUpdate?.({ body: val })}
+                     placeholder="Enter comprehensive supporting arguments or analytical context..."
+                     className={cn("font-body leading-relaxed drop-shadow-sm", 
+                       { '100': 'opacity-100', '80': 'opacity-80', '50': 'opacity-50' }[slide.bodyConfig?.opacity || '100'],
+                       slide.bodyConfig?.colorToken ? typographyColors[slide.bodyConfig.colorToken as keyof typeof typographyColors] : bodyTokenCSS,
+                     {
+                       'sm': 'text-sm',
+                       'md': 'text-base',
+                       'lg': 'text-lg'
+                     }[slide.bodyConfig?.size || 'md'], !inGroup && getGlassCSS(slide.bodyConfig))}
+                   />
+                </div>
+              )
+            },
+            {
+              id: 'cta',
+              visible: slide.ctaConfig?.visible,
+              glass: slide.ctaConfig?.glassBackground,
+              render: (inGroup: boolean) => (
+                <div key="cta" className={cn("w-full last:mb-0", getVSpaceCSS(slide.ctaConfig, 'mt-0'), `text-${slide.ctaConfig?.align || 'left'}`, getIndentCSS(slide.ctaConfig))}>     
+                   <div className={cn("inline-block font-ui font-bold tracking-widest uppercase rounded shadow-sm pointer-events-auto transition-all", {
+                     'sm': 'px-6 py-3.5 text-[10px]',
+                     'md': 'px-8 py-4 text-xs',
+                     'lg': 'px-10 py-5 text-sm'
+                   }[slide.ctaConfig?.size || 'md'], buttonStyles[slide.buttonStyleToken as keyof typeof buttonStyles || 'teal-solid'], !inGroup && getGlassCSS(slide.ctaConfig))}>
+                      <InlineEditableText 
+                        as="div"
+                        value={slide.cta || ''}
+                        onChange={(val) => onUpdate?.({ cta: val })}
+                        placeholder="CALL TO ACTION"
+                        className="w-full text-current"
+                      />
+                   </div>
+                </div>
+              )
+            }
+          ];
 
-        {slide.headlineConfig?.visible && (
-          <div className={cn("w-full", getVSpaceCSS(slide.headlineConfig, 'mb-5'), `text-${slide.headlineConfig.align}`, getIndentCSS(slide.headlineConfig))}>
-             <InlineEditableText 
-               as="h1"
-               value={slide.headline || slide.text || ''}
-               onChange={(val) => onUpdate?.({ headline: val })}
-               placeholder="Enter Core Headline..."
-               className={cn("font-display leading-tight font-medium tracking-tight drop-shadow-sm", 
-                 { '100': 'opacity-100', '80': 'opacity-80', '50': 'opacity-50' }[slide.headlineConfig.opacity || '100'],
-                 slide.headlineConfig.colorToken ? typographyColors[slide.headlineConfig.colorToken as keyof typeof typographyColors] : textTokenCSS,
-               {
-                 'sm': 'text-4xl',
-                 'md': 'text-5xl',
-                 'lg': 'text-6xl'
-               }[slide.headlineConfig.size || 'md'], getGlassCSS(slide.headlineConfig))}
-             />
-          </div>
-        )}
+          const renderedTypography: React.ReactNode[] = [];
+          const visibleNodes = typographySequence.filter(n => n.visible);
+          
+          let currentGroup: typeof visibleNodes = [];
+          
+          visibleNodes.forEach((node, index) => {
+            if (node.glass) {
+              currentGroup.push(node);
+            } else {
+              if (currentGroup.length > 0) {
+                const groupAlignConfig = currentGroup[0].id === 'eyebrow' ? slide.eyebrowConfig : currentGroup[0].id === 'headline' ? slide.headlineConfig : slide.bodyConfig;
+                const glassAlign = groupAlignConfig?.align || 'left';
+                const flexAlignMap: Record<string, string> = { 'left': 'items-start', 'center': 'items-center', 'right': 'items-end' };
+                
+                renderedTypography.push(
+                  <div key={`glass-group-${index}`} className={cn("bg-[#001b15]/60 backdrop-blur-md border border-white/20 rounded-xl px-10 py-8 shadow-2xl flex flex-col max-w-[85%] w-fit", flexAlignMap[glassAlign], "mb-5 last:mb-0")}>
+                    {currentGroup.map(g => g.render(true))}
+                  </div>
+                );
+                currentGroup = [];
+              }
+              renderedTypography.push(node.render(false));
+            }
+          });
+          
+          if (currentGroup.length > 0) {
+            const groupAlignConfig = currentGroup[0].id === 'eyebrow' ? slide.eyebrowConfig : currentGroup[0].id === 'headline' ? slide.headlineConfig : slide.bodyConfig;
+            const glassAlign = groupAlignConfig?.align || 'left';
+            const flexAlignMap: Record<string, string> = { 'left': 'items-start', 'center': 'items-center', 'right': 'items-end' };
 
-        {slide.subheadlineConfig?.visible && (
-          <div className={cn("w-full", getVSpaceCSS(slide.subheadlineConfig, 'mb-5'), `text-${slide.subheadlineConfig.align}`, getIndentCSS(slide.subheadlineConfig))}>
-             <InlineEditableText 
-               as="h2"
-               value={slide.subheadline || slide.metric || ''}
-               onChange={(val) => onUpdate?.({ subheadline: val })}
-               placeholder="Enter structural subheadline details..."
-               className={cn("font-heading leading-snug font-medium drop-shadow-sm", 
-                 { '100': 'opacity-100', '80': 'opacity-80', '50': 'opacity-50' }[slide.subheadlineConfig.opacity || '80'],
-                 slide.subheadlineConfig.colorToken ? typographyColors[slide.subheadlineConfig.colorToken as keyof typeof typographyColors] : textTokenCSS,
-               {
-                 'sm': 'text-2xl',
-                 'md': 'text-3xl',
-                 'lg': 'text-4xl'
-               }[slide.subheadlineConfig.size || 'md'], getGlassCSS(slide.subheadlineConfig))}
-             />
-          </div>
-        )}
+            renderedTypography.push(
+              <div key="glass-group-final" className={cn("bg-[#001b15]/60 backdrop-blur-md border border-white/20 rounded-xl px-10 py-8 shadow-2xl flex flex-col max-w-[85%] w-fit", flexAlignMap[glassAlign], "last:mb-0")}>
+                {currentGroup.map(g => g.render(true))}
+              </div>
+            );
+          }
 
-        {slide.bodyConfig?.visible && (
-          <div className={cn("w-full", getVSpaceCSS(slide.bodyConfig, 'mb-0'), `text-${slide.bodyConfig.align}`, getIndentCSS(slide.bodyConfig))}>
-             <InlineEditableText 
-               as="div"
-               value={slide.body || ''}
-               onChange={(val) => onUpdate?.({ body: val })}
-               placeholder="Enter comprehensive supporting arguments or analytical context..."
-               className={cn("font-body leading-relaxed drop-shadow-sm", 
-                 { '100': 'opacity-100', '80': 'opacity-80', '50': 'opacity-50' }[slide.bodyConfig.opacity || '100'],
-                 slide.bodyConfig.colorToken ? typographyColors[slide.bodyConfig.colorToken as keyof typeof typographyColors] : bodyTokenCSS,
-               {
-                 'sm': 'text-sm',
-                 'md': 'text-base',
-                 'lg': 'text-lg'
-               }[slide.bodyConfig.size || 'md'], getGlassCSS(slide.bodyConfig))}
-             />
-          </div>
-        )}
-
-        {slide.ctaConfig?.visible && (
-          <div className={cn("w-full", getVSpaceCSS(slide.ctaConfig, 'mt-0'), `text-${slide.ctaConfig.align}`, getIndentCSS(slide.ctaConfig))}>     
-             {/* Wrapped Button inline-block for proper alignment targeting */}
-             <div className={cn("inline-block font-ui font-bold tracking-widest uppercase rounded shadow-sm pointer-events-auto transition-all", {
-               'sm': 'px-6 py-3.5 text-[10px]',
-               'md': 'px-8 py-4 text-xs',
-               'lg': 'px-10 py-5 text-sm'
-             }[slide.ctaConfig.size || 'md'], buttonStyles[slide.buttonStyleToken as keyof typeof buttonStyles || 'teal-solid'])}>
-                <InlineEditableText 
-                  as="div"
-                  value={slide.cta || ''}
-                  onChange={(val) => onUpdate?.({ cta: val })}
-                  placeholder="CALL TO ACTION"
-                  className="w-full text-current"
-                />
-             </div>
-          </div>
-        )}
+          return renderedTypography;
+        })()}
 
       </div>
       </div>
