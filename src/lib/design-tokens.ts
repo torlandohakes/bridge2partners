@@ -25,9 +25,9 @@ export const typographyColors = {
 };
 
 export const shapeVariants = {
-  none: 'h-full w-full flex flex-col',
-  'thin-frame': 'h-full w-full border border-neutral-300 bg-transparent rounded-sm p-6 flex flex-col',
-  'understated-solid': 'h-full w-full bg-[#f4f6f5] border border-neutral-200 rounded-sm p-6 shadow-sm flex flex-col',
+  none: '',
+  'thin-frame': 'absolute inset-6 border border-neutral-300 bg-transparent rounded-sm',
+  'understated-solid': 'absolute inset-6 bg-[#f4f6f5] border border-neutral-200 rounded-sm shadow-sm',
   'glass-panel': 'w-fit h-fit bg-[#001b15]/60 backdrop-blur-xl border border-white/20 rounded-xl p-6 shadow-2xl flex flex-col max-w-full'
 };
 

@@ -218,11 +218,16 @@ export function LinkedInCarouselTemplate({ slide, onUpdate }: LinkedInCarouselTe
       {renderBackgroundEffects()}
       {renderBackgroundFallbackImage()}
       
+      {/* Absolute Full-Bleed Overlays (Thin Frame, Understated Solid) */}
+      {(slide.cardVariantToken === 'thin-frame' || slide.cardVariantToken === 'understated-solid') && (
+        <div className={cn("z-0 pointer-events-none", cardTokenCSS)} />
+      )}
+      
       {/* Layout Placement Wrapper */}
       <div className={cn("relative z-10 flex flex-col h-full w-full", layoutTokenCSS)}>
         
-        {/* Card Shape Wrapper */}
-        <div className={cn("transition-all duration-300", cardTokenCSS, layoutTokenCSS)}>
+        {/* Dynamic Inner Wrapper for Glass Panel */}
+        <div className={cn("transition-all duration-300 flex flex-col", slide.cardVariantToken === 'glass-panel' ? cardTokenCSS : "w-full flex-1")}>
         
         {slide.eyebrowConfig?.visible && (
           <div className={cn("w-full", getVSpaceCSS(slide.eyebrowConfig, 'mb-3'), `text-${slide.eyebrowConfig.align}`, getIndentCSS(slide.eyebrowConfig))}>
