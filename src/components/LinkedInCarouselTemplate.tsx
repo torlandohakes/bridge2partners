@@ -178,7 +178,7 @@ export function LinkedInCarouselTemplate({ slide, onUpdate }: LinkedInCarouselTe
     }[brandMarkOpacity];
 
     return (
-      <div className="absolute bottom-16 left-16 right-16 flex justify-between items-end z-20 pointer-events-none">
+      <div className="absolute bottom-6 left-6 right-6 flex justify-between items-end z-20 pointer-events-none">
          {brandMarkType === 'watermark' && (
            <span className={cn("font-ui font-bold tracking-[0.25em] uppercase", opacityClass, wmTextSizeClass, wmColorCSS)}>
              BRIDGE<span className="opacity-50">2</span>PARTNERS
@@ -202,7 +202,7 @@ export function LinkedInCarouselTemplate({ slide, onUpdate }: LinkedInCarouselTe
   const bodyTokenCSS = typographyColors[(slide as any).bodyColorToken as keyof typeof typographyColors || 'brand-neutral'];
   const cardTokenCSS = shapeVariants[slide.cardVariantToken as keyof typeof shapeVariants || 'none'];
   const layoutTokenCSS = layouts[slide.layoutToken as keyof typeof layouts || 'center'];
-  const outerPaddingCSS = 'p-16';
+  const outerPaddingCSS = 'p-6';
 
   const getIndentCSS = (config?: TextConfig) => {
     const p = config?.padding || 'none';
@@ -343,7 +343,7 @@ export function LinkedInCarouselTemplate({ slide, onUpdate }: LinkedInCarouselTe
       </div>
 
       {slide.footerConfig?.visible && (
-        <div className={cn("absolute bottom-16 left-16 right-16 z-20", getVSpaceCSS(slide.footerConfig, 'mb-0'), `text-${slide.footerConfig.align}`, getIndentCSS(slide.footerConfig))}>
+        <div className={cn("absolute bottom-6 left-6 right-6 z-20", getVSpaceCSS(slide.footerConfig, 'mb-0'), `text-${slide.footerConfig.align}`, getIndentCSS(slide.footerConfig))}>
              <InlineEditableText 
                as="span"
                value={slide.footer || slide.footnote || ''}
