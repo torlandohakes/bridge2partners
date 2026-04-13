@@ -54,6 +54,13 @@ export const buttonStyles = {
 };
 
 export const layouts = {
-  center: 'items-center text-center',
-  left: 'items-start text-left'
+  'center': 'justify-center items-center text-center',
+  'left': 'justify-center items-start text-left',
+  'right': 'justify-center items-end text-right',
+  'top-left': 'justify-start items-start text-left mt-8',
+  'top-center': 'justify-start items-center text-center mt-8',
+  'top-right': 'justify-start items-end text-right mt-8',
+  'bottom-left': 'justify-end items-start text-left mb-8',
+  'bottom-center': 'justify-end items-center text-center mb-8',
+  'bottom-right': 'justify-end items-end text-right mb-8'
 };

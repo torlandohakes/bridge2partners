@@ -567,6 +567,24 @@ export function SocialAssetStudio({ projectId }: { projectId?: string }) {
                     <span className="text-[8px] font-bold uppercase tracking-[0.1em] text-primary">Surface & Structure</span>
                     <div className="grid grid-cols-2 gap-3">
                       <div className="flex flex-col space-y-1.5">
+                        <label className="text-[9px] font-mono uppercase text-muted-foreground font-semibold">Layout Anchor</label>
+                        <select 
+                          value={activeSlide.layoutToken || 'center'}
+                          onChange={e => updateActiveSlide({ layoutToken: e.target.value as SlideData['layoutToken'] })}
+                          className="bg-neutral-50 border border-neutral-200 text-xs rounded p-2 focus:ring-1 focus:ring-primary outline-none"
+                        >
+                          <option value="top-left">Top Left</option>
+                          <option value="top-center">Top Center</option>
+                          <option value="top-right">Top Right</option>
+                          <option value="left">Center Left</option>
+                          <option value="center">Centered Block</option>
+                          <option value="right">Center Right</option>
+                          <option value="bottom-left">Bottom Left</option>
+                          <option value="bottom-center">Bottom Center</option>
+                          <option value="bottom-right">Bottom Right</option>
+                        </select>
+                      </div>
+                      <div className="flex flex-col space-y-1.5">
                         <label className="text-[9px] font-mono uppercase text-muted-foreground font-semibold">Surface Fade</label>
                         <select 
                           value={activeSlide.backgroundColorToken || 'dark'}
@@ -830,11 +848,25 @@ export function SocialAssetStudio({ projectId }: { projectId?: string }) {
                               <div className="flex bg-neutral-200/50 p-0.5 rounded gap-0.5 w-full items-center overflow-x-auto no-scrollbar">
                                 <span className="text-[7px] font-mono text-neutral-400 uppercase tracking-widest px-2 border-r border-neutral-300 min-w-[40px] shrink-0">Pad</span>
                                 {['none', 'sm', 'md', 'lg', 'xl'].map(p => {
-                                  const isActive = (config.padding || (config.glassBackground ? 'md' : 'none')) === p;
+                                  const isActive = (config.padding || 'none') === p; // Let layout handle glass indent directly
                                   return (
                                     <button 
                                        key={p}
                                        onClick={() => updateActiveSlide({ [slot.key]: { ...config, padding: p }})}
+                                       className={cn("flex-1 px-1.5 text-[8px] font-bold py-1.5 rounded-sm text-neutral-500 hover:text-black transition-colors uppercase tracking-widest text-center shrink-0", isActive && "bg-white text-black shadow-sm")}
+                                    >{p}</button>
+                                  );
+                                })}
+                              </div>
+
+                              <div className="flex bg-neutral-200/50 p-0.5 rounded gap-0.5 w-full items-center overflow-x-auto no-scrollbar">
+                                <span className="text-[7px] font-mono text-neutral-400 uppercase tracking-widest px-2 border-r border-neutral-300 min-w-[40px] shrink-0">Space</span>
+                                {['none', 'sm', 'md', 'lg', 'xl'].map(p => {
+                                  const isActive = (config.vSpace || 'none') === p;
+                                  return (
+                                    <button 
+                                       key={p}
+                                       onClick={() => updateActiveSlide({ [slot.key]: { ...config, vSpace: p }})}
                                        className={cn("flex-1 px-1.5 text-[8px] font-bold py-1.5 rounded-sm text-neutral-500 hover:text-black transition-colors uppercase tracking-widest text-center shrink-0", isActive && "bg-white text-black shadow-sm")}
                                     >{p}</button>
                                   );
