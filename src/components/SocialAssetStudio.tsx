@@ -642,7 +642,6 @@ export function SocialAssetStudio({ projectId }: { projectId?: string }) {
                         >
                           <optgroup label="Layouts">
                             <option value="none">None</option>
-                            <option value="cutout">Cutout</option>
                             <option value="framed">Framed</option>
                           </optgroup>
                           <optgroup label="Solid Fades">
@@ -665,11 +664,12 @@ export function SocialAssetStudio({ projectId }: { projectId?: string }) {
                           <label className="text-[9px] font-mono uppercase text-muted-foreground font-semibold">Scale</label>
                           <select 
                             value={activeSlide.imageFit || 'cover'}
-                            onChange={e => updateActiveSlide({ imageFit: e.target.value as 'cover' | 'contain' })}
+                            onChange={e => updateActiveSlide({ imageFit: e.target.value as 'cover' | 'contain' | 'cutout' })}
                             className="w-full bg-neutral-50 border border-neutral-200 text-[10px] rounded p-2 focus:ring-1 focus:ring-primary outline-none uppercase font-mono"
                           >
                             <option value="cover">Cover</option>
                             <option value="contain">Contain</option>
+                            <option value="cutout">Anchor Cutout</option>
                           </select>
                         </div>
 

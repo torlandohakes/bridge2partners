@@ -52,7 +52,7 @@ export interface SlideData {
   brandMarkType?: 'watermark' | 'logo' | 'icon';
   brandMarkSize?: 'sm' | 'md' | 'lg';
   brandMarkOpacity?: '50' | '80' | '100';
-  imageFit?: 'cover' | 'contain';
+  imageFit?: 'cover' | 'contain' | 'cutout';
   imagePosition?: 'front' | 'back';
   imageAlign?: 'left' | 'center' | 'right';
 }
@@ -82,14 +82,26 @@ export function LinkedInCarouselTemplate({ slide, onUpdate }: LinkedInCarouselTe
     const style = slide.imageStyleToken || 'none';
     const safeImageUrl = slide.imageUrl.startsWith('http') ? `/api/proxy-image?url=${encodeURIComponent(slide.imageUrl)}` : slide.imageUrl;
     const isFront = slide.imagePosition === 'front';
-    const imgFit = slide.imageFit === 'contain' ? 'object-contain' : 'object-cover';
-    const alignmentMap = { left: 'object-left', center: 'object-center', right: 'object-right' };
-    const imgAlign = alignmentMap[slide.imageAlign || 'center'];
+
+    const getScaleClasses = () => {
+       if (slide.imageFit === 'cutout') {
+          const cutoutAlignMap: Record<string, string> = { 
+            left: 'left-0 bottom-0 object-left-bottom', 
+            center: 'left-1/2 -translate-x-1/2 bottom-0 object-bottom', 
+            right: 'right-0 bottom-0 object-right-bottom' 
+          };
+          return cn("absolute max-w-[85%] max-h-[85%] object-contain", cutoutAlignMap[slide.imageAlign || 'center']);
+       }
+       const alignmentMap = { left: 'object-left', center: 'object-center', right: 'object-right' };
+       const alignCSS = alignmentMap[slide.imageAlign || 'center'];
+       const fitCSS = slide.imageFit === 'contain' ? 'object-contain' : 'object-cover';
+       return cn("w-full h-full", fitCSS, alignCSS);
+    };
     
     if (['full-bleed-dark-overlay', 'full-bleed-green-overlay', 'overlay-gradient-institutional', 'overlay-gradient-teal', 'overlay-frosted-glass'].includes(style) || style === 'none') {
        return (
          <div className={cn("absolute inset-0 pointer-events-none", isFront ? 'z-20' : 'z-0')}>
-           <img src={safeImageUrl} alt="Slide background" className={cn("w-full h-full", imgFit, imgAlign)} />
+           <img src={safeImageUrl} alt="Slide background" className={getScaleClasses()} />
            <div className={imageStyles[style as keyof typeof imageStyles]} />
          </div>
        );
@@ -98,7 +110,7 @@ export function LinkedInCarouselTemplate({ slide, onUpdate }: LinkedInCarouselTe
     if (style === 'overlay-aurora-spots') {
        return (
          <div className={cn("absolute inset-0", isFront ? 'z-20' : 'z-0')}>
-           <img src={safeImageUrl} alt="Slide background" className={cn("w-full h-full", imgFit, imgAlign)} />
+           <img src={safeImageUrl} alt="Slide background" className={getScaleClasses()} />
            <div className="absolute inset-0 bg-black/40 z-0 mix-blend-multiply" />
            <div className="absolute -top-[20%] -left-[10%] w-[60%] h-[60%] bg-[#009677] rounded-full blur-[100px] opacity-60 mix-blend-screen pointer-events-none z-10" />
            <div className="absolute -bottom-[20%] -right-[10%] w-[60%] h-[60%] bg-[#00573f] rounded-full blur-[100px] opacity-70 mix-blend-screen pointer-events-none z-10" />
@@ -106,24 +118,10 @@ export function LinkedInCarouselTemplate({ slide, onUpdate }: LinkedInCarouselTe
        );
     }
     
-    if (style === 'cutout') {
-      const cutoutAlignMap: Record<string, string> = { 
-        left: 'left-0 bottom-0 object-left-bottom', 
-        center: 'left-1/2 -translate-x-1/2 bottom-0 object-bottom', 
-        right: 'right-0 bottom-0 object-right-bottom' 
-      };
-      const cutAlign = cutoutAlignMap[slide.imageAlign || 'center'];
-      return (
-         <div className={cn("absolute inset-0 overflow-hidden pointer-events-none", isFront ? 'z-20' : 'z-0')}>
-           <img src={safeImageUrl} alt="Cutout" className={cn("absolute max-w-[85%] max-h-[85%]", imgFit, cutAlign)} />
-         </div>
-      );
-    }
-
     if (style === 'framed') {
        return (
          <div className={cn("absolute inset-0 flex items-center justify-center p-12 pointer-events-none", isFront ? 'z-20' : 'z-0')}>
-            <img src={safeImageUrl} alt="Framed" className={cn("w-full h-full p-2 border border-neutral-200 bg-white shadow-sm pointer-events-auto", imgFit, imgAlign)} />
+            <img src={safeImageUrl} alt="Framed" className={cn("p-2 border border-neutral-200 bg-white shadow-sm pointer-events-auto", getScaleClasses())} />
          </div>
        );
     }
