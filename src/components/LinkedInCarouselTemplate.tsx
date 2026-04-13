@@ -189,18 +189,18 @@ export function LinkedInCarouselTemplate({ slide, onUpdate }: LinkedInCarouselTe
   const layoutTokenCSS = layouts[slide.layoutToken as keyof typeof layouts || 'center'];
   const outerPaddingCSS = (slide.cardVariantToken && slide.cardVariantToken !== 'none') ? 'p-6' : 'p-12';
 
-  const getTypographicCSS = (config?: TextConfig) => {
-    const glass = config?.glassBackground ? 'bg-[#001b15]/60 backdrop-blur-md border border-white/20 rounded-lg shadow-xl inline-block max-w-full' : '';
-    const p = config?.padding || (config?.glassBackground ? 'md' : 'none');
-    const padding = {
+  const getIndentCSS = (config?: TextConfig) => {
+    const p = config?.padding || 'none';
+    return {
       'none': '',
-      'sm': 'px-2 py-1',
-      'md': 'px-4 py-2',
-      'lg': 'px-6 py-4',
-      'xl': 'px-8 py-6'
+      'sm': 'pl-4',
+      'md': 'pl-8',
+      'lg': 'pl-16',
+      'xl': 'pl-24'
     }[p];
-    return cn(glass, padding);
   };
+
+  const getGlassCSS = (config?: TextConfig) => config?.glassBackground ? 'bg-[#001b15]/60 backdrop-blur-md border border-white/20 rounded-lg px-6 py-4 shadow-xl inline-block max-w-full' : '';
 
   return (
     <div className={cn("w-full h-full flex relative overflow-hidden flex-col justify-center", outerPaddingCSS, bgTokenCSS)}>
@@ -208,10 +208,10 @@ export function LinkedInCarouselTemplate({ slide, onUpdate }: LinkedInCarouselTe
       {renderBackgroundFallbackImage()}
       
       {/* Main Content Wrapper */}
-      <div className={cn("relative z-10 flex flex-col justify-center h-full w-full px-12", layoutTokenCSS, cardTokenCSS)}>
+      <div className={cn("relative z-10 flex flex-col justify-center h-full w-full p-4", layoutTokenCSS, cardTokenCSS)}>
         
         {slide.eyebrowConfig?.visible && (
-          <div className={cn("w-full mb-3", `text-${slide.eyebrowConfig.align}`)}>
+          <div className={cn("w-full mb-3", `text-${slide.eyebrowConfig.align}`, getIndentCSS(slide.eyebrowConfig))}>
              <InlineEditableText 
                as="span"
                value={slide.eyebrow || slide.kicker || ''}
@@ -224,14 +224,14 @@ export function LinkedInCarouselTemplate({ slide, onUpdate }: LinkedInCarouselTe
                  'sm': 'text-xs',
                  'md': 'text-sm',
                  'lg': 'text-base'
-               }[slide.eyebrowConfig.size || 'md'], getTypographicCSS(slide.eyebrowConfig))}
+               }[slide.eyebrowConfig.size || 'md'], getGlassCSS(slide.eyebrowConfig))}
              />
           </div>
         )}
 
         {slide.headlineConfig?.visible && (
-          <div className={cn("w-full mb-5", `text-${slide.headlineConfig.align}`)}>
-            <InlineEditableText 
+          <div className={cn("w-full mb-5", `text-${slide.headlineConfig.align}`, getIndentCSS(slide.headlineConfig))}>
+             <InlineEditableText 
                as="h1"
                value={slide.headline || slide.text || ''}
                onChange={(val) => onUpdate?.({ headline: val })}
@@ -243,13 +243,13 @@ export function LinkedInCarouselTemplate({ slide, onUpdate }: LinkedInCarouselTe
                  'sm': 'text-4xl',
                  'md': 'text-5xl',
                  'lg': 'text-6xl'
-               }[slide.headlineConfig.size || 'md'], getTypographicCSS(slide.headlineConfig))}
+               }[slide.headlineConfig.size || 'md'], getGlassCSS(slide.headlineConfig))}
              />
           </div>
         )}
 
         {slide.subheadlineConfig?.visible && (
-          <div className={cn("w-full mb-5", `text-${slide.subheadlineConfig.align}`)}>
+          <div className={cn("w-full mb-5", `text-${slide.subheadlineConfig.align}`, getIndentCSS(slide.subheadlineConfig))}>
              <InlineEditableText 
                as="h2"
                value={slide.subheadline || slide.metric || ''}
@@ -262,15 +262,15 @@ export function LinkedInCarouselTemplate({ slide, onUpdate }: LinkedInCarouselTe
                  'sm': 'text-2xl',
                  'md': 'text-3xl',
                  'lg': 'text-4xl'
-               }[slide.subheadlineConfig.size || 'md'], getTypographicCSS(slide.subheadlineConfig))}
+               }[slide.subheadlineConfig.size || 'md'], getGlassCSS(slide.subheadlineConfig))}
              />
           </div>
         )}
 
         {slide.bodyConfig?.visible && (
-          <div className={cn("w-full mb-6", `text-${slide.bodyConfig.align}`)}>
+          <div className={cn("w-full mb-6", `text-${slide.bodyConfig.align}`, getIndentCSS(slide.bodyConfig))}>
              <InlineEditableText 
-               as="p"
+               as="div"
                value={slide.body || ''}
                onChange={(val) => onUpdate?.({ body: val })}
                placeholder="Enter comprehensive supporting arguments or analytical context..."
@@ -281,13 +281,13 @@ export function LinkedInCarouselTemplate({ slide, onUpdate }: LinkedInCarouselTe
                  'sm': 'text-sm',
                  'md': 'text-base',
                  'lg': 'text-lg'
-               }[slide.bodyConfig.size || 'md'], getTypographicCSS(slide.bodyConfig))}
+               }[slide.bodyConfig.size || 'md'], getGlassCSS(slide.bodyConfig))}
              />
           </div>
         )}
 
         {slide.ctaConfig?.visible && (
-          <div className={cn("w-full mt-4", `text-${slide.ctaConfig.align}`)}>     
+          <div className={cn("w-full mt-4", `text-${slide.ctaConfig.align}`, getIndentCSS(slide.ctaConfig))}>     
              {/* Wrapped Button inline-block for proper alignment targeting */}
              <div className={cn("inline-block font-ui font-bold tracking-widest uppercase rounded shadow-sm pointer-events-auto transition-all", {
                'sm': 'px-6 py-3.5 text-[10px]',
@@ -308,7 +308,7 @@ export function LinkedInCarouselTemplate({ slide, onUpdate }: LinkedInCarouselTe
       </div>
 
       {slide.footerConfig?.visible && (
-        <div className={cn("absolute bottom-8 left-12 right-12 z-20", `text-${slide.footerConfig.align}`)}>
+        <div className={cn("absolute bottom-8 left-12 right-12 z-20", `text-${slide.footerConfig.align}`, getIndentCSS(slide.footerConfig))}>
              <InlineEditableText 
                as="span"
                value={slide.footer || slide.footnote || ''}
@@ -321,7 +321,7 @@ export function LinkedInCarouselTemplate({ slide, onUpdate }: LinkedInCarouselTe
                  'sm': 'text-[8px]',
                  'md': 'text-[10px]',
                  'lg': 'text-[12px]'
-               }[slide.footerConfig.size || 'md'], getTypographicCSS(slide.footerConfig))}
+               }[slide.footerConfig.size || 'md'], getGlassCSS(slide.footerConfig))}
              />
         </div>
       )}
