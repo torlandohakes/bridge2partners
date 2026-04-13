@@ -218,8 +218,11 @@ export function LinkedInCarouselTemplate({ slide, onUpdate }: LinkedInCarouselTe
       {renderBackgroundEffects()}
       {renderBackgroundFallbackImage()}
       
-      {/* Main Content Wrapper */}
-      <div className={cn("relative z-10 flex flex-col h-full w-full", layoutTokenCSS, cardTokenCSS)}>
+      {/* Layout Placement Wrapper */}
+      <div className={cn("relative z-10 flex flex-col h-full w-full", layoutTokenCSS)}>
+        
+        {/* Card Shape Wrapper */}
+        <div className={cn("transition-all duration-300", cardTokenCSS)}>
         
         {slide.eyebrowConfig?.visible && (
           <div className={cn("w-full", getVSpaceCSS(slide.eyebrowConfig, 'mb-3'), `text-${slide.eyebrowConfig.align}`, getIndentCSS(slide.eyebrowConfig))}>
@@ -279,7 +282,7 @@ export function LinkedInCarouselTemplate({ slide, onUpdate }: LinkedInCarouselTe
         )}
 
         {slide.bodyConfig?.visible && (
-          <div className={cn("w-full", getVSpaceCSS(slide.bodyConfig, 'mb-6'), `text-${slide.bodyConfig.align}`, getIndentCSS(slide.bodyConfig))}>
+          <div className={cn("w-full", getVSpaceCSS(slide.bodyConfig, 'mb-0'), `text-${slide.bodyConfig.align}`, getIndentCSS(slide.bodyConfig))}>
              <InlineEditableText 
                as="div"
                value={slide.body || ''}
@@ -298,7 +301,7 @@ export function LinkedInCarouselTemplate({ slide, onUpdate }: LinkedInCarouselTe
         )}
 
         {slide.ctaConfig?.visible && (
-          <div className={cn("w-full", getVSpaceCSS(slide.ctaConfig, 'mt-4'), `text-${slide.ctaConfig.align}`, getIndentCSS(slide.ctaConfig))}>     
+          <div className={cn("w-full", getVSpaceCSS(slide.ctaConfig, 'mt-0'), `text-${slide.ctaConfig.align}`, getIndentCSS(slide.ctaConfig))}>     
              {/* Wrapped Button inline-block for proper alignment targeting */}
              <div className={cn("inline-block font-ui font-bold tracking-widest uppercase rounded shadow-sm pointer-events-auto transition-all", {
                'sm': 'px-6 py-3.5 text-[10px]',
@@ -316,6 +319,7 @@ export function LinkedInCarouselTemplate({ slide, onUpdate }: LinkedInCarouselTe
           </div>
         )}
 
+      </div>
       </div>
 
       {slide.footerConfig?.visible && (
