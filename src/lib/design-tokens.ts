@@ -16,15 +16,12 @@ export const colors = {
 };
 
 export const typographyColors = {
-  'slate-900': 'text-slate-900',
-  'brand-dark': 'text-[#001b15]',
-  'brand-primary': 'text-[#00573f]',
-  'brand-teal': 'text-[#009677]',
-  'brand-neutral': 'text-[#3d4645]',
-  'white': 'text-white',
-  'white-80': 'text-white/80',
-  'white-50': 'text-white/50',
-  'slate-400': 'text-slate-400'
+  'b2p-black': 'text-[#001b15]',
+  'b2p-green': 'text-[#00573f]',
+  'secondary-teal': 'text-[#009677]',
+  'neutral-slate': 'text-[#3d4645]',
+  'luminous-lime': 'text-[#98cc67]',
+  'sterile-white': 'text-white'
 };
 
 export const shapeVariants = {

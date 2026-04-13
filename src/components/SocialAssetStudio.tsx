@@ -822,15 +822,12 @@ export function SocialAssetStudio({ projectId }: { projectId?: string }) {
                                   className="flex-1 bg-white border border-neutral-200 text-[9px] rounded p-1 outline-none text-black font-semibold uppercase tracking-wider"
                                 >
                                   <option value="">Slide Default</option>
-                                  <option value="slate-900">Slate Black</option>
-                                  <option value="brand-dark">Brand Dark</option>
-                                  <option value="brand-primary">Primary Green</option>
-                                  <option value="brand-teal">Bright Teal</option>
-                                  <option value="brand-neutral">Neutral Slate</option>
-                                  <option value="white">Pure White</option>
-                                  <option value="white-80">White (80%)</option>
-                                  <option value="white-50">White (50%)</option>
-                                  <option value="slate-400">Light Slate</option>
+                                  <option value="b2p-black">B2P Black</option>
+                                  <option value="b2p-green">B2P Green</option>
+                                  <option value="secondary-teal">Secondary Teal</option>
+                                  <option value="neutral-slate">Neutral Slate</option>
+                                  <option value="luminous-lime">Luminous Lime</option>
+                                  <option value="sterile-white">Sterile White</option>
                                 </select>
                               </div>
 
