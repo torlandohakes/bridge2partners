@@ -178,7 +178,7 @@ export function LinkedInCarouselTemplate({ slide, onUpdate }: LinkedInCarouselTe
     }[brandMarkOpacity];
 
     return (
-      <div className="absolute bottom-8 left-8 right-8 flex justify-between items-end z-20 pointer-events-none">
+      <div className="absolute bottom-6 left-6 right-6 flex justify-between items-end z-20 pointer-events-none">
          {brandMarkType === 'watermark' && (
            <span className={cn("font-ui font-bold tracking-[0.25em] uppercase", opacityClass, wmTextSizeClass, wmColorCSS)}>
              BRIDGE<span className="opacity-50">2</span>PARTNERS
