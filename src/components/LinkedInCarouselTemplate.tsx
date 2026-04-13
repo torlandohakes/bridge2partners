@@ -1,7 +1,7 @@
 import React from 'react';
 import { ArrowRight } from 'lucide-react';
 import { cn } from '@/lib/utils';
-import { colors, textColors, bodyColors, shapeVariants, layouts, imageStyles, buttonStyles } from '@/lib/design-tokens';
+import { colors, typographyColors, shapeVariants, layouts, imageStyles, buttonStyles } from '@/lib/design-tokens';
 import { InlineEditableText } from './InlineEditableText';
 
 export type SlideType = 'hook' | 'thesis' | 'solution' | 'validation' | 'cta';
@@ -10,7 +10,7 @@ export interface TextConfig {
   visible: boolean;
   align: 'left' | 'center' | 'right';
   size?: 'sm' | 'md' | 'lg';
-  colorToken?: 'text-dark' | 'text-primary' | 'text-light' | 'text-neutral';
+  colorToken?: string;
   opacity?: '100' | '80' | '50';
   glassBackground?: boolean;
   padding?: 'none' | 'sm' | 'md' | 'lg' | 'xl';
@@ -183,8 +183,8 @@ export function LinkedInCarouselTemplate({ slide, onUpdate }: LinkedInCarouselTe
   };
 
   const bgTokenCSS = colors[slide.backgroundColorToken as keyof typeof colors || 'dark'];
-  const textTokenCSS = textColors[(slide as any).headlineColorToken as keyof typeof textColors || 'text-light'];
-  const bodyTokenCSS = bodyColors[(slide as any).bodyColorToken as keyof typeof bodyColors || 'text-neutral'];
+  const textTokenCSS = typographyColors[(slide as any).headlineColorToken as keyof typeof typographyColors || 'white'];
+  const bodyTokenCSS = typographyColors[(slide as any).bodyColorToken as keyof typeof typographyColors || 'brand-neutral'];
   const cardTokenCSS = shapeVariants[slide.cardVariantToken as keyof typeof shapeVariants || 'none'];
   const layoutTokenCSS = layouts[slide.layoutToken as keyof typeof layouts || 'center'];
   const outerPaddingCSS = 'p-6';
@@ -230,7 +230,7 @@ export function LinkedInCarouselTemplate({ slide, onUpdate }: LinkedInCarouselTe
                placeholder="01 / Enter Eyebrow..."
                className={cn("font-ui font-semibold tracking-[0.15em] uppercase block", 
                  { '100': 'opacity-100', '80': 'opacity-80', '50': 'opacity-50' }[slide.eyebrowConfig.opacity || '80'],
-                 slide.eyebrowConfig.colorToken ? ((textColors as Record<string,string>)[slide.eyebrowConfig.colorToken] || (bodyColors as Record<string,string>)[slide.eyebrowConfig.colorToken]) : textTokenCSS,
+                 slide.eyebrowConfig.colorToken ? typographyColors[slide.eyebrowConfig.colorToken as keyof typeof typographyColors] : textTokenCSS,
                {
                  'sm': 'text-xs',
                  'md': 'text-sm',
@@ -249,7 +249,7 @@ export function LinkedInCarouselTemplate({ slide, onUpdate }: LinkedInCarouselTe
                placeholder="Enter Core Headline..."
                className={cn("font-display leading-tight font-medium tracking-tight drop-shadow-sm", 
                  { '100': 'opacity-100', '80': 'opacity-80', '50': 'opacity-50' }[slide.headlineConfig.opacity || '100'],
-                 slide.headlineConfig.colorToken ? ((textColors as Record<string,string>)[slide.headlineConfig.colorToken] || (bodyColors as Record<string,string>)[slide.headlineConfig.colorToken]) : textTokenCSS,
+                 slide.headlineConfig.colorToken ? typographyColors[slide.headlineConfig.colorToken as keyof typeof typographyColors] : textTokenCSS,
                {
                  'sm': 'text-4xl',
                  'md': 'text-5xl',
@@ -268,7 +268,7 @@ export function LinkedInCarouselTemplate({ slide, onUpdate }: LinkedInCarouselTe
                placeholder="Enter structural subheadline details..."
                className={cn("font-heading leading-snug font-medium drop-shadow-sm", 
                  { '100': 'opacity-100', '80': 'opacity-80', '50': 'opacity-50' }[slide.subheadlineConfig.opacity || '80'],
-                 slide.subheadlineConfig.colorToken ? ((textColors as Record<string,string>)[slide.subheadlineConfig.colorToken] || (bodyColors as Record<string,string>)[slide.subheadlineConfig.colorToken]) : textTokenCSS,
+                 slide.subheadlineConfig.colorToken ? typographyColors[slide.subheadlineConfig.colorToken as keyof typeof typographyColors] : textTokenCSS,
                {
                  'sm': 'text-2xl',
                  'md': 'text-3xl',
@@ -287,7 +287,7 @@ export function LinkedInCarouselTemplate({ slide, onUpdate }: LinkedInCarouselTe
                placeholder="Enter comprehensive supporting arguments or analytical context..."
                className={cn("font-body leading-relaxed drop-shadow-sm", 
                  { '100': 'opacity-100', '80': 'opacity-80', '50': 'opacity-50' }[slide.bodyConfig.opacity || '100'],
-                 slide.bodyConfig.colorToken ? ((textColors as Record<string,string>)[slide.bodyConfig.colorToken] || (bodyColors as Record<string,string>)[slide.bodyConfig.colorToken]) : bodyTokenCSS,
+                 slide.bodyConfig.colorToken ? typographyColors[slide.bodyConfig.colorToken as keyof typeof typographyColors] : bodyTokenCSS,
                {
                  'sm': 'text-sm',
                  'md': 'text-base',
@@ -327,7 +327,7 @@ export function LinkedInCarouselTemplate({ slide, onUpdate }: LinkedInCarouselTe
                placeholder="Enter citation or footer detail..."
                className={cn("font-ui font-medium tracking-[0.15em] uppercase pointer-events-auto block", 
                  { '100': 'opacity-100', '80': 'opacity-80', '50': 'opacity-50' }[slide.footerConfig.opacity || '50'],
-                 slide.footerConfig.colorToken ? ((textColors as Record<string,string>)[slide.footerConfig.colorToken] || (bodyColors as Record<string,string>)[slide.footerConfig.colorToken]) : textTokenCSS,
+                 slide.footerConfig.colorToken ? typographyColors[slide.footerConfig.colorToken as keyof typeof typographyColors] : textTokenCSS,
                {
                  'sm': 'text-[8px]',
                  'md': 'text-[10px]',

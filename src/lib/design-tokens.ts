@@ -15,15 +15,16 @@ export const colors = {
   'bg-aurora-spots': 'bg-[#001b15]'
 };
 
-export const textColors = {
-  'text-dark': 'text-slate-900',
-  'text-primary': 'text-[#00573f]',
-  'text-light': 'text-white'
-};
-
-export const bodyColors = {
-  'text-neutral': 'text-[#3d4645]',
-  'text-light': 'text-white/80'
+export const typographyColors = {
+  'slate-900': 'text-slate-900',
+  'brand-dark': 'text-[#001b15]',
+  'brand-primary': 'text-[#00573f]',
+  'brand-teal': 'text-[#009677]',
+  'brand-neutral': 'text-[#3d4645]',
+  'white': 'text-white',
+  'white-80': 'text-white/80',
+  'white-50': 'text-white/50',
+  'slate-400': 'text-slate-400'
 };
 
 export const shapeVariants = {

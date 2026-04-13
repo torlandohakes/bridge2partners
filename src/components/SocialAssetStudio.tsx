@@ -814,20 +814,24 @@ export function SocialAssetStudio({ projectId }: { projectId?: string }) {
                                 >LG</button>
                               </div>
 
-                              <div className="flex bg-neutral-200/50 p-0.5 rounded gap-0.5 w-full items-center">
+                              <div className="flex bg-neutral-200/50 p-1 rounded gap-1 w-full items-center">
                                 <span className="text-[7px] font-mono text-neutral-400 uppercase tracking-widest px-2 border-r border-neutral-300 min-w-[50px]">Color</span>
-                                <button 
-                                   onClick={() => updateActiveSlide({ [slot.key]: { ...config, colorToken: 'text-dark' }})}
-                                   className={cn("flex-1 text-[8px] font-bold py-1 rounded-sm text-neutral-500 hover:text-black transition-colors uppercase tracking-widest text-center", config.colorToken === 'text-dark' && "bg-white text-black shadow-sm")}
-                                >Dark</button>
-                                <button 
-                                   onClick={() => updateActiveSlide({ [slot.key]: { ...config, colorToken: 'text-primary' }})}
-                                   className={cn("flex-1 text-[8px] font-bold py-1 rounded-sm text-neutral-500 hover:text-black transition-colors uppercase tracking-widest text-center", config.colorToken === 'text-primary' && "bg-white text-black shadow-sm")}
-                                >Green</button>
-                                <button 
-                                   onClick={() => updateActiveSlide({ [slot.key]: { ...config, colorToken: 'text-light' }})}
-                                   className={cn("flex-1 text-[8px] font-bold py-1 rounded-sm text-neutral-500 hover:text-black transition-colors uppercase tracking-widest text-center", config.colorToken === 'text-light' && "bg-white text-black shadow-sm")}
-                                >White</button>
+                                <select 
+                                  value={config.colorToken || ''}
+                                  onChange={e => updateActiveSlide({ [slot.key]: { ...config, colorToken: e.target.value }})}
+                                  className="flex-1 bg-white border border-neutral-200 text-[9px] rounded p-1 outline-none text-black font-semibold uppercase tracking-wider"
+                                >
+                                  <option value="">Slide Default</option>
+                                  <option value="slate-900">Slate Black</option>
+                                  <option value="brand-dark">Brand Dark</option>
+                                  <option value="brand-primary">Primary Green</option>
+                                  <option value="brand-teal">Bright Teal</option>
+                                  <option value="brand-neutral">Neutral Slate</option>
+                                  <option value="white">Pure White</option>
+                                  <option value="white-80">White (80%)</option>
+                                  <option value="white-50">White (50%)</option>
+                                  <option value="slate-400">Light Slate</option>
+                                </select>
                               </div>
 
                               <div className="flex bg-neutral-200/50 p-0.5 rounded gap-0.5 w-full items-center">
