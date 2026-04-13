@@ -826,6 +826,14 @@ export function SocialAssetStudio({ projectId }: { projectId?: string }) {
                                   );
                                 })}
                               </div>
+
+                              <div className="flex bg-neutral-200/50 p-0.5 rounded gap-0.5 w-full items-center">
+                                <span className="text-[7px] font-mono text-neutral-400 uppercase tracking-widest px-2 border-r border-neutral-300 min-w-[50px]">Layout</span>
+                                <button 
+                                   onClick={() => updateActiveSlide({ [slot.key]: { ...config, glassBackground: !config.glassBackground }})}
+                                   className={cn("flex-1 text-[8px] font-bold py-1 rounded-sm text-neutral-500 hover:text-black transition-colors uppercase tracking-widest text-center", config.glassBackground && "bg-white text-black shadow-sm")}
+                                >{config.glassBackground ? 'Glass Active' : 'Standard'}</button>
+                              </div>
                             </div>
                           )}
                        </div>

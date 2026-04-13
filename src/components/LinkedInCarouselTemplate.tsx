@@ -12,6 +12,7 @@ export interface TextConfig {
   size?: 'sm' | 'md' | 'lg';
   colorToken?: 'text-dark' | 'text-primary' | 'text-light' | 'text-neutral';
   opacity?: '100' | '80' | '50';
+  glassBackground?: boolean;
 }
 
 export interface SlideData {
@@ -187,6 +188,8 @@ export function LinkedInCarouselTemplate({ slide, onUpdate }: LinkedInCarouselTe
   const layoutTokenCSS = layouts[slide.layoutToken as keyof typeof layouts || 'center'];
   const outerPaddingCSS = (slide.cardVariantToken && slide.cardVariantToken !== 'none') ? 'p-6' : 'p-12';
 
+  const getGlassCSS = (config?: TextConfig) => config?.glassBackground ? 'bg-[#001b15]/60 backdrop-blur-md border border-white/20 rounded-lg px-4 py-2 shadow-xl inline-block max-w-full' : '';
+
   return (
     <div className={cn("w-full h-full flex relative overflow-hidden flex-col justify-center", outerPaddingCSS, bgTokenCSS)}>
       {renderBackgroundEffects()}
@@ -209,7 +212,7 @@ export function LinkedInCarouselTemplate({ slide, onUpdate }: LinkedInCarouselTe
                  'sm': 'text-xs',
                  'md': 'text-sm',
                  'lg': 'text-base'
-               }[slide.eyebrowConfig.size || 'md'])}
+               }[slide.eyebrowConfig.size || 'md'], getGlassCSS(slide.eyebrowConfig))}
              />
           </div>
         )}
@@ -228,7 +231,7 @@ export function LinkedInCarouselTemplate({ slide, onUpdate }: LinkedInCarouselTe
                  'sm': 'text-4xl',
                  'md': 'text-5xl',
                  'lg': 'text-6xl'
-               }[slide.headlineConfig.size || 'md'])}
+               }[slide.headlineConfig.size || 'md'], getGlassCSS(slide.headlineConfig))}
              />
           </div>
         )}
@@ -247,7 +250,7 @@ export function LinkedInCarouselTemplate({ slide, onUpdate }: LinkedInCarouselTe
                  'sm': 'text-2xl',
                  'md': 'text-3xl',
                  'lg': 'text-4xl'
-               }[slide.subheadlineConfig.size || 'md'])}
+               }[slide.subheadlineConfig.size || 'md'], getGlassCSS(slide.subheadlineConfig))}
              />
           </div>
         )}
@@ -259,14 +262,14 @@ export function LinkedInCarouselTemplate({ slide, onUpdate }: LinkedInCarouselTe
                value={slide.body || ''}
                onChange={(val) => onUpdate?.({ body: val })}
                placeholder="Enter comprehensive supporting arguments or analytical context..."
-               className={cn("font-sans leading-relaxed", 
+               className={cn("font-body leading-relaxed drop-shadow-sm", 
                  { '100': 'opacity-100', '80': 'opacity-80', '50': 'opacity-50' }[slide.bodyConfig.opacity || '100'],
                  slide.bodyConfig.colorToken ? ((textColors as Record<string,string>)[slide.bodyConfig.colorToken] || (bodyColors as Record<string,string>)[slide.bodyConfig.colorToken]) : bodyTokenCSS,
                {
                  'sm': 'text-sm',
                  'md': 'text-base',
                  'lg': 'text-lg'
-               }[slide.bodyConfig.size || 'md'])}
+               }[slide.bodyConfig.size || 'md'], getGlassCSS(slide.bodyConfig))}
              />
           </div>
         )}
@@ -299,14 +302,14 @@ export function LinkedInCarouselTemplate({ slide, onUpdate }: LinkedInCarouselTe
                value={slide.footer || slide.footnote || ''}
                onChange={(val) => onUpdate?.({ footer: val })}
                placeholder="Enter citation or footer detail..."
-               className={cn("font-sans tracking-wide uppercase pointer-events-auto block", 
+               className={cn("font-ui font-medium tracking-[0.15em] uppercase pointer-events-auto block", 
                  { '100': 'opacity-100', '80': 'opacity-80', '50': 'opacity-50' }[slide.footerConfig.opacity || '50'],
                  slide.footerConfig.colorToken ? ((textColors as Record<string,string>)[slide.footerConfig.colorToken] || (bodyColors as Record<string,string>)[slide.footerConfig.colorToken]) : textTokenCSS,
                {
                  'sm': 'text-[8px]',
                  'md': 'text-[10px]',
                  'lg': 'text-[12px]'
-               }[slide.footerConfig.size || 'md'])}
+               }[slide.footerConfig.size || 'md'], getGlassCSS(slide.footerConfig))}
              />
         </div>
       )}
