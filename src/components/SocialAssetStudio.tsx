@@ -588,19 +588,7 @@ export function SocialAssetStudio({ projectId }: { projectId?: string }) {
                         </select>
                       </div>
 
-                      <div className="flex flex-col space-y-1.5">
-                        <label className="text-[9px] font-mono uppercase text-muted-foreground font-semibold">Alignment</label>
-                        <div className="flex bg-neutral-200/50 p-0.5 rounded gap-0.5 w-full">
-                          <button 
-                             onClick={() => updateActiveSlide({ layoutToken: 'center' })}
-                             className={cn("flex-1 flex justify-center py-1.5 rounded-sm text-neutral-500 hover:text-black transition-colors", (activeSlide.layoutToken || 'center') === 'center' && "bg-white text-black shadow-sm")}
-                          ><AlignCenter className="w-3.5 h-3.5" /></button>
-                          <button 
-                             onClick={() => updateActiveSlide({ layoutToken: 'left' })}
-                             className={cn("flex-1 flex justify-center py-1.5 rounded-sm text-neutral-500 hover:text-black transition-colors", activeSlide.layoutToken === 'left' && "bg-white text-black shadow-sm")}
-                          ><AlignLeft className="w-3.5 h-3.5" /></button>
-                        </div>
-                      </div>
+
 
                       <div className="flex flex-col space-y-1.5">
                         <label className="text-[9px] font-mono uppercase text-muted-foreground font-semibold">Card Shape</label>
