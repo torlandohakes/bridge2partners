@@ -107,11 +107,15 @@ export function LinkedInCarouselTemplate({ slide, onUpdate }: LinkedInCarouselTe
     }
     
     if (style === 'cutout') {
-      const cutoutAlignMap = { left: 'object-left-bottom', center: 'object-bottom', right: 'object-right-bottom' };
+      const cutoutAlignMap: Record<string, string> = { 
+        left: 'left-0 bottom-0 object-left-bottom', 
+        center: 'left-1/2 -translate-x-1/2 bottom-0 object-bottom', 
+        right: 'right-0 bottom-0 object-right-bottom' 
+      };
       const cutAlign = cutoutAlignMap[slide.imageAlign || 'center'];
       return (
          <div className={cn("absolute inset-0 overflow-hidden pointer-events-none", isFront ? 'z-20' : 'z-0')}>
-           <img src={safeImageUrl} alt="Cutout" className={cn("w-full h-full", imgFit, cutAlign)} />
+           <img src={safeImageUrl} alt="Cutout" className={cn("absolute max-w-[85%] max-h-[85%]", imgFit, cutAlign)} />
          </div>
       );
     }
