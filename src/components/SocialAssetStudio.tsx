@@ -686,7 +686,7 @@ export function SocialAssetStudio({ projectId }: { projectId?: string }) {
                           </select>
                         </div>
                         
-                        <div className="flex flex-col space-y-1.5 col-span-2">
+                        <div className="flex flex-col space-y-1.5">
                           <label className="text-[9px] font-mono uppercase text-muted-foreground font-semibold">Stack Order</label>
                           <select 
                             value={activeSlide.imagePosition || 'back'}
@@ -695,6 +695,21 @@ export function SocialAssetStudio({ projectId }: { projectId?: string }) {
                           >
                             <option value="back">Back</option>
                             <option value="front">Front</option>
+                          </select>
+                        </div>
+
+                        <div className="flex flex-col space-y-1.5">
+                          <label className="text-[9px] font-mono uppercase text-muted-foreground font-semibold">Opacity</label>
+                          <select 
+                            value={activeSlide.imageOpacity || '100'}
+                            onChange={e => updateActiveSlide({ imageOpacity: e.target.value as SlideData['imageOpacity'] })}
+                            className="w-full bg-neutral-50 border border-neutral-200 text-[10px] rounded p-2 focus:ring-1 focus:ring-primary outline-none uppercase font-mono"
+                          >
+                            <option value="100">100%</option>
+                            <option value="80">80%</option>
+                            <option value="60">60%</option>
+                            <option value="40">40%</option>
+                            <option value="20">20%</option>
                           </select>
                         </div>
                       </div>

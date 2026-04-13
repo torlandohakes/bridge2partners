@@ -55,6 +55,7 @@ export interface SlideData {
   imageFit?: 'cover' | 'contain' | 'cutout';
   imagePosition?: 'front' | 'back';
   imageAlign?: 'left' | 'center' | 'right';
+  imageOpacity?: '100' | '80' | '60' | '40' | '20';
 }
 
 interface LinkedInCarouselTemplateProps {
@@ -84,18 +85,21 @@ export function LinkedInCarouselTemplate({ slide, onUpdate }: LinkedInCarouselTe
     const isFront = slide.imagePosition === 'front';
 
     const getScaleClasses = () => {
+       const opMap: Record<string, string> = { '100': 'opacity-100', '80': 'opacity-80', '60': 'opacity-60', '40': 'opacity-40', '20': 'opacity-20' };
+       const opCSS = opMap[slide.imageOpacity || '100'];
+
        if (slide.imageFit === 'cutout') {
           const cutoutAlignMap: Record<string, string> = { 
             left: 'left-0 bottom-0 object-left-bottom', 
             center: 'left-1/2 -translate-x-1/2 bottom-0 object-bottom', 
             right: 'right-0 bottom-0 object-right-bottom' 
           };
-          return cn("absolute max-w-[85%] max-h-[85%] object-contain", cutoutAlignMap[slide.imageAlign || 'center']);
+          return cn("absolute max-w-[85%] max-h-[85%] object-contain", cutoutAlignMap[slide.imageAlign || 'center'], opCSS);
        }
        const alignmentMap = { left: 'object-left', center: 'object-center', right: 'object-right' };
        const alignCSS = alignmentMap[slide.imageAlign || 'center'];
        const fitCSS = slide.imageFit === 'contain' ? 'object-contain' : 'object-cover';
-       return cn("w-full h-full", fitCSS, alignCSS);
+       return cn("w-full h-full", fitCSS, alignCSS, opCSS);
     };
     
     if (['full-bleed-dark-overlay', 'full-bleed-green-overlay', 'overlay-gradient-institutional', 'overlay-gradient-teal', 'overlay-frosted-glass'].includes(style) || style === 'none') {
