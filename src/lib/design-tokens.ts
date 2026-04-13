@@ -25,10 +25,10 @@ export const typographyColors = {
 };
 
 export const shapeVariants = {
-  none: 'w-full',
-  'thin-frame': 'w-fit h-fit border border-neutral-300 bg-transparent rounded-sm p-8 flex flex-col',
-  'understated-solid': 'w-fit h-fit bg-[#f4f6f5] border border-neutral-200 rounded-sm p-8 shadow-sm flex flex-col',
-  'glass-panel': 'w-fit h-fit bg-[#001b15]/60 backdrop-blur-xl border border-white/20 rounded-xl p-4 shadow-2xl flex flex-col'
+  none: 'h-full w-full flex flex-col',
+  'thin-frame': 'h-full w-full border border-neutral-300 bg-transparent rounded-sm p-6 flex flex-col',
+  'understated-solid': 'h-full w-full bg-[#f4f6f5] border border-neutral-200 rounded-sm p-6 shadow-sm flex flex-col',
+  'glass-panel': 'w-fit h-fit bg-[#001b15]/60 backdrop-blur-xl border border-white/20 rounded-xl p-6 shadow-2xl flex flex-col max-w-full'
 };
 
 export const imageStyles = {

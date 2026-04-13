@@ -222,7 +222,7 @@ export function LinkedInCarouselTemplate({ slide, onUpdate }: LinkedInCarouselTe
       <div className={cn("relative z-10 flex flex-col h-full w-full", layoutTokenCSS)}>
         
         {/* Card Shape Wrapper */}
-        <div className={cn("transition-all duration-300", cardTokenCSS)}>
+        <div className={cn("transition-all duration-300", cardTokenCSS, layoutTokenCSS)}>
         
         {slide.eyebrowConfig?.visible && (
           <div className={cn("w-full", getVSpaceCSS(slide.eyebrowConfig, 'mb-3'), `text-${slide.eyebrowConfig.align}`, getIndentCSS(slide.eyebrowConfig))}>
