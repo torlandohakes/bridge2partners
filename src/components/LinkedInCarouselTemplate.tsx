@@ -54,7 +54,7 @@ export interface SlideData {
   brandMarkOpacity?: '50' | '80' | '100';
   imageFit?: 'cover' | 'contain' | 'cutout';
   imagePosition?: 'front' | 'back';
-  imageAlign?: 'left' | 'center' | 'right';
+  imageAlign?: 'far-left' | 'left' | 'center' | 'right' | 'far-right';
   imageOpacity?: '100' | '80' | '60' | '40' | '20';
   contentWidth?: '100' | '80' | '65' | '50';
 }
@@ -91,13 +91,15 @@ export function LinkedInCarouselTemplate({ slide, onUpdate }: LinkedInCarouselTe
 
        if (slide.imageFit === 'cutout') {
           const cutoutAlignMap: Record<string, string> = { 
+            'far-left': '-left-[15%] bottom-0 object-left-bottom',
             left: 'left-0 bottom-0 object-left-bottom', 
             center: 'left-1/2 -translate-x-1/2 bottom-0 object-bottom', 
-            right: 'right-0 bottom-0 object-right-bottom' 
+            right: 'right-0 bottom-0 object-right-bottom',
+            'far-right': '-right-[15%] bottom-0 object-right-bottom'
           };
           return cn("absolute max-w-[85%] max-h-[85%] object-contain", cutoutAlignMap[slide.imageAlign || 'center'], opCSS);
        }
-       const alignmentMap = { left: 'object-left', center: 'object-center', right: 'object-right' };
+       const alignmentMap: Record<string, string> = { 'far-left': 'object-left scale-110 -translate-x-[5%]', left: 'object-left', center: 'object-center', right: 'object-right', 'far-right': 'object-right scale-110 translate-x-[5%]' };
        const alignCSS = alignmentMap[slide.imageAlign || 'center'];
        const fitCSS = slide.imageFit === 'contain' ? 'object-contain' : 'object-cover';
        return cn("w-full h-full", fitCSS, alignCSS, opCSS);
