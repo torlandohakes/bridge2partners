@@ -29,7 +29,8 @@ export const bodyColors = {
 export const shapeVariants = {
   none: '',
   'thin-frame': 'border border-neutral-300 bg-transparent rounded-sm p-8',
-  'understated-solid': 'bg-[#f4f6f5] border border-neutral-200 rounded-sm p-8 shadow-sm'
+  'understated-solid': 'bg-[#f4f6f5] border border-neutral-200 rounded-sm p-8 shadow-sm',
+  'glass-panel': 'h-auto w-auto mt-auto mb-6 mx-6 bg-[#001b15]/60 backdrop-blur-xl border border-white/20 rounded-xl p-8 shadow-2xl'
 };
 
 export const imageStyles = {

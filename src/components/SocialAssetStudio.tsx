@@ -255,10 +255,9 @@ export function SocialAssetStudio({ projectId }: { projectId?: string }) {
       const reader = new FileReader();
       reader.onloadend = () => {
         const imageUrl = reader.result as string;
-        const updatedSlides = [...slides];
-        updatedSlides[activeIndex].imageUrl = imageUrl;
-        setSlides(updatedSlides);
-        // Clear input so the same file can be uploaded again if cleared
+        updateActiveSlide({ imageUrl });
+        
+        // Clear input so the same file can be uploaded again
         if (fileInputRef.current) fileInputRef.current.value = '';
       };
       reader.readAsDataURL(file);
@@ -600,6 +599,7 @@ export function SocialAssetStudio({ projectId }: { projectId?: string }) {
                           className="bg-neutral-50 border border-neutral-200 text-xs rounded p-2 focus:ring-1 focus:ring-primary outline-none"
                         >
                           <option value="none">None</option>
+                          <option value="glass-panel">Glass Panel</option>
                           <option value="thin-frame">Thin Frame</option>
                           <option value="understated-solid">Understated Solid</option>
                         </select>
