@@ -623,6 +623,20 @@ export function SocialAssetStudio({ projectId }: { projectId?: string }) {
                         </select>
                       </div>
 
+                      <div className="flex flex-col space-y-1.5">
+                        <label className="text-[9px] font-mono uppercase text-muted-foreground font-semibold">Text Bounding</label>
+                        <select 
+                          value={activeSlide.contentWidth || '100'}
+                          onChange={e => updateActiveSlide({ contentWidth: e.target.value as SlideData['contentWidth'] })}
+                          className="w-full bg-neutral-50 border border-neutral-200 text-xs rounded p-2 focus:ring-1 focus:ring-primary outline-none font-mono"
+                        >
+                          <option value="100">100% (Full Bleed)</option>
+                          <option value="80">80% Width</option>
+                          <option value="65">65% Width</option>
+                          <option value="50">50% Width</option>
+                        </select>
+                      </div>
+
                     </div>
                   </div>
 

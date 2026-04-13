@@ -56,6 +56,7 @@ export interface SlideData {
   imagePosition?: 'front' | 'back';
   imageAlign?: 'left' | 'center' | 'right';
   imageOpacity?: '100' | '80' | '60' | '40' | '20';
+  contentWidth?: '100' | '80' | '65' | '50';
 }
 
 interface LinkedInCarouselTemplateProps {
@@ -242,7 +243,10 @@ export function LinkedInCarouselTemplate({ slide, onUpdate }: LinkedInCarouselTe
       <div className={cn("relative z-10 flex flex-col h-full w-full", layoutTokenCSS)}>
         
         {/* Dynamic Inner Wrapper for Glass Panel */}
-        <div className={cn("transition-all duration-300 flex flex-col", slide.cardVariantToken === 'glass-panel' ? cardTokenCSS : "")}>
+        <div className={cn("transition-all duration-300 flex flex-col", 
+          slide.cardVariantToken === 'glass-panel' ? cardTokenCSS : "",
+          { '100': 'w-full', '80': 'w-[80%]', '65': 'w-[65%]', '50': 'w-[50%]' }[slide.contentWidth || '100']
+        )}>
         
         {(() => {
           const typographySequence = [
