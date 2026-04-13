@@ -227,7 +227,7 @@ export function LinkedInCarouselTemplate({ slide, onUpdate }: LinkedInCarouselTe
       <div className={cn("relative z-10 flex flex-col h-full w-full", layoutTokenCSS)}>
         
         {/* Dynamic Inner Wrapper for Glass Panel */}
-        <div className={cn("transition-all duration-300 flex flex-col", slide.cardVariantToken === 'glass-panel' ? cardTokenCSS : "w-full flex-1")}>
+        <div className={cn("transition-all duration-300 flex flex-col", slide.cardVariantToken === 'glass-panel' ? cardTokenCSS : "")}>
         
         {slide.eyebrowConfig?.visible && (
           <div className={cn("w-full", getVSpaceCSS(slide.eyebrowConfig, 'mb-3'), `text-${slide.eyebrowConfig.align}`, getIndentCSS(slide.eyebrowConfig))}>
