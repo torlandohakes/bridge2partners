@@ -185,9 +185,10 @@ export function LinkedInCarouselTemplate({ slide, onUpdate }: LinkedInCarouselTe
   const bodyTokenCSS = bodyColors[slide.bodyColorToken as keyof typeof bodyColors || 'text-neutral'];
   const cardTokenCSS = shapeVariants[slide.cardVariantToken as keyof typeof shapeVariants || 'none'];
   const layoutTokenCSS = layouts[slide.layoutToken as keyof typeof layouts || 'center'];
+  const outerPaddingCSS = (slide.cardVariantToken && slide.cardVariantToken !== 'none') ? 'p-6' : 'p-12';
 
   return (
-    <div className={cn("w-full h-full flex p-12 relative overflow-hidden flex-col justify-center", bgTokenCSS)}>
+    <div className={cn("w-full h-full flex relative overflow-hidden flex-col justify-center", outerPaddingCSS, bgTokenCSS)}>
       {renderBackgroundEffects()}
       {renderBackgroundFallbackImage()}
       
