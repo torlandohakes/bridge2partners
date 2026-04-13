@@ -106,18 +106,20 @@ export function LinkedInCarouselTemplate({ slide, onUpdate }: LinkedInCarouselTe
        );
     }
     
-        if (style === 'cutout') {
+    if (style === 'cutout') {
+      const cutoutAlignMap = { left: 'object-left-bottom', center: 'object-bottom', right: 'object-right-bottom' };
+      const cutAlign = cutoutAlignMap[slide.imageAlign || 'center'];
       return (
-         <div className="absolute inset-0 z-0 overflow-hidden">
-           <img src={safeImageUrl} alt="Cutout" className="absolute bottom-0 right-0 max-w-[80%] max-h-[80%] object-contain object-right-bottom mix-blend-normal" />
+         <div className={cn("absolute inset-0 overflow-hidden pointer-events-none", isFront ? 'z-20' : 'z-0')}>
+           <img src={safeImageUrl} alt="Cutout" className={cn("w-full h-full", imgFit, cutAlign)} />
          </div>
       );
     }
 
     if (style === 'framed') {
        return (
-         <div className="absolute inset-0 z-0 flex items-center justify-center p-12">
-            <img src={safeImageUrl} alt="Framed" className="w-full h-full object-cover p-2 border border-neutral-200 bg-white shadow-sm" />
+         <div className={cn("absolute inset-0 flex items-center justify-center p-12 pointer-events-none", isFront ? 'z-20' : 'z-0')}>
+            <img src={safeImageUrl} alt="Framed" className={cn("w-full h-full p-2 border border-neutral-200 bg-white shadow-sm pointer-events-auto", imgFit, imgAlign)} />
          </div>
        );
     }
