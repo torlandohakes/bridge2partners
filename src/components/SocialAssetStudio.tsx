@@ -623,8 +623,18 @@ export function SocialAssetStudio({ projectId }: { projectId?: string }) {
                         </select>
                       </div>
 
+                    </div>
+                  </div>
+
+                  <div className="border-t border-neutral-100" />
+
+                  {/* Category: Imagery & Backgrounds */}
+                  <div className="flex flex-col space-y-3">
+                    <span className="text-[8px] font-bold uppercase tracking-[0.1em] text-primary">Imagery & Backgrounds</span>
+                    
+                    <div className="flex flex-col space-y-3">
                       <div className="flex flex-col space-y-1.5">
-                        <label className="text-[9px] font-mono uppercase text-muted-foreground font-semibold">Image</label>
+                        <label className="text-[9px] font-mono uppercase text-muted-foreground font-semibold">Image Style</label>
                         <select 
                           value={activeSlide.imageStyleToken || 'none'}
                           onChange={e => updateActiveSlide({ imageStyleToken: e.target.value as SlideData['imageStyleToken'] })}
@@ -650,23 +660,43 @@ export function SocialAssetStudio({ projectId }: { projectId?: string }) {
                         </select>
                       </div>
 
-                      <div className="flex gap-2 w-full pt-1">
-                        <select 
-                          value={activeSlide.imageFit || 'cover'}
-                          onChange={e => updateActiveSlide({ imageFit: e.target.value as 'cover' | 'contain' })}
-                          className="flex-1 bg-neutral-50 border border-neutral-200 text-[10px] rounded p-2 focus:ring-1 focus:ring-primary outline-none uppercase font-mono"
-                        >
-                          <option value="cover">Fill (Cover)</option>
-                          <option value="contain">Fit (Contain)</option>
-                        </select>
-                        <select 
-                          value={activeSlide.imagePosition || 'back'}
-                          onChange={e => updateActiveSlide({ imagePosition: e.target.value as 'front' | 'back' })}
-                          className="flex-1 bg-neutral-50 border border-neutral-200 text-[10px] rounded p-2 focus:ring-1 focus:ring-primary outline-none uppercase font-mono"
-                        >
-                          <option value="back">Send to Back</option>
-                          <option value="front">Send to Front</option>
-                        </select>
+                      <div className="grid grid-cols-2 gap-2 w-full pt-1">
+                        <div className="flex flex-col space-y-1.5">
+                          <label className="text-[9px] font-mono uppercase text-muted-foreground font-semibold">Scale</label>
+                          <select 
+                            value={activeSlide.imageFit || 'cover'}
+                            onChange={e => updateActiveSlide({ imageFit: e.target.value as 'cover' | 'contain' })}
+                            className="w-full bg-neutral-50 border border-neutral-200 text-[10px] rounded p-2 focus:ring-1 focus:ring-primary outline-none uppercase font-mono"
+                          >
+                            <option value="cover">Fill Area (Cover)</option>
+                            <option value="contain">Fit Bounds (Contain)</option>
+                          </select>
+                        </div>
+
+                        <div className="flex flex-col space-y-1.5">
+                          <label className="text-[9px] font-mono uppercase text-muted-foreground font-semibold">Alignment</label>
+                          <select 
+                            value={activeSlide.imageAlign || 'center'}
+                            onChange={e => updateActiveSlide({ imageAlign: e.target.value as 'left' | 'center' | 'right' })}
+                            className="w-full bg-neutral-50 border border-neutral-200 text-[10px] rounded p-2 focus:ring-1 focus:ring-primary outline-none uppercase font-mono"
+                          >
+                            <option value="left">Left</option>
+                            <option value="center">Center</option>
+                            <option value="right">Right</option>
+                          </select>
+                        </div>
+                        
+                        <div className="flex flex-col space-y-1.5 col-span-2">
+                          <label className="text-[9px] font-mono uppercase text-muted-foreground font-semibold">Stack Order</label>
+                          <select 
+                            value={activeSlide.imagePosition || 'back'}
+                            onChange={e => updateActiveSlide({ imagePosition: e.target.value as 'front' | 'back' })}
+                            className="w-full bg-neutral-50 border border-neutral-200 text-[10px] rounded p-2 focus:ring-1 focus:ring-primary outline-none uppercase font-mono"
+                          >
+                            <option value="back">Send to Background (Behind Overlays)</option>
+                            <option value="front">Pull to Foreground (Above Text Overlays)</option>
+                          </select>
+                        </div>
                       </div>
                     </div>
                   </div>

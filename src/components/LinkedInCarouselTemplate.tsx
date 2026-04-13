@@ -54,6 +54,7 @@ export interface SlideData {
   brandMarkOpacity?: '50' | '80' | '100';
   imageFit?: 'cover' | 'contain';
   imagePosition?: 'front' | 'back';
+  imageAlign?: 'left' | 'center' | 'right';
 }
 
 interface LinkedInCarouselTemplateProps {
@@ -82,11 +83,13 @@ export function LinkedInCarouselTemplate({ slide, onUpdate }: LinkedInCarouselTe
     const safeImageUrl = slide.imageUrl.startsWith('http') ? `/api/proxy-image?url=${encodeURIComponent(slide.imageUrl)}` : slide.imageUrl;
     const isFront = slide.imagePosition === 'front';
     const imgFit = slide.imageFit === 'contain' ? 'object-contain' : 'object-cover';
+    const alignmentMap = { left: 'object-left', center: 'object-center', right: 'object-right' };
+    const imgAlign = alignmentMap[slide.imageAlign || 'center'];
     
     if (['full-bleed-dark-overlay', 'full-bleed-green-overlay', 'overlay-gradient-institutional', 'overlay-gradient-teal', 'overlay-frosted-glass'].includes(style) || style === 'none') {
        return (
          <div className={cn("absolute inset-0 pointer-events-none", isFront ? 'z-20' : 'z-0')}>
-           <img src={safeImageUrl} alt="Slide background" className={cn("w-full h-full", imgFit)} />
+           <img src={safeImageUrl} alt="Slide background" className={cn("w-full h-full", imgFit, imgAlign)} />
            <div className={imageStyles[style as keyof typeof imageStyles]} />
          </div>
        );
@@ -95,7 +98,7 @@ export function LinkedInCarouselTemplate({ slide, onUpdate }: LinkedInCarouselTe
     if (style === 'overlay-aurora-spots') {
        return (
          <div className={cn("absolute inset-0", isFront ? 'z-20' : 'z-0')}>
-           <img src={safeImageUrl} alt="Slide background" className={cn("w-full h-full", imgFit)} />
+           <img src={safeImageUrl} alt="Slide background" className={cn("w-full h-full", imgFit, imgAlign)} />
            <div className="absolute inset-0 bg-black/40 z-0 mix-blend-multiply" />
            <div className="absolute -top-[20%] -left-[10%] w-[60%] h-[60%] bg-[#009677] rounded-full blur-[100px] opacity-60 mix-blend-screen pointer-events-none z-10" />
            <div className="absolute -bottom-[20%] -right-[10%] w-[60%] h-[60%] bg-[#00573f] rounded-full blur-[100px] opacity-70 mix-blend-screen pointer-events-none z-10" />
