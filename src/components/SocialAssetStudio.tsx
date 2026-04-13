@@ -258,6 +258,8 @@ export function SocialAssetStudio({ projectId }: { projectId?: string }) {
         const updatedSlides = [...slides];
         updatedSlides[activeIndex].imageUrl = imageUrl;
         setSlides(updatedSlides);
+        // Clear input so the same file can be uploaded again if cleared
+        if (fileInputRef.current) fileInputRef.current.value = '';
       };
       reader.readAsDataURL(file);
     }
