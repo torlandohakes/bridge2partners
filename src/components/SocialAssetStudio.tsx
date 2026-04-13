@@ -616,7 +616,7 @@ export function SocialAssetStudio({ projectId }: { projectId?: string }) {
                       </div>
 
                       <div className="flex flex-col space-y-1.5">
-                        <label className="text-[9px] font-mono uppercase text-muted-foreground font-semibold">Image Treat</label>
+                        <label className="text-[9px] font-mono uppercase text-muted-foreground font-semibold">Image</label>
                         <select 
                           value={activeSlide.imageStyleToken || 'none'}
                           onChange={e => updateActiveSlide({ imageStyleToken: e.target.value as SlideData['imageStyleToken'] })}

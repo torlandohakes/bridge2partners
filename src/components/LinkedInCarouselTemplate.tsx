@@ -97,10 +97,10 @@ export function LinkedInCarouselTemplate({ slide, onUpdate }: LinkedInCarouselTe
        );
     }
     
-    if (style === 'cutout') {
+        if (style === 'cutout') {
       return (
-         <div className="absolute inset-0 z-0 flex items-end justify-end p-8">
-           <img src={safeImageUrl} alt="Cutout" className="w-[80%] h-[80%] object-contain object-bottom right-0 mix-blend-normal" />
+         <div className="absolute inset-0 z-0 overflow-hidden">
+           <img src={safeImageUrl} alt="Cutout" className="absolute bottom-0 right-0 max-w-[80%] max-h-[80%] object-contain object-right-bottom mix-blend-normal" />
          </div>
       );
     }
