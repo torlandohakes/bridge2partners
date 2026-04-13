@@ -187,7 +187,7 @@ export function LinkedInCarouselTemplate({ slide, onUpdate }: LinkedInCarouselTe
   const bodyTokenCSS = bodyColors[slide.bodyColorToken as keyof typeof bodyColors || 'text-neutral'];
   const cardTokenCSS = shapeVariants[slide.cardVariantToken as keyof typeof shapeVariants || 'none'];
   const layoutTokenCSS = layouts[slide.layoutToken as keyof typeof layouts || 'center'];
-  const outerPaddingCSS = (slide.cardVariantToken && slide.cardVariantToken !== 'none') ? 'p-6' : 'p-12';
+  const outerPaddingCSS = 'p-6';
 
   const getIndentCSS = (config?: TextConfig) => {
     const p = config?.padding || 'none';
@@ -208,7 +208,7 @@ export function LinkedInCarouselTemplate({ slide, onUpdate }: LinkedInCarouselTe
       {renderBackgroundFallbackImage()}
       
       {/* Main Content Wrapper */}
-      <div className={cn("relative z-10 flex flex-col justify-center h-full w-full p-4", layoutTokenCSS, cardTokenCSS)}>
+      <div className={cn("relative z-10 flex flex-col justify-center h-full w-full", layoutTokenCSS, cardTokenCSS)}>
         
         {slide.eyebrowConfig?.visible && (
           <div className={cn("w-full mb-3", `text-${slide.eyebrowConfig.align}`, getIndentCSS(slide.eyebrowConfig))}>
