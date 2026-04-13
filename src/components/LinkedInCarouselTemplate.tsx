@@ -52,6 +52,8 @@ export interface SlideData {
   brandMarkType?: 'watermark' | 'logo' | 'icon';
   brandMarkSize?: 'sm' | 'md' | 'lg';
   brandMarkOpacity?: '50' | '80' | '100';
+  imageFit?: 'cover' | 'contain';
+  imagePosition?: 'front' | 'back';
 }
 
 interface LinkedInCarouselTemplateProps {
@@ -73,16 +75,18 @@ export function LinkedInCarouselTemplate({ slide, onUpdate }: LinkedInCarouselTe
     return null;
   };
 
-  const renderBackgroundFallbackImage = () => {
+  const renderImageContent = () => {
     if (!slide.imageUrl) return null;
     
     const style = slide.imageStyleToken || 'none';
     const safeImageUrl = slide.imageUrl.startsWith('http') ? `/api/proxy-image?url=${encodeURIComponent(slide.imageUrl)}` : slide.imageUrl;
+    const isFront = slide.imagePosition === 'front';
+    const imgFit = slide.imageFit === 'contain' ? 'object-contain' : 'object-cover';
     
     if (['full-bleed-dark-overlay', 'full-bleed-green-overlay', 'overlay-gradient-institutional', 'overlay-gradient-teal', 'overlay-frosted-glass'].includes(style) || style === 'none') {
        return (
-         <div className="absolute inset-0 z-0">
-           <img src={safeImageUrl} alt="Slide background" className="w-full h-full object-cover" />
+         <div className={cn("absolute inset-0 pointer-events-none", isFront ? 'z-20' : 'z-0')}>
+           <img src={safeImageUrl} alt="Slide background" className={cn("w-full h-full", imgFit)} />
            <div className={imageStyles[style as keyof typeof imageStyles]} />
          </div>
        );
@@ -90,8 +94,8 @@ export function LinkedInCarouselTemplate({ slide, onUpdate }: LinkedInCarouselTe
 
     if (style === 'overlay-aurora-spots') {
        return (
-         <div className="absolute inset-0 z-0">
-           <img src={safeImageUrl} alt="Slide background" className="w-full h-full object-cover" />
+         <div className={cn("absolute inset-0", isFront ? 'z-20' : 'z-0')}>
+           <img src={safeImageUrl} alt="Slide background" className={cn("w-full h-full", imgFit)} />
            <div className="absolute inset-0 bg-black/40 z-0 mix-blend-multiply" />
            <div className="absolute -top-[20%] -left-[10%] w-[60%] h-[60%] bg-[#009677] rounded-full blur-[100px] opacity-60 mix-blend-screen pointer-events-none z-10" />
            <div className="absolute -bottom-[20%] -right-[10%] w-[60%] h-[60%] bg-[#00573f] rounded-full blur-[100px] opacity-70 mix-blend-screen pointer-events-none z-10" />
@@ -216,7 +220,7 @@ export function LinkedInCarouselTemplate({ slide, onUpdate }: LinkedInCarouselTe
   return (
     <div className={cn("w-full h-full flex relative overflow-hidden flex-col", outerPaddingCSS, bgTokenCSS)}>
       {renderBackgroundEffects()}
-      {renderBackgroundFallbackImage()}
+      {renderImageContent()}
       
       {/* Absolute Full-Bleed Overlays (Thin Frame, Understated Solid) */}
       {(slide.cardVariantToken === 'thin-frame' || slide.cardVariantToken === 'understated-solid') && (

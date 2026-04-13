@@ -649,6 +649,25 @@ export function SocialAssetStudio({ projectId }: { projectId?: string }) {
                           </optgroup>
                         </select>
                       </div>
+
+                      <div className="flex gap-2 w-full pt-1">
+                        <select 
+                          value={activeSlide.imageFit || 'cover'}
+                          onChange={e => updateActiveSlide({ imageFit: e.target.value as 'cover' | 'contain' })}
+                          className="flex-1 bg-neutral-50 border border-neutral-200 text-[10px] rounded p-2 focus:ring-1 focus:ring-primary outline-none uppercase font-mono"
+                        >
+                          <option value="cover">Fill (Cover)</option>
+                          <option value="contain">Fit (Contain)</option>
+                        </select>
+                        <select 
+                          value={activeSlide.imagePosition || 'back'}
+                          onChange={e => updateActiveSlide({ imagePosition: e.target.value as 'front' | 'back' })}
+                          className="flex-1 bg-neutral-50 border border-neutral-200 text-[10px] rounded p-2 focus:ring-1 focus:ring-primary outline-none uppercase font-mono"
+                        >
+                          <option value="back">Send to Back</option>
+                          <option value="front">Send to Front</option>
+                        </select>
+                      </div>
                     </div>
                   </div>
 
