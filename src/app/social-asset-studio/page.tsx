@@ -6,6 +6,7 @@ import { exportProjectToJson, importProjectFromJson } from '@/lib/studio-file-sy
 import { Plus, Folder, Trash, ArrowRight, LayoutTemplate, BookmarkPlus, Upload, Download } from 'lucide-react';
 import { templates } from '@/lib/templates';
 import { cn } from '@/lib/utils';
+import LinkedInCarouselTemplate from '@/components/LinkedInCarouselTemplate';
 
 export default function StudioDashboard() {
   const router = useRouter();
@@ -165,33 +166,55 @@ export default function StudioDashboard() {
                    <div 
                      key={proj.id}
                      onClick={() => router.push(`/social-asset-studio/projects/${proj.id}`)}
-                     className="bg-white border border-neutral-200 rounded-lg p-5 flex flex-col cursor-pointer hover:border-[#00573f] hover:shadow-md transition-all group"
+                     className="bg-white border border-neutral-200 rounded-lg flex flex-col cursor-pointer hover:border-[#00573f] hover:shadow-md transition-all group overflow-hidden"
                    >
-                      <div className="flex items-center justify-between mb-4">
-                        <div className="w-10 h-10 bg-[#f4f6f5] rounded flex items-center justify-center select-none shadow-inner border border-neutral-100">
-                          <span className="text-xs font-bold text-[#00573f] font-mono">{proj.slides?.length || 0}</span>
-                        </div>
-                        <div className="flex items-center opacity-0 group-hover:opacity-100 transition-opacity">
-                          <button 
-                            onClick={(e) => handleExportProject(e, proj)}
-                            title="Export to JSON"
-                            className="p-1.5 text-neutral-400 hover:text-emerald-600 hover:bg-emerald-50 rounded mr-1"
-                          >
-                            <Download className="w-4 h-4" />
-                          </button>
-                          <button 
-                            onClick={(e) => handleDelete(e, proj.id)}
-                            title="Delete Project"
-                            className="p-1.5 text-neutral-400 hover:text-red-500 hover:bg-red-50 rounded"
-                          >
-                            <Trash className="w-4 h-4" />
-                          </button>
-                        </div>
+                      <div 
+                         style={{ containerType: 'inline-size' } as React.CSSProperties} 
+                         className={cn("w-full relative overflow-hidden bg-neutral-100 border-b border-neutral-200", proj.aspectRatio === '4:5' ? 'aspect-[4/5]' : 'aspect-square')}
+                      >
+                          {proj.slides && proj.slides.length > 0 ? (
+                             <div 
+                               className="absolute top-0 left-0 origin-top-left pointer-events-none" 
+                               style={{ 
+                                   width: '1080px', 
+                                   height: proj.aspectRatio === '4:5' ? '1350px' : '1080px',
+                                   transform: 'scale(calc(100cqw / 1080))' 
+                               }}
+                             >
+                                <LinkedInCarouselTemplate slide={proj.slides[0]} aspectRatio={proj.aspectRatio || '1:1'} />
+                             </div>
+                          ) : (
+                             <div className="absolute inset-0 flex items-center justify-center text-neutral-300"><Folder className="w-8 h-8 opacity-50" /></div>
+                          )}
+                          
+                          <div className="absolute top-3 left-3 bg-white/90 backdrop-blur-sm shadow-sm rounded px-2 py-1 flex items-center justify-center select-none border border-black/5 z-20">
+                            <span className="text-[10px] font-bold text-[#00573f] font-mono">{proj.slides?.length || 0} Slides</span>
+                          </div>
+
+                          <div className="absolute top-3 right-3 flex items-center opacity-0 group-hover:opacity-100 transition-opacity z-20">
+                            <button 
+                              onClick={(e) => handleExportProject(e, proj)}
+                              title="Export to JSON"
+                              className="p-1.5 text-neutral-600 bg-white shadow-sm hover:text-emerald-600 border border-black/10 rounded mr-1"
+                            >
+                              <Download className="w-3.5 h-3.5" />
+                            </button>
+                            <button 
+                              onClick={(e) => handleDelete(e, proj.id)}
+                              title="Delete Project"
+                              className="p-1.5 text-neutral-600 bg-white shadow-sm hover:text-red-500 border border-black/10 rounded"
+                            >
+                              <Trash className="w-3.5 h-3.5" />
+                            </button>
+                          </div>
                       </div>
-                      <h3 className="font-heading font-medium text-slate-800 line-clamp-1">{proj.name}</h3>
-                      <p className="text-xs text-neutral-400 mt-1.5 font-mono">
-                        Last edited: {new Date(proj.updatedAt).toLocaleDateString()}
-                      </p>
+
+                      <div className="p-4 flex flex-col">
+                         <h3 className="font-heading font-medium text-slate-800 line-clamp-1">{proj.name}</h3>
+                         <p className="text-xs text-neutral-400 mt-1 font-mono">
+                           Last edited: {new Date(proj.updatedAt).toLocaleDateString()}
+                         </p>
+                      </div>
                    </div>
                  ))
                )}
@@ -216,26 +239,45 @@ export default function StudioDashboard() {
                    <div 
                      key={tpl.id}
                      onClick={() => handleCreateFromCustomTemplate(tpl.id)}
-                     className="bg-white border border-emerald-500/30 rounded-lg p-6 flex flex-col cursor-pointer hover:border-emerald-500 hover:shadow-lg transition-all group overflow-hidden relative"
+                     className="bg-white border border-emerald-500/30 rounded-lg flex flex-col cursor-pointer hover:border-emerald-500 hover:shadow-md transition-all group overflow-hidden"
                    >
-                      <div className="absolute top-0 right-0 p-4 opacity-10">
-                        <BookmarkPlus className="w-24 h-24 text-emerald-600" />
+                      <div 
+                         style={{ containerType: 'inline-size' } as React.CSSProperties} 
+                         className={cn("w-full relative overflow-hidden bg-neutral-100 border-b border-emerald-500/20", tpl.aspectRatio === '4:5' ? 'aspect-[4/5]' : 'aspect-square')}
+                      >
+                          {tpl.slides && tpl.slides.length > 0 ? (
+                             <div 
+                               className="absolute top-0 left-0 origin-top-left pointer-events-none" 
+                               style={{ 
+                                   width: '1080px', 
+                                   height: tpl.aspectRatio === '4:5' ? '1350px' : '1080px',
+                                   transform: 'scale(calc(100cqw / 1080))' 
+                               }}
+                             >
+                                <LinkedInCarouselTemplate slide={tpl.slides[0]} aspectRatio={tpl.aspectRatio || '1:1'} />
+                             </div>
+                          ) : (
+                             <div className="absolute inset-0 flex items-center justify-center text-emerald-200"><BookmarkPlus className="w-8 h-8 opacity-50" /></div>
+                          )}
+                          
+                          <div className="absolute top-3 left-3 bg-emerald-500/90 backdrop-blur-sm shadow-sm rounded px-2 py-1 flex items-center justify-center select-none border border-emerald-600/20 z-20">
+                            <span className="text-[10px] font-bold text-white font-mono">{tpl.slides?.length || 0} Blueprint Slides</span>
+                          </div>
+
+                          <div className="absolute top-3 right-3 flex items-center opacity-0 group-hover:opacity-100 transition-opacity z-20">
+                            <button 
+                              onClick={(e) => handleDeleteTemplate(e, tpl.id)}
+                              className="p-1.5 text-neutral-600 bg-white shadow-sm hover:text-red-500 border border-black/10 rounded"
+                            >
+                              <Trash className="w-3.5 h-3.5" />
+                            </button>
+                          </div>
                       </div>
-                      <div className="relative z-10 flex flex-col h-full">
-                         <div className="flex items-start justify-between mb-2">
-                           <h3 className="font-heading text-lg font-medium text-slate-800 pr-4">{tpl.name}</h3>
-                           <button 
-                             onClick={(e) => handleDeleteTemplate(e, tpl.id)}
-                             className="opacity-0 group-hover:opacity-100 transition-opacity p-1 -mt-1 -mr-1 text-neutral-400 hover:text-red-500 hover:bg-red-50 rounded"
-                           >
-                             <Trash className="w-4 h-4" />
-                           </button>
-                         </div>
-                         <p className="text-xs text-emerald-700 mb-6 font-mono leading-relaxed bg-emerald-50 p-2 rounded w-fit border border-emerald-100">
-                           {tpl.slides.length} Slide Blueprints
-                         </p>
-                         <div className="mt-auto flex items-center text-emerald-600 text-sm font-semibold opacity-0 group-hover:opacity-100 transition-opacity -translate-x-2 group-hover:translate-x-0">
-                           Spawn Custom Project <ArrowRight className="w-4 h-4 ml-2" />
+
+                      <div className="p-4 flex flex-col">
+                         <h3 className="font-heading font-medium text-emerald-900 line-clamp-1">{tpl.name}</h3>
+                         <div className="mt-3 flex items-center text-emerald-600 text-[11px] font-semibold opacity-0 group-hover:opacity-100 transition-opacity -translate-x-2 group-hover:translate-x-0">
+                           Spawn Custom Project <ArrowRight className="w-3.5 h-3.5 ml-1.5" />
                          </div>
                       </div>
                    </div>
@@ -257,18 +299,36 @@ export default function StudioDashboard() {
                  <div 
                    key={key}
                    onClick={() => handleCreateProject(key)}
-                   className="bg-neutral-900 border border-neutral-800 rounded-lg p-6 flex flex-col cursor-pointer hover:border-emerald-500 hover:shadow-lg transition-all group overflow-hidden relative"
+                   className="bg-neutral-900 border border-neutral-800 rounded-lg flex flex-col cursor-pointer hover:border-emerald-500 hover:shadow-lg transition-all group overflow-hidden"
                  >
-                    <div className="absolute top-0 right-0 p-4 opacity-10">
-                      <LayoutTemplate className="w-24 h-24 text-white" />
+                    <div 
+                       style={{ containerType: 'inline-size' } as React.CSSProperties} 
+                       className="w-full relative overflow-hidden bg-black border-b border-neutral-800 aspect-square"
+                    >
+                        {templates[key] && templates[key].length > 0 ? (
+                           <div 
+                             className="absolute top-0 left-0 origin-top-left pointer-events-none" 
+                             style={{ 
+                                 width: '1080px', 
+                                 height: '1080px',
+                                 transform: 'scale(calc(100cqw / 1080))' 
+                             }}
+                           >
+                              <LinkedInCarouselTemplate slide={templates[key][0]} aspectRatio="1:1" />
+                           </div>
+                        ) : (
+                           <div className="absolute inset-0 flex items-center justify-center text-neutral-700"><LayoutTemplate className="w-8 h-8 opacity-50" /></div>
+                        )}
+                        
+                        <div className="absolute top-3 left-3 bg-white/10 backdrop-blur-md rounded px-2 py-1 flex items-center justify-center select-none border border-white/5 z-20">
+                          <span className="text-[10px] font-bold text-white font-mono">{templates[key]?.length || 0} Base Configurations</span>
+                        </div>
                     </div>
-                    <div className="relative z-10 flex flex-col h-full">
-                       <h3 className="font-heading text-lg font-medium text-white mb-2">{key.split('_').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ')}</h3>
-                       <p className="text-xs text-neutral-400 mb-6 font-mono leading-relaxed bg-black/20 p-2 rounded w-fit">
-                         {templates[key].length} Base Configurations
-                       </p>
-                       <div className="mt-auto flex items-center text-emerald-400 text-sm font-semibold opacity-0 group-hover:opacity-100 transition-opacity -translate-x-2 group-hover:translate-x-0">
-                         Create Project <ArrowRight className="w-4 h-4 ml-2" />
+
+                    <div className="p-4 flex flex-col">
+                       <h3 className="font-heading font-medium text-white line-clamp-1">{key.split('_').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ')}</h3>
+                       <div className="mt-3 flex items-center text-emerald-400 text-[11px] font-semibold opacity-0 group-hover:opacity-100 transition-opacity -translate-x-2 group-hover:translate-x-0">
+                         Create Project <ArrowRight className="w-3.5 h-3.5 ml-1.5" />
                        </div>
                     </div>
                  </div>
