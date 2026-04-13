@@ -641,21 +641,21 @@ export function SocialAssetStudio({ projectId }: { projectId?: string }) {
                           className="bg-neutral-50 border border-neutral-200 text-xs rounded p-2 focus:ring-1 focus:ring-primary outline-none"
                         >
                           <optgroup label="Layouts">
-                            <option value="none">None (Raw Background)</option>
-                            <option value="cutout">Cutout (Contain)</option>
-                            <option value="framed">Framed Polarized</option>
+                            <option value="none">None</option>
+                            <option value="cutout">Cutout</option>
+                            <option value="framed">Framed</option>
                           </optgroup>
                           <optgroup label="Solid Fades">
-                            <option value="full-bleed-dark-overlay">Full Bleed (Dark)</option>
-                            <option value="full-bleed-green-overlay">Full Bleed (Green)</option>
+                            <option value="full-bleed-dark-overlay">Dark Overlay</option>
+                            <option value="full-bleed-green-overlay">Green Overlay</option>
                           </optgroup>
                           <optgroup label="Gradients">
-                            <option value="overlay-gradient-institutional">Institutional Grad</option>
-                            <option value="overlay-gradient-teal">Teal Horizon Grad</option>
+                            <option value="overlay-gradient-institutional">Institutional</option>
+                            <option value="overlay-gradient-teal">Teal Horizon</option>
                           </optgroup>
                           <optgroup label="Glass & Blur">
-                            <option value="overlay-frosted-glass">Frosted Glass Blur</option>
-                            <option value="overlay-aurora-spots">Aurora Spots Blend</option>
+                            <option value="overlay-frosted-glass">Frosted Glass</option>
+                            <option value="overlay-aurora-spots">Aurora Spots</option>
                           </optgroup>
                         </select>
                       </div>
@@ -668,8 +668,8 @@ export function SocialAssetStudio({ projectId }: { projectId?: string }) {
                             onChange={e => updateActiveSlide({ imageFit: e.target.value as 'cover' | 'contain' })}
                             className="w-full bg-neutral-50 border border-neutral-200 text-[10px] rounded p-2 focus:ring-1 focus:ring-primary outline-none uppercase font-mono"
                           >
-                            <option value="cover">Fill Area (Cover)</option>
-                            <option value="contain">Fit Bounds (Contain)</option>
+                            <option value="cover">Cover</option>
+                            <option value="contain">Contain</option>
                           </select>
                         </div>
 
@@ -693,8 +693,8 @@ export function SocialAssetStudio({ projectId }: { projectId?: string }) {
                             onChange={e => updateActiveSlide({ imagePosition: e.target.value as 'front' | 'back' })}
                             className="w-full bg-neutral-50 border border-neutral-200 text-[10px] rounded p-2 focus:ring-1 focus:ring-primary outline-none uppercase font-mono"
                           >
-                            <option value="back">Send to Background (Behind Overlays)</option>
-                            <option value="front">Pull to Foreground (Above Text Overlays)</option>
+                            <option value="back">Back</option>
+                            <option value="front">Front</option>
                           </select>
                         </div>
                       </div>
