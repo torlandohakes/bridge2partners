@@ -13,6 +13,7 @@ export interface TextConfig {
   colorToken?: 'text-dark' | 'text-primary' | 'text-light' | 'text-neutral';
   opacity?: '100' | '80' | '50';
   glassBackground?: boolean;
+  padding?: 'none' | 'sm' | 'md' | 'lg' | 'xl';
 }
 
 export interface SlideData {
@@ -188,7 +189,18 @@ export function LinkedInCarouselTemplate({ slide, onUpdate }: LinkedInCarouselTe
   const layoutTokenCSS = layouts[slide.layoutToken as keyof typeof layouts || 'center'];
   const outerPaddingCSS = (slide.cardVariantToken && slide.cardVariantToken !== 'none') ? 'p-6' : 'p-12';
 
-  const getGlassCSS = (config?: TextConfig) => config?.glassBackground ? 'bg-[#001b15]/60 backdrop-blur-md border border-white/20 rounded-lg px-4 py-2 shadow-xl inline-block max-w-full' : '';
+  const getTypographicCSS = (config?: TextConfig) => {
+    const glass = config?.glassBackground ? 'bg-[#001b15]/60 backdrop-blur-md border border-white/20 rounded-lg shadow-xl inline-block max-w-full' : '';
+    const p = config?.padding || (config?.glassBackground ? 'md' : 'none');
+    const padding = {
+      'none': '',
+      'sm': 'px-2 py-1',
+      'md': 'px-4 py-2',
+      'lg': 'px-6 py-4',
+      'xl': 'px-8 py-6'
+    }[p];
+    return cn(glass, padding);
+  };
 
   return (
     <div className={cn("w-full h-full flex relative overflow-hidden flex-col justify-center", outerPaddingCSS, bgTokenCSS)}>
@@ -212,7 +224,7 @@ export function LinkedInCarouselTemplate({ slide, onUpdate }: LinkedInCarouselTe
                  'sm': 'text-xs',
                  'md': 'text-sm',
                  'lg': 'text-base'
-               }[slide.eyebrowConfig.size || 'md'], getGlassCSS(slide.eyebrowConfig))}
+               }[slide.eyebrowConfig.size || 'md'], getTypographicCSS(slide.eyebrowConfig))}
              />
           </div>
         )}
@@ -231,7 +243,7 @@ export function LinkedInCarouselTemplate({ slide, onUpdate }: LinkedInCarouselTe
                  'sm': 'text-4xl',
                  'md': 'text-5xl',
                  'lg': 'text-6xl'
-               }[slide.headlineConfig.size || 'md'], getGlassCSS(slide.headlineConfig))}
+               }[slide.headlineConfig.size || 'md'], getTypographicCSS(slide.headlineConfig))}
              />
           </div>
         )}
@@ -250,7 +262,7 @@ export function LinkedInCarouselTemplate({ slide, onUpdate }: LinkedInCarouselTe
                  'sm': 'text-2xl',
                  'md': 'text-3xl',
                  'lg': 'text-4xl'
-               }[slide.subheadlineConfig.size || 'md'], getGlassCSS(slide.subheadlineConfig))}
+               }[slide.subheadlineConfig.size || 'md'], getTypographicCSS(slide.subheadlineConfig))}
              />
           </div>
         )}
@@ -269,7 +281,7 @@ export function LinkedInCarouselTemplate({ slide, onUpdate }: LinkedInCarouselTe
                  'sm': 'text-sm',
                  'md': 'text-base',
                  'lg': 'text-lg'
-               }[slide.bodyConfig.size || 'md'], getGlassCSS(slide.bodyConfig))}
+               }[slide.bodyConfig.size || 'md'], getTypographicCSS(slide.bodyConfig))}
              />
           </div>
         )}
@@ -309,7 +321,7 @@ export function LinkedInCarouselTemplate({ slide, onUpdate }: LinkedInCarouselTe
                  'sm': 'text-[8px]',
                  'md': 'text-[10px]',
                  'lg': 'text-[12px]'
-               }[slide.footerConfig.size || 'md'], getGlassCSS(slide.footerConfig))}
+               }[slide.footerConfig.size || 'md'], getTypographicCSS(slide.footerConfig))}
              />
         </div>
       )}
