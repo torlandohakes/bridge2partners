@@ -6,7 +6,43 @@ import { exportProjectToJson, importProjectFromJson } from '@/lib/studio-file-sy
 import { Plus, Folder, Trash, ArrowRight, LayoutTemplate, BookmarkPlus, Upload, Download } from 'lucide-react';
 import { templates } from '@/lib/templates';
 import { cn } from '@/lib/utils';
-import LinkedInCarouselTemplate from '@/components/LinkedInCarouselTemplate';
+import { LinkedInCarouselTemplate } from '@/components/LinkedInCarouselTemplate';
+import { SlideData } from '@/components/LinkedInCarouselTemplate';
+
+function ThumbnailPreview({ slide, aspectRatio = '1:1' }: { slide: SlideData, aspectRatio?: string }) {
+  const containerRef = React.useRef<HTMLDivElement>(null);
+  const [scale, setScale] = useState(0.25);
+
+  React.useEffect(() => {
+    if (!containerRef.current) return;
+    
+    // Initial scale read before observer catches
+    setScale(containerRef.current.getBoundingClientRect().width / 1080);
+    
+    const ob = new ResizeObserver((entries) => {
+      for (let entry of entries) {
+        setScale(entry.contentRect.width / 1080);
+      }
+    });
+    ob.observe(containerRef.current);
+    return () => ob.disconnect();
+  }, []);
+
+  return (
+    <div ref={containerRef} className="w-full h-full relative overflow-hidden pointer-events-none">
+       <div 
+         className="absolute top-0 left-0 origin-top-left"
+         style={{ 
+             width: '1080px', 
+             height: aspectRatio === '4:5' ? '1350px' : '1080px',
+             transform: `scale(${scale})`
+         }}
+       >
+          <LinkedInCarouselTemplate slide={slide} aspectRatio={aspectRatio} />
+       </div>
+    </div>
+  );
+}
 
 export default function StudioDashboard() {
   const router = useRouter();
@@ -169,20 +205,10 @@ export default function StudioDashboard() {
                      className="bg-white border border-neutral-200 rounded-lg flex flex-col cursor-pointer hover:border-[#00573f] hover:shadow-md transition-all group overflow-hidden"
                    >
                       <div 
-                         style={{ containerType: 'inline-size' } as React.CSSProperties} 
                          className={cn("w-full relative overflow-hidden bg-neutral-100 border-b border-neutral-200", proj.aspectRatio === '4:5' ? 'aspect-[4/5]' : 'aspect-square')}
                       >
                           {proj.slides && proj.slides.length > 0 ? (
-                             <div 
-                               className="absolute top-0 left-0 origin-top-left pointer-events-none" 
-                               style={{ 
-                                   width: '1080px', 
-                                   height: proj.aspectRatio === '4:5' ? '1350px' : '1080px',
-                                   transform: 'scale(calc(100cqw / 1080))' 
-                               }}
-                             >
-                                <LinkedInCarouselTemplate slide={proj.slides[0]} aspectRatio={proj.aspectRatio || '1:1'} />
-                             </div>
+                             <ThumbnailPreview slide={proj.slides[0]} aspectRatio={proj.aspectRatio} />
                           ) : (
                              <div className="absolute inset-0 flex items-center justify-center text-neutral-300"><Folder className="w-8 h-8 opacity-50" /></div>
                           )}
@@ -242,20 +268,10 @@ export default function StudioDashboard() {
                      className="bg-white border border-emerald-500/30 rounded-lg flex flex-col cursor-pointer hover:border-emerald-500 hover:shadow-md transition-all group overflow-hidden"
                    >
                       <div 
-                         style={{ containerType: 'inline-size' } as React.CSSProperties} 
                          className={cn("w-full relative overflow-hidden bg-neutral-100 border-b border-emerald-500/20", tpl.aspectRatio === '4:5' ? 'aspect-[4/5]' : 'aspect-square')}
                       >
                           {tpl.slides && tpl.slides.length > 0 ? (
-                             <div 
-                               className="absolute top-0 left-0 origin-top-left pointer-events-none" 
-                               style={{ 
-                                   width: '1080px', 
-                                   height: tpl.aspectRatio === '4:5' ? '1350px' : '1080px',
-                                   transform: 'scale(calc(100cqw / 1080))' 
-                               }}
-                             >
-                                <LinkedInCarouselTemplate slide={tpl.slides[0]} aspectRatio={tpl.aspectRatio || '1:1'} />
-                             </div>
+                             <ThumbnailPreview slide={tpl.slides[0]} aspectRatio={tpl.aspectRatio} />
                           ) : (
                              <div className="absolute inset-0 flex items-center justify-center text-emerald-200"><BookmarkPlus className="w-8 h-8 opacity-50" /></div>
                           )}
@@ -302,20 +318,10 @@ export default function StudioDashboard() {
                    className="bg-neutral-900 border border-neutral-800 rounded-lg flex flex-col cursor-pointer hover:border-emerald-500 hover:shadow-lg transition-all group overflow-hidden"
                  >
                     <div 
-                       style={{ containerType: 'inline-size' } as React.CSSProperties} 
                        className="w-full relative overflow-hidden bg-black border-b border-neutral-800 aspect-square"
                     >
                         {templates[key] && templates[key].length > 0 ? (
-                           <div 
-                             className="absolute top-0 left-0 origin-top-left pointer-events-none" 
-                             style={{ 
-                                 width: '1080px', 
-                                 height: '1080px',
-                                 transform: 'scale(calc(100cqw / 1080))' 
-                             }}
-                           >
-                              <LinkedInCarouselTemplate slide={templates[key][0]} aspectRatio="1:1" />
-                           </div>
+                           <ThumbnailPreview slide={templates[key][0]} aspectRatio="1:1" />
                         ) : (
                            <div className="absolute inset-0 flex items-center justify-center text-neutral-700"><LayoutTemplate className="w-8 h-8 opacity-50" /></div>
                         )}
