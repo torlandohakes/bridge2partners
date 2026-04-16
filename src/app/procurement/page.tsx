@@ -15,6 +15,10 @@ export default function ProcurementPage() {
         title="Procurement Documentation" 
         subtitle="Fast, frictionless vendor onboarding. Access all required legal and compliance documents below." 
         theme="dark" 
+        imageSrc="https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2FDOM_alpha.png?alt=media&token=47717353-59db-4f9f-b8a6-4dd70e6520be"
+        imageAlt="Dominick Grillas, Chief Administrative Officer"
+        imageCaptionName="Dominick Grillas"
+        imageCaptionTitle="Chief Administrative Officer & Delivery QA Testing & Automation Leader"
       />
 
       <div className="max-w-4xl mx-auto px-6 py-24 space-y-32 relative z-10">

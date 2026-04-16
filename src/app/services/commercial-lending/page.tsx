@@ -6,6 +6,11 @@ export default function CommercialLendingService() {
       <SubpageHero 
         title="Commercial Lending Automation" 
         subtitle="Streamline commercial lending workflows and modernize infrastructure for faster loan origination." 
+        imageSrc="https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2FUntitled%20(78).png?alt=media&token=51dedfc2-9786-4d4a-a9cf-cfaf389fe979"
+        imageAlt="Shane Williams, Head of Capital Markets and Commercial Lending"
+        imageCaptionName="Shane Williams"
+        imageCaptionTitle="Head of Capital Markets and Commercial Lending"
+        imageCaptionPosition="right"
       />
 
       <div className="max-w-6xl mx-auto px-6 py-24 relative z-10 grid grid-cols-1 md:grid-cols-2 gap-16">

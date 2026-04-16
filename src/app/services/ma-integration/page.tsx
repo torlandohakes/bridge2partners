@@ -6,6 +6,11 @@ export default function MAIntegrationService() {
       <SubpageHero 
         title="M&A Tech Integration" 
         subtitle="Execute derisked, post-merger technology integrations across legacy core dependencies." 
+        imageSrc="https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2FUntitled%20(77).png?alt=media&token=361ca2b2-eb78-45c0-8c7a-80f76df8e060"
+        imageAlt="Bob Holohan, Managing Director of M&A and Business Transformation"
+        imageCaptionName="Bob Holohan"
+        imageCaptionTitle="Managing Director of M&A and Business Transformation"
+        imageCaptionPosition="right"
       />
 
       <div className="max-w-6xl mx-auto px-6 py-24 relative z-10 grid grid-cols-1 md:grid-cols-2 gap-16">

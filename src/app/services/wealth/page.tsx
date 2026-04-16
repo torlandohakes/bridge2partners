@@ -6,6 +6,11 @@ export default function WealthManagementService() {
       <SubpageHero 
         title="Wealth Management Analytics" 
         subtitle="Align technology with business goals to accelerate platform modernization and deepen client relationships." 
+        imageSrc="https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2FUntitled%20(75).png?alt=media&token=fd2c0e28-b578-44c2-b113-483c83d8b308"
+        imageAlt="John Gustav, Head of Financial Services"
+        imageCaptionName="John Gustav"
+        imageCaptionTitle="Head of Financial Services"
+        imageCaptionPosition="right"
       />
 
       <div className="max-w-6xl mx-auto px-6 py-24 relative z-10 grid grid-cols-1 md:grid-cols-2 gap-16">
