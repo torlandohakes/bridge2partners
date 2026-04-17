@@ -14,6 +14,7 @@ export interface TextConfig {
   opacity?: '100' | '80' | '50';
   glassBackground?: boolean;
   padding?: 'none' | 'sm' | 'md' | 'lg' | 'xl';
+  vSpace?: 'none' | 'sm' | 'md' | 'lg' | 'xl';
 }
 
 export interface SlideData {
@@ -61,10 +62,11 @@ export interface SlideData {
 
 interface LinkedInCarouselTemplateProps {
   slide: SlideData;
+  aspectRatio?: string;
   onUpdate?: (updates: Partial<SlideData>) => void;
 }
 
-export function LinkedInCarouselTemplate({ slide, onUpdate }: LinkedInCarouselTemplateProps) {
+export function LinkedInCarouselTemplate({ slide, aspectRatio, onUpdate }: LinkedInCarouselTemplateProps) {
   const renderBackgroundEffects = () => {
     if (slide.backgroundColorToken === 'bg-aurora-spots') {
       return (
