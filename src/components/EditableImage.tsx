@@ -82,6 +82,7 @@ export default function EditableImage(props: EditableImageProps) {
         src={displaySrc} 
         alt={alt} 
         {...imageProps} 
+        unoptimized={true}
         className={`${props.className} ${isUploading ? 'opacity-50 grayscale blur-sm' : ''} transition-all duration-300`} 
       />
       
