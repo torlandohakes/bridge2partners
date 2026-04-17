@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
 import { ShieldAlert, X, Loader2, FileText, Send, CheckCircle2 } from 'lucide-react';
 import { db } from '../lib/firebase';
 import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
@@ -92,6 +93,7 @@ export default function GapAnalysisModal({ isOpen, onClose, reportMarkdown, isLo
              <article className="max-w-none">
                <div className={`markdown-body ${theme === 'light' ? 'text-slate-800' : 'text-white/90'}`}>
                   <ReactMarkdown
+                    remarkPlugins={[remarkGfm]}
                     components={{
                        h1: ({node, ...props}) => <h1 className="text-3xl font-display font-bold text-[#98cc67] mb-6 pb-2 border-b border-[#98cc67]/20" {...props} />,
                        h2: ({node, ...props}) => <h2 className="text-2xl font-display font-bold mt-8 mb-4 border-b border-white/10 pb-2" {...props} />,
@@ -99,7 +101,11 @@ export default function GapAnalysisModal({ isOpen, onClose, reportMarkdown, isLo
                        ul: ({node, ...props}) => <ul className="list-disc pl-6 mb-6 pt-2 space-y-3 opacity-90" {...props} />,
                        ol: ({node, ...props}) => <ol className="list-decimal pl-6 mb-6 space-y-3 opacity-90" {...props} />,
                        strong: ({node, ...props}) => <strong className="font-bold text-[#98cc67]" {...props} />,
-                       p: ({node, ...props}) => <p className="mb-5 leading-loose text-lg" {...props} />
+                       p: ({node, ...props}) => <p className="mb-5 leading-loose text-lg" {...props} />,
+                       table: ({node, ...props}) => <div className="overflow-x-auto mb-8"><table className="w-full text-left border-collapse" {...props} /></div>,
+                       thead: ({node, ...props}) => <thead className="bg-[#98cc67]/10" {...props} />,
+                       th: ({node, ...props}) => <th className="p-4 font-display font-bold text-[#98cc67] border-b border-white/20 whitespace-nowrap" {...props} />,
+                       td: ({node, ...props}) => <td className="p-4 border-b border-white/10" {...props} />
                     }}
                   >{reportMarkdown}</ReactMarkdown>
                </div>
