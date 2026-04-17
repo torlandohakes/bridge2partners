@@ -16,7 +16,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'Prompt is required' }, { status: 400 });
     }
 
-    const model = genAI.getGenerativeModel({ model: 'gemini-1.5-pro' });
+    const model = genAI.getGenerativeModel({ model: 'gemini-3.1-pro-preview' });
 
     const systemInstruction = `You are a Banking Digital Transformation Consultant who is an expert at writing gap analysis reports for core banking infrastructure and digital migrations. 
 A user will provide you with a brief description of their current banking tech stack challenge. 
