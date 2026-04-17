@@ -26,4 +26,4 @@ jobs:
         env:
           FIREBASE_CLI_EXPERIMENTS: webframeworks
           GOOGLE_APPLICATION_CREDENTIALS: '${{ steps.auth.outputs.credentials_file_path }}'
-        run: firebase deploy --only hosting --project bridge2partners-staging --non-interactive --force
+        run: firebase deploy --only hosting,firestore --project bridge2partners-staging --non-interactive --force
