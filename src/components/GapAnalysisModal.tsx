@@ -71,7 +71,7 @@ export default function GapAnalysisModal({ isOpen, onClose, reportMarkdown, isLo
              </div>
              <div>
                <h3 className="font-display font-bold text-2xl">Gap Analysis Report</h3>
-               <p className={`font-ui text-xs tracking-wider uppercase mt-1 ${overlayText}`}>B2P Intelligence • Automated Consultant</p>
+               <p className={`font-ui text-xs tracking-wider uppercase mt-1 ${overlayText}`}>B2P Intelligence • Contact a B2P Consultant to perform an in-depth gap analysis to go further.</p>
              </div>
           </div>
           <button onClick={onClose} className={`p-3 rounded-full hover:bg-black/10 transition-colors ${overlayText}`}>
