@@ -1,18 +1,22 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { GoogleGenerativeAI } from '@google/generative-ai';
 
-// Requires GEMINI_API_KEY in environment
-const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || '');
-
 export async function POST(req: NextRequest) {
   try {
+    const apiKey = process.env.GEMINI_API_KEY;
+    if (!apiKey) {
+      console.error("CRITICAL: GEMINI_API_KEY is missing from server environment mapping.");
+      return NextResponse.json({ error: 'Server misconfiguration: API connection missing' }, { status: 500 });
+    }
+    
+    const genAI = new GoogleGenerativeAI(apiKey);
     const { prompt } = await req.json();
 
     if (!prompt) {
       return NextResponse.json({ error: 'Prompt is required' }, { status: 400 });
     }
 
-    const model = genAI.getGenerativeModel({ model: 'gemini-3.1-pro-preview' });
+    const model = genAI.getGenerativeModel({ model: 'gemini-1.5-pro' });
 
     const systemInstruction = `You are a Banking Digital Transformation Consultant who is an expert at writing gap analysis reports for core banking infrastructure and digital migrations. 
 A user will provide you with a brief description of their current banking tech stack challenge. 

@@ -24,8 +24,8 @@ jobs:
         run: npm install -g firebase-tools
       - name: Inject Production Secrets
         run: |
-          echo "GEMINI_API_KEY=${{ secrets.GEMINI_API_KEY }}" > .env.production
-          echo "RESEND_API_KEY=${{ secrets.RESEND_API_KEY }}" >> .env.production
+          echo "GEMINI_API_KEY=${{ secrets.GEMINI_API_KEY }}" > .env
+          echo "RESEND_API_KEY=${{ secrets.RESEND_API_KEY }}" >> .env
           echo "NEXT_PUBLIC_FIREBASE_API_KEY=AIzaSyC_3MVmr-TDM-2Xf_6FZRWRFfgg4UmQAm4" >> .env.production
           echo "NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=bridge2partners-staging.firebaseapp.com" >> .env.production
           echo "NEXT_PUBLIC_FIREBASE_PROJECT_ID=bridge2partners-staging" >> .env.production
