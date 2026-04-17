@@ -85,7 +85,7 @@ export default function GapAnalysisModal({ isOpen, onClose, reportMarkdown, isLo
                 <Loader2 className="w-12 h-12 text-[#98cc67] animate-spin" />
                 <div className="text-center">
                   <p className="font-display font-bold text-xl mb-2">Architecting Transformation...</p>
-                  <p className={`text-sm ${overlayText}`}>Gemini 3.1 Pro is analyzing your infrastructure liabilities.</p>
+                  <p className={`text-sm ${overlayText}`}>B2P Intelligence is analyzing your infrastructure liabilities.</p>
                 </div>
              </div>
            ) : reportMarkdown ? (

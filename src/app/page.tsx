@@ -195,7 +195,7 @@ export default function Home() {
       if (data.report) {
          setModalReport(data.report);
       } else {
-         setModalReport("Error loading report. Ensure GEMINI_API_KEY is configured.");
+         setModalReport("Error loading report. Ensure B2P Intelligence connection is configured.");
       }
     } catch (e) {
       setModalReport("Failed to generate report due to a network error.");
@@ -350,30 +350,45 @@ export default function Home() {
 
          {/* Glassmorphic AI Gap Analysis Pill */}
          <div className="relative z-20 w-full px-6 md:px-12 pb-12 md:pb-16 flex flex-col justify-start mt-auto">
-            <div className="w-full flex flex-col gap-3 max-w-6xl">
-               <label className={`font-ui text-xs sm:text-sm ${theme === 'light' ? t.textSecondary : 'text-white/80'} font-medium pl-6 drop-shadow tracking-wide transition-colors`}>
-                 Change management fails when the gap between strategy and reality is too wide. <span className={`${theme === 'light' ? t.textHighlight : 'text-[#98cc67]'} font-bold ml-1`}>Run an instant gap analysis.</span>
-               </label>
-               <div className={`relative w-full flex flex-col sm:flex-row items-center ${theme === 'light' ? 'bg-white' : theme === 'medium' ? 'bg-white/25' : 'bg-white/5'} backdrop-blur-[12px] border ${t.borderStrong} rounded-3xl sm:rounded-full shadow-2xl overflow-hidden p-2 group transition-all`}>
-                  <div className={`hidden sm:flex w-12 h-12 shrink-0 items-center justify-center ${theme === 'light' ? 'bg-slate-50' : 'bg-white/10'} rounded-full ml-1 backdrop-blur-md border ${t.borderBase} shadow-inner transition-colors`}>
-                     <BrainCircuit className="w-5 h-5 text-[#98cc67]" />
+             <div className="w-full flex flex-col gap-3 max-w-6xl">
+                <label className={`font-ui text-xs sm:text-sm ${theme === 'light' ? t.textSecondary : 'text-white/80'} font-medium pl-6 drop-shadow tracking-wide transition-colors flex items-center flex-wrap`}>
+                  <EditableText element="span" contentId="gap_analysis_label_pre" defaultText="Change management fails when the gap between strategy and reality is too wide." isAdmin={isAdmin} value={cmsContent.gap_analysis_label_pre} />
+                  <span className={`${theme === 'light' ? t.textHighlight : 'text-[#98cc67]'} font-bold ml-1 flex items-center`}>
+                     <EditableText element="span" contentId="gap_analysis_label_post" defaultText="Run an instant gap analysis." isAdmin={isAdmin} value={cmsContent.gap_analysis_label_post} />
+                  </span>
+                </label>
+                <div className={`relative w-full flex flex-col sm:flex-row items-center ${theme === 'light' ? 'bg-white' : theme === 'medium' ? 'bg-white/25' : 'bg-white/5'} backdrop-blur-[12px] border ${t.borderStrong} rounded-3xl sm:rounded-full shadow-2xl overflow-hidden p-2 group transition-all`}>
+                   <div className={`hidden sm:flex w-12 h-12 shrink-0 items-center justify-center ${theme === 'light' ? 'bg-slate-50' : 'bg-white/10'} rounded-full ml-1 backdrop-blur-md border ${t.borderBase} shadow-inner transition-colors`}>
+                      <BrainCircuit className="w-5 h-5 text-[#98cc67]" />
+                   </div>
+                   <input 
+                     type="text" 
+                     value={promptText || ''}
+                     onChange={(e) => setPromptText(e.target.value)}
+                     placeholder={cmsContent.gap_analysis_placeholder || 'E.g., "We are migrating to a unified FIS core and need to align our commercial lending teams..."'} 
+                     className={`flex-1 w-full bg-transparent border-none outline-none ${theme === 'light' ? t.textPrimary : 'text-white/90'} ${theme === 'light' ? 'placeholder:text-[#001b15]/60' : 'placeholder:text-white/60'} px-4 sm:px-6 py-4 sm:py-3 font-ui text-sm sm:text-base h-full focus:outline-none focus:ring-0 transition-colors`}
+                   />
+                   <button onClick={() => handleGenerateAnalysis()} className="w-full sm:w-auto h-full sm:min-h-[48px] bg-primary/80 backdrop-blur-[10px] border border-white/20 text-white px-8 py-3 sm:py-0 rounded-2xl sm:rounded-full transition-all font-bold hover:bg-primary/90 hover:scale-[1.02] active:scale-95 ml-0 sm:ml-2 flex items-center justify-center gap-2 whitespace-nowrap">
+                     <EditableText element="span" contentId="gap_analysis_btn" defaultText="Generate Gap Analysis" isAdmin={isAdmin} value={cmsContent.gap_analysis_btn} />
+                     <ArrowRight className="w-4 h-4 flex-shrink-0" />
+                   </button>
+                </div>
+                {isAdmin && (
+                  <div className="pl-6 flex items-center gap-2 text-[10px] sm:text-xs text-white/50 bg-black/40 w-fit px-3 py-1 rounded-full border border-white/10">
+                    <span className="opacity-70 whitespace-nowrap">Edit Placeholder:</span>
+                    <EditableText element="span" contentId="gap_analysis_placeholder" defaultText='E.g., "We are migrating to a unified FIS core and need to align our commercial lending teams..."' isAdmin={isAdmin} value={cmsContent.gap_analysis_placeholder} className="font-mono text-white/80" />
                   </div>
-                  <input 
-                    type="text" 
-                    value={promptText || ''}
-                    onChange={(e) => setPromptText(e.target.value)}
-                    placeholder='E.g., "We are migrating to a unified FIS core and need to align our commercial lending teams..."' 
-                    className={`flex-1 w-full bg-transparent border-none outline-none ${theme === 'light' ? t.textPrimary : 'text-white/90'} ${theme === 'light' ? 'placeholder:text-[#001b15]/60' : 'placeholder:text-white/60'} px-4 sm:px-6 py-4 sm:py-3 font-ui text-sm sm:text-base h-full focus:outline-none focus:ring-0 transition-colors`}
-                  />
-                  <button onClick={() => handleGenerateAnalysis()} className="w-full sm:w-auto h-full sm:min-h-[48px] bg-primary/80 backdrop-blur-[10px] border border-white/20 text-white px-8 py-3 sm:py-0 rounded-2xl sm:rounded-full transition-all font-bold hover:bg-primary/90 hover:scale-[1.02] active:scale-95 ml-0 sm:ml-2 flex items-center justify-center gap-2">
-                    Generate Gap Analysis <ArrowRight className="w-4 h-4" />
-                  </button>
-               </div>
-               <span className={`font-ui text-[10px] sm:text-[11px] ${theme === 'light' ? t.textMuted : 'text-white/60'} pl-6 flex flex-col sm:flex-row items-start sm:items-center gap-2 mt-1 transition-colors`}>
-                 <strong className="flex items-center gap-1.5 uppercase tracking-widest text-[#98cc67] whitespace-nowrap"><span className="w-1.5 h-1.5 rounded-full bg-[#98cc67] shadow-[0_0_8px_rgba(152,204,103,1)]"></span>B2P Intelligence</strong>
-                 <span className="opacity-80 leading-snug">Identifies tech risks and operational friction prior to human discovery calls.</span>
-               </span>
-            </div>
+                )}
+                <span className={`font-ui text-[10px] sm:text-[11px] ${theme === 'light' ? t.textMuted : 'text-white/60'} pl-6 flex flex-col sm:flex-row items-start sm:items-center gap-2 mt-1 transition-colors`}>
+                  <strong className="flex items-center gap-1.5 uppercase tracking-widest text-[#98cc67] whitespace-nowrap">
+                     <span className="w-1.5 h-1.5 rounded-full bg-[#98cc67] shadow-[0_0_8px_rgba(152,204,103,1)]"></span>
+                     <EditableText element="span" contentId="gap_analysis_footer_strong" defaultText="B2P Intelligence" isAdmin={isAdmin} value={cmsContent.gap_analysis_footer_strong} />
+                  </strong>
+                  <span className="opacity-80 leading-snug">
+                     <EditableText element="span" contentId="gap_analysis_footer_desc" defaultText="Identifies tech risks and operational friction prior to human discovery calls." isAdmin={isAdmin} value={cmsContent.gap_analysis_footer_desc} />
+                  </span>
+                </span>
+             </div>
          </div>
 
          </div> {/* End 100vh Constraint */}
