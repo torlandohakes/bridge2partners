@@ -1,8 +1,8 @@
 import { NextResponse } from 'next/server';
 import { Resend } from 'resend';
 
-// Will gracefully throw if key is missing
-const resend = new Resend(process.env.RESEND_API_KEY!);
+// Will gracefully bypass if key is missing during build time
+const resend = new Resend(process.env.RESEND_API_KEY || 're_dummy_fallback_key');
 
 export async function POST(req: Request) {
   try {
