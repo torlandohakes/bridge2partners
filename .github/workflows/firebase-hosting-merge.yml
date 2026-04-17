@@ -26,6 +26,13 @@ jobs:
         run: |
           echo "GEMINI_API_KEY=${{ secrets.GEMINI_API_KEY }}" > .env.production
           echo "RESEND_API_KEY=${{ secrets.RESEND_API_KEY }}" >> .env.production
+          echo "NEXT_PUBLIC_FIREBASE_API_KEY=AIzaSyC_3MVmr-TDM-2Xf_6FZRWRFfgg4UmQAm4" >> .env.production
+          echo "NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=bridge2partners-staging.firebaseapp.com" >> .env.production
+          echo "NEXT_PUBLIC_FIREBASE_PROJECT_ID=bridge2partners-staging" >> .env.production
+          echo "NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET=bridge2partners-staging.firebasestorage.app" >> .env.production
+          echo "NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=206048055122" >> .env.production
+          echo "NEXT_PUBLIC_FIREBASE_APP_ID=1:206048055122:web:8b2569ce10e7ca69b8b48b" >> .env.production
+          echo "NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID=G-GHL3GPBHVT" >> .env.production
       - name: Deploy to Firebase Live Channel
         env:
           FIREBASE_CLI_EXPERIMENTS: webframeworks
