@@ -72,6 +72,7 @@ export default function PeoplePage() {
                 <Image 
                   src={member.imageUrl} 
                   alt={member.name}
+                  unoptimized
                   fill
                   className="object-contain object-bottom scale-100 group-hover:scale-105 transition-transform duration-500 drop-shadow-2xl"
                   sizes="(max-width: 768px) 100vw, 33vw"

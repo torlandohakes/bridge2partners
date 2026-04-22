@@ -58,6 +58,7 @@ export default function DigitalBusinessCard({ params }: { params: Promise<{ id: 
           <Image 
             src={member.imageUrl} 
             alt={member.name}
+            unoptimized
             fill
             className="object-contain object-bottom"
             sizes="192px"
