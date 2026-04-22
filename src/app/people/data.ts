@@ -21,7 +21,7 @@ export const MOCK_TEAM: TeamMember[] = [
     category: "Executive",
     bio: "Strategic banking executive driving innovation and modernizing core platforms.",
     fullBio: "Michael Cordas is a strategic banking executive with a track record of driving innovation across financial institutions. During his career, he has held senior leadership roles at City National Bank and Wells Fargo, where he oversaw transformation programs that modernized core platforms, digital channels, and payments systems.",
-    imageUrl: "https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2FUntitled%20(80).png?alt=media&token=0c3eb91b-d011-4554-92b0-9d80e04ad70d",
+    imageUrl: "https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2FMichael%20Cordas%20B2P.png?alt=media&token=a733e89a-1323-409e-b8c6-aef101e34019",
     linkedinUrl: "#"
   },
   {
