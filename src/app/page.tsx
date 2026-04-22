@@ -397,6 +397,65 @@ export default function Home() {
       {/* ================= UNIFIED CONTENT CANVAS OVERLAP ================= */}
       <main className={`relative z-30 -mt-[10vh] rounded-t-[2.5rem] md:rounded-t-[4rem] border-t ${t.canvasBorder} ${t.canvasBg} flex flex-col transition-all duration-700`}>
 
+      {/* ================= VALUE PROP (BENTO BOX) ================= */}
+      <section className={`min-h-screen flex flex-col justify-center px-6 md:px-12 py-24 ${t.bgValueProp} relative overflow-hidden transition-colors duration-500`}>
+        <div className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[60vw] h-[40vw] rounded-full blur-[150px] pointer-events-none transition-colors duration-500 ${t.orb2}`} />
+        <div className={`max-w-7xl mx-auto w-full ${t.sectionWrapper} relative z-10`}>
+          <div className="max-w-6xl w-full mx-auto relative z-10">
+            <div className="mb-16">
+              <EditableText element="h2" contentId="value_h2" defaultText="Unifying disparate systems." isAdmin={isAdmin} value={cmsContent.value_h2} className={`font-display text-4xl md:text-5xl font-bold mb-4 ${t.textPrimary} transition-colors`} />
+              <EditableText element="p" contentId="value_p" defaultText="Executing change management across your core banking infrastructure." isAdmin={isAdmin} value={cmsContent.value_p} className={`font-reading text-xl ${t.textMuted} transition-colors`} />
+            </div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {[
+                { cta: "Explore Wealth Management", link: "/services/wealth", eyebrow: "Led by John Gustav, CFA", avatar: "https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2FUntitled%20(75).png?alt=media&token=fd2c0e28-b578-44c2-b113-483c83d8b308", icon: <Landmark className={`w-8 h-8 ${theme === 'dark' ? 'text-[#98cc67]' : 'text-[#00573f]'} mb-2`} />, title: "Wealth", desc: "Align technology with business goals to accelerate platform modernization." },
+                { cta: "Explore Commercial Lending", link: "/services/commercial-lending", eyebrow: "Led by Shane Williams", avatar: "https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2FUntitled%20(78).png?alt=media&token=51dedfc2-9786-4d4a-a9cf-cfaf389fe979", icon: <Handshake className={`w-8 h-8 ${theme === 'dark' ? 'text-[#98cc67]' : 'text-[#00573f]'} mb-2`} />, title: "Commercial", desc: "Streamline commercial lending workflows and modernize infrastructure." },
+                { cta: "Explore M&A Integration", link: "/services/ma-integration", eyebrow: "Led by Bob Holohan", avatar: "https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2FUntitled%20(77).png?alt=media&token=361ca2b2-eb78-45c0-8c7a-80f76df8e060", icon: <Zap className={`w-8 h-8 ${theme === 'dark' ? 'text-[#98cc67]' : 'text-[#00573f]'} mb-2`} />, title: "M&A", desc: "Execute derisked, post-merger technology integrations." },
+                { cta: "Explore Treasury Operations", link: "/services/treasury", eyebrow: "Led by Linda Weber", avatar: "https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2FUntitled%20(76).png?alt=media&token=292094e1-53b4-43ee-94cf-841c3a139fe7", icon: <ShieldCheck className={`w-8 h-8 ${theme === 'dark' ? 'text-[#98cc67]' : 'text-[#00573f]'} mb-2`} />, title: "Treasury", desc: "Modernize payments and treasury operations for immediate ROI." }
+              ].map((item, idx) => (
+                 <Card key={idx} className={`relative flex flex-col bg-white/20 backdrop-blur-2xl border border-white/30 shadow-2xl rounded-xl p-8 transition-all duration-300 hover:bg-white/30 hover:scale-[1.02] group`}>
+                   {/* Operator Cutout */}
+                   <div className="absolute bottom-0 right-0 w-[70%] md:w-[65%] h-[130%] z-0 pointer-events-none transition-transform duration-500 origin-bottom group-hover:scale-105 opacity-90 group-hover:opacity-100">
+                     <EditableImage contentId={`value_card_${idx}_cutout`} defaultSrc={item.avatar} isAdmin={isAdmin} value={cmsContent[`value_card_${idx}_cutout`]} alt="Operator Portrait" fill sizes="(max-width: 768px) 350px, 400px" className="object-contain object-bottom md:object-right-bottom drop-shadow-2xl pr-2 md:pr-4" />
+                   </div>
+
+                   <div className="flex flex-col flex-1 pointer-events-none pr-[45%] md:pr-[50%] z-20 relative">
+                     <div className="pointer-events-auto">
+                       {item.icon}
+                       {/* Operator Eyebrow */}
+                       <span className={`block ${theme === 'dark' ? 'text-white/80' : 'text-[#001b15]/70'} text-xs tracking-wider uppercase font-semibold mb-2`}>
+                         <EditableText element="span" contentId={`value_card_${idx}_eyebrow`} defaultText={item.eyebrow} isAdmin={isAdmin} value={cmsContent[`value_card_${idx}_eyebrow`]} />
+                       </span>
+                       <CardTitle className={`font-display text-2xl ${t.textPrimary} transition-colors mb-3`}>
+                         <EditableText element="span" contentId={`value_card_${idx}_title`} defaultText={item.title} isAdmin={isAdmin} value={cmsContent[`value_card_${idx}_title`]} />
+                       </CardTitle>
+                     </div>
+                     <CardContent className="p-0 pointer-events-auto">
+                       <EditableText element="p" contentId={`value_card_${idx}_desc`} defaultText={item.desc} isAdmin={isAdmin} value={cmsContent[`value_card_${idx}_desc`]} className={`${t.textSecondary} font-reading leading-relaxed transition-colors`} />
+                     </CardContent>
+                   </div>
+                   
+                   <a href={item.link} className={`mt-6 self-start inline-flex items-center justify-center px-5 py-2.5 rounded-full text-sm font-bold ${theme === 'dark' ? 'bg-[#98cc67]/10 text-[#98cc67] hover:bg-[#98cc67]/20 border border-[#98cc67]/20' : 'bg-[#00573f]/10 text-[#00573f] hover:bg-[#00573f]/20 border border-[#00573f]/20'} backdrop-blur-md transition-all group w-fit pointer-events-auto relative z-20`}>
+                     <EditableText element="span" contentId={`value_card_${idx}_cta`} defaultText={item.cta} isAdmin={isAdmin} value={cmsContent[`value_card_${idx}_cta`]} />
+                     <span className="ml-2 transform transition-transform group-hover:translate-x-1">&rarr;</span>
+                   </a>
+                 </Card>
+              ))}
+            </div>
+
+            <div className="mt-16 flex flex-col sm:flex-row justify-center gap-4">
+              <Button size="lg" onClick={() => setIsStrategyModalOpen(true)} className="bg-primary/80 backdrop-blur-[10px] border border-white/20 hover:bg-primary/90 text-white font-bold px-8">
+                <EditableButtonText contentId="value_btn_1" defaultText="Schedule a Strategy Call" isAdmin={isAdmin} value={cmsContent.value_btn_1} />
+              </Button>
+              <Button size="lg" variant="outline" onClick={() => setIsChallengeModalOpen(true)} className={`${t.outlineBtn} px-8`}>
+                <EditableButtonText contentId="value_btn_2" defaultText="Generate Gap Analysis" isAdmin={isAdmin} value={cmsContent.value_btn_2} />
+              </Button>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* ================= PROBLEM & STAKES SECTION ================= */}
       <section className={`min-h-[100vh] flex flex-col justify-center px-6 md:px-12 py-24 ${t.bgProblem} relative overflow-hidden transition-colors duration-500`}>
         <div className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[50vw] h-[50vw] rounded-full blur-[150px] pointer-events-none transition-colors duration-500 ${t.orb1}`} />
@@ -441,65 +500,6 @@ export default function Home() {
                    <EditableText element="span" contentId="problem_quote_title" defaultText="Managing partner" isAdmin={isAdmin} value={cmsContent.problem_quote_title} className="text-[#001b15]/90 font-semibold tracking-normal capitalize" />
                  </div>
               </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ================= VALUE PROP (BENTO BOX) ================= */}
-      <section className={`min-h-screen flex flex-col justify-center px-6 md:px-12 py-24 ${t.bgValueProp} relative overflow-hidden transition-colors duration-500`}>
-        <div className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[60vw] h-[40vw] rounded-full blur-[150px] pointer-events-none transition-colors duration-500 ${t.orb2}`} />
-        <div className={`max-w-7xl mx-auto w-full ${t.sectionWrapper} relative z-10`}>
-          <div className="max-w-6xl w-full mx-auto relative z-10">
-            <div className="mb-16">
-              <EditableText element="h2" contentId="value_h2" defaultText="Unifying disparate systems." isAdmin={isAdmin} value={cmsContent.value_h2} className={`font-display text-4xl md:text-5xl font-bold mb-4 ${t.textPrimary} transition-colors`} />
-              <EditableText element="p" contentId="value_p" defaultText="Executing change management across your core banking infrastructure." isAdmin={isAdmin} value={cmsContent.value_p} className={`font-reading text-xl ${t.textMuted} transition-colors`} />
-            </div>
-            
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {[
-                { cta: "Explore Wealth Management", link: "/services/wealth", eyebrow: "Led by [Name], Former CIO at [Institution]", avatar: "/images/leadership_portrait_1.png", icon: <Landmark className={`w-8 h-8 ${theme === 'dark' ? 'text-[#98cc67]' : 'text-[#00573f]'} mb-2`} />, title: "Wealth", desc: "Align technology with business goals to accelerate platform modernization." },
-                { cta: "Explore Commercial Lending", link: "/services/commercial-lending", eyebrow: "Led by [Name], Former Head of Lending at [Institution]", avatar: "/images/leadership_portrait_2.png", icon: <Handshake className={`w-8 h-8 ${theme === 'dark' ? 'text-[#98cc67]' : 'text-[#00573f]'} mb-2`} />, title: "Commercial", desc: "Streamline commercial lending workflows and modernize infrastructure." },
-                { cta: "Explore M&A Integration", link: "/services/ma-integration", eyebrow: "Led by [Name], Post-Merger Integration Lead", avatar: "/images/leadership_portrait_3.png", icon: <Zap className={`w-8 h-8 ${theme === 'dark' ? 'text-[#98cc67]' : 'text-[#00573f]'} mb-2`} />, title: "M&A", desc: "Execute derisked, post-merger technology integrations." },
-                { cta: "Explore Treasury Operations", link: "/services/treasury", eyebrow: "Led by [Name], Former VP of Treasury Ops", avatar: "/images/leadership_portrait_4.png", icon: <ShieldCheck className={`w-8 h-8 ${theme === 'dark' ? 'text-[#98cc67]' : 'text-[#00573f]'} mb-2`} />, title: "Treasury", desc: "Modernize payments and treasury operations for immediate ROI." }
-              ].map((item, idx) => (
-                 <Card key={idx} className={`relative flex flex-col bg-white/20 backdrop-blur-2xl border border-white/30 shadow-2xl rounded-xl p-8 transition-all duration-300 hover:bg-white/30 hover:scale-[1.02] group`}>
-                   {/* Operator Avatar */}
-                   <div className="absolute top-8 right-8 w-24 md:w-28 h-24 md:h-28 rounded-full border-2 border-white/50 shadow-lg z-10 overflow-hidden bg-white/10 backdrop-blur-md transition-all">
-                     <EditableImage contentId={`value_card_${idx}_avatar`} defaultSrc={item.avatar} isAdmin={isAdmin} value={cmsContent[`value_card_${idx}_avatar`]} alt="Operator Portrait" fill sizes="112px" className="object-cover" />
-                   </div>
-
-                   <div className="flex flex-col flex-1 pointer-events-none pr-28 md:pr-32">
-                     <div className="pointer-events-auto">
-                       {item.icon}
-                       {/* Operator Eyebrow */}
-                       <span className={`block ${theme === 'dark' ? 'text-white/80' : 'text-[#001b15]/70'} text-xs tracking-wider uppercase font-semibold mb-2`}>
-                         <EditableText element="span" contentId={`value_card_${idx}_eyebrow`} defaultText={item.eyebrow} isAdmin={isAdmin} value={cmsContent[`value_card_${idx}_eyebrow`]} />
-                       </span>
-                       <CardTitle className={`font-display text-2xl ${t.textPrimary} transition-colors mb-3`}>
-                         <EditableText element="span" contentId={`value_card_${idx}_title`} defaultText={item.title} isAdmin={isAdmin} value={cmsContent[`value_card_${idx}_title`]} />
-                       </CardTitle>
-                     </div>
-                     <CardContent className="p-0 pointer-events-auto">
-                       <EditableText element="p" contentId={`value_card_${idx}_desc`} defaultText={item.desc} isAdmin={isAdmin} value={cmsContent[`value_card_${idx}_desc`]} className={`${t.textSecondary} font-reading leading-relaxed transition-colors`} />
-                     </CardContent>
-                   </div>
-                   
-                   <a href={item.link} className={`mt-5 self-end inline-flex items-center text-sm font-bold ${theme === 'dark' ? 'text-[#98cc67] hover:text-white' : 'text-[#00573f] hover:text-[#001b15]'} transition-colors group w-fit pointer-events-auto`}>
-                     <EditableText element="span" contentId={`value_card_${idx}_cta`} defaultText={item.cta} isAdmin={isAdmin} value={cmsContent[`value_card_${idx}_cta`]} />
-                     <span className="ml-2 transform transition-transform group-hover:translate-x-1">&rarr;</span>
-                   </a>
-                 </Card>
-              ))}
-            </div>
-
-            <div className="mt-16 flex flex-col sm:flex-row justify-center gap-4">
-              <Button size="lg" onClick={() => setIsStrategyModalOpen(true)} className="bg-primary/80 backdrop-blur-[10px] border border-white/20 hover:bg-primary/90 text-white font-bold px-8">
-                <EditableButtonText contentId="value_btn_1" defaultText="Schedule a Strategy Call" isAdmin={isAdmin} value={cmsContent.value_btn_1} />
-              </Button>
-              <Button size="lg" variant="outline" onClick={() => setIsChallengeModalOpen(true)} className={`${t.outlineBtn} px-8`}>
-                <EditableButtonText contentId="value_btn_2" defaultText="Generate Gap Analysis" isAdmin={isAdmin} value={cmsContent.value_btn_2} />
-              </Button>
             </div>
           </div>
         </div>
@@ -669,10 +669,10 @@ export default function Home() {
           <div className={`bg-white/20 backdrop-blur-2xl rounded-2xl border border-white/30 p-2 shadow-2xl transition-colors duration-500`}>
             {[
               { id: 'procurement_doc_1', text: 'Legal Entity Overview', hash: 'legal-entity-overview' },
-              { id: 'procurement_doc_2', text: 'Financial Stability Indicators', hash: 'financial-stability-indicators' },
-              { id: 'procurement_doc_3', text: 'Insurance Coverage Limits', hash: 'insurance-coverage-limits' },
+              { id: 'procurement_doc_2', text: 'Technology Stack', hash: 'technology-stack' },
               { id: 'procurement_doc_4', text: 'Compliance Standards', hash: 'compliance-standards' },
-              { id: 'procurement_doc_5', text: 'Data Security Approach', hash: 'data-security-approach' }
+              { id: 'procurement_doc_5', text: 'Data Security Approach', hash: 'data-security-approach' },
+              { id: 'procurement_doc_3', text: 'Insurance Coverage Limits', hash: 'insurance-coverage-limits' }
             ].map((doc, i) => (
               <Link href={`/procurement#${doc.hash}`} key={i} className={`flex items-center justify-between p-6 ${theme === 'light' ? 'hover:bg-slate-50 border-b border-slate-100' : 'hover:bg-white/5 border-b border-white/5'} last:border-0 cursor-pointer group transition-colors block w-full`}>
                 <EditableText 

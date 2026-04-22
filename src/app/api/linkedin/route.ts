@@ -40,6 +40,28 @@ export async function GET(request: Request) {
       comments: 0,
       imageUrl: "/images/mock_post_3.png",
       link: "https://www.linkedin.com/company/bridge-2-partners"
+    },
+    {
+      id: "mock-4",
+      author: "Bridge2Partners",
+      authorSub: "Banking Transformation Advisors",
+      date: "2w • 🌐",
+      text: "A merger shouldn't just be a 'survivable' event; it should be an immediate competitive advantage.\n\nYet, the gap between signing the deal and actually seeing the benefits is where most M&A value is lost. The truth is, post-merger integration is rarely an IT ticket—it is a change management crisis disguised as a technology project.\n\nAt Bridge2Partners, we specialize in the operational and technological heavy lifting that accelerates your synergies.\n\n#Mergers #MAIntegration #BankingTransformation #Bridge2Partners",
+      likes: 34,
+      comments: 5,
+      imageUrl: "/images/leadership_portrait_3.png",
+      link: "https://www.linkedin.com/company/bridge-2-partners"
+    },
+    {
+      id: "mock-5",
+      author: "Bridge2Partners",
+      authorSub: "Banking Transformation Advisors",
+      date: "3w • 🌐",
+      text: "Is your bank losing 'share of wallet' to fintechs because of fragmented onboarding?\n\nToo often, treasury and payments modernization promises a 'digital' future but delivers redundant PDF forms and disjointed workflows that feel like you're servicing an airplane while it's in flight.\n\nJoin Linda Weber at our upcoming Peers In Practice Roundtable to discuss how leading institutions are mapping workflows to drive immediate speed to revenue.\n\n#Treasury #Payments #BankingInnovation #Bridge2Partners",
+      likes: 42,
+      comments: 6,
+      imageUrl: "/images/leadership_portrait_4.png",
+      link: "https://www.linkedin.com/company/bridge-2-partners"
     }
   ];
 
