@@ -7,6 +7,10 @@ export type TeamMember = {
   fullBio: string;
   imageUrl: string;
   linkedinUrl?: string;
+  email?: string;
+  phone?: string;
+  calendarUrl?: string;
+  expertise?: string[];
 };
 
 export const MOCK_TEAM: TeamMember[] = [

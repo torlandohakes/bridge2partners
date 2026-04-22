@@ -8,6 +8,7 @@ import { onAuthStateChanged } from "firebase/auth";
 import { doc, onSnapshot } from "firebase/firestore";
 import ServiceFooter from "@/components/ServiceFooter";
 import Image from "next/image";
+import Link from "next/link";
 import { TeamMember, MOCK_TEAM } from "./data";
 
 export default function PeoplePage() {
@@ -61,7 +62,7 @@ export default function PeoplePage() {
         {/* Team Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-14">
           {filteredTeam.map((member) => (
-            <div key={member.id} className="group relative bg-white/5 border border-white/10 rounded-2xl overflow-hidden hover:bg-white/10 transition-colors flex flex-col h-full">
+            <Link href={`/people/${member.id}`} key={member.id} className="group relative bg-white/5 border border-white/10 rounded-2xl overflow-hidden hover:bg-white/10 transition-colors flex flex-col h-full cursor-pointer">
               
               {/* Image Container */}
               <div className="relative aspect-[10/11] w-full bg-[#001b15]/50 overflow-hidden flex items-end justify-center">
@@ -82,25 +83,22 @@ export default function PeoplePage() {
                 <span className="text-[#98cc67] font-ui text-[10px] uppercase tracking-widest font-bold mb-2 block">
                   {member.category}
                 </span>
-                <h3 className="text-xl font-display font-bold text-white mb-1">
+                <h3 className="text-xl font-display font-bold text-white mb-1 group-hover:text-[#98cc67] transition-colors">
                   {member.name}
                 </h3>
                 <p className="text-white/60 font-ui font-medium mb-4">
                   {member.title}
                 </p>
                 <div className="w-8 h-px bg-white/20 mb-4 group-hover:w-16 transition-all duration-300"></div>
-                <p className="text-white/70 font-sans leading-relaxed text-sm flex-grow">
+                <p className="text-white/70 font-sans leading-relaxed text-sm flex-grow line-clamp-3">
                   {member.bio}
                 </p>
                 
-                {member.linkedinUrl && (
-                  <a href={member.linkedinUrl} className="mt-6 inline-flex items-center gap-2 text-[#98cc67] hover:text-white transition-colors w-fit font-bold text-sm" target="_blank" rel="noopener noreferrer">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
-                    Connect on LinkedIn
-                  </a>
-                )}
+                <div className="mt-6 inline-flex items-center gap-2 text-[#98cc67] group-hover:text-white transition-colors w-fit font-bold text-sm">
+                  View Profile &rarr;
+                </div>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
       </div>
