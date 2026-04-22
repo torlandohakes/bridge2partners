@@ -313,6 +313,9 @@ export default function Home() {
               <Image src="/images/Bridge2Partners_Logo-3-White.png" alt="Bridge2Partners Logo" width={200} height={40} className="w-auto h-8 md:h-10 object-contain" style={{ width: 'auto' }} priority />
             </Link>
             <div className="flex items-center gap-6 md:gap-8 font-ui text-sm font-medium text-white/90">
+              <Link href="/people" className="hidden md:block hover:text-white transition-colors tracking-normal normal-case py-4">
+                People
+              </Link>
               <div className="relative group hidden md:block">
                 <span className="flex items-center gap-1 cursor-pointer hover:text-white transition-colors tracking-normal normal-case py-4">Services <ChevronDown className="w-4 h-4 opacity-60 transition-transform group-hover:rotate-180" /></span>
                 <div className="absolute top-[85%] left-0 mt-1 w-52 bg-[#001b15]/90 backdrop-blur-xl border border-white/20 rounded-xl shadow-2xl opacity-0 translate-y-2 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto transition-all duration-300 flex flex-col p-2">
