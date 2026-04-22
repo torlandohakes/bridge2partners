@@ -239,10 +239,10 @@ export const getPitchSlides = (slideCopies: string[], customBg: string | null) =
 
          {/* Left Side (40%): Typography Header */}
          <div className="w-[38%] flex flex-col justify-center h-full z-30 gap-[1cqw]">
-            <h2 className="font-display font-black text-[4cqw] leading-[1.05] tracking-tight text-white drop-shadow-md">
+            <h2 className="font-display font-black text-[4cqw] leading-[1.05] tracking-tight text-white drop-shadow-md b2p-narrative-text transition-opacity duration-300">
                {slideCopies[3].split('\n')[0] || "We Are Bankers, Like You."}
             </h2>
-            <p className="font-sans text-[1.4cqw] leading-snug text-neutral-400 font-medium mt-[1cqw] max-w-[90%]">
+            <p className="font-sans text-[1.4cqw] leading-snug text-neutral-400 font-medium mt-[1cqw] max-w-[90%] b2p-narrative-text transition-opacity duration-300">
                {slideCopies[3].split('\n').slice(1).join('\n') || "We have worked at the banks we serve. Dedicated specialists with tenure at the top 100 financial institutions."}
             </p>
          </div>
@@ -270,12 +270,12 @@ export const getPitchSlides = (slideCopies: string[], customBg: string | null) =
                     </div>
                     {/* Card Body */}
                     <div className="flex flex-col gap-[0.3cqw] flex-grow justify-end">
-                       <h3 className="text-white font-display font-bold text-[1.2cqw] leading-none mb-[0.2cqw] truncate">{person.name}</h3>
-                       <span className="text-primary text-[0.8cqw] font-bold uppercase tracking-widest leading-none mb-[0.5cqw] truncate">{person.role}</span>
+                       <h3 className="text-white font-display font-bold text-[1.2cqw] leading-none mb-[0.2cqw] truncate b2p-narrative-text transition-opacity duration-300">{person.name}</h3>
+                       <span className="text-primary text-[0.8cqw] font-bold uppercase tracking-widest leading-none mb-[0.5cqw] truncate b2p-narrative-text transition-opacity duration-300">{person.role}</span>
                        <div className="flex flex-wrap gap-[0.3cqw]">
                          {person.tags.map(tag => (
                            <span key={tag} className="bg-white/10 rounded-full px-[0.6cqw] py-[0.2cqw] text-[0.7cqw] text-neutral-300 font-semibold tracking-wide border border-white/5 whitespace-nowrap">
-                             {tag}
+                             <span className="b2p-narrative-text transition-opacity duration-300">{tag}</span>
                            </span>
                          ))}
                        </div>
@@ -318,7 +318,7 @@ export const getPitchSlides = (slideCopies: string[], customBg: string | null) =
 
          {/* Left Side (35%): Typography Header */}
          <div className="w-[35%] flex flex-col justify-start pt-[6cqw] h-full z-30 gap-[1.5cqw] pl-[2cqw]">
-            <h2 className="font-display font-black text-[4.5cqw] leading-[1.05] tracking-tight text-white drop-shadow-md pb-[0.5cqw]">
+            <h2 className="font-display font-black text-[4.5cqw] leading-[1.05] tracking-tight text-white drop-shadow-md pb-[0.5cqw] b2p-narrative-text transition-opacity duration-300">
                {slideCopies[4].split('\n')[0] || "The Simplified"}
                <br />
                <span className="text-transparent bg-clip-text bg-gradient-to-r from-secondary to-secondary/70 drop-shadow-[0_0_20px_rgba(0,150,119,0.3)] leading-normal">
@@ -355,27 +355,27 @@ export const getPitchSlides = (slideCopies: string[], customBg: string | null) =
             {/* Glassmorphic Nodes positioning manually */}
             {/* Node 1 Top (Online Portal & Mobile) */}
             <div className="absolute top-[calc(50%-24.5cqw)] left-1/2 -translate-x-1/2 w-auto px-[1.5cqw] h-[4cqw] rounded-xl border-[0.15cqw] border-white/30 bg-neutral-900/90 flex items-center justify-center z-40 backdrop-blur-md shadow-2xl whitespace-nowrap">
-              <span className="font-ui text-[0.9cqw] text-white tracking-widest font-bold uppercase text-center w-full">Online Portal & Mobile</span>
+              <span className="font-ui text-[0.9cqw] text-white tracking-widest font-bold uppercase text-center w-full b2p-narrative-text transition-opacity duration-300">Online Portal & Mobile</span>
             </div>
 
             {/* Node 2 Top Right (Marketing & CRM) */}
             <div className="absolute top-[calc(50%-10cqw)] left-[calc(50%+16cqw)] w-auto px-[1.5cqw] h-[4cqw] rounded-xl border-[0.15cqw] border-white/30 bg-neutral-900/90 flex items-center justify-center z-40 backdrop-blur-md shadow-2xl whitespace-nowrap">
-              <span className="font-ui text-[0.9cqw] text-white tracking-widest font-bold uppercase text-center w-full">Marketing & CRM</span>
+              <span className="font-ui text-[0.9cqw] text-white tracking-widest font-bold uppercase text-center w-full b2p-narrative-text transition-opacity duration-300">Marketing & CRM</span>
             </div>
 
             {/* Node 3 Bottom Right (Payments & Cards) */}
             <div className="absolute top-[calc(50%+18cqw)] left-[calc(50%+10cqw)] w-auto px-[1.5cqw] h-[4cqw] rounded-xl border-[0.15cqw] border-white/30 bg-neutral-900/90 flex items-center justify-center z-40 backdrop-blur-md shadow-2xl whitespace-nowrap">
-              <span className="font-ui text-[1cqw] text-white tracking-widest font-bold uppercase text-center w-full">Payments & Cards</span>
+              <span className="font-ui text-[1cqw] text-white tracking-widest font-bold uppercase text-center w-full b2p-narrative-text transition-opacity duration-300">Payments & Cards</span>
             </div>
 
             {/* Node 4 Bottom Left (Data Lake / Warehouse) */}
             <div className="absolute top-[calc(50%+18cqw)] right-[calc(50%+10cqw)] w-auto px-[1.5cqw] h-[4cqw] rounded-xl border-[0.15cqw] border-white/30 bg-neutral-900/90 flex items-center justify-center z-40 backdrop-blur-md shadow-2xl whitespace-nowrap">
-              <span className="font-ui text-[0.9cqw] text-white tracking-widest font-bold uppercase text-center w-full">Data Lake / Warehouse</span>
+              <span className="font-ui text-[0.9cqw] text-white tracking-widest font-bold uppercase text-center w-full b2p-narrative-text transition-opacity duration-300">Data Lake / Warehouse</span>
             </div>
 
             {/* Node 5 Top Left (APIs, Interfaces & Open Banking) */}
             <div className="absolute top-[calc(50%-10cqw)] right-[calc(50%+8cqw)] w-auto px-[1.5cqw] h-[4cqw] rounded-xl border-[0.2cqw] border-primary/80 bg-neutral-900/95 flex items-center justify-center z-40 backdrop-blur-md shadow-[0_0_30px_rgba(152,204,103,0.3)] whitespace-nowrap">
-              <span className="font-ui text-[0.8cqw] text-white tracking-widest font-extrabold uppercase text-center w-full">APIs, Interfaces & Open Banking</span>
+              <span className="font-ui text-[0.8cqw] text-white tracking-widest font-extrabold uppercase text-center w-full b2p-narrative-text transition-opacity duration-300">APIs, Interfaces & Open Banking</span>
             </div>
          </div>
 
@@ -409,7 +409,7 @@ export const getPitchSlides = (slideCopies: string[], customBg: string | null) =
 
          {/* Absolute Center Typography Header (Single Line) */}
          <div className="absolute top-[10cqw] w-full flex justify-center z-30">
-            <h2 className="font-display font-extrabold text-[7cqw] leading-[1.05] tracking-tight text-secondary drop-shadow-md">
+            <h2 className="font-display font-extrabold text-[7cqw] leading-[1.05] tracking-tight text-secondary drop-shadow-md b2p-narrative-text transition-opacity duration-300">
                {slideCopies[5].split('\n')[0] || "Execution at Scale."}
             </h2>
          </div>
@@ -419,22 +419,22 @@ export const getPitchSlides = (slideCopies: string[], customBg: string | null) =
             {/* Metric 1 */}
             <div className="flex flex-col items-center justify-center flex-1 text-center bg-white/5 border border-white/10 p-[4cqw] h-[26cqw] rounded-[1cqw] hover:bg-white/10 transition-colors shadow-2xl relative overflow-hidden">
                <div className="absolute top-0 right-0 p-[2cqw] opacity-20"><Database className="w-[4cqw] h-[4cqw] text-[#98cc67]" /></div>
-               <span className="text-white text-[8cqw] font-data font-black leading-none drop-shadow-[0_0_30px_rgba(255,255,255,0.2)] mb-[1cqw] z-10">40+</span>
-               <span className="text-neutral-300 text-[1.4cqw] font-ui uppercase tracking-[0.2em] font-bold leading-relaxed px-[1cqw] z-10">Interfaces Built & Deployed</span>
+               <span className="text-white text-[8cqw] font-data font-black leading-none drop-shadow-[0_0_30px_rgba(255,255,255,0.2)] mb-[1cqw] z-10 b2p-narrative-text transition-opacity duration-300">40+</span>
+               <span className="text-neutral-300 text-[1.4cqw] font-ui uppercase tracking-[0.2em] font-bold leading-relaxed px-[1cqw] z-10 b2p-narrative-text transition-opacity duration-300">Interfaces Built & Deployed</span>
             </div>
 
             {/* Metric 2 */}
             <div className="flex flex-col items-center justify-center flex-1 text-center bg-white/5 border border-white/10 p-[4cqw] h-[26cqw] rounded-[1cqw] hover:bg-white/10 transition-colors shadow-2xl relative overflow-hidden">
                <div className="absolute top-0 right-0 p-[2cqw] opacity-20"><Target className="w-[4cqw] h-[4cqw] text-[#98cc67]" /></div>
-               <span className="text-white text-[8cqw] font-data font-black leading-none drop-shadow-[0_0_30px_rgba(255,255,255,0.2)] mb-[1cqw] z-10">$80B</span>
-               <span className="text-neutral-300 text-[1.4cqw] font-ui uppercase tracking-[0.2em] font-bold leading-relaxed px-[1cqw] z-10">Super-Regional Bank Transformed</span>
+               <span className="text-white text-[8cqw] font-data font-black leading-none drop-shadow-[0_0_30px_rgba(255,255,255,0.2)] mb-[1cqw] z-10 b2p-narrative-text transition-opacity duration-300">$80B</span>
+               <span className="text-neutral-300 text-[1.4cqw] font-ui uppercase tracking-[0.2em] font-bold leading-relaxed px-[1cqw] z-10 b2p-narrative-text transition-opacity duration-300">Super-Regional Bank Transformed</span>
             </div>
 
             {/* Metric 3 */}
             <div className="flex flex-col items-center justify-center flex-1 text-center bg-white/5 border border-white/10 p-[4cqw] h-[26cqw] rounded-[1cqw] hover:bg-white/10 transition-colors shadow-2xl relative overflow-hidden">
                <div className="absolute top-0 right-0 p-[2cqw] opacity-20"><CheckCircle2 className="w-[4cqw] h-[4cqw] text-[#98cc67]" /></div>
-               <span className="text-white text-[8cqw] font-data font-black leading-none drop-shadow-[0_0_30px_rgba(255,255,255,0.2)] mb-[1cqw] z-10">ZERO</span>
-               <span className="text-neutral-300 text-[1.4cqw] font-ui uppercase tracking-[0.2em] font-bold leading-relaxed px-[1cqw] z-10">Operational Disruption</span>
+               <span className="text-white text-[8cqw] font-data font-black leading-none drop-shadow-[0_0_30px_rgba(255,255,255,0.2)] mb-[1cqw] z-10 b2p-narrative-text transition-opacity duration-300">ZERO</span>
+               <span className="text-neutral-300 text-[1.4cqw] font-ui uppercase tracking-[0.2em] font-bold leading-relaxed px-[1cqw] z-10 b2p-narrative-text transition-opacity duration-300">Operational Disruption</span>
             </div>
          </div>
 
@@ -491,14 +491,14 @@ export const getPitchSlides = (slideCopies: string[], customBg: string | null) =
          <div className="absolute bottom-[5.5cqw] left-0 w-full h-[0.15cqw] bg-secondary z-20 shadow-[0_0_10px_rgba(0,150,119,0.5)]" />
 
          <div className="relative z-30 w-[85cqw] flex flex-col items-start text-left transform transition-transform duration-700 ease-out group-hover:scale-[1.02]">
-            <h2 className="font-display font-black text-[5cqw] leading-[1.1] tracking-tight text-white drop-shadow-md mb-[2cqw]">
+            <h2 className="font-display font-black text-[5cqw] leading-[1.1] tracking-tight text-white drop-shadow-md mb-[2cqw] b2p-narrative-text transition-opacity duration-300">
               The Enterprise Architecture Assessment.
             </h2>
-            <p className="font-sans text-[1.8cqw] text-neutral-300 leading-relaxed font-light mb-[4cqw] max-w-[80%]">
+            <p className="font-sans text-[1.8cqw] text-neutral-300 leading-relaxed font-light mb-[4cqw] max-w-[80%] b2p-narrative-text transition-opacity duration-300">
               In 14 days, our practitioners will map your legacy constraints and deliver the parallel-build blueprint.
             </p>
             <button className="flex items-center gap-[1cqw] bg-transparent border border-white text-white px-[4cqw] py-[1.5cqw] rounded-md font-ui uppercase font-extrabold tracking-widest text-[1.2cqw] hover:bg-white/10 transition-colors shadow-2xl focus-visible:ring-2 focus-visible:ring-white/50 focus-visible:outline-none">
-              Initiate Assessment
+              <span className="b2p-narrative-text transition-opacity duration-300">Initiate Assessment</span>
             </button>
          </div>
 
@@ -546,7 +546,7 @@ export const getPitchSlides = (slideCopies: string[], customBg: string | null) =
       <div className="w-full h-full bg-white relative flex flex-row group z-30 overflow-hidden text-neutral-900 border-2 border-neutral-100">
          <div className="w-[25%] h-[90%] my-auto relative border-r border-[#98cc67]/30 flex flex-col justify-between ml-[2cqw]">
            <div className="absolute left-[3cqw] top-[6cqw] origin-top-left -rotate-90 translate-y-[22cqw]">
-             <span className="font-ui text-[1.2cqw] uppercase tracking-[0.3em] font-bold text-neutral-400">Appendix A // Playbooks</span>
+             <span className="font-ui text-[1.2cqw] uppercase tracking-[0.3em] font-bold text-neutral-400 b2p-narrative-text transition-opacity duration-300">Appendix A // Playbooks</span>
            </div>
            
            {/* Custom Slide Anchors */}
@@ -556,12 +556,12 @@ export const getPitchSlides = (slideCopies: string[], customBg: string | null) =
                alt="B2P Logo" 
                className="w-[2cqw] h-[2cqw] object-contain opacity-50 contrast-200 grayscale"
              />
-             <span className="font-ui text-[0.9cqw] text-neutral-400/80 tracking-widest uppercase font-bold">Bridge2Partners</span>
+             <span className="font-ui text-[0.9cqw] text-neutral-400/80 tracking-widest uppercase font-bold b2p-narrative-text transition-opacity duration-300">Bridge2Partners</span>
            </div>
          </div>
          <div className="w-[75%] h-full flex flex-col p-[6cqw] pt-[8cqw] justify-start">
-           <h2 className="font-display font-black text-[3.5cqw] leading-[1.05] tracking-tight mb-[4cqw] text-neutral-900">Playbooks &<br/>Capabilities Matrix</h2>
-           <div className="columns-2 gap-[4cqw] font-sans text-[1.1cqw] leading-relaxed text-neutral-600">
+           <h2 className="font-display font-black text-[3.5cqw] leading-[1.05] tracking-tight mb-[4cqw] text-neutral-900 b2p-narrative-text transition-opacity duration-300">Playbooks &<br/>Capabilities Matrix</h2>
+           <div className="columns-2 gap-[4cqw] font-sans text-[1.1cqw] leading-relaxed text-neutral-600 b2p-narrative-text transition-opacity duration-300">
              <div className="mb-[3cqw] break-inside-avoid">
                <h3 className="font-ui font-black text-neutral-900 mb-1 tracking-wide relative pl-[2cqw]">
                  <span className="absolute left-0 top-[0.1cqw] text-[#98cc67] text-[1.5cqw] leading-none">•</span> Digital Account Opening
@@ -606,7 +606,7 @@ export const getPitchSlides = (slideCopies: string[], customBg: string | null) =
       <div className="w-full h-full bg-white relative flex flex-row group z-30 overflow-hidden text-neutral-900 border-2 border-neutral-100">
          <div className="w-[25%] h-[90%] my-auto relative border-r border-[#98cc67]/30 flex flex-col justify-between ml-[2cqw]">
            <div className="absolute left-[3cqw] top-[6cqw] origin-top-left -rotate-90 translate-y-[28cqw]">
-             <span className="font-ui text-[1.2cqw] uppercase tracking-[0.3em] font-bold text-neutral-400">Appendix B // Migration Timeline</span>
+             <span className="font-ui text-[1.2cqw] uppercase tracking-[0.3em] font-bold text-neutral-400 b2p-narrative-text transition-opacity duration-300">Appendix B // Migration Timeline</span>
            </div>
            <div className="absolute bottom-[2cqw] left-[3cqw] flex items-center gap-[1cqw]">
              <img 
@@ -614,28 +614,28 @@ export const getPitchSlides = (slideCopies: string[], customBg: string | null) =
                alt="B2P Logo" 
                className="w-[2cqw] h-[2cqw] object-contain opacity-50 contrast-200 grayscale"
              />
-             <span className="font-ui text-[0.9cqw] text-neutral-400/80 tracking-widest uppercase font-bold">Bridge2Partners</span>
+             <span className="font-ui text-[0.9cqw] text-neutral-400/80 tracking-widest uppercase font-bold b2p-narrative-text transition-opacity duration-300">Bridge2Partners</span>
            </div>
          </div>
          <div className="w-[75%] h-full flex flex-col p-[6cqw] pt-[8cqw] justify-start">
-           <h2 className="font-display font-black text-[3.5cqw] leading-[1.05] tracking-tight mb-[4cqw] text-neutral-900">Seamless Migration<br/>Protocol</h2>
+           <h2 className="font-display font-black text-[3.5cqw] leading-[1.05] tracking-tight mb-[4cqw] text-neutral-900 b2p-narrative-text transition-opacity duration-300">Seamless Migration<br/>Protocol</h2>
            
            <div className="flex flex-col gap-[2cqw]">
               <div className="flex items-start gap-[3cqw] border-l-2 border-[#98cc67] pl-[2cqw] py-1">
-                 <div className="w-[12cqw] shrink-0 font-ui font-black text-[1.3cqw] text-neutral-900 uppercase leading-snug">Pre-Flight<br/><span className="text-[#98cc67] text-[1cqw] tracking-widest font-bold">4 Weeks</span></div>
-                 <p className="font-sans text-[1.1cqw] text-neutral-600">Total Systems Audit. Deep mapping of all existing core processes, API endpoints, and undocumented legacy protocols to configure the target state architecture.</p>
+                 <div className="w-[12cqw] shrink-0 font-ui font-black text-[1.3cqw] text-neutral-900 uppercase leading-snug b2p-narrative-text transition-opacity duration-300">Pre-Flight<br/><span className="text-[#98cc67] text-[1cqw] tracking-widest font-bold">4 Weeks</span></div>
+                 <p className="font-sans text-[1.1cqw] text-neutral-600 b2p-narrative-text transition-opacity duration-300">Total Systems Audit. Deep mapping of all existing core processes, API endpoints, and undocumented legacy protocols to configure the target state architecture.</p>
               </div>
               <div className="flex items-start gap-[3cqw] border-l-2 border-neutral-200 pl-[2cqw] py-1">
-                 <div className="w-[12cqw] shrink-0 font-ui font-black text-[1.3cqw] text-neutral-900 uppercase leading-snug">Core Wrap<br/><span className="text-neutral-400 text-[1cqw] tracking-widest font-bold">8 Weeks</span></div>
-                 <p className="font-sans text-[1.1cqw] text-neutral-600">Construction of the abstraction layer. The legacy core is containerized behind secure REST interfaces allowing external systems to interact without direct core contact.</p>
+                 <div className="w-[12cqw] shrink-0 font-ui font-black text-[1.3cqw] text-neutral-900 uppercase leading-snug b2p-narrative-text transition-opacity duration-300">Core Wrap<br/><span className="text-neutral-400 text-[1cqw] tracking-widest font-bold">8 Weeks</span></div>
+                 <p className="font-sans text-[1.1cqw] text-neutral-600 b2p-narrative-text transition-opacity duration-300">Construction of the abstraction layer. The legacy core is containerized behind secure REST interfaces allowing external systems to interact without direct core contact.</p>
               </div>
               <div className="flex items-start gap-[3cqw] border-l-2 border-neutral-200 pl-[2cqw] py-1">
-                 <div className="w-[12cqw] shrink-0 font-ui font-black text-[1.3cqw] text-neutral-900 uppercase leading-snug">Shadow Node<br/><span className="text-neutral-400 text-[1cqw] tracking-widest font-bold">6 Weeks</span></div>
-                 <p className="font-sans text-[1.1cqw] text-neutral-600">Parallel event routing. Transactions flow simultaneously through the legacy stack and the new middleware. Complete data verification without operational disruption.</p>
+                 <div className="w-[12cqw] shrink-0 font-ui font-black text-[1.3cqw] text-neutral-900 uppercase leading-snug b2p-narrative-text transition-opacity duration-300">Shadow Node<br/><span className="text-neutral-400 text-[1cqw] tracking-widest font-bold">6 Weeks</span></div>
+                 <p className="font-sans text-[1.1cqw] text-neutral-600 b2p-narrative-text transition-opacity duration-300">Parallel event routing. Transactions flow simultaneously through the legacy stack and the new middleware. Complete data verification without operational disruption.</p>
               </div>
               <div className="flex items-start gap-[3cqw] border-l-2 border-neutral-200 pl-[2cqw] py-1">
-                 <div className="w-[12cqw] shrink-0 font-ui font-black text-[1.3cqw] text-neutral-900 uppercase leading-snug">Go-Live Cut<br/><span className="text-neutral-400 text-[1cqw] tracking-widest font-bold">0 Downtime</span></div>
-                 <p className="font-sans text-[1.1cqw] text-neutral-600">Atomic transition. Shadow routing is finalized and primary logic flows through the accelerated architecture with 24/7 hypercare support attached.</p>
+                 <div className="w-[12cqw] shrink-0 font-ui font-black text-[1.3cqw] text-neutral-900 uppercase leading-snug b2p-narrative-text transition-opacity duration-300">Go-Live Cut<br/><span className="text-neutral-400 text-[1cqw] tracking-widest font-bold">0 Downtime</span></div>
+                 <p className="font-sans text-[1.1cqw] text-neutral-600 b2p-narrative-text transition-opacity duration-300">Atomic transition. Shadow routing is finalized and primary logic flows through the accelerated architecture with 24/7 hypercare support attached.</p>
               </div>
            </div>
          </div>
@@ -657,7 +657,7 @@ export const getPitchSlides = (slideCopies: string[], customBg: string | null) =
       <div className="w-full h-full bg-white relative flex flex-row group z-30 overflow-hidden text-neutral-900 border-2 border-neutral-100">
          <div className="w-[25%] h-[90%] my-auto relative border-r border-[#98cc67]/30 flex flex-col justify-between ml-[2cqw]">
            <div className="absolute left-[3cqw] top-[6cqw] origin-top-left -rotate-90 translate-y-[26cqw]">
-             <span className="font-ui text-[1.2cqw] uppercase tracking-[0.3em] font-bold text-neutral-400">Appendix C // Integrations</span>
+             <span className="font-ui text-[1.2cqw] uppercase tracking-[0.3em] font-bold text-neutral-400 b2p-narrative-text transition-opacity duration-300">Appendix C // Integrations</span>
            </div>
            <div className="absolute bottom-[2cqw] left-[3cqw] flex items-center gap-[1cqw]">
              <img 
@@ -665,13 +665,13 @@ export const getPitchSlides = (slideCopies: string[], customBg: string | null) =
                alt="B2P Logo" 
                className="w-[2cqw] h-[2cqw] object-contain opacity-50 contrast-200 grayscale"
              />
-             <span className="font-ui text-[0.9cqw] text-neutral-400/80 tracking-widest uppercase font-bold">Bridge2Partners</span>
+             <span className="font-ui text-[0.9cqw] text-neutral-400/80 tracking-widest uppercase font-bold b2p-narrative-text transition-opacity duration-300">Bridge2Partners</span>
            </div>
          </div>
          <div className="w-[75%] h-full flex flex-col p-[6cqw] pt-[8cqw] justify-start">
-           <h2 className="font-display font-black text-[3.5cqw] leading-[1.05] tracking-tight mb-[4cqw] text-neutral-900">The Integration<br/>Catalog</h2>
+           <h2 className="font-display font-black text-[3.5cqw] leading-[1.05] tracking-tight mb-[4cqw] text-neutral-900 b2p-narrative-text transition-opacity duration-300">The Integration<br/>Catalog</h2>
            
-           <div className="columns-2 gap-[4cqw] font-sans text-[1.2cqw] text-neutral-700">
+           <div className="columns-2 gap-[4cqw] font-sans text-[1.2cqw] text-neutral-700 b2p-narrative-text transition-opacity duration-300">
               {['Fiserv Core', 'FIS Profile', 'Jack Henry Silverlake', 'Salesforce Financial', 'nCino Bank Operating', 'Plaid Link', 'Synctera Ledger', 'Encompass Loan', 'Alkami Digital Banking', 'MuleSoft Anypoint', 'AWS Lambda Integration', 'Azure Event Grid', 'DocuSign eSignature', 'MANTIS Legacy', 'MeridianLink'].map(item => (
                 <div key={item} className="break-inside-avoid flex items-center gap-[1.5cqw] mb-[2cqw]">
                    <div className="w-[0.5cqw] h-[0.5cqw] bg-neutral-300 rounded-sm flex-shrink-0" />
@@ -698,31 +698,31 @@ export const getPitchSlides = (slideCopies: string[], customBg: string | null) =
       <div className="w-full h-full bg-white relative flex flex-row group z-30 overflow-hidden text-neutral-900 border-2 border-neutral-100">
          <div className="w-[25%] h-[90%] my-auto relative border-r border-[#98cc67]/30 flex flex-col justify-between ml-[2cqw]">
            <div className="absolute left-[3cqw] top-[6cqw] origin-top-left -rotate-90 translate-y-[22cqw]">
-             <span className="font-ui text-[1.2cqw] uppercase tracking-[0.3em] font-bold text-neutral-400">CASE STUDY</span>
+             <span className="font-ui text-[1.2cqw] uppercase tracking-[0.3em] font-bold text-neutral-400 b2p-narrative-text transition-opacity duration-300">CASE STUDY</span>
            </div>
            <div className="absolute bottom-[2cqw] left-[3cqw] flex items-center gap-[1cqw]">
              <img src={'https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2FBridge2Partners_Favicon.png?alt=media&token=8281d312-5968-4fa1-9e37-347481934b95'} alt="B2P Logo" className="w-[2cqw] h-[2cqw] object-contain opacity-50 contrast-200 grayscale" />
-             <span className="font-ui text-[0.9cqw] text-neutral-400/80 tracking-widest uppercase font-bold">Bridge2Partners</span>
+             <span className="font-ui text-[0.9cqw] text-neutral-400/80 tracking-widest uppercase font-bold b2p-narrative-text transition-opacity duration-300">Bridge2Partners</span>
            </div>
          </div>
          <div className="w-[75%] h-full flex flex-col p-[6cqw] pt-[8cqw] justify-start">
-           <h2 className="font-display font-black text-[3.5cqw] leading-[1.05] tracking-tight mb-[4cqw] text-neutral-900">$80B Commercial Lending</h2>
+           <h2 className="font-display font-black text-[3.5cqw] leading-[1.05] tracking-tight mb-[4cqw] text-neutral-900 b2p-narrative-text transition-opacity duration-300">$80B Commercial Lending</h2>
            
            <div className="grid grid-cols-3 gap-[3cqw] font-sans text-[1.1cqw] text-neutral-600">
               <div className="flex flex-col border-t-2 border-[#98cc67] pt-[2cqw] relative">
-                 <h3 className="font-ui font-black text-[1.2cqw] uppercase text-neutral-900 mb-[1cqw]">Client Challenge</h3>
-                 <p className="leading-relaxed">Massive technical debt across origination channels slowing downstream fulfillment to a crawl.</p>
-                 <span className="text-[#98cc67] font-bold mt-auto pt-[2cqw]">[40+ Interfaces Required]</span>
+                 <h3 className="font-ui font-black text-[1.2cqw] uppercase text-neutral-900 mb-[1cqw] b2p-narrative-text transition-opacity duration-300">Client Challenge</h3>
+                 <p className="leading-relaxed b2p-narrative-text transition-opacity duration-300">Massive technical debt across origination channels slowing downstream fulfillment to a crawl.</p>
+                 <span className="text-[#98cc67] font-bold mt-auto pt-[2cqw] b2p-narrative-text transition-opacity duration-300">[40+ Interfaces Required]</span>
               </div>
               <div className="flex flex-col border-t-2 border-neutral-300 pt-[2cqw] relative">
-                 <h3 className="font-ui font-black text-[1.2cqw] uppercase text-neutral-900 mb-[1cqw]">Solution Delivered</h3>
-                 <p className="leading-relaxed">Designed and implemented the Simplified Middleware Layer wrapping core protocols in an agile REST envelope.</p>
-                 <span className="text-secondary font-bold mt-auto pt-[2cqw]">[Zero Downtime Migration]</span>
+                 <h3 className="font-ui font-black text-[1.2cqw] uppercase text-neutral-900 mb-[1cqw] b2p-narrative-text transition-opacity duration-300">Solution Delivered</h3>
+                 <p className="leading-relaxed b2p-narrative-text transition-opacity duration-300">Designed and implemented the Simplified Middleware Layer wrapping core protocols in an agile REST envelope.</p>
+                 <span className="text-secondary font-bold mt-auto pt-[2cqw] b2p-narrative-text transition-opacity duration-300">[Zero Downtime Migration]</span>
               </div>
               <div className="flex flex-col border-t-2 border-neutral-300 pt-[2cqw] relative">
-                 <h3 className="font-ui font-black text-[1.2cqw] uppercase text-neutral-900 mb-[1cqw]">Realized Value</h3>
-                 <p className="leading-relaxed">Achieved 100% automated decisioning on standard CRE loans while drastically reducing IT SLA loads.</p>
-                 <span className="text-primary font-bold mt-auto pt-[2cqw]">[$80B Balance Sheet Secured]</span>
+                 <h3 className="font-ui font-black text-[1.2cqw] uppercase text-neutral-900 mb-[1cqw] b2p-narrative-text transition-opacity duration-300">Realized Value</h3>
+                 <p className="leading-relaxed b2p-narrative-text transition-opacity duration-300">Achieved 100% automated decisioning on standard CRE loans while drastically reducing IT SLA loads.</p>
+                 <span className="text-primary font-bold mt-auto pt-[2cqw] b2p-narrative-text transition-opacity duration-300">[$80B Balance Sheet Secured]</span>
               </div>
            </div>
          </div>
@@ -741,31 +741,31 @@ export const getPitchSlides = (slideCopies: string[], customBg: string | null) =
       <div className="w-full h-full bg-white relative flex flex-row group z-30 overflow-hidden text-neutral-900 border-2 border-neutral-100">
          <div className="w-[25%] h-[90%] my-auto relative border-r border-[#98cc67]/30 flex flex-col justify-between ml-[2cqw]">
            <div className="absolute left-[3cqw] top-[6cqw] origin-top-left -rotate-90 translate-y-[22cqw]">
-             <span className="font-ui text-[1.2cqw] uppercase tracking-[0.3em] font-bold text-neutral-400">CASE STUDY</span>
+             <span className="font-ui text-[1.2cqw] uppercase tracking-[0.3em] font-bold text-neutral-400 b2p-narrative-text transition-opacity duration-300">CASE STUDY</span>
            </div>
            <div className="absolute bottom-[2cqw] left-[3cqw] flex items-center gap-[1cqw]">
              <img src={'https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2FBridge2Partners_Favicon.png?alt=media&token=8281d312-5968-4fa1-9e37-347481934b95'} alt="B2P Logo" className="w-[2cqw] h-[2cqw] object-contain opacity-50 contrast-200 grayscale" />
-             <span className="font-ui text-[0.9cqw] text-neutral-400/80 tracking-widest uppercase font-bold">Bridge2Partners</span>
+             <span className="font-ui text-[0.9cqw] text-neutral-400/80 tracking-widest uppercase font-bold b2p-narrative-text transition-opacity duration-300">Bridge2Partners</span>
            </div>
          </div>
          <div className="w-[75%] h-full flex flex-col p-[6cqw] pt-[8cqw] justify-start">
-           <h2 className="font-display font-black text-[3.5cqw] leading-[1.05] tracking-tight mb-[4cqw] text-neutral-900">$32B Deposit Onboarding</h2>
+           <h2 className="font-display font-black text-[3.5cqw] leading-[1.05] tracking-tight mb-[4cqw] text-neutral-900 b2p-narrative-text transition-opacity duration-300">$32B Deposit Onboarding</h2>
            
            <div className="grid grid-cols-3 gap-[3cqw] font-sans text-[1.1cqw] text-neutral-600">
               <div className="flex flex-col border-t-2 border-[#98cc67] pt-[2cqw] relative">
-                 <h3 className="font-ui font-black text-[1.2cqw] uppercase text-neutral-900 mb-[1cqw]">Client Challenge</h3>
-                 <p className="leading-relaxed">Customer acquisition was crippled by manual document validation resulting in 40% application drop-off.</p>
-                 <span className="text-[#98cc67] font-bold mt-auto pt-[2cqw]">[Severe Friction Points]</span>
+                 <h3 className="font-ui font-black text-[1.2cqw] uppercase text-neutral-900 mb-[1cqw] b2p-narrative-text transition-opacity duration-300">Client Challenge</h3>
+                 <p className="leading-relaxed b2p-narrative-text transition-opacity duration-300">Customer acquisition was crippled by manual document validation resulting in 40% application drop-off.</p>
+                 <span className="text-[#98cc67] font-bold mt-auto pt-[2cqw] b2p-narrative-text transition-opacity duration-300">[Severe Friction Points]</span>
               </div>
               <div className="flex flex-col border-t-2 border-neutral-300 pt-[2cqw] relative">
-                 <h3 className="font-ui font-black text-[1.2cqw] uppercase text-neutral-900 mb-[1cqw]">Solution Delivered</h3>
-                 <p className="leading-relaxed">Integrated complete eSign automation and live identity verification APIs via the parallel node structure.</p>
-                 <span className="text-secondary font-bold mt-auto pt-[2cqw]">[End-to-end DAO Pipeline]</span>
+                 <h3 className="font-ui font-black text-[1.2cqw] uppercase text-neutral-900 mb-[1cqw] b2p-narrative-text transition-opacity duration-300">Solution Delivered</h3>
+                 <p className="leading-relaxed b2p-narrative-text transition-opacity duration-300">Integrated complete eSign automation and live identity verification APIs via the parallel node structure.</p>
+                 <span className="text-secondary font-bold mt-auto pt-[2cqw] b2p-narrative-text transition-opacity duration-300">[End-to-end DAO Pipeline]</span>
               </div>
               <div className="flex flex-col border-t-2 border-neutral-300 pt-[2cqw] relative">
-                 <h3 className="font-ui font-black text-[1.2cqw] uppercase text-neutral-900 mb-[1cqw]">Realized Value</h3>
-                 <p className="leading-relaxed">Application time plummeted from 4 days to 6 minutes, driving unprecedented conversion ratios.</p>
-                 <span className="text-primary font-bold mt-auto pt-[2cqw]">[Reduced Application Time]</span>
+                 <h3 className="font-ui font-black text-[1.2cqw] uppercase text-neutral-900 mb-[1cqw] b2p-narrative-text transition-opacity duration-300">Realized Value</h3>
+                 <p className="leading-relaxed b2p-narrative-text transition-opacity duration-300">Application time plummeted from 4 days to 6 minutes, driving unprecedented conversion ratios.</p>
+                 <span className="text-primary font-bold mt-auto pt-[2cqw] b2p-narrative-text transition-opacity duration-300">[Reduced Application Time]</span>
               </div>
            </div>
          </div>
@@ -784,31 +784,31 @@ export const getPitchSlides = (slideCopies: string[], customBg: string | null) =
       <div className="w-full h-full bg-white relative flex flex-row group z-30 overflow-hidden text-neutral-900 border-2 border-neutral-100">
          <div className="w-[25%] h-[90%] my-auto relative border-r border-[#98cc67]/30 flex flex-col justify-between ml-[2cqw]">
            <div className="absolute left-[3cqw] top-[6cqw] origin-top-left -rotate-90 translate-y-[22cqw]">
-             <span className="font-ui text-[1.2cqw] uppercase tracking-[0.3em] font-bold text-neutral-400">CASE STUDY</span>
+             <span className="font-ui text-[1.2cqw] uppercase tracking-[0.3em] font-bold text-neutral-400 b2p-narrative-text transition-opacity duration-300">CASE STUDY</span>
            </div>
            <div className="absolute bottom-[2cqw] left-[3cqw] flex items-center gap-[1cqw]">
              <img src={'https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2FBridge2Partners_Favicon.png?alt=media&token=8281d312-5968-4fa1-9e37-347481934b95'} alt="B2P Logo" className="w-[2cqw] h-[2cqw] object-contain opacity-50 contrast-200 grayscale" />
-             <span className="font-ui text-[0.9cqw] text-neutral-400/80 tracking-widest uppercase font-bold">Bridge2Partners</span>
+             <span className="font-ui text-[0.9cqw] text-neutral-400/80 tracking-widest uppercase font-bold b2p-narrative-text transition-opacity duration-300">Bridge2Partners</span>
            </div>
          </div>
          <div className="w-[75%] h-full flex flex-col p-[6cqw] pt-[8cqw] justify-start">
-           <h2 className="font-display font-black text-[3.5cqw] leading-[1.05] tracking-tight mb-[4cqw] text-neutral-900">$250B Post-Merger Integration</h2>
+           <h2 className="font-display font-black text-[3.5cqw] leading-[1.05] tracking-tight mb-[4cqw] text-neutral-900 b2p-narrative-text transition-opacity duration-300">$250B Post-Merger Integration</h2>
            
            <div className="grid grid-cols-3 gap-[3cqw] font-sans text-[1.1cqw] text-neutral-600">
               <div className="flex flex-col border-t-2 border-[#98cc67] pt-[2cqw] relative">
-                 <h3 className="font-ui font-black text-[1.2cqw] uppercase text-neutral-900 mb-[1cqw]">Client Challenge</h3>
-                 <p className="leading-relaxed">Legally mandated day-one operational benchmarks required immediate consolidation of highly disparate banking cores.</p>
-                 <span className="text-[#98cc67] font-bold mt-auto pt-[2cqw]">[Legal Day One Complexity]</span>
+                 <h3 className="font-ui font-black text-[1.2cqw] uppercase text-neutral-900 mb-[1cqw] b2p-narrative-text transition-opacity duration-300">Client Challenge</h3>
+                 <p className="leading-relaxed b2p-narrative-text transition-opacity duration-300">Legally mandated day-one operational benchmarks required immediate consolidation of highly disparate banking cores.</p>
+                 <span className="text-[#98cc67] font-bold mt-auto pt-[2cqw] b2p-narrative-text transition-opacity duration-300">[Legal Day One Complexity]</span>
               </div>
               <div className="flex flex-col border-t-2 border-neutral-300 pt-[2cqw] relative">
-                 <h3 className="font-ui font-black text-[1.2cqw] uppercase text-neutral-900 mb-[1cqw]">Solution Delivered</h3>
-                 <p className="leading-relaxed">Deployed advanced routing middleware to unify customer portals without touching the underlying warring databases.</p>
-                 <span className="text-secondary font-bold mt-auto pt-[2cqw]">[Shadow Node Routing]</span>
+                 <h3 className="font-ui font-black text-[1.2cqw] uppercase text-neutral-900 mb-[1cqw] b2p-narrative-text transition-opacity duration-300">Solution Delivered</h3>
+                 <p className="leading-relaxed b2p-narrative-text transition-opacity duration-300">Deployed advanced routing middleware to unify customer portals without touching the underlying warring databases.</p>
+                 <span className="text-secondary font-bold mt-auto pt-[2cqw] b2p-narrative-text transition-opacity duration-300">[Shadow Node Routing]</span>
               </div>
               <div className="flex flex-col border-t-2 border-neutral-300 pt-[2cqw] relative">
-                 <h3 className="font-ui font-black text-[1.2cqw] uppercase text-neutral-900 mb-[1cqw]">Realized Value</h3>
-                 <p className="leading-relaxed">Eliminated massive potential attrition by creating seamless digital continuity across borders.</p>
-                 <span className="text-primary font-bold mt-auto pt-[2cqw]">[Optimized Call Center Volume]</span>
+                 <h3 className="font-ui font-black text-[1.2cqw] uppercase text-neutral-900 mb-[1cqw] b2p-narrative-text transition-opacity duration-300">Realized Value</h3>
+                 <p className="leading-relaxed b2p-narrative-text transition-opacity duration-300">Eliminated massive potential attrition by creating seamless digital continuity across borders.</p>
+                 <span className="text-primary font-bold mt-auto pt-[2cqw] b2p-narrative-text transition-opacity duration-300">[Optimized Call Center Volume]</span>
               </div>
            </div>
          </div>
@@ -827,31 +827,31 @@ export const getPitchSlides = (slideCopies: string[], customBg: string | null) =
       <div className="w-full h-full bg-white relative flex flex-row group z-30 overflow-hidden text-neutral-900 border-2 border-neutral-100">
          <div className="w-[25%] h-[90%] my-auto relative border-r border-[#98cc67]/30 flex flex-col justify-between ml-[2cqw]">
            <div className="absolute left-[3cqw] top-[6cqw] origin-top-left -rotate-90 translate-y-[22cqw]">
-             <span className="font-ui text-[1.2cqw] uppercase tracking-[0.3em] font-bold text-neutral-400">CASE STUDY</span>
+             <span className="font-ui text-[1.2cqw] uppercase tracking-[0.3em] font-bold text-neutral-400 b2p-narrative-text transition-opacity duration-300">CASE STUDY</span>
            </div>
            <div className="absolute bottom-[2cqw] left-[3cqw] flex items-center gap-[1cqw]">
              <img src={'https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2FBridge2Partners_Favicon.png?alt=media&token=8281d312-5968-4fa1-9e37-347481934b95'} alt="B2P Logo" className="w-[2cqw] h-[2cqw] object-contain opacity-50 contrast-200 grayscale" />
-             <span className="font-ui text-[0.9cqw] text-neutral-400/80 tracking-widest uppercase font-bold">Bridge2Partners</span>
+             <span className="font-ui text-[0.9cqw] text-neutral-400/80 tracking-widest uppercase font-bold b2p-narrative-text transition-opacity duration-300">Bridge2Partners</span>
            </div>
          </div>
          <div className="w-[75%] h-full flex flex-col p-[6cqw] pt-[8cqw] justify-start">
-           <h2 className="font-display font-black text-[3.5cqw] leading-[1.05] tracking-tight mb-[4cqw] text-neutral-900">Enterprise Program Management</h2>
+           <h2 className="font-display font-black text-[3.5cqw] leading-[1.05] tracking-tight mb-[4cqw] text-neutral-900 b2p-narrative-text transition-opacity duration-300">Enterprise Program Management</h2>
            
            <div className="grid grid-cols-3 gap-[3cqw] font-sans text-[1.1cqw] text-neutral-600">
               <div className="flex flex-col border-t-2 border-[#98cc67] pt-[2cqw] relative">
-                 <h3 className="font-ui font-black text-[1.2cqw] uppercase text-neutral-900 mb-[1cqw]">Client Challenge</h3>
-                 <p className="leading-relaxed">A major CRE Lender lacked the structural agility to execute parallel integrations, causing massive budget overruns.</p>
-                 <span className="text-[#98cc67] font-bold mt-auto pt-[2cqw]">[Vendor Sprawl]</span>
+                 <h3 className="font-ui font-black text-[1.2cqw] uppercase text-neutral-900 mb-[1cqw] b2p-narrative-text transition-opacity duration-300">Client Challenge</h3>
+                 <p className="leading-relaxed b2p-narrative-text transition-opacity duration-300">A major CRE Lender lacked the structural agility to execute parallel integrations, causing massive budget overruns.</p>
+                 <span className="text-[#98cc67] font-bold mt-auto pt-[2cqw] b2p-narrative-text transition-opacity duration-300">[Vendor Sprawl]</span>
               </div>
               <div className="flex flex-col border-t-2 border-neutral-300 pt-[2cqw] relative">
-                 <h3 className="font-ui font-black text-[1.2cqw] uppercase text-neutral-900 mb-[1cqw]">Solution Delivered</h3>
-                 <p className="leading-relaxed">Installed a robust PMO and Governance structure enforcing strict agile ceremonies and strategic vendor alignment.</p>
-                 <span className="text-secondary font-bold mt-auto pt-[2cqw]">[PMO Execution Deployed]</span>
+                 <h3 className="font-ui font-black text-[1.2cqw] uppercase text-neutral-900 mb-[1cqw] b2p-narrative-text transition-opacity duration-300">Solution Delivered</h3>
+                 <p className="leading-relaxed b2p-narrative-text transition-opacity duration-300">Installed a robust PMO and Governance structure enforcing strict agile ceremonies and strategic vendor alignment.</p>
+                 <span className="text-secondary font-bold mt-auto pt-[2cqw] b2p-narrative-text transition-opacity duration-300">[PMO Execution Deployed]</span>
               </div>
               <div className="flex flex-col border-t-2 border-neutral-300 pt-[2cqw] relative">
-                 <h3 className="font-ui font-black text-[1.2cqw] uppercase text-neutral-900 mb-[1cqw]">Realized Value</h3>
-                 <p className="leading-relaxed">Saved millions in wasted engineering cycles by forcing architectural compliance and parallel construction.</p>
-                 <span className="text-primary font-bold mt-auto pt-[2cqw]">[Unified Governance Structure]</span>
+                 <h3 className="font-ui font-black text-[1.2cqw] uppercase text-neutral-900 mb-[1cqw] b2p-narrative-text transition-opacity duration-300">Realized Value</h3>
+                 <p className="leading-relaxed b2p-narrative-text transition-opacity duration-300">Saved millions in wasted engineering cycles by forcing architectural compliance and parallel construction.</p>
+                 <span className="text-primary font-bold mt-auto pt-[2cqw] b2p-narrative-text transition-opacity duration-300">[Unified Governance Structure]</span>
               </div>
            </div>
          </div>

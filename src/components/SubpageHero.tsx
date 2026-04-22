@@ -1,14 +1,15 @@
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
+import { ReactNode } from "react";
 
 interface SubpageHeroProps {
-  title: string;
-  subtitle: string;
+  title: ReactNode;
+  subtitle: ReactNode;
   theme?: "light" | "dark" | "medium";
   imageSrc?: string;
   imageAlt?: string;
-  imageCaptionName?: string;
-  imageCaptionTitle?: string;
+  imageCaptionName?: ReactNode;
+  imageCaptionTitle?: ReactNode;
   imageCaptionPosition?: "left" | "right";
 }
 

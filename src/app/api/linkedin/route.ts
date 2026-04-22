@@ -1,6 +1,9 @@
 import { NextResponse } from 'next/server';
 
-export async function GET() {
+export async function GET(request: Request) {
+  const { searchParams } = new URL(request.url);
+  const tag = searchParams.get('tag')?.toLowerCase();
+
   const token = process.env.LINKEDIN_ACCESS_TOKEN;
   const orgUrn = process.env.LINKEDIN_ORG_URN;
 
@@ -40,9 +43,15 @@ export async function GET() {
     }
   ];
 
+  // FILTER HELPER
+  const filterByTag = (posts: any[]) => {
+    if (!tag) return posts;
+    return posts.filter(post => post.text.toLowerCase().includes(`#${tag}`));
+  };
+
   // FALLBACK MOCK FEED IF KEYS ARE NOT SET OR ARE DEFAULT PLACEHOLDERS
   if (!token || !orgUrn || token.includes('your-token')) {
-    return NextResponse.json({ live: false, posts: MOCK_FEED });
+    return NextResponse.json({ live: false, posts: filterByTag(MOCK_FEED) });
   }
 
   try {
@@ -81,11 +90,11 @@ export async function GET() {
       };
     }) || [];
 
-    return NextResponse.json({ live: true, posts: mappedPosts });
+    return NextResponse.json({ live: true, posts: filterByTag(mappedPosts) });
     
   } catch (err: any) {
     console.warn("LinkedIn API Crash, reverting to fallback Mock Feed:", err.message);
     // Graceful fallback prevents the entire UI grid from vanishing if tokens expire inside the browser view
-    return NextResponse.json({ live: false, posts: MOCK_FEED });
+    return NextResponse.json({ live: false, posts: filterByTag(MOCK_FEED) });
   }
 }

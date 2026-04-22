@@ -11,6 +11,7 @@ interface EditableTextProps {
   element?: 'h1' | 'h2' | 'h3' | 'h4' | 'p' | 'span' | 'div';
   className?: string;
   value?: string;
+  documentId?: string;
 }
 
 export default function EditableText({ 
@@ -19,7 +20,8 @@ export default function EditableText({
   isAdmin, 
   element: Element = 'span',
   className = '',
-  value
+  value,
+  documentId = 'home'
 }: EditableTextProps) {
   const [isEditing, setIsEditing] = useState(false);
   const textRef = useRef<HTMLElement>(null);
@@ -38,7 +40,7 @@ export default function EditableText({
 
     if (newText !== value) {
       try {
-        const docRef = doc(db, 'site-content', 'home');
+        const docRef = doc(db, 'site-content', documentId);
         // Check if doc exists, if not, setDoc. Or strictly use setDoc with merge:true
         await setDoc(docRef, { [contentId]: newText }, { merge: true });
       } catch (error) {

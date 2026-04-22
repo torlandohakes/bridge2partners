@@ -16,14 +16,15 @@ interface LinkedInPost {
   link: string;
 }
 
-export default function LinkedInFeed({ theme }: { theme: 'light' | 'medium' | 'dark' }) {
+export default function LinkedInFeed({ theme, tag }: { theme: 'light' | 'medium' | 'dark', tag?: string }) {
   const [posts, setPosts] = useState<LinkedInPost[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     async function fetchPosts() {
       try {
-        const res = await fetch('/api/linkedin');
+        const url = tag ? `/api/linkedin?tag=${encodeURIComponent(tag)}` : '/api/linkedin';
+        const res = await fetch(url);
         if (!res.ok) throw new Error('API down');
         const data = await res.json();
         setPosts(data.posts || []);
@@ -34,7 +35,7 @@ export default function LinkedInFeed({ theme }: { theme: 'light' | 'medium' | 'd
       }
     }
     fetchPosts();
-  }, []);
+  }, [tag]);
 
   const cardBgStyle = theme === 'light' 
     ? 'bg-white border-[#001b15]/10 shadow-sm' 

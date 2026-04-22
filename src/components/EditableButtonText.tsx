@@ -10,6 +10,7 @@ interface EditableButtonTextProps {
   isAdmin: boolean;
   className?: string;
   value?: string;
+  documentId?: string;
 }
 
 export default function EditableButtonText({ 
@@ -17,7 +18,8 @@ export default function EditableButtonText({
   defaultText, 
   isAdmin, 
   className = '',
-  value
+  value,
+  documentId = 'home'
 }: EditableButtonTextProps) {
   const [isEditing, setIsEditing] = useState(false);
   const textRef = useRef<HTMLSpanElement>(null);
@@ -55,7 +57,7 @@ export default function EditableButtonText({
 
     if (newText !== value) {
       try {
-        const docRef = doc(db, 'site-content', 'home');
+        const docRef = doc(db, 'site-content', documentId);
         await setDoc(docRef, { [contentId]: newText }, { merge: true });
       } catch (error) {
         console.error("Failed to save content", error);
