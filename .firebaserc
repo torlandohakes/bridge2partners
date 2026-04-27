@@ -1,5 +1,7 @@
 {
   "projects": {
-    "default": "bridge2partners-staging"
+    "default": "bridge2partners-staging",
+    "staging": "bridge2partners-staging",
+    "production": "bridge2partners-prod"
   }
 }
