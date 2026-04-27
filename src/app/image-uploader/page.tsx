@@ -14,8 +14,21 @@ export default function ImageUploaderPage() {
   const [uploadedImages, setUploadedImages] = useState<string[]>([]);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
+  const MAX_FILE_SIZE = 15 * 1024 * 1024; // 15MB
+
   const handleUpload = async (file: File) => {
     if (!file) return;
+
+    if (!file.type.startsWith('image/')) {
+      alert("Invalid file type. Only images are allowed.");
+      return;
+    }
+
+    if (file.size > MAX_FILE_SIZE) {
+      alert(`File size exceeds the ${MAX_FILE_SIZE / (1024 * 1024)}MB limit.`);
+      return;
+    }
+
     setIsUploading(true);
     setUploadProgress(0);
 

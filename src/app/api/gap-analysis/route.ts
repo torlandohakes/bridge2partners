@@ -1,8 +1,28 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { GoogleGenerativeAI } from '@google/generative-ai';
 
+const rateLimitMap = new Map<string, { count: number, resetTime: number }>();
+const RATE_LIMIT = 5; // Max 5 requests per IP
+const WINDOW_MS = 60 * 1000; // 1 minute window
+const MAX_PROMPT_LENGTH = 2500;
+
 export async function POST(req: NextRequest) {
   try {
+    const ip = req.headers.get('x-forwarded-for') || req.ip || 'unknown-ip';
+    
+    // Rate Limiting Logic
+    const now = Date.now();
+    const clientRecord = rateLimitMap.get(ip);
+    
+    if (clientRecord && now < clientRecord.resetTime) {
+      if (clientRecord.count >= RATE_LIMIT) {
+        return NextResponse.json({ error: 'Too many requests. Please try again later.' }, { status: 429 });
+      }
+      clientRecord.count++;
+    } else {
+      rateLimitMap.set(ip, { count: 1, resetTime: now + WINDOW_MS });
+    }
+
     const apiKey = process.env.GEMINI_API_KEY;
     if (!apiKey) {
       console.error("CRITICAL: GEMINI_API_KEY is missing from server environment mapping.");
@@ -14,6 +34,10 @@ export async function POST(req: NextRequest) {
 
     if (!prompt) {
       return NextResponse.json({ error: 'Prompt is required' }, { status: 400 });
+    }
+
+    if (prompt.length > MAX_PROMPT_LENGTH) {
+      return NextResponse.json({ error: `Prompt is too long. Maximum ${MAX_PROMPT_LENGTH} characters allowed.` }, { status: 400 });
     }
 
     const model = genAI.getGenerativeModel({ model: 'gemini-3.1-pro-preview' });

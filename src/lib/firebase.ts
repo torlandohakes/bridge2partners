@@ -40,8 +40,18 @@ export { storage, analytics, app, db, auth };
  * @param path The path in Firebase storage bucket
  * @returns Download URL of the uploaded image
  */
+const MAX_FILE_SIZE = 15 * 1024 * 1024; // 15MB
+
 export async function uploadToFirebase(file: File, path: string): Promise<string> {
   if (!file) throw new Error("No file provided");
+
+  if (!file.type.startsWith('image/')) {
+    throw new Error("Invalid file type. Only images are allowed.");
+  }
+  
+  if (file.size > MAX_FILE_SIZE) {
+    throw new Error(`File size exceeds the ${MAX_FILE_SIZE / (1024 * 1024)}MB limit.`);
+  }
 
   const storageRef = ref(storage, `${path}/${file.name}`);
   const uploadTask = uploadBytesResumable(storageRef, file);

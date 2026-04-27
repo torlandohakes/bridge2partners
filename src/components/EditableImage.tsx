@@ -28,9 +28,21 @@ export default function EditableImage(props: EditableImageProps) {
 
   const displaySrc = value || defaultSrc;
 
+  const MAX_FILE_SIZE = 15 * 1024 * 1024; // 15MB
+
   const handleImageChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file || !isAdmin) return;
+
+    if (!file.type.startsWith('image/')) {
+      alert("Invalid file type. Only images are allowed.");
+      return;
+    }
+
+    if (file.size > MAX_FILE_SIZE) {
+      alert(`File size exceeds the ${MAX_FILE_SIZE / (1024 * 1024)}MB limit.`);
+      return;
+    }
 
     setIsUploading(true);
     try {
