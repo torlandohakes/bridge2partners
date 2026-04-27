@@ -1,7 +1,9 @@
 "use client";
 
 import { use, useState, useEffect } from "react";
-import { MOCK_TEAM } from "../data";
+import { TeamMember } from "../data";
+import { doc, getDoc } from "firebase/firestore";
+import { db } from "@/lib/firebase";
 import Image from "next/image";
 import Link from "next/link";
 import { QRCodeSVG } from "qrcode.react";
@@ -12,12 +14,39 @@ export default function DigitalBusinessCard({ params }: { params: Promise<{ id: 
   const { id } = use(params);
   const [showQR, setShowQR] = useState(false);
   const [currentUrl, setCurrentUrl] = useState("");
+  const [member, setMember] = useState<TeamMember | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     setCurrentUrl(window.location.href);
-  }, []);
+    
+    const fetchMember = async () => {
+      if (!db) return;
+      try {
+        const docRef = doc(db, 'team', id);
+        const docSnap = await getDoc(docRef);
+        if (docSnap.exists()) {
+          setMember(docSnap.data() as TeamMember);
+        } else {
+          setMember(null);
+        }
+      } catch (err) {
+        console.error("Error fetching member:", err);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    
+    fetchMember();
+  }, [id]);
 
-  const member = MOCK_TEAM.find((m) => m.id === id);
+  if (isLoading) {
+    return (
+      <main className="min-h-screen bg-[#000d0a] text-white flex items-center justify-center">
+        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-[#98cc67]"></div>
+      </main>
+    );
+  }
 
   if (!member) {
     return notFound();

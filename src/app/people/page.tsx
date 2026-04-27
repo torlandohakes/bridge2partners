@@ -9,12 +9,15 @@ import { doc, onSnapshot } from "firebase/firestore";
 import ServiceFooter from "@/components/ServiceFooter";
 import Image from "next/image";
 import Link from "next/link";
-import { TeamMember, MOCK_TEAM } from "./data";
+import { TeamMember } from "./data";
+import { collection, onSnapshot as onCollectionSnapshot } from "firebase/firestore";
 
 export default function PeoplePage() {
   const [isAdmin, setIsAdmin] = useState(false);
   const [cmsContent, setCmsContent] = useState<Record<string, string>>({});
   const [activeTab, setActiveTab] = useState<"All" | "Executive" | "Practice Leader" | "Client Success" | "Strategic Advisor">("All");
+  const [team, setTeam] = useState<TeamMember[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     if (!auth) return;
@@ -30,7 +33,17 @@ export default function PeoplePage() {
     return () => unsub();
   }, []);
 
-  const filteredTeam = MOCK_TEAM.filter(member => activeTab === "All" || member.category === activeTab);
+  useEffect(() => {
+    if (!db) return;
+    const unsub = onCollectionSnapshot(collection(db, 'team'), (snapshot) => {
+      const teamData = snapshot.docs.map(doc => ({ ...doc.data() } as TeamMember));
+      setTeam(teamData);
+      setIsLoading(false);
+    });
+    return () => unsub();
+  }, []);
+
+  const filteredTeam = team.filter(member => activeTab === "All" || member.category === activeTab);
 
   return (
     <main className="min-h-screen bg-[#000d0a] text-white">
@@ -60,8 +73,13 @@ export default function PeoplePage() {
         </div>
 
         {/* Team Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-14">
-          {filteredTeam.map((member) => (
+        {isLoading ? (
+          <div className="flex justify-center py-20">
+            <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-[#98cc67]"></div>
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-14">
+            {filteredTeam.map((member) => (
             <Link href={`/people/${member.id}`} key={member.id} className="group relative bg-white/5 border border-white/10 rounded-2xl overflow-hidden hover:bg-white/10 transition-colors flex flex-col h-full cursor-pointer">
               
               {/* Image Container */}
@@ -101,7 +119,8 @@ export default function PeoplePage() {
               </div>
             </Link>
           ))}
-        </div>
+          </div>
+        )}
       </div>
 
       <ServiceFooter 
