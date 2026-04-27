@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { auth, db, uploadToFirebase } from "@/lib/firebase";
 import { onAuthStateChanged } from "firebase/auth";
 import { collection, onSnapshot, doc, setDoc, deleteDoc } from "firebase/firestore";
-import { MOCK_TEAM, TeamMember } from "@/app/people/data";
+import { TeamMember } from "@/app/people/data";
 import Image from "next/image";
 import { Trash2, Edit2, Plus, Upload, Loader2, Save, X } from "lucide-react";
 
@@ -13,7 +13,6 @@ export default function PeopleAdminDashboard() {
   const [team, setTeam] = useState<TeamMember[]>([]);
   const [isEditing, setIsEditing] = useState<TeamMember | null>(null);
   const [isUploading, setIsUploading] = useState(false);
-  const [isMigrating, setIsMigrating] = useState(false);
 
   useEffect(() => {
     if (!auth) return;
@@ -32,22 +31,6 @@ export default function PeopleAdminDashboard() {
     });
     return () => unsub();
   }, [isAdmin]);
-
-  const handleMigrate = async () => {
-    if (!confirm("Are you sure you want to migrate the hardcoded MOCK_TEAM data to Firestore? This will overwrite existing records with the same IDs.")) return;
-    setIsMigrating(true);
-    try {
-      for (const member of MOCK_TEAM) {
-        await setDoc(doc(db, "team", member.id), member, { merge: true });
-      }
-      alert("Migration complete!");
-    } catch (err) {
-      console.error(err);
-      alert("Migration failed.");
-    } finally {
-      setIsMigrating(false);
-    }
-  };
 
   const handleSave = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -113,14 +96,6 @@ export default function PeopleAdminDashboard() {
             <p className="text-white/60 font-sans">Manage profiles for the People page and Digital Business Cards.</p>
           </div>
           <div className="flex gap-4">
-            <button 
-              onClick={handleMigrate}
-              disabled={isMigrating}
-              className="px-4 py-2 bg-white/10 hover:bg-white/20 text-white rounded-lg flex items-center gap-2 transition-colors disabled:opacity-50"
-            >
-              {isMigrating ? <Loader2 className="w-4 h-4 animate-spin" /> : <Upload className="w-4 h-4" />}
-              Migrate Mock Data
-            </button>
             <button 
               onClick={() => setIsEditing({
                 id: '', name: '', title: '', category: 'Strategic Advisor', bio: '', fullBio: '', imageUrl: ''
