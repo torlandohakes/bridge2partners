@@ -8,7 +8,7 @@ const MAX_PROMPT_LENGTH = 2500;
 
 export async function POST(req: NextRequest) {
   try {
-    const ip = req.headers.get('x-forwarded-for') || req.ip || 'unknown-ip';
+    const ip = req.headers.get('x-forwarded-for') || 'unknown-ip';
     
     // Rate Limiting Logic
     const now = Date.now();
