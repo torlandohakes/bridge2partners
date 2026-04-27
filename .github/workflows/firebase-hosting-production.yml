@@ -31,4 +31,4 @@ jobs:
         env:
           FIREBASE_CLI_EXPERIMENTS: webframeworks
           FIREBASE_TOKEN: '${{ secrets.FIREBASE_TOKEN_PROD }}'
-        run: firebase deploy --only hosting,firestore,functions --project bridge2partners-prod --non-interactive --force
+        run: firebase deploy --only hosting,firestore --project bridge2partners-prod --non-interactive --force
