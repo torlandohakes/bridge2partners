@@ -33,8 +33,8 @@ const THEMES = {
     cardHover: "hover:bg-[#009677]/[0.12]",
     heroOverlayBottom: "from-[#001b15]/60 via-[#001b15]/20 to-transparent",
     bgProblem: "bg-transparent",
-    bgValueProp: "bg-gradient-to-b from-transparent to-[#00120e]",
-    bgGuide: "bg-gradient-to-b from-[#00120e] to-[#001b15]",
+    bgValueProp: "bg-gradient-to-b from-[#00120e] to-[#001b15]",
+    bgGuide: "bg-gradient-to-b from-transparent to-[#00120e]",
     bgPlan: "bg-gradient-to-b from-[#001b15] to-[#00120e]",
     bgTrust: "bg-gradient-to-b from-[#00120e] to-[#000d0a]",
     orb1: "bg-[#009677]/[0.15] mix-blend-screen",
@@ -281,7 +281,7 @@ export default function Home() {
 
       {/* ================= HERO SECTION ================= */}
       <div 
-        className={`relative w-full min-h-[110vh] z-10 transition-all duration-700`}
+        className={`relative w-full min-h-[140svh] sm:min-h-[110vh] z-10 transition-all duration-700`}
         style={{ 
           backgroundImage: `url("${cmsContent.hero_bg || 'https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2Fbridge2partners-hero-1.webp?alt=media&token=bb05e1e4-8f2d-4a75-8880-ddd7bbfa2797'}")`, 
           backgroundSize: 'cover', 
@@ -304,8 +304,8 @@ export default function Home() {
          <div className="absolute inset-0 bg-gradient-to-r from-[#001b15]/90 via-[#001b15]/50 to-transparent backdrop-blur-[1px] z-0" />
          <div className={`absolute inset-x-0 bottom-0 h-[40vh] bg-gradient-to-t ${t.heroOverlayBottom} pointer-events-none transition-colors duration-500 z-0`} />
 
-         {/* 100vh UI Content Constraint Wrapper */}
-         <div className="relative flex flex-col min-h-screen z-10">
+         {/* UI Content Constraint Wrapper */}
+         <div className="relative flex flex-col min-h-[140svh] sm:min-h-[100svh] z-10 pb-0">
          
          {/* Header Nav - Fixed White for Image Legibility */}
          <div className="relative z-50 w-full flex flex-col sm:flex-row items-center justify-between px-6 md:px-12 pt-8 pb-4 gap-6 sm:gap-0 text-white">
@@ -336,27 +336,33 @@ export default function Home() {
                   <EditableButtonText contentId="nav_btn_1" defaultText="View Procurement Docs" isAdmin={isAdmin} value={cmsContent.nav_btn_1} />
                 </Link>
               </Button>
-              <Button variant="default" onClick={() => setIsStrategyModalOpen(true)} className="bg-primary/80 backdrop-blur-[10px] border border-white/20 hover:bg-primary/90 text-white font-bold">
+              <Button variant="default" onClick={() => setIsStrategyModalOpen(true)} className="hidden md:flex bg-primary/80 backdrop-blur-[10px] border border-white/20 hover:bg-primary/90 text-white font-bold">
                 <EditableButtonText contentId="nav_btn_2" defaultText="Schedule a Strategy Call" isAdmin={isAdmin} value={cmsContent.nav_btn_2} />
               </Button>
             </div>
          </div>
 
          {/* Hero Content Body - Fixed White for Image Legibility */}
-         <div className="relative z-10 flex flex-col items-start justify-center flex-1 px-6 md:px-12 w-full max-w-5xl gap-6 md:gap-8 mt-4 md:mt-12 text-white">
-           <EditableText element="span" contentId="hero_super" defaultText="FOR BANKING EXECUTIVES FACING DISRUPTION" isAdmin={isAdmin} value={cmsContent.hero_super} className="font-ui text-xs sm:text-sm text-secondary uppercase tracking-widest font-bold" />
+         <div className="relative z-10 flex flex-col items-start justify-center min-h-[85svh] sm:min-h-0 sm:flex-1 px-6 md:px-12 w-full max-w-5xl gap-10 sm:gap-6 md:gap-8 mt-8 md:mt-12 text-white pb-12 sm:pb-0">
+           <div className="inline-flex items-center bg-[#001b15]/60 backdrop-blur-md border border-white/10 px-3 py-1.5 sm:px-4 sm:py-2 rounded-full mb-2 shadow-lg">
+             <EditableText element="span" contentId="hero_super" defaultText="FOR BANKING EXECUTIVES FACING DISRUPTION" isAdmin={isAdmin} value={cmsContent.hero_super} className="font-ui text-[9px] sm:text-[10px] md:text-xs text-[#98cc67] uppercase tracking-widest font-bold drop-shadow-sm" />
+           </div>
            
-           <EditableText element="h1" contentId="hero_h1" defaultText={"Bank modernization \\nand M&A integrations"} isAdmin={isAdmin} value={cmsContent.hero_h1} className="font-display font-extrabold text-5xl md:text-6xl lg:text-[5.5rem] leading-[1.05] tracking-tight normal-case drop-shadow-md" />
+           <EditableText element="h1" contentId="hero_h1" defaultText={"Bank modernization \\nand M&A integrations"} isAdmin={isAdmin} value={cmsContent.hero_h1} className="font-display font-extrabold text-4xl sm:text-5xl md:text-6xl lg:text-[5.5rem] leading-[1.1] sm:leading-[1.05] tracking-tight normal-case drop-shadow-md" />
            
-           <EditableText element="p" contentId="hero_p" defaultText="Derisk your digital transformation. We provide the tactical team of banking experts you need to navigate complex digital integrations without disrupting everyday operations." isAdmin={isAdmin} value={cmsContent.hero_p} className="font-reading text-lg md:text-xl text-white/80 max-w-3xl leading-relaxed" />
+           <EditableText element="p" contentId="hero_p" defaultText="Derisk your digital transformation. We provide the tactical team of banking experts you need to navigate complex digital integrations without disrupting everyday operations." isAdmin={isAdmin} value={cmsContent.hero_p} className="font-reading text-base sm:text-lg md:text-xl text-white/80 max-w-3xl leading-relaxed" />
+           
+           <Button variant="default" onClick={() => setIsStrategyModalOpen(true)} className="flex sm:hidden mt-4 bg-primary/80 backdrop-blur-[10px] border border-white/20 hover:bg-primary/90 text-white font-bold w-full rounded-full py-6 text-base shadow-2xl">
+              <EditableButtonText contentId="nav_btn_2" defaultText="Schedule a Strategy Call" isAdmin={isAdmin} value={cmsContent.nav_btn_2} />
+           </Button>
          </div>
 
          {/* Glassmorphic AI Gap Analysis Pill */}
-         <div className="relative z-20 w-full px-6 md:px-12 pb-12 md:pb-16 flex flex-col justify-start mt-auto">
-             <div className="w-full flex flex-col gap-3 max-w-6xl">
-                <label className={`font-ui text-xs sm:text-sm ${theme === 'light' ? t.textSecondary : 'text-white/80'} font-medium pl-6 drop-shadow tracking-wide transition-colors flex items-center flex-wrap`}>
-                  <EditableText element="span" contentId="gap_analysis_label_pre" defaultText="Change management fails when the gap between strategy and reality is too wide." isAdmin={isAdmin} value={cmsContent.gap_analysis_label_pre} />
-                  <span className={`${theme === 'light' ? t.textHighlight : 'text-[#98cc67]'} font-bold ml-1 flex items-center`}>
+         <div className="relative z-20 w-full px-0 sm:px-6 md:px-12 pb-0 sm:pb-12 md:pb-16 flex flex-col justify-start mt-auto">
+             <div className={`w-full flex flex-col gap-5 sm:gap-3 max-w-6xl px-6 py-10 sm:p-0 rounded-t-[2.5rem] sm:rounded-none ${theme === 'light' ? 'bg-white/40' : 'bg-[#001b15]/60'} sm:bg-transparent backdrop-blur-2xl sm:backdrop-blur-none border-t border-white/10 sm:border-none shadow-[0_-10px_40px_rgba(0,0,0,0.3)] sm:shadow-none`}>
+                <label className={`font-ui text-sm ${theme === 'light' ? t.textSecondary : 'text-white/80'} font-medium pl-0 sm:pl-6 drop-shadow tracking-wide transition-colors flex flex-col sm:flex-row sm:items-center`}>
+                  <span className="block sm:inline leading-relaxed"><EditableText element="span" contentId="gap_analysis_label_pre" defaultText="Change management fails when the gap between strategy and reality is too wide." isAdmin={isAdmin} value={cmsContent.gap_analysis_label_pre} /></span>
+                  <span className={`${theme === 'light' ? t.textHighlight : 'text-[#98cc67]'} font-bold mt-1 sm:mt-0 sm:ml-1 block sm:inline`}>
                      <EditableText element="span" contentId="gap_analysis_label_post" defaultText="Run an instant gap analysis." isAdmin={isAdmin} value={cmsContent.gap_analysis_label_post} />
                   </span>
                 </label>
@@ -382,15 +388,15 @@ export default function Home() {
                     <EditableText element="span" contentId="gap_analysis_placeholder" defaultText='E.g., "We are migrating to a unified FIS core and need to align our commercial lending teams..."' isAdmin={isAdmin} value={cmsContent.gap_analysis_placeholder} className="font-mono text-white/80" />
                   </div>
                 )}
-                <span className={`font-ui text-[10px] sm:text-[11px] ${theme === 'light' ? t.textMuted : 'text-white/60'} pl-6 flex flex-col sm:flex-row items-start sm:items-center gap-2 mt-1 transition-colors`}>
-                  <strong className="flex items-center gap-1.5 uppercase tracking-widest text-[#98cc67] whitespace-nowrap">
-                     <span className="w-1.5 h-1.5 rounded-full bg-[#98cc67] shadow-[0_0_8px_rgba(152,204,103,1)]"></span>
+                <div className={`font-ui text-[10px] sm:text-[11px] ${theme === 'light' ? t.textMuted : 'text-white/60'} pl-0 sm:pl-6 flex flex-col sm:flex-row items-start sm:items-center gap-1 sm:gap-2 mt-1 transition-colors`}>
+                  <strong className="flex items-center gap-2 uppercase tracking-widest text-[#98cc67] whitespace-nowrap">
+                     <span className="w-1.5 h-1.5 rounded-full bg-[#98cc67] shadow-[0_0_8px_rgba(152,204,103,1)] shrink-0"></span>
                      <EditableText element="span" contentId="gap_analysis_footer_strong" defaultText="B2P Intelligence" isAdmin={isAdmin} value={cmsContent.gap_analysis_footer_strong} />
                   </strong>
-                  <span className="opacity-80 leading-snug">
+                  <span className="opacity-80 leading-relaxed pl-[14px] sm:pl-0 block">
                      <EditableText element="span" contentId="gap_analysis_footer_desc" defaultText="Identifies tech risks and operational friction prior to human discovery calls." isAdmin={isAdmin} value={cmsContent.gap_analysis_footer_desc} />
                   </span>
-                </span>
+                </div>
              </div>
          </div>
 
@@ -398,90 +404,31 @@ export default function Home() {
       </div>
 
       {/* ================= UNIFIED CONTENT CANVAS OVERLAP ================= */}
-      <main className={`relative z-30 -mt-[10vh] rounded-t-[2.5rem] md:rounded-t-[4rem] border-t ${t.canvasBorder} ${t.canvasBg} flex flex-col transition-all duration-700`}>
-
-      {/* ================= VALUE PROP (BENTO BOX) ================= */}
-      <section className={`min-h-screen flex flex-col justify-center px-6 md:px-12 py-24 ${t.bgValueProp} relative overflow-hidden transition-colors duration-500`}>
-        <div className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[60vw] h-[40vw] rounded-full blur-[150px] pointer-events-none transition-colors duration-500 ${t.orb2}`} />
-        <div className={`max-w-7xl mx-auto w-full ${t.sectionWrapper} relative z-10`}>
-          <div className="max-w-6xl w-full mx-auto relative z-10">
-            <div className="mb-16">
-              <EditableText element="h2" contentId="value_h2" defaultText="Unifying disparate systems." isAdmin={isAdmin} value={cmsContent.value_h2} className={`font-display text-4xl md:text-5xl font-bold mb-4 ${t.textPrimary} transition-colors`} />
-              <EditableText element="p" contentId="value_p" defaultText="Executing change management across your core banking infrastructure." isAdmin={isAdmin} value={cmsContent.value_p} className={`font-reading text-xl ${t.textMuted} transition-colors`} />
-            </div>
-            
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8">
-              {[
-                { cta: "Explore Wealth Management", link: "/services/wealth", eyebrow: "Led by John Gustav, CFA", avatar: "https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2FUntitled%20(75).png?alt=media&token=fd2c0e28-b578-44c2-b113-483c83d8b308", icon: <Landmark className={`w-8 h-8 ${theme === 'dark' ? 'text-[#98cc67]' : 'text-[#00573f]'} mb-2`} />, title: "Wealth", desc: "Align technology with business goals to accelerate platform modernization." },
-                { cta: "Explore Commercial Lending", link: "/services/commercial-lending", eyebrow: "Led by Shane Williams", avatar: "https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2FUntitled%20(78).png?alt=media&token=51dedfc2-9786-4d4a-a9cf-cfaf389fe979", icon: <Handshake className={`w-8 h-8 ${theme === 'dark' ? 'text-[#98cc67]' : 'text-[#00573f]'} mb-2`} />, title: "Commercial", desc: "Streamline commercial lending workflows and modernize infrastructure." },
-                { cta: "Explore M&A Integration", link: "/services/ma-integration", eyebrow: "Led by Bob Holohan", avatar: "https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2FUntitled%20(77).png?alt=media&token=361ca2b2-eb78-45c0-8c7a-80f76df8e060", icon: <Zap className={`w-8 h-8 ${theme === 'dark' ? 'text-[#98cc67]' : 'text-[#00573f]'} mb-2`} />, title: "M&A", desc: "Execute derisked, post-merger technology integrations." },
-                { cta: "Explore Treasury Operations", link: "/services/treasury", eyebrow: "Led by Linda Weber", avatar: "https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2FUntitled%20(76).png?alt=media&token=292094e1-53b4-43ee-94cf-841c3a139fe7", icon: <ShieldCheck className={`w-8 h-8 ${theme === 'dark' ? 'text-[#98cc67]' : 'text-[#00573f]'} mb-2`} />, title: "Treasury", desc: "Modernize payments and treasury operations for immediate ROI." }
-              ].map((item, idx) => (
-                 <Card key={idx} className={`relative flex flex-col bg-white/20 backdrop-blur-2xl border border-white/30 shadow-2xl rounded-xl p-6 pb-64 sm:p-8 sm:pb-8 transition-all duration-300 hover:bg-white/30 hover:scale-[1.02] group`}>
-                   {/* Operator Cutout */}
-                   <div className="absolute bottom-0 right-0 z-0 pointer-events-none transition-transform duration-500 origin-bottom group-hover:scale-105 opacity-90 group-hover:opacity-100 flex items-end justify-end w-72 h-80 sm:w-96 sm:h-[28rem] lg:w-80 lg:h-96 xl:w-96 xl:h-[28rem]">
-                     <EditableImage contentId={`value_card_${idx}_cutout`} defaultSrc={item.avatar} isAdmin={isAdmin} value={cmsContent[`value_card_${idx}_cutout`]} alt="Operator Portrait" fill sizes="(max-width: 768px) 350px, 400px" className="object-contain object-bottom drop-shadow-2xl pr-0 sm:pr-4" />
-                   </div>
-
-                   <div className="flex flex-col flex-1 pointer-events-none pr-0 sm:pr-96 lg:pr-72 xl:pr-80 z-20 relative">
-                     <div className="pointer-events-auto">
-                       {item.icon}
-                       {/* Operator Eyebrow */}
-                       <span className={`block ${theme === 'dark' ? 'text-white/80' : 'text-[#001b15]/70'} text-xs tracking-wider uppercase font-semibold mb-2`}>
-                         <EditableText element="span" contentId={`value_card_${idx}_eyebrow`} defaultText={item.eyebrow} isAdmin={isAdmin} value={cmsContent[`value_card_${idx}_eyebrow`]} />
-                       </span>
-                       <CardTitle className={`font-display text-2xl ${t.textPrimary} transition-colors mb-3`}>
-                         <EditableText element="span" contentId={`value_card_${idx}_title`} defaultText={item.title} isAdmin={isAdmin} value={cmsContent[`value_card_${idx}_title`]} />
-                       </CardTitle>
-                     </div>
-                     <CardContent className="p-0 pointer-events-auto">
-                       <EditableText element="p" contentId={`value_card_${idx}_desc`} defaultText={item.desc} isAdmin={isAdmin} value={cmsContent[`value_card_${idx}_desc`]} className={`${t.textSecondary} font-reading leading-relaxed transition-colors`} />
-                     </CardContent>
-                   </div>
-                   
-                   <a href={item.link} className={`mt-6 self-start inline-flex items-center justify-center px-5 py-2.5 rounded-full text-sm font-bold ${theme === 'dark' ? 'bg-[#98cc67]/10 text-[#98cc67] hover:bg-[#98cc67]/20 border border-[#98cc67]/20' : 'bg-[#00573f]/10 text-[#00573f] hover:bg-[#00573f]/20 border border-[#00573f]/20'} backdrop-blur-md transition-all group w-fit pointer-events-auto relative z-20`}>
-                     <EditableText element="span" contentId={`value_card_${idx}_cta`} defaultText={item.cta} isAdmin={isAdmin} value={cmsContent[`value_card_${idx}_cta`]} />
-                     <span className="ml-2 transform transition-transform group-hover:translate-x-1">&rarr;</span>
-                   </a>
-                 </Card>
-              ))}
-            </div>
-
-            <div className="mt-16 flex flex-col sm:flex-row justify-center gap-4">
-              <Button size="lg" onClick={() => setIsStrategyModalOpen(true)} className="bg-primary/80 backdrop-blur-[10px] border border-white/20 hover:bg-primary/90 text-white font-bold px-8">
-                <EditableButtonText contentId="value_btn_1" defaultText="Schedule a Strategy Call" isAdmin={isAdmin} value={cmsContent.value_btn_1} />
-              </Button>
-              <Button size="lg" variant="outline" onClick={() => setIsChallengeModalOpen(true)} className={`${t.outlineBtn} px-8`}>
-                <EditableButtonText contentId="value_btn_2" defaultText="Generate Gap Analysis" isAdmin={isAdmin} value={cmsContent.value_btn_2} />
-              </Button>
-            </div>
-          </div>
-        </div>
-      </section>
+      <main className={`relative z-30 -mt-1 sm:-mt-[10vh] sm:rounded-t-[2.5rem] md:rounded-t-[4rem] border-t-0 sm:border-t ${t.canvasBorder} ${t.canvasBg} flex flex-col transition-all duration-700`}>
 
       {/* ================= PROBLEM & STAKES SECTION ================= */}
       <section className={`min-h-[100vh] flex flex-col justify-center px-6 md:px-12 py-24 ${t.bgProblem} relative overflow-hidden transition-colors duration-500`}>
         <div className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[50vw] h-[50vw] rounded-full blur-[150px] pointer-events-none transition-colors duration-500 ${t.orb1}`} />
-        <div className={`max-w-7xl mx-auto w-full ${t.sectionWrapper} relative z-10`}>
+        <div className={`max-w-7xl mx-auto w-full ${t.sectionWrapper} overflow-hidden relative z-10`}>
           <div className="max-w-6xl w-full mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center relative z-10">
-            <div>
-              <ShieldAlert className="w-12 h-12 text-[#98cc67] mb-6" />
-              <h2 className={`font-display text-4xl md:text-5xl font-bold mb-6 tracking-tight leading-tight ${t.textPrimary} transition-colors`}>
+            <div className="relative w-[85%] sm:w-[75%] lg:w-full pb-72 lg:pb-0 pr-4 sm:pr-8 lg:pr-0">
+              <ShieldAlert className="relative z-20 w-12 h-12 text-[#98cc67] mb-6" />
+              <h2 className={`relative z-20 mix-blend-difference text-white font-display text-4xl md:text-5xl font-bold mb-6 tracking-tight leading-tight transition-colors`}>
                 <EditableText element="span" contentId="problem_h2_top" defaultText="Strategies look flawless on paper." isAdmin={isAdmin} value={cmsContent.problem_h2_top} /> 
                 <br/>
-                <EditableText element="span" contentId="problem_h2_bot" defaultText="Execution is where budgets bloat." isAdmin={isAdmin} value={cmsContent.problem_h2_bot} className={t.textMuted} />
+                <EditableText element="span" contentId="problem_h2_bot" defaultText="Execution is where budgets bloat." isAdmin={isAdmin} value={cmsContent.problem_h2_bot} className="text-white/80" />
               </h2>
-              <EditableText element="p" contentId="problem_p" defaultText="Modernizing massive, interconnected bank ecosystems is overwhelmingly complex. You need practical operators who do the heavy lifting, not just high-level advisors." isAdmin={isAdmin} value={cmsContent.problem_p} className={`font-reading text-lg mb-6 leading-relaxed ${t.textSecondary} transition-colors`} />
+              <EditableText element="p" contentId="problem_p" defaultText="Modernizing massive, interconnected bank ecosystems is overwhelmingly complex. You need practical operators who do the heavy lifting, not just high-level advisors." isAdmin={isAdmin} value={cmsContent.problem_p} className={`relative z-20 font-reading text-lg font-medium lg:font-normal mb-6 leading-relaxed max-w-[70%] md:max-w-[60%] lg:max-w-none transition-colors text-white mix-blend-difference`} />
               
-              <div className={`p-6 ${theme === 'medium' ? 'bg-[#009677]/80 border border-[#009677]/50' : theme === 'light' ? 'bg-[#001b15]/80 backdrop-blur-xl border border-[#001b15]/20' : 'bg-[#001b15]'} shadow-xl rounded-xl transition-colors`}>
+              <div className={`relative z-20 p-6 ${theme === 'medium' ? 'bg-[#009677]/80 border border-[#009677]/50' : theme === 'light' ? 'bg-[#001b15]/80 backdrop-blur-xl border border-[#001b15]/20' : 'bg-[#001b15]'} shadow-xl rounded-xl transition-colors`}>
                 <EditableText element="p" contentId="problem_red_p" defaultText="And when digital migrations fail or M&A integrations fracture, it puts your institution’s stability and bottom line directly at risk." isAdmin={isAdmin} value={cmsContent.problem_red_p} className={`font-ui text-white/90 font-medium leading-relaxed transition-colors`} />
               </div>
               
-              <div className="mt-8 flex flex-col sm:flex-row gap-4">
+              <div className="relative z-20 mt-8 flex flex-col sm:flex-row items-start gap-4">
                  <Button size="lg" onClick={() => setIsStrategyModalOpen(true)} className="bg-primary/80 backdrop-blur-[10px] border border-white/20 hover:bg-primary/90 text-white font-bold">
                    <EditableButtonText contentId="problem_btn_1" defaultText="Schedule a Strategy Call" isAdmin={isAdmin} value={cmsContent.problem_btn_1} />
                  </Button>
-                 <Button size="lg" variant="outline" onClick={() => setIsChallengeModalOpen(true)} className={t.outlineBtn}>
+                 <Button size="lg" variant="outline" onClick={() => setIsChallengeModalOpen(true)} className={`${t.outlineBtn} bg-black/40 backdrop-blur-md lg:bg-transparent lg:backdrop-blur-none`}>
                    <EditableButtonText contentId="problem_btn_2" defaultText="Generate Gap Analysis" isAdmin={isAdmin} value={cmsContent.problem_btn_2} />
                  </Button>
               </div>
@@ -489,13 +436,13 @@ export default function Home() {
             {/* High-Contrast Execution Team Photo */}
             {/* Operator Cutout Floating Right */}
             {/* Operator Cutout Floating Right */}
-            <div className={`relative h-[450px] md:h-[650px] w-full transition-colors overflow-visible lg:self-end translate-y-8 md:translate-y-16 scale-[1.1] origin-bottom`}>
-              <div className={`absolute inset-0`}>
-                <EditableImage contentId="problem_img" defaultSrc="https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2FChristopher%20Summers%20B2P%20Cutout.png?alt=media&token=b1ebc9e8-08a5-4ba8-8e48-7fad149d6ae2" isAdmin={isAdmin} value={cmsContent.problem_img} alt="Christopher Summers B2P" fill sizes="(max-width: 768px) 100vw, 50vw" className={`object-contain object-bottom transition-all duration-500 ${theme === 'light' ? '' : theme === 'medium' ? 'drop-shadow-[0_15px_25px_rgba(0,0,0,0.25)]' : 'drop-shadow-[0_30px_45px_rgba(0,0,0,0.5)]'}`} />
+            <div className={`absolute z-0 transition-colors overflow-visible top-[-24px] bottom-[-64px] right-0 w-full lg:w-[50%]`}>
+              <div className={`absolute inset-y-0 -right-96 md:-right-64 lg:right-0 -left-[200%] lg:-left-[100%]`}>
+                <EditableImage contentId="problem_img" defaultSrc="https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2FChristopher%20Summers%20B2P%20Cutout.png?alt=media&token=b1ebc9e8-08a5-4ba8-8e48-7fad149d6ae2" isAdmin={isAdmin} value={cmsContent.problem_img} alt="Christopher Summers B2P" fill sizes="(max-width: 768px) 100vw, 50vw" className={`object-contain object-right-bottom transition-all duration-500 ${theme === 'light' ? '' : theme === 'medium' ? 'drop-shadow-[0_15px_25px_rgba(0,0,0,0.25)]' : 'drop-shadow-[0_30px_45px_rgba(0,0,0,0.5)]'}`} />
               </div>
               
               {/* Glassmorphic Quote Overlay (Shifted to Torso) */}
-              <div className="absolute bottom-6 right-2 md:bottom-24 md:right-4 w-[90%] md:w-3/4 max-w-sm z-10 bg-white/60 backdrop-blur-3xl border border-white/20 shadow-2xl rounded-xl p-5 md:p-6 transition-all duration-500 hover:bg-white/80">
+              <div className="absolute bottom-6 right-2 md:bottom-24 md:right-4 w-[90%] md:w-3/4 max-w-sm z-20 bg-white/60 backdrop-blur-3xl border border-white/20 shadow-2xl rounded-xl p-5 md:p-6 transition-all duration-500 hover:bg-white/80">
                  <EditableText element="p" contentId="problem_quote" defaultText={`"I've audited 40 post-merger integrations. 90% of them failed because they treated it as an IT ticket, not a change management crisis."`} isAdmin={isAdmin} value={cmsContent.problem_quote} className="text-[#001b15] font-reading font-medium italic text-base md:text-lg leading-relaxed mb-4" />
                  <div className="text-[#009677] font-ui text-xs md:text-base tracking-wide font-bold uppercase">
                    <EditableText element="span" contentId="problem_quote_name" defaultText="– Christopher Summers" isAdmin={isAdmin} value={cmsContent.problem_quote_name} />
@@ -573,11 +520,11 @@ export default function Home() {
 
                     {/* Content Overlay */}
                     <div className="relative z-10 w-full lg:w-3/5">
-                      <p className={`text-3xl font-light italic leading-tight mb-8 ${theme === 'light' ? 'text-[#001b15]' : 'text-white'}`}>
+                      <p className={`text-3xl font-light italic leading-tight mb-6 pb-6 border-b ${theme === 'light' ? 'border-[#001b15]/10 text-[#001b15]' : 'border-white/20 text-white'}`}>
                         "<EditableText element="span" contentId={`leader_roster_${activeLeader.id}_quote`} defaultText={activeLeader.quote} isAdmin={isAdmin} value={cmsContent[`leader_roster_${activeLeader.id}_quote`]} />"
                       </p>
                       
-                      <div className="mb-8">
+                      <div className="mb-0">
                         <ul className="space-y-4">
                           {activeLeader.accolades.map((accolade, i) => (
                             <li key={i} className="flex items-start">
@@ -589,19 +536,6 @@ export default function Home() {
                           ))}
                         </ul>
                       </div>
-
-                      <div className={`pt-6 border-t ${theme === 'light' ? 'border-[#001b15]/10' : 'border-white/20'}`}>
-                        <span className={`block text-xs uppercase tracking-widest font-semibold mb-4 ${theme === 'light' ? 'text-[#001b15]/60' : 'text-white/60'}`}>
-                           <EditableText element="span" contentId="trusted_by_title_block" defaultText="Trusted By" isAdmin={isAdmin} value={cmsContent.trusted_by_title_block} />
-                        </span>
-                        <div className="flex flex-wrap gap-x-8 gap-y-4">
-                          {activeLeader.clientFocus.map((client, i) => (
-                            <span key={i} className={`font-display text-xl font-bold opacity-80 ${theme === 'light' ? 'text-[#001b15]' : 'text-white'}`}>
-                               <EditableText element="span" contentId={`leader_roster_${activeLeader.id}_client_${i}`} defaultText={client} isAdmin={isAdmin} value={cmsContent[`leader_roster_${activeLeader.id}_client_${i}`]} />
-                            </span>
-                          ))}
-                        </div>
-                      </div>
                     </div>
 
                   </div>
@@ -609,6 +543,86 @@ export default function Home() {
               })()}
             </div>
 
+          </div>
+        </div>
+      </section>
+
+      {/* ================= VALUE PROP (BENTO BOX) ================= */}
+      <section className={`min-h-screen flex flex-col justify-center px-6 md:px-12 py-24 ${t.bgValueProp} relative overflow-hidden transition-colors duration-500`}>
+        <div className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[60vw] h-[40vw] rounded-full blur-[150px] pointer-events-none transition-colors duration-500 ${t.orb2}`} />
+        <div className={`max-w-7xl mx-auto w-full ${t.sectionWrapper} relative z-10`}>
+          <div className="max-w-6xl w-full mx-auto relative z-10">
+            <div className="mb-16">
+              <EditableText element="h2" contentId="value_h2" defaultText="Unifying disparate systems." isAdmin={isAdmin} value={cmsContent.value_h2} className={`font-display text-4xl md:text-5xl font-bold mb-4 ${t.textPrimary} transition-colors`} />
+              <EditableText element="p" contentId="value_p" defaultText="Executing change management across your core banking infrastructure." isAdmin={isAdmin} value={cmsContent.value_p} className={`font-reading text-xl ${t.textMuted} transition-colors`} />
+            </div>
+            
+            <div className="grid grid-cols-1 xl:grid-cols-2 gap-6 lg:gap-8">
+              {[
+                { cta: "Explore Wealth Management", link: "/services/wealth", eyebrow: "Led by John Gustav, CFA", avatar: "https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2FUntitled%20(75).png?alt=media&token=fd2c0e28-b578-44c2-b113-483c83d8b308", icon: <Landmark className={`w-8 h-8 ${theme === 'dark' ? 'text-[#98cc67]' : 'text-[#00573f]'} mb-2`} />, title: "Wealth", desc: "Align technology with business goals to accelerate platform modernization." },
+                { cta: "Explore Commercial Lending", link: "/services/commercial-lending", eyebrow: "Led by Shane Williams", avatar: "https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2FUntitled%20(78).png?alt=media&token=51dedfc2-9786-4d4a-a9cf-cfaf389fe979", icon: <Handshake className={`w-8 h-8 ${theme === 'dark' ? 'text-[#98cc67]' : 'text-[#00573f]'} mb-2`} />, title: "Commercial", desc: "Streamline commercial lending workflows and modernize infrastructure." },
+                { cta: "Explore M&A Integration", link: "/services/ma-integration", eyebrow: "Led by Bob Holohan", avatar: "https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2FUntitled%20(77).png?alt=media&token=361ca2b2-eb78-45c0-8c7a-80f76df8e060", icon: <Zap className={`w-8 h-8 ${theme === 'dark' ? 'text-[#98cc67]' : 'text-[#00573f]'} mb-2`} />, title: "M&A", desc: "Execute derisked, post-merger technology integrations." },
+                { cta: "Explore Treasury Operations", link: "/services/treasury", eyebrow: "Led by Linda Weber", avatar: "https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2FUntitled%20(76).png?alt=media&token=292094e1-53b4-43ee-94cf-841c3a139fe7", icon: <ShieldCheck className={`w-8 h-8 ${theme === 'dark' ? 'text-[#98cc67]' : 'text-[#00573f]'} mb-2`} />, title: "Treasury", desc: "Modernize payments and treasury operations for immediate ROI." }
+              ].map((item, idx) => (
+                 <Card key={idx} className={`relative flex flex-col bg-white/20 backdrop-blur-2xl border border-white/30 shadow-2xl rounded-xl p-6 sm:p-8 min-h-[420px] sm:min-h-[450px] transition-colors duration-300 hover:bg-white/30 group overflow-hidden`}>
+                   
+                   {/* Operator Cutout */}
+                   <div className="absolute top-5 bottom-0 -right-24 sm:right-0 z-0 pointer-events-none opacity-100 flex items-end justify-end w-[120%] sm:w-[90%]">
+                     <EditableImage contentId={`value_card_${idx}_cutout`} defaultSrc={item.avatar} isAdmin={isAdmin} value={cmsContent[`value_card_${idx}_cutout`]} alt="Operator Portrait" fill sizes="(max-width: 768px) 400px, 400px" className="object-contain object-right-bottom drop-shadow-2xl" />
+                   </div>
+
+                   <div className="flex flex-col flex-1 pointer-events-none pr-2 w-full max-w-[80%] sm:max-w-[60%] lg:max-w-[55%] xl:max-w-[50%] z-20 relative">
+                     <div className="pointer-events-auto">
+                       <div className="mb-6">
+                         {item.icon}
+                       </div>
+                       
+                       {/* Operator Eyebrow (Editorial Stacked Layout) */}
+                       <div className="mb-4">
+                         <EditableText 
+                           element="span" 
+                           contentId={`value_card_${idx}_eyebrow_prefix`} 
+                           defaultText="LED BY" 
+                           isAdmin={isAdmin} 
+                           value={cmsContent[`value_card_${idx}_eyebrow_prefix`]} 
+                           className={`block text-[10px] tracking-widest uppercase font-bold ${theme === 'dark' ? 'text-[#98cc67]' : 'text-[#00573f]'} mb-1.5`} 
+                         />
+                         <EditableText 
+                           element="span" 
+                           contentId={`value_card_${idx}_eyebrow_name`} 
+                           defaultText={item.eyebrow.replace(/^Led by\s+/i, '')} 
+                           isAdmin={isAdmin} 
+                           value={cmsContent[`value_card_${idx}_eyebrow_name`] || (cmsContent[`value_card_${idx}_eyebrow`] ? cmsContent[`value_card_${idx}_eyebrow`].replace(/^Led by\s+/i, '') : undefined)} 
+                           className={`block text-xs leading-snug uppercase font-bold ${theme === 'dark' ? 'text-white/90 drop-shadow-md' : 'text-[#001b15]/90'} pr-4`} 
+                         />
+                       </div>
+
+                       <CardTitle className={`font-display text-2xl sm:text-3xl font-bold ${t.textPrimary} transition-colors mb-4 drop-shadow-sm`}>
+                         <EditableText element="span" contentId={`value_card_${idx}_title`} defaultText={item.title} isAdmin={isAdmin} value={cmsContent[`value_card_${idx}_title`]} />
+                       </CardTitle>
+                     </div>
+                     
+                     <CardContent className="p-0 pointer-events-auto mb-8">
+                       <EditableText element="p" contentId={`value_card_${idx}_desc`} defaultText={item.desc} isAdmin={isAdmin} value={cmsContent[`value_card_${idx}_desc`]} className={`text-xs sm:text-sm ${t.textSecondary} font-reading leading-relaxed transition-colors drop-shadow-md pr-2`} />
+                     </CardContent>
+                   </div>
+                   
+                   <a href={item.link} className={`mt-auto self-start inline-flex items-center justify-center px-4 py-2 sm:px-5 sm:py-2.5 rounded-full text-xs sm:text-sm font-bold ${theme === 'dark' ? 'bg-black/40 text-[#98cc67] hover:bg-black/60 border border-[#98cc67]/30' : 'bg-[#00573f]/10 text-[#00573f] hover:bg-[#00573f]/20 border border-[#00573f]/20'} backdrop-blur-md transition-all group w-fit pointer-events-auto relative z-20`}>
+                     <EditableText element="span" contentId={`value_card_${idx}_cta`} defaultText={item.cta} isAdmin={isAdmin} value={cmsContent[`value_card_${idx}_cta`]} />
+                     <span className="ml-2 transform transition-transform group-hover:translate-x-1">&rarr;</span>
+                   </a>
+                 </Card>
+              ))}
+            </div>
+
+            <div className="mt-16 flex flex-col sm:flex-row justify-center gap-4">
+              <Button size="lg" onClick={() => setIsStrategyModalOpen(true)} className="bg-primary/80 backdrop-blur-[10px] border border-white/20 hover:bg-primary/90 text-white font-bold px-8">
+                <EditableButtonText contentId="value_btn_1" defaultText="Schedule a Strategy Call" isAdmin={isAdmin} value={cmsContent.value_btn_1} />
+              </Button>
+              <Button size="lg" variant="outline" onClick={() => setIsChallengeModalOpen(true)} className={`${t.outlineBtn} px-8`}>
+                <EditableButtonText contentId="value_btn_2" defaultText="Generate Gap Analysis" isAdmin={isAdmin} value={cmsContent.value_btn_2} />
+              </Button>
+            </div>
           </div>
         </div>
       </section>
