@@ -410,20 +410,20 @@ export default function Home() {
               <EditableText element="p" contentId="value_p" defaultText="Executing change management across your core banking infrastructure." isAdmin={isAdmin} value={cmsContent.value_p} className={`font-reading text-xl ${t.textMuted} transition-colors`} />
             </div>
             
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8">
               {[
                 { cta: "Explore Wealth Management", link: "/services/wealth", eyebrow: "Led by John Gustav, CFA", avatar: "https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2FUntitled%20(75).png?alt=media&token=fd2c0e28-b578-44c2-b113-483c83d8b308", icon: <Landmark className={`w-8 h-8 ${theme === 'dark' ? 'text-[#98cc67]' : 'text-[#00573f]'} mb-2`} />, title: "Wealth", desc: "Align technology with business goals to accelerate platform modernization." },
                 { cta: "Explore Commercial Lending", link: "/services/commercial-lending", eyebrow: "Led by Shane Williams", avatar: "https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2FUntitled%20(78).png?alt=media&token=51dedfc2-9786-4d4a-a9cf-cfaf389fe979", icon: <Handshake className={`w-8 h-8 ${theme === 'dark' ? 'text-[#98cc67]' : 'text-[#00573f]'} mb-2`} />, title: "Commercial", desc: "Streamline commercial lending workflows and modernize infrastructure." },
                 { cta: "Explore M&A Integration", link: "/services/ma-integration", eyebrow: "Led by Bob Holohan", avatar: "https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2FUntitled%20(77).png?alt=media&token=361ca2b2-eb78-45c0-8c7a-80f76df8e060", icon: <Zap className={`w-8 h-8 ${theme === 'dark' ? 'text-[#98cc67]' : 'text-[#00573f]'} mb-2`} />, title: "M&A", desc: "Execute derisked, post-merger technology integrations." },
                 { cta: "Explore Treasury Operations", link: "/services/treasury", eyebrow: "Led by Linda Weber", avatar: "https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2FUntitled%20(76).png?alt=media&token=292094e1-53b4-43ee-94cf-841c3a139fe7", icon: <ShieldCheck className={`w-8 h-8 ${theme === 'dark' ? 'text-[#98cc67]' : 'text-[#00573f]'} mb-2`} />, title: "Treasury", desc: "Modernize payments and treasury operations for immediate ROI." }
               ].map((item, idx) => (
-                 <Card key={idx} className={`relative flex flex-col bg-white/20 backdrop-blur-2xl border border-white/30 shadow-2xl rounded-xl p-8 transition-all duration-300 hover:bg-white/30 hover:scale-[1.02] group`}>
+                 <Card key={idx} className={`relative flex flex-col bg-white/20 backdrop-blur-2xl border border-white/30 shadow-2xl rounded-xl p-6 pb-64 sm:p-8 sm:pb-8 transition-all duration-300 hover:bg-white/30 hover:scale-[1.02] group`}>
                    {/* Operator Cutout */}
-                   <div className="absolute bottom-0 right-0 w-[70%] md:w-[65%] h-[130%] z-0 pointer-events-none transition-transform duration-500 origin-bottom group-hover:scale-105 opacity-90 group-hover:opacity-100">
-                     <EditableImage contentId={`value_card_${idx}_cutout`} defaultSrc={item.avatar} isAdmin={isAdmin} value={cmsContent[`value_card_${idx}_cutout`]} alt="Operator Portrait" fill sizes="(max-width: 768px) 350px, 400px" className="object-contain object-bottom md:object-right-bottom drop-shadow-2xl pr-2 md:pr-4" />
+                   <div className="absolute bottom-0 right-0 z-0 pointer-events-none transition-transform duration-500 origin-bottom group-hover:scale-105 opacity-90 group-hover:opacity-100 flex items-end justify-end w-72 h-80 sm:w-96 sm:h-[28rem] lg:w-80 lg:h-96 xl:w-96 xl:h-[28rem]">
+                     <EditableImage contentId={`value_card_${idx}_cutout`} defaultSrc={item.avatar} isAdmin={isAdmin} value={cmsContent[`value_card_${idx}_cutout`]} alt="Operator Portrait" fill sizes="(max-width: 768px) 350px, 400px" className="object-contain object-bottom drop-shadow-2xl pr-0 sm:pr-4" />
                    </div>
 
-                   <div className="flex flex-col flex-1 pointer-events-none pr-[45%] md:pr-[50%] z-20 relative">
+                   <div className="flex flex-col flex-1 pointer-events-none pr-0 sm:pr-96 lg:pr-72 xl:pr-80 z-20 relative">
                      <div className="pointer-events-auto">
                        {item.icon}
                        {/* Operator Eyebrow */}

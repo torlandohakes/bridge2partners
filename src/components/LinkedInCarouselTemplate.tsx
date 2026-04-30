@@ -249,7 +249,7 @@ export function LinkedInCarouselTemplate({ slide, aspectRatio, onUpdate }: Linke
         {/* Dynamic Inner Wrapper for Glass Panel */}
         <div className={cn("transition-all duration-300 flex flex-col", 
           slide.cardVariantToken === 'glass-panel' ? cardTokenCSS : "",
-          { '100': 'w-full', '80': 'w-[80%]', '65': 'w-[65%]', '50': 'w-[50%]' }[slide.contentWidth || '100']
+          { '100': 'w-full', '80': 'w-full pr-[20%]', '65': 'w-full pr-[35%]', '50': 'w-full pr-[50%]' }[slide.contentWidth || '100']
         )}>
         
         {(() => {
