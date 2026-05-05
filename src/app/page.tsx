@@ -310,7 +310,7 @@ export default function Home() {
          {/* Header Nav - Fixed White for Image Legibility */}
          <div className="relative z-50 w-full flex flex-col sm:flex-row items-center justify-between px-6 md:px-12 pt-8 pb-4 gap-6 sm:gap-0 text-white">
             <Link href="/">
-              <Image src="/images/Bridge2Partners_Logo-3-White.png" alt="Bridge2Partners Logo" width={200} height={40} className="w-auto h-8 md:h-10 object-contain" style={{ width: 'auto' }} priority />
+              <Image src="/images/Bridge2Partners_Logo-3-White.png" alt="Bridge2Partners Logo" width={300} height={60} className="w-auto h-12 md:h-16 object-contain" style={{ width: 'auto' }} priority />
             </Link>
             <div className="flex items-center gap-6 md:gap-8 font-ui text-sm font-medium text-white/90">
               <Link href="/people" className="hidden md:block hover:text-white transition-colors tracking-normal normal-case py-4">
@@ -407,50 +407,71 @@ export default function Home() {
       <main className={`relative z-30 -mt-1 sm:-mt-[10vh] sm:rounded-t-[2.5rem] md:rounded-t-[4rem] border-t-0 sm:border-t ${t.canvasBorder} ${t.canvasBg} flex flex-col transition-all duration-700`}>
 
       {/* ================= PROBLEM & STAKES SECTION ================= */}
-      <section className={`min-h-[100vh] flex flex-col justify-center px-6 md:px-12 py-24 ${t.bgProblem} relative overflow-hidden transition-colors duration-500`}>
+      <section className={`lg:min-h-[100svh] flex flex-col justify-center px-6 md:px-12 py-16 lg:py-24 ${t.bgProblem} relative overflow-hidden transition-colors duration-500`}>
         <div className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[50vw] h-[50vw] rounded-full blur-[150px] pointer-events-none transition-colors duration-500 ${t.orb1}`} />
-        <div className={`max-w-7xl mx-auto w-full ${t.sectionWrapper} overflow-hidden relative z-10`}>
-          <div className="max-w-6xl w-full mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center relative z-10">
-            <div className="relative w-[85%] sm:w-[75%] lg:w-full pb-72 lg:pb-0 pr-4 sm:pr-8 lg:pr-0">
+        
+        <div className={`max-w-7xl mx-auto w-full relative z-10 lg:overflow-hidden lg:rounded-[4rem]`}>
+          {/* Desktop-Only Glass Card Wrapper */}
+          <div className={`hidden lg:block absolute inset-0 rounded-[4rem] border pointer-events-none z-0 ${theme === 'light' ? 'bg-white/60 backdrop-blur-2xl border-[#001b15]/10 shadow-[0_20px_60px_rgba(0,150,119,0.1)]' : theme === 'medium' ? 'bg-white/20 backdrop-blur-3xl border-white/40 shadow-[0_20px_60px_rgba(255,255,255,0.05)]' : 'bg-white/10 backdrop-blur-2xl border-white/10 shadow-2xl'}`}></div>
+          
+          {/* Flat DOM Container: Flex column on mobile, Block on desktop */}
+          <div className="max-w-6xl w-full mx-auto flex flex-col lg:block lg:p-16 relative z-10">
+            
+            {/* 1. Shield & Headline */}
+            <div className="order-1 lg:w-[50%] lg:pr-8">
               <ShieldAlert className="relative z-20 w-12 h-12 text-[#98cc67] mb-6" />
-              <h2 className={`relative z-20 mix-blend-difference text-white font-display text-4xl md:text-5xl font-bold mb-6 tracking-tight leading-tight transition-colors`}>
+              <h2 className={`relative z-20 lg:mix-blend-difference text-white font-display text-4xl md:text-5xl font-bold mb-6 tracking-tight leading-tight transition-colors`}>
                 <EditableText element="span" contentId="problem_h2_top" defaultText="Strategies look flawless on paper." isAdmin={isAdmin} value={cmsContent.problem_h2_top} /> 
                 <br/>
                 <EditableText element="span" contentId="problem_h2_bot" defaultText="Execution is where budgets bloat." isAdmin={isAdmin} value={cmsContent.problem_h2_bot} className="text-white/80" />
               </h2>
-              <EditableText element="p" contentId="problem_p" defaultText="Modernizing massive, interconnected bank ecosystems is overwhelmingly complex. You need practical operators who do the heavy lifting, not just high-level advisors." isAdmin={isAdmin} value={cmsContent.problem_p} className={`relative z-20 font-reading text-lg font-medium lg:font-normal mb-6 leading-relaxed max-w-[70%] md:max-w-[60%] lg:max-w-none transition-colors text-white mix-blend-difference`} />
-              
-              <div className={`relative z-20 p-6 ${theme === 'medium' ? 'bg-[#009677]/80 border border-[#009677]/50' : theme === 'light' ? 'bg-[#001b15]/80 backdrop-blur-xl border border-[#001b15]/20' : 'bg-[#001b15]'} shadow-xl rounded-xl transition-colors`}>
-                <EditableText element="p" contentId="problem_red_p" defaultText="And when digital migrations fail or M&A integrations fracture, it puts your institution’s stability and bottom line directly at risk." isAdmin={isAdmin} value={cmsContent.problem_red_p} className={`font-ui text-white/90 font-medium leading-relaxed transition-colors`} />
-              </div>
-              
-              <div className="relative z-20 mt-8 flex flex-col sm:flex-row items-start gap-4">
-                 <Button size="lg" onClick={() => setIsStrategyModalOpen(true)} className="bg-primary/80 backdrop-blur-[10px] border border-white/20 hover:bg-primary/90 text-white font-bold">
-                   <EditableButtonText contentId="problem_btn_1" defaultText="Schedule a Strategy Call" isAdmin={isAdmin} value={cmsContent.problem_btn_1} />
-                 </Button>
-                 <Button size="lg" variant="outline" onClick={() => setIsChallengeModalOpen(true)} className={`${t.outlineBtn} bg-black/40 backdrop-blur-md lg:bg-transparent lg:backdrop-blur-none`}>
-                   <EditableButtonText contentId="problem_btn_2" defaultText="Generate Gap Analysis" isAdmin={isAdmin} value={cmsContent.problem_btn_2} />
-                 </Button>
-              </div>
             </div>
-            {/* High-Contrast Execution Team Photo */}
-            {/* Operator Cutout Floating Right */}
-            {/* Operator Cutout Floating Right */}
-            <div className={`absolute z-0 transition-colors overflow-visible top-[-24px] bottom-[-64px] right-0 w-full lg:w-[50%]`}>
-              <div className={`absolute inset-y-0 -right-96 md:-right-64 lg:right-0 -left-[200%] lg:-left-[100%]`}>
-                <EditableImage contentId="problem_img" defaultSrc="https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2FChristopher%20Summers%20B2P%20Cutout.png?alt=media&token=b1ebc9e8-08a5-4ba8-8e48-7fad149d6ae2" isAdmin={isAdmin} value={cmsContent.problem_img} alt="Christopher Summers B2P" fill sizes="(max-width: 768px) 100vw, 50vw" className={`object-contain object-right-bottom transition-all duration-500 ${theme === 'light' ? '' : theme === 'medium' ? 'drop-shadow-[0_15px_25px_rgba(0,0,0,0.25)]' : 'drop-shadow-[0_30px_45px_rgba(0,0,0,0.5)]'}`} />
+            
+            {/* 2. Portrait Block & Quote Overlay */}
+            <div className={`order-2 relative mt-4 mb-4 w-full h-[450px] sm:h-[500px] lg:mt-0 lg:mb-0 lg:absolute lg:z-0 transition-colors overflow-visible lg:bottom-[-64px] lg:right-0 lg:w-[50%] lg:h-auto lg:top-[-24px]`}>
+              {/* Mobile Graphical Treatment */}
+              <div className="lg:hidden absolute inset-0 bg-gradient-to-t from-[#009677]/10 to-transparent rounded-[2rem] border border-[#009677]/20 overflow-hidden shadow-inner">
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-[#98cc67]/20 blur-[80px] rounded-full"></div>
+              </div>
+              <div className={`absolute inset-0 lg:inset-auto lg:inset-y-0 lg:-right-10 lg:-left-[100%]`}>
+                <EditableImage contentId="problem_img" defaultSrc="https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2FChristopher%20Summers%20B2P%20Cutout.png?alt=media&token=b1ebc9e8-08a5-4ba8-8e48-7fad149d6ae2" isAdmin={isAdmin} value={cmsContent.problem_img} alt="Christopher Summers B2P" fill sizes="(max-width: 1024px) 100vw, 50vw" className={`object-contain object-bottom lg:object-right-bottom transition-all duration-500 ${theme === 'light' ? '' : theme === 'medium' ? 'drop-shadow-[0_15px_25px_rgba(0,0,0,0.25)]' : 'drop-shadow-[0_30px_45px_rgba(0,0,0,0.5)]'}`} />
               </div>
               
-              {/* Glassmorphic Quote Overlay (Shifted to Torso) */}
-              <div className="absolute bottom-6 right-2 md:bottom-24 md:right-4 w-[90%] md:w-3/4 max-w-sm z-20 bg-white/60 backdrop-blur-3xl border border-white/20 shadow-2xl rounded-xl p-5 md:p-6 transition-all duration-500 hover:bg-white/80">
-                 <EditableText element="p" contentId="problem_quote" defaultText={`"I've audited 40 post-merger integrations. 90% of them failed because they treated it as an IT ticket, not a change management crisis."`} isAdmin={isAdmin} value={cmsContent.problem_quote} className="text-[#001b15] font-reading font-medium italic text-base md:text-lg leading-relaxed mb-4" />
-                 <div className="text-[#009677] font-ui text-xs md:text-base tracking-wide font-bold uppercase">
+              {/* Quote Block (Docked inside card on mobile, floating on desktop) */}
+              <div className="absolute z-20 bottom-[5px] left-[40px] right-[5px] w-auto max-w-none lg:left-auto lg:bottom-24 lg:right-4 lg:w-[90%] lg:max-w-sm bg-white/60 backdrop-blur-3xl border border-white/20 shadow-2xl rounded-[1.5rem] p-4 lg:p-6 transition-all duration-500 hover:bg-white/80">
+                 <EditableText element="p" contentId="problem_quote" defaultText={`"I've audited 40 post-merger integrations. 90% of them failed because they treated it as an IT ticket, not a change management crisis."`} isAdmin={isAdmin} value={cmsContent.problem_quote} className="text-[#001b15] font-reading font-medium italic text-xs md:text-lg leading-relaxed mb-2 md:mb-4" />
+                 <div className="text-[#009677] font-ui text-[9px] md:text-base tracking-wide font-bold uppercase">
                    <EditableText element="span" contentId="problem_quote_name" defaultText="– Christopher Summers" isAdmin={isAdmin} value={cmsContent.problem_quote_name} />
                    <br />
                    <EditableText element="span" contentId="problem_quote_title" defaultText="Managing partner" isAdmin={isAdmin} value={cmsContent.problem_quote_title} className="text-[#001b15]/90 font-semibold tracking-normal capitalize" />
                  </div>
               </div>
             </div>
+
+            {/* 4. Body Paragraph */}
+            <div className="order-4 mt-8 lg:mt-0 lg:w-[50%] lg:pr-8">
+              <EditableText element="p" contentId="problem_p" defaultText="Modernizing massive, interconnected bank ecosystems is overwhelmingly complex. You need practical operators who do the heavy lifting, not just high-level advisors." isAdmin={isAdmin} value={cmsContent.problem_p} className={`relative z-20 font-reading text-lg font-medium lg:font-normal mb-6 leading-relaxed w-full transition-colors text-white lg:mix-blend-difference`} />
+            </div>
+
+            {/* 5. Impact Card */}
+            <div className="order-5 lg:w-[50%] lg:pr-8">
+              <div className={`relative z-20 p-6 backdrop-blur-xl border border-white/5 border-t-white/15 border-l-white/10 shadow-2xl rounded-2xl transition-colors ${theme === 'medium' ? 'bg-[#009677]/80' : 'bg-[#001b15]/80'}`}>
+                <EditableText element="p" contentId="problem_red_p" defaultText="And when digital migrations fail or M&A integrations fracture, it puts your institution’s stability and bottom line directly at risk." isAdmin={isAdmin} value={cmsContent.problem_red_p} className={`font-ui text-white/90 font-medium leading-relaxed transition-colors`} />
+              </div>
+            </div>
+
+            {/* 6. Action Buttons */}
+            <div className="order-6 mt-8 lg:mt-8 lg:w-[50%] lg:pr-8">
+              <div className="relative z-20 flex flex-col sm:flex-row items-start gap-4">
+                 <Button size="lg" onClick={() => setIsStrategyModalOpen(true)} className="bg-primary/80 backdrop-blur-[10px] border border-white/20 hover:bg-primary/90 text-white font-bold w-full sm:w-auto">
+                   <EditableButtonText contentId="problem_btn_1" defaultText="Schedule a Strategy Call" isAdmin={isAdmin} value={cmsContent.problem_btn_1} />
+                 </Button>
+                 <Button size="lg" variant="outline" onClick={() => setIsChallengeModalOpen(true)} className={`${t.outlineBtn} bg-black/40 backdrop-blur-md lg:bg-transparent lg:backdrop-blur-none w-full sm:w-auto`}>
+                   <EditableButtonText contentId="problem_btn_2" defaultText="Generate Gap Analysis" isAdmin={isAdmin} value={cmsContent.problem_btn_2} />
+                 </Button>
+              </div>
+            </div>
+
           </div>
         </div>
       </section>
@@ -458,91 +479,131 @@ export default function Home() {
       {/* ================= GUIDE & PROOF ================= */}
       <section className={`min-h-screen flex flex-col justify-center px-6 md:px-12 py-24 ${t.bgGuide} relative text-center overflow-hidden transition-colors duration-500`}>
         <div className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[60vw] h-[40vw] rounded-full blur-[150px] pointer-events-none transition-colors duration-500 ${t.orb3}`} />
-        <div className={`max-w-7xl mx-auto w-full ${t.sectionWrapper} relative z-10`}>
-          <div className="max-w-6xl w-full mx-auto text-center mb-16 relative z-10">
-            <EditableText element="h2" contentId="guide_h2" defaultText="Your modernization is in safe hands." isAdmin={isAdmin} value={cmsContent.guide_h2} className={`font-display text-4xl md:text-5xl font-bold mb-6 ${t.textPrimary} transition-colors`} />
-            <EditableText element="p" contentId="guide_p" defaultText="We combine deep banking experience with modern technology expertise. Because we have the ability to operate across strategy, implementation, and execution, your modernization is always in safe hands." isAdmin={isAdmin} value={cmsContent.guide_p} className={`font-reading text-xl ${t.textSecondary} max-w-3xl mx-auto leading-relaxed transition-colors`} />
-          </div>
-
-          {/* Interactive Pedigree UI */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 w-full relative z-10 mt-16 max-w-6xl mx-auto text-left">
+        {/* Desktop-Only Glass Card Wrapper */}
+        <div className="max-w-7xl mx-auto w-full relative z-10">
+          <div className={`hidden lg:block absolute inset-0 rounded-[4rem] border pointer-events-none z-0 ${theme === 'light' ? 'bg-white/60 backdrop-blur-2xl border-[#001b15]/10 shadow-[0_20px_60px_rgba(0,150,119,0.1)]' : theme === 'medium' ? 'bg-white/20 backdrop-blur-3xl border-white/40 shadow-[0_20px_60px_rgba(255,255,255,0.05)]' : 'bg-white/10 backdrop-blur-2xl border-white/10 shadow-2xl'}`}></div>
+          
+          <div className="max-w-6xl w-full mx-auto relative z-10 flex flex-col lg:block lg:p-16">
             
-            {/* Left Column (Selector Menu) */}
-            <div className="lg:col-span-4 flex flex-col gap-4">
-              {LEADERSHIP_DATA.map((leader) => {
-                const isActive = activeLeaderId === leader.id;
-                return (
-                  <button
-                    key={leader.id}
-                    onClick={() => setActiveLeaderId(leader.id)}
-                    className={`text-left p-6 rounded-xl border transition-all duration-300 ${
-                      isActive 
-                        ? `${theme === 'light' ? 'bg-[#001b15]/5 border-[#001b15]/20 text-[#001b15]' : 'bg-white/20 border-white/50 shadow-lg text-white'}`
-                        : `bg-transparent border-transparent ${theme === 'light' ? 'text-[#001b15]/50 hover:bg-[#001b15]/5 hover:text-[#001b15]' : 'text-white/50 hover:bg-white/5 hover:text-white/80'}`
-                    }`}
-                  >
-                    <span className="block font-display text-2xl font-bold mb-1">
-                      <EditableText element="span" contentId={`selector_menu_${leader.id}_name`} defaultText={leader.name} isAdmin={isAdmin} value={cmsContent[`selector_menu_${leader.id}_name`]} />
-                    </span>
-                    <span className={`block font-ui text-xs tracking-widest uppercase font-semibold ${isActive ? '' : 'opacity-70'}`}>
-                      <EditableText element="span" contentId={`selector_menu_${leader.id}_title`} defaultText={leader.title} isAdmin={isAdmin} value={cmsContent[`selector_menu_${leader.id}_title`]} />
-                    </span>
-                  </button>
-                );
-              })}
+            {/* 1. Header Block */}
+            <div className="order-1 text-left mb-8 lg:mb-16 relative z-10">
+              <EditableText element="h2" contentId="guide_h2" defaultText="Your modernization is in safe hands." isAdmin={isAdmin} value={cmsContent.guide_h2} className={`font-display text-3xl md:text-4xl font-bold mb-4 ${t.textPrimary} transition-colors`} />
+              <EditableText element="p" contentId="guide_p" defaultText="We combine deep banking experience with modern technology expertise. Because we have the ability to operate across strategy, implementation, and execution, your modernization is always in safe hands." isAdmin={isAdmin} value={cmsContent.guide_p} className={`font-reading text-base ${t.textSecondary} max-w-3xl leading-relaxed transition-colors`} />
+            </div>
+
+            {/* Interactive Pedigree UI Container */}
+            <div className="order-2 w-full relative z-10 flex flex-col lg:grid lg:grid-cols-12 gap-6 lg:gap-8 text-left">
               
-              <Link href="/team" className="mt-4">
-                <Button size="lg" variant="outline" className={`w-full ${t.outlineBtn} py-6 text-lg hover:scale-[1.02] transition-all`}>
-                  <EditableButtonText contentId="meet_team_btn" defaultText="Meet Our Full Team" isAdmin={isAdmin} value={cmsContent.meet_team_btn} />
-                </Button>
-              </Link>
-            </div>
+              {/* Left Column (Selector Menu) */}
+              <div className="order-1 lg:order-none lg:col-span-4 flex flex-row lg:flex-col overflow-x-auto snap-x gap-3 lg:gap-4 pb-4 lg:pb-0 -mx-6 px-6 lg:mx-0 lg:px-0 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+                {LEADERSHIP_DATA.map((leader) => {
+                  const isActive = activeLeaderId === leader.id;
+                  return (
+                    <button
+                      key={leader.id}
+                      onClick={() => setActiveLeaderId(leader.id)}
+                      className={`text-center lg:text-left px-5 py-3 lg:p-6 rounded-full lg:rounded-xl border transition-all duration-300 flex-shrink-0 snap-start w-auto lg:w-full ${
+                        isActive 
+                          ? `${theme === 'light' ? 'bg-[#001b15]/5 border-[#001b15]/20 text-[#001b15]' : 'bg-white/20 border-white/50 shadow-lg text-white'}`
+                          : `bg-transparent border-transparent ${theme === 'light' ? 'text-[#001b15]/50 hover:bg-[#001b15]/5 hover:text-[#001b15]' : 'text-white/50 hover:bg-white/5 hover:text-white/80'}`
+                      }`}
+                    >
+                      <span className="block font-display text-base lg:text-2xl font-bold mb-0 lg:mb-1 whitespace-nowrap">
+                        <EditableText element="span" contentId={`selector_menu_${leader.id}_name`} defaultText={leader.name} isAdmin={isAdmin} value={cmsContent[`selector_menu_${leader.id}_name`]} />
+                      </span>
+                      <span className={`hidden lg:block font-ui text-xs tracking-widest uppercase font-semibold ${isActive ? '' : 'opacity-70'}`}>
+                        <EditableText element="span" contentId={`selector_menu_${leader.id}_title`} defaultText={leader.title} isAdmin={isAdmin} value={cmsContent[`selector_menu_${leader.id}_title`]} />
+                      </span>
+                    </button>
+                  );
+                })}
+                
+                {/* Desktop Action Button */}
+                <Link href="/team" className="hidden lg:block mt-4">
+                  <Button size="lg" variant="outline" className={`w-full ${t.outlineBtn} py-6 text-lg hover:scale-[1.02] transition-all`}>
+                    <EditableButtonText contentId="meet_team_btn" defaultText="Meet Our Full Team" isAdmin={isAdmin} value={cmsContent.meet_team_btn} />
+                  </Button>
+                </Link>
+              </div>
 
-            {/* Right Column (Dynamic Pedigree Panel) */}
-            <div className="lg:col-span-8">
-              {(() => {
-                const activeLeader = LEADERSHIP_DATA.find(l => l.id === activeLeaderId) || LEADERSHIP_DATA[0];
-                return (
-                  <div className={`backdrop-blur-3xl border rounded-2xl overflow-hidden relative min-h-[500px] p-10 flex flex-col justify-center transition-colors duration-500 ${theme === 'light' ? 'bg-[#001b15]/5 border-[#001b15]/20' : 'bg-white/10 border-white/30'}`}>
-                    
-                    {/* Background Image with Mask */}
-                    <div 
-                      className="absolute inset-y-0 right-0 w-full lg:w-[80%] z-0 pointer-events-none transition-all duration-500"
-                      style={{
-                        backgroundImage: `url("${activeLeader.imageUrl}")`,
-                        backgroundPosition: 'bottom right',
-                        backgroundSize: 'contain',
-                        backgroundRepeat: 'no-repeat',
-                        WebkitMaskImage: 'linear-gradient(to right, transparent 0%, black 60%)',
-                        maskImage: 'linear-gradient(to right, transparent 0%, black 60%)'
-                      }}
-                    ></div>
-
-                    {/* Content Overlay */}
-                    <div className="relative z-10 w-full lg:w-3/5">
-                      <p className={`text-3xl font-light italic leading-tight mb-6 pb-6 border-b ${theme === 'light' ? 'border-[#001b15]/10 text-[#001b15]' : 'border-white/20 text-white'}`}>
-                        "<EditableText element="span" contentId={`leader_roster_${activeLeader.id}_quote`} defaultText={activeLeader.quote} isAdmin={isAdmin} value={cmsContent[`leader_roster_${activeLeader.id}_quote`]} />"
-                      </p>
+              {/* Right Column (Dynamic Pedigree Panel) */}
+              <div className="order-2 lg:order-none lg:col-span-8">
+                {(() => {
+                  const activeLeader = LEADERSHIP_DATA.find(l => l.id === activeLeaderId) || LEADERSHIP_DATA[0];
+                  return (
+                    <div className={`backdrop-blur-3xl border rounded-3xl lg:rounded-2xl overflow-hidden relative min-h-[550px] lg:min-h-[500px] p-6 pt-0 lg:p-10 flex flex-col justify-end lg:justify-center transition-colors duration-500 ${theme === 'light' ? 'bg-gradient-to-t from-[#009677]/5 to-transparent lg:bg-none lg:bg-[#001b15]/5 border-[#001b15]/20 shadow-xl lg:shadow-none' : 'bg-gradient-to-t from-[#009677]/15 to-transparent lg:bg-none lg:bg-white/10 border-[#009677]/30 lg:border-white/30 shadow-inner lg:shadow-none'}`}>
                       
-                      <div className="mb-0">
-                        <ul className="space-y-4">
-                          {activeLeader.accolades.map((accolade, i) => (
-                            <li key={i} className="flex items-start">
-                              <CheckCircle2 className={`w-6 h-6 mr-3 mt-1 flex-shrink-0 ${theme === 'dark' ? 'text-[#98cc67]' : 'text-[#00573f]'}`} />
-                              <span className={`font-ui font-medium text-lg ${theme === 'light' ? 'text-[#001b15]/90' : 'text-white/90'}`}>
-                                <EditableText element="span" contentId={`leader_roster_${activeLeader.id}_accolade_${i}`} defaultText={accolade} isAdmin={isAdmin} value={cmsContent[`leader_roster_${activeLeader.id}_accolade_${i}`]} />
-                              </span>
-                            </li>
-                          ))}
-                        </ul>
+                      {/* Decorative Glowing Orb */}
+                      <div className="lg:hidden absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-80 h-80 bg-[#98cc67]/15 blur-[80px] rounded-full pointer-events-none"></div>
+
+                      {/* Mobile Background Image (Top fading down) */}
+                      <div 
+                        className="lg:hidden absolute top-0 inset-x-0 h-[350px] w-full z-0 pointer-events-none transition-all duration-500"
+                        style={{
+                          backgroundImage: `url("${activeLeader.imageUrl}")`,
+                          backgroundPosition: 'top center',
+                          backgroundSize: 'cover',
+                          backgroundRepeat: 'no-repeat',
+                          WebkitMaskImage: 'linear-gradient(to bottom, black 50%, transparent 100%)',
+                          maskImage: 'linear-gradient(to bottom, black 50%, transparent 100%)'
+                        }}
+                      ></div>
+
+                      {/* Desktop Background Image (Right fading left) */}
+                      <div 
+                        className="hidden lg:block absolute inset-y-0 right-0 w-[80%] z-0 pointer-events-none transition-all duration-500"
+                        style={{
+                          backgroundImage: `url("${activeLeader.imageUrl}")`,
+                          backgroundPosition: 'bottom right',
+                          backgroundSize: 'contain',
+                          backgroundRepeat: 'no-repeat',
+                          WebkitMaskImage: 'linear-gradient(to right, transparent 0%, black 60%)',
+                          maskImage: 'linear-gradient(to right, transparent 0%, black 60%)'
+                        }}
+                      ></div>
+
+                      {/* Content Overlay */}
+                      <div className="relative z-10 w-full lg:w-3/5 mt-[280px] lg:mt-0">
+                        {/* Mobile Title Injection (Since it's hidden from pill) */}
+                        <div className="lg:hidden mb-2 text-center">
+                          <span className={`font-ui text-sm tracking-widest uppercase font-bold ${theme === 'light' ? 'text-[#009677]' : 'text-[#98cc67]'}`}>
+                            <EditableText element="span" contentId={`leader_roster_${activeLeader.id}_title_mobile`} defaultText={activeLeader.title} isAdmin={isAdmin} value={cmsContent[`selector_menu_${activeLeader.id}_title`]} />
+                          </span>
+                        </div>
+
+                        <p className={`text-xl text-center lg:text-left lg:text-3xl font-light italic leading-tight mb-6 pb-6 border-b ${theme === 'light' ? 'border-[#001b15]/10 text-[#001b15]' : 'border-white/20 text-white'}`}>
+                          "<EditableText element="span" contentId={`leader_roster_${activeLeader.id}_quote`} defaultText={activeLeader.quote} isAdmin={isAdmin} value={cmsContent[`leader_roster_${activeLeader.id}_quote`]} />"
+                        </p>
+                        
+                        <div className="mb-0">
+                          <ul className="space-y-3 lg:space-y-4">
+                            {activeLeader.accolades.map((accolade, i) => (
+                              <li key={i} className="flex items-start">
+                                <CheckCircle2 className={`w-5 h-5 lg:w-6 lg:h-6 mr-3 mt-0.5 lg:mt-1 flex-shrink-0 ${theme === 'dark' ? 'text-[#98cc67]' : 'text-[#00573f]'}`} />
+                                <span className={`font-ui font-medium text-base lg:text-lg ${theme === 'light' ? 'text-[#001b15]/90' : 'text-white/90'}`}>
+                                  <EditableText element="span" contentId={`leader_roster_${activeLeader.id}_accolade_${i}`} defaultText={accolade} isAdmin={isAdmin} value={cmsContent[`leader_roster_${activeLeader.id}_accolade_${i}`]} />
+                                </span>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
                       </div>
+
                     </div>
+                  );
+                })()}
+              </div>
 
-                  </div>
-                );
-              })()}
+              {/* Mobile Action Button */}
+              <div className="order-3 lg:hidden mt-4">
+                <Link href="/team">
+                  <Button size="lg" variant="outline" className={`w-full ${t.outlineBtn} py-6 text-lg hover:scale-[1.02] transition-all`}>
+                    <EditableButtonText contentId="meet_team_btn" defaultText="Meet Our Full Team" isAdmin={isAdmin} value={cmsContent.meet_team_btn} />
+                  </Button>
+                </Link>
+              </div>
+
             </div>
-
           </div>
         </div>
       </section>
@@ -550,33 +611,46 @@ export default function Home() {
       {/* ================= VALUE PROP (BENTO BOX) ================= */}
       <section className={`min-h-screen flex flex-col justify-center px-6 md:px-12 py-24 ${t.bgValueProp} relative overflow-hidden transition-colors duration-500`}>
         <div className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[60vw] h-[40vw] rounded-full blur-[150px] pointer-events-none transition-colors duration-500 ${t.orb2}`} />
-        <div className={`max-w-7xl mx-auto w-full ${t.sectionWrapper} relative z-10`}>
-          <div className="max-w-6xl w-full mx-auto relative z-10">
-            <div className="mb-16">
-              <EditableText element="h2" contentId="value_h2" defaultText="Unifying disparate systems." isAdmin={isAdmin} value={cmsContent.value_h2} className={`font-display text-4xl md:text-5xl font-bold mb-4 ${t.textPrimary} transition-colors`} />
-              <EditableText element="p" contentId="value_p" defaultText="Executing change management across your core banking infrastructure." isAdmin={isAdmin} value={cmsContent.value_p} className={`font-reading text-xl ${t.textMuted} transition-colors`} />
+        
+        {/* Desktop-Only Glass Card Wrapper */}
+        <div className="max-w-7xl mx-auto w-full relative z-10">
+          <div className={`hidden lg:block absolute inset-0 rounded-[4rem] border pointer-events-none z-0 ${theme === 'light' ? 'bg-white/60 backdrop-blur-2xl border-[#001b15]/10 shadow-[0_20px_60px_rgba(0,150,119,0.1)]' : theme === 'medium' ? 'bg-white/20 backdrop-blur-3xl border-white/40 shadow-[0_20px_60px_rgba(255,255,255,0.05)]' : 'bg-white/10 backdrop-blur-2xl border-white/10 shadow-2xl'}`}></div>
+          
+          <div className="max-w-6xl w-full mx-auto relative z-10 flex flex-col lg:block lg:p-16">
+            <div className="mb-8 lg:mb-16">
+              <EditableText element="h2" contentId="value_h2" defaultText="Unifying disparate systems." isAdmin={isAdmin} value={cmsContent.value_h2} className={`font-display text-3xl md:text-4xl font-bold mb-4 ${t.textPrimary} transition-colors`} />
+              <EditableText element="p" contentId="value_p" defaultText="Executing change management across your core banking infrastructure." isAdmin={isAdmin} value={cmsContent.value_p} className={`font-reading text-base ${t.textMuted} transition-colors`} />
             </div>
             
             <div className="grid grid-cols-1 xl:grid-cols-2 gap-6 lg:gap-8">
               {[
-                { cta: "Explore Wealth Management", link: "/services/wealth", eyebrow: "Led by John Gustav, CFA", avatar: "https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2FUntitled%20(75).png?alt=media&token=fd2c0e28-b578-44c2-b113-483c83d8b308", icon: <Landmark className={`w-8 h-8 ${theme === 'dark' ? 'text-[#98cc67]' : 'text-[#00573f]'} mb-2`} />, title: "Wealth", desc: "Align technology with business goals to accelerate platform modernization." },
+                { cta: "Explore Wealth Management", link: "/services/wealth", eyebrow: "Led by John Gustav, CFA", avatar: "https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2FJohn%20Gustav.png?alt=media&token=34dcdf7d-49b5-45a3-bc50-85a7ae83b798", icon: <Landmark className={`w-8 h-8 ${theme === 'dark' ? 'text-[#98cc67]' : 'text-[#00573f]'} mb-2`} />, title: "Wealth", desc: "Align technology with business goals to accelerate platform modernization." },
                 { cta: "Explore Commercial Lending", link: "/services/commercial-lending", eyebrow: "Led by Shane Williams", avatar: "https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2FUntitled%20(78).png?alt=media&token=51dedfc2-9786-4d4a-a9cf-cfaf389fe979", icon: <Handshake className={`w-8 h-8 ${theme === 'dark' ? 'text-[#98cc67]' : 'text-[#00573f]'} mb-2`} />, title: "Commercial", desc: "Streamline commercial lending workflows and modernize infrastructure." },
-                { cta: "Explore M&A Integration", link: "/services/ma-integration", eyebrow: "Led by Bob Holohan", avatar: "https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2FUntitled%20(77).png?alt=media&token=361ca2b2-eb78-45c0-8c7a-80f76df8e060", icon: <Zap className={`w-8 h-8 ${theme === 'dark' ? 'text-[#98cc67]' : 'text-[#00573f]'} mb-2`} />, title: "M&A", desc: "Execute derisked, post-merger technology integrations." },
+                { cta: "Explore M&A Integration", link: "/services/ma-integration", eyebrow: "Led by Bob Holohan", avatar: "https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2FBob%20Holohan.png?alt=media&token=21c70eb2-4e77-46f6-8fd4-b2878eb15a7e", icon: <Zap className={`w-8 h-8 ${theme === 'dark' ? 'text-[#98cc67]' : 'text-[#00573f]'} mb-2`} />, title: "M&A", desc: "Execute derisked, post-merger technology integrations." },
                 { cta: "Explore Treasury Operations", link: "/services/treasury", eyebrow: "Led by Linda Weber", avatar: "https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2FUntitled%20(76).png?alt=media&token=292094e1-53b4-43ee-94cf-841c3a139fe7", icon: <ShieldCheck className={`w-8 h-8 ${theme === 'dark' ? 'text-[#98cc67]' : 'text-[#00573f]'} mb-2`} />, title: "Treasury", desc: "Modernize payments and treasury operations for immediate ROI." }
               ].map((item, idx) => (
                  <Card key={idx} className={`relative flex flex-col bg-white/20 backdrop-blur-2xl border border-white/30 shadow-2xl rounded-xl p-6 sm:p-8 min-h-[420px] sm:min-h-[450px] transition-colors duration-300 hover:bg-white/30 group overflow-hidden`}>
                    
                    {/* Operator Cutout */}
-                   <div className="absolute top-5 bottom-0 -right-24 sm:right-0 z-0 pointer-events-none opacity-100 flex items-end justify-end w-[120%] sm:w-[90%]">
+                   <div className="absolute top-5 bottom-0 -right-24 sm:-right-5 z-0 pointer-events-none opacity-100 flex items-end justify-end w-[120%] sm:w-[90%]">
                      <EditableImage contentId={`value_card_${idx}_cutout`} defaultSrc={item.avatar} isAdmin={isAdmin} value={cmsContent[`value_card_${idx}_cutout`]} alt="Operator Portrait" fill sizes="(max-width: 768px) 400px, 400px" className="object-contain object-right-bottom drop-shadow-2xl" />
                    </div>
 
-                   <div className="flex flex-col flex-1 pointer-events-none pr-2 w-full max-w-[80%] sm:max-w-[60%] lg:max-w-[55%] xl:max-w-[50%] z-20 relative">
+                   {/* Mobile Text Legibility Overlay (Radial Mask) */}
+                   <div 
+                     className="lg:hidden absolute inset-0 z-10 pointer-events-none overflow-hidden rounded-xl"
+                     style={{
+                       background: 'radial-gradient(ellipse at 80% 35%, transparent 10%, rgba(0, 27, 21, 0.6) 60%, rgba(0, 27, 21, 0.95) 100%)'
+                     }}
+                   ></div>
+
+                   {/* Top Left Icon */}
+                   <div className="mb-auto z-20 relative pointer-events-auto">
+                     {item.icon}
+                   </div>
+
+                   <div className="flex flex-col flex-1 pointer-events-none pr-[48px] lg:pr-2 w-full max-w-[75%] sm:max-w-[60%] lg:max-w-[55%] xl:max-w-[50%] z-20 relative justify-end pt-8">
                      <div className="pointer-events-auto">
-                       <div className="mb-6">
-                         {item.icon}
-                       </div>
-                       
                        {/* Operator Eyebrow (Editorial Stacked Layout) */}
                        <div className="mb-4">
                          <EditableText 

@@ -91,7 +91,7 @@ export const MOCK_TEAM: TeamMember[] = [
     category: "Practice Leader",
     bio: "Drives large-scale business transformation and M&A integration programs.",
     fullBio: "Bob Holohan is a seasoned banking and digital solutions leader with extensive experience driving large-scale business transformation programs, both on the Commerical and Retail sides. Across his career he has specialized in delivering innovative, omnichannel solutions.",
-    imageUrl: "https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2FUntitled%20(80).png?alt=media&token=8885978f-5ea2-475e-9863-1d6de58c949a",
+    imageUrl: "https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2FBob%20Holohan.png?alt=media&token=21c70eb2-4e77-46f6-8fd4-b2878eb15a7e",
     linkedinUrl: "#"
   },
   {
@@ -111,7 +111,7 @@ export const MOCK_TEAM: TeamMember[] = [
     category: "Practice Leader",
     bio: "Bridges legacy architectures and modern real-time business outcomes.",
     fullBio: "John brings over 25 years of experience in financial services strategy and operational transformation to Bridge2Partners. As the Head of Financial Services and leader of the Wealth, Investment, and Trust Management practice, he specializes in bridging the gap between complex legacy architectures and modern outcomes.",
-    imageUrl: "https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2FJohn%20G.png?alt=media&token=b86b804e-7e45-4b30-8788-a95dac52635e",
+    imageUrl: "https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2FJohn%20Gustav.png?alt=media&token=34dcdf7d-49b5-45a3-bc50-85a7ae83b798",
     linkedinUrl: "#"
   },
   {
