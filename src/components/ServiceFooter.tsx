@@ -82,16 +82,17 @@ export default function ServiceFooter({ isAdmin, cmsContent, documentId, tag }: 
 
         {/* DYNAMIC FOOTER LINKS */}
         <div className="max-w-6xl mx-auto border-t border-white/10 pt-12">
-          {tag && (
+          {/* LinkedIn integration hidden temporarily for performance */}
+          {/* tag && (
              <div className="mb-16">
                <h3 className="font-ui text-sm text-white/50 uppercase tracking-widest mb-6 font-bold">Market Momentum</h3>
                <LinkedInFeed theme="dark" tag={tag} />
              </div>
-          )}
+          ) */}
           <div className="mt-8 flex flex-col md:flex-row items-center justify-between text-xs text-white/50 font-ui">
             <span>© 2026 Bridge2Partners. All rights reserved.</span>
             <div className="flex gap-6 mt-4 md:mt-0">
-              <Link href="/team" className="hover:text-white transition-colors">Team</Link>
+              <Link href="/people" className="hover:text-white transition-colors">People</Link>
               <Link href="/careers" className="hover:text-white transition-colors">Careers</Link>
               <Link href="/privacy" className="hover:text-white transition-colors">Privacy Policy</Link>
               <Link href="/terms" className="hover:text-white transition-colors">Terms of Service</Link>

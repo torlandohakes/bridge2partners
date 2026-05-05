@@ -3,16 +3,18 @@
 import { useState, useEffect } from "react";
 import { auth, db, uploadToFirebase } from "@/lib/firebase";
 import { onAuthStateChanged } from "firebase/auth";
-import { collection, onSnapshot, doc, setDoc, deleteDoc } from "firebase/firestore";
-import { TeamMember } from "@/app/people/data";
+import { collection, onSnapshot, doc, setDoc, deleteDoc, getDocs } from "firebase/firestore";
+import { TeamMember, MOCK_TEAM } from "@/app/people/data";
 import Image from "next/image";
 import { Trash2, Edit2, Plus, Upload, Loader2, Save, X } from "lucide-react";
+import LoginModal from "@/components/LoginModal";
 
 export default function PeopleAdminDashboard() {
   const [isAdmin, setIsAdmin] = useState(false);
   const [team, setTeam] = useState<TeamMember[]>([]);
   const [isEditing, setIsEditing] = useState<TeamMember | null>(null);
   const [isUploading, setIsUploading] = useState(false);
+  const [showLoginModal, setShowLoginModal] = useState(false);
 
   useEffect(() => {
     if (!auth) return;
@@ -84,7 +86,22 @@ export default function PeopleAdminDashboard() {
   };
 
   if (!isAdmin) {
-    return <div className="min-h-screen bg-[#000d0a] text-white flex items-center justify-center">Please log in to access the CMS.</div>;
+    return (
+      <div className="min-h-screen bg-[#000d0a] text-white flex flex-col items-center justify-center space-y-6">
+        <p className="font-ui text-white/60">Please log in to access the CMS.</p>
+        <button 
+          onClick={() => setShowLoginModal(true)} 
+          className="px-6 py-3 bg-[#98cc67] text-[#001b15] font-bold rounded-lg hover:bg-white transition-colors"
+        >
+          Admin Login
+        </button>
+        <LoginModal 
+          isOpen={showLoginModal} 
+          onClose={() => setShowLoginModal(false)} 
+          theme="dark" 
+        />
+      </div>
+    );
   }
 
   return (
@@ -97,8 +114,47 @@ export default function PeopleAdminDashboard() {
           </div>
           <div className="flex gap-4">
             <button 
+              onClick={async () => {
+                if(!confirm("Are you sure? This will smartly merge the new Excel data, preserving existing images, and remove obsolete team members.")) return;
+                try {
+                  const existingDocsSnap = await getDocs(collection(db, "team"));
+                  const existingData = existingDocsSnap.docs.map(d => ({ id: d.id, ...d.data() } as TeamMember));
+                  
+                  const newIds = new Set(MOCK_TEAM.map(m => m.id));
+
+                  // Delete obsolete members
+                  for (const oldMember of existingData) {
+                    if (!newIds.has(oldMember.id)) {
+                      await deleteDoc(doc(db, "team", oldMember.id));
+                    }
+                  }
+
+                  // Upsert new members, preserving images if they exist
+                  for (const newMember of MOCK_TEAM) {
+                    const existingMember = existingData.find(m => m.id === newMember.id);
+                    const finalImageUrl = (existingMember && existingMember.imageUrl && !existingMember.imageUrl.includes('dummy-token') && !existingMember.imageUrl.includes('Silhouette')) 
+                      ? existingMember.imageUrl 
+                      : newMember.imageUrl;
+                    
+                    await setDoc(doc(db, "team", newMember.id), {
+                      ...newMember,
+                      imageUrl: finalImageUrl
+                    }, { merge: true });
+                  }
+                  
+                  alert(`Success: Smart-merged ${MOCK_TEAM.length} members.`);
+                } catch(e: any) {
+                  console.error(e);
+                  alert(`Failed: ${e.message}`);
+                }
+              }}
+              className="px-4 py-2 bg-yellow-500/20 text-yellow-500 border border-yellow-500/30 hover:bg-yellow-500 hover:text-black rounded-lg flex items-center gap-2 font-bold transition-all"
+            >
+              <Upload className="w-4 h-4" /> Run Migration
+            </button>
+            <button 
               onClick={() => setIsEditing({
-                id: '', name: '', title: '', category: 'Strategic Advisor', bio: '', fullBio: '', imageUrl: ''
+                id: '', name: '', title: '', category: 'Executive Leadership', bio: '', fullBio: '', imageUrl: ''
               })}
               className="px-4 py-2 bg-[#98cc67] hover:bg-white text-[#001b15] rounded-lg flex items-center gap-2 font-bold transition-colors"
             >
@@ -177,10 +233,10 @@ export default function PeopleAdminDashboard() {
                   <div>
                     <label className="block text-xs uppercase tracking-wider text-white/50 mb-1">Category</label>
                     <select required value={isEditing.category} onChange={e => setIsEditing({...isEditing, category: e.target.value as any})} className="w-full bg-[#001b15] border border-white/10 rounded-lg px-3 py-2 text-white focus:outline-none focus:border-[#98cc67] appearance-none">
-                      <option>Executive</option>
-                      <option>Practice Leader</option>
-                      <option>Client Success</option>
-                      <option>Strategic Advisor</option>
+                      <option>Executive Leadership</option>
+                      <option>Business Line Leaders</option>
+                      <option>Technical Expertise</option>
+                      <option>Business Development</option>
                     </select>
                   </div>
                 </div>

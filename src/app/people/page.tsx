@@ -15,7 +15,8 @@ import { collection, onSnapshot as onCollectionSnapshot } from "firebase/firesto
 export default function PeoplePage() {
   const [isAdmin, setIsAdmin] = useState(false);
   const [cmsContent, setCmsContent] = useState<Record<string, string>>({});
-  const [activeTab, setActiveTab] = useState<"All" | "Executive" | "Practice Leader" | "Client Success" | "Strategic Advisor">("All");
+  const [activeTab, setActiveTab] = useState<"All" | "Executive Leadership" | "Business Line Leaders" | "Technical Expertise" | "Business Development">("All");
+
   const [team, setTeam] = useState<TeamMember[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -37,6 +38,22 @@ export default function PeoplePage() {
     if (!db) return;
     const unsub = onCollectionSnapshot(collection(db, 'team'), (snapshot) => {
       const teamData = snapshot.docs.map(doc => ({ ...doc.data() } as TeamMember));
+      
+      // Define correct order for categories
+      const categoryOrder = {
+        "Executive Leadership": 1,
+        "Business Line Leaders": 2,
+        "Technical Expertise": 3,
+        "Business Development": 4
+      };
+
+      // Sort team members based on category order
+      teamData.sort((a, b) => {
+        const orderA = categoryOrder[a.category as keyof typeof categoryOrder] || 99;
+        const orderB = categoryOrder[b.category as keyof typeof categoryOrder] || 99;
+        return orderA - orderB;
+      });
+
       setTeam(teamData);
       setIsLoading(false);
     });
@@ -61,7 +78,7 @@ export default function PeoplePage() {
         
         {/* Filtering Tabs */}
         <div className="flex flex-wrap items-center gap-4 mb-16 border-b border-white/10 pb-6">
-          {["All", "Executive", "Practice Leader", "Client Success", "Strategic Advisor"].map(tab => (
+          {["All", "Executive Leadership", "Business Line Leaders", "Technical Expertise", "Business Development"].map(tab => (
             <button
               key={tab}
               onClick={() => setActiveTab(tab as any)}

@@ -519,7 +519,7 @@ export default function Home() {
                 })}
                 
                 {/* Desktop Action Button */}
-                <Link href="/team" className="hidden lg:block mt-4">
+                <Link href="/people" className="hidden lg:block mt-4">
                   <Button size="lg" variant="outline" className={`w-full ${t.outlineBtn} py-6 text-lg hover:scale-[1.02] transition-all`}>
                     <EditableButtonText contentId="meet_team_btn" defaultText="Meet Our Full Team" isAdmin={isAdmin} value={cmsContent.meet_team_btn} />
                   </Button>
@@ -596,7 +596,7 @@ export default function Home() {
 
               {/* Mobile Action Button */}
               <div className="order-3 lg:hidden mt-4">
-                <Link href="/team">
+                <Link href="/people">
                   <Button size="lg" variant="outline" className={`w-full ${t.outlineBtn} py-6 text-lg hover:scale-[1.02] transition-all`}>
                     <EditableButtonText contentId="meet_team_btn" defaultText="Meet Our Full Team" isAdmin={isAdmin} value={cmsContent.meet_team_btn} />
                   </Button>
@@ -796,12 +796,13 @@ export default function Home() {
           </div>
 
           <div className={`max-w-6xl mx-auto border-t ${t.borderBase} pt-12 transition-colors`}>
-            <h3 className={`font-ui text-sm ${t.textMuted} uppercase tracking-widest mb-6 font-bold transition-colors`}>Market Momentum</h3>
-            <LinkedInFeed theme={theme} />
+            {/* LinkedIn integration hidden temporarily for performance */}
+            {/* <h3 className={`font-ui text-sm ${t.textMuted} uppercase tracking-widest mb-6 font-bold transition-colors`}>Market Momentum</h3>
+            <LinkedInFeed theme={theme} /> */}
             <div className={`mt-16 flex flex-col md:flex-row items-center justify-between text-xs ${t.textMuted} font-ui transition-colors`}>
               <span>© 2026 Bridge2Partners. All rights reserved.</span>
               <div className="flex gap-6 mt-4 md:mt-0">
-                <Link href="/team" className={`hover:${t.textHighlight} cursor-pointer transition-colors`}>Team</Link>
+                <Link href="/people" className={`hover:${t.textHighlight} cursor-pointer transition-colors`}>People</Link>
                 <Link href="/careers" className={`hover:${t.textHighlight} cursor-pointer transition-colors`}>Careers</Link>
                 <Link href="/privacy" className={`hover:${t.textHighlight} cursor-pointer transition-colors`}>Privacy Policy</Link>
                 <Link href="/terms" className={`hover:${t.textHighlight} cursor-pointer transition-colors`}>Terms of Service</Link>
