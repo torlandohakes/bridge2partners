@@ -84,7 +84,7 @@ export async function POST(request: Request) {
 
     if (resend) {
       // Send to Client
-      await resend.emails.send({
+      const { error: clientError } = await resend.emails.send({
         from: 'Bridge2Partners <hello@bridge2partners.com>', // Assuming verified domain
         to: email,
         subject: 'Tentative: Bridge2Partners Strategy Call',
@@ -98,13 +98,21 @@ export async function POST(request: Request) {
         ]
       });
 
+      if (clientError) {
+        console.error("Failed to send client email via Resend. Is bridge2partners.com verified?", clientError);
+      }
+
       // Send to Internal Team
-      await resend.emails.send({
-        from: 'Bridge2Partners Web <notifications@bridge2partners.com>',
+      const { error: internalError } = await resend.emails.send({
+        from: 'Bridge2Partners Web <hello@bridge2partners.com>', // Use the same from address to avoid sender issues
         to: 'torlando.hakes@bridge2partners.com', // Internal address
         subject: `New Call Request: ${name} (${company})`,
         html: internalEmailHtml,
       });
+
+      if (internalError) {
+        console.error("Failed to send internal notification via Resend.", internalError);
+      }
     } else {
       console.log("Mocking email send because RESEND_API_KEY is not configured.");
       console.log("Client Email:", clientEmailHtml);

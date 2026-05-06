@@ -40,7 +40,16 @@ export default function StrategyCallModal({ isOpen, onClose, theme }: StrategyCa
   const backdropBg = theme === 'light' ? 'bg-slate-900/40 backdrop-blur-md' : 'bg-[#001b15]/60 backdrop-blur-md';
   const overlayText = theme === 'light' ? 'text-slate-500' : 'text-white/60';
   const divider = theme === 'light' ? 'border-slate-100' : 'border-white/10';
-  
+
+  const handleClose = () => {
+    setIsConfirmed(false);
+    setShowForm(false);
+    setSelectedDate(null);
+    setSelectedTime(null);
+    setFormData({ name: '', email: '', company: '', notes: '' });
+    onClose();
+  };
+
   const handleProceedToForm = () => {
     setShowForm(true);
   };
@@ -65,13 +74,7 @@ export default function StrategyCallModal({ isOpen, onClose, theme }: StrategyCa
       setIsConfirmed(true);
       setShowForm(false);
       
-      setTimeout(() => {
-        setIsConfirmed(false);
-        setSelectedDate(null);
-        setSelectedTime(null);
-        setFormData({ name: '', email: '', company: '', notes: '' });
-        onClose();
-      }, 5000);
+      // Removed auto-close setTimeout to let the user close manually via the X button
       
     } catch (error) {
       console.error(error);
@@ -86,7 +89,7 @@ export default function StrategyCallModal({ isOpen, onClose, theme }: StrategyCa
         
         {/* Left Column (Call Context) */}
         <div className={`w-full md:w-1/3 p-8 border-r ${divider} ${theme === 'light' ? 'bg-slate-50/50' : 'bg-black/10'}`}>
-           <button onClick={onClose} className={`absolute top-6 left-6 md:hidden p-2 rounded-full hover:bg-black/10 transition-colors ${overlayText}`}>
+           <button onClick={handleClose} className={`absolute top-6 left-6 md:hidden p-2 rounded-full hover:bg-black/10 transition-colors ${overlayText}`}>
               <X className="w-5 h-5" />
            </button>
            <div className="mt-8 md:mt-4 mb-8">
@@ -116,7 +119,7 @@ export default function StrategyCallModal({ isOpen, onClose, theme }: StrategyCa
         {/* Right Column (Interactive Calendar Mockup) */}
         <div className="flex-1 flex flex-col p-8 relative overflow-y-auto">
           <div className="flex justify-end hidden md:flex mb-2">
-             <button onClick={onClose} className={`p-2 rounded-full hover:bg-black/10 transition-colors ${overlayText}`}>
+             <button onClick={handleClose} className={`p-2 rounded-full hover:bg-black/10 transition-colors ${overlayText}`}>
                 <X className="w-6 h-6" />
              </button>
           </div>
