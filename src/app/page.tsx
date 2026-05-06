@@ -585,7 +585,7 @@ export default function Home() {
         
         {/* Desktop-Only Glass Card Wrapper */}
         <div className="max-w-7xl mx-auto w-full relative z-10">
-          <div className={`hidden lg:block absolute inset-0 rounded-[4rem] border pointer-events-none z-0 ${theme === 'light' ? 'bg-white/60 backdrop-blur-2xl border-[#001b15]/10 shadow-[0_20px_60px_rgba(0,150,119,0.1)]' : theme === 'medium' ? 'bg-white/20 backdrop-blur-3xl border-white/40 shadow-[0_20px_60px_rgba(255,255,255,0.05)]' : 'bg-white/10 backdrop-blur-2xl border-white/10 shadow-2xl'}`}></div>
+          <div className={`hidden lg:block absolute inset-0 transform-gpu rounded-[4rem] border pointer-events-none z-0 ${theme === 'light' ? 'bg-white/60 backdrop-blur-2xl border-[#001b15]/10 shadow-[0_20px_60px_rgba(0,150,119,0.1)]' : theme === 'medium' ? 'bg-white/20 backdrop-blur-3xl border-white/40 shadow-[0_20px_60px_rgba(255,255,255,0.05)]' : 'bg-white/10 backdrop-blur-2xl border-white/10 shadow-2xl'}`}></div>
           
           <div className="max-w-6xl w-full mx-auto relative z-10 flex flex-col lg:block lg:p-16">
             <div className="mb-8 lg:mb-16">
@@ -600,7 +600,7 @@ export default function Home() {
                 { cta: "Explore M&A Integration", link: "/services/ma-integration", eyebrow: "Led by Bob Holohan", avatar: "https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2FBob%20Holohan.png?alt=media&token=21c70eb2-4e77-46f6-8fd4-b2878eb15a7e", icon: <Zap className={`w-8 h-8 ${theme === 'dark' ? 'text-[#98cc67]' : 'text-[#00573f]'} mb-2`} />, title: "M&A", desc: "Execute derisked, post-merger technology integrations." },
                 { cta: "Explore Treasury Operations", link: "/services/treasury", eyebrow: "Led by Linda Weber", avatar: "https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2FUntitled%20(76).png?alt=media&token=292094e1-53b4-43ee-94cf-841c3a139fe7", icon: <ShieldCheck className={`w-8 h-8 ${theme === 'dark' ? 'text-[#98cc67]' : 'text-[#00573f]'} mb-2`} />, title: "Treasury", desc: "Modernize payments and treasury operations for immediate ROI." }
               ].map((item, idx) => (
-                 <Card key={idx} className={`relative flex flex-col bg-white/20 backdrop-blur-2xl border border-white/30 shadow-2xl rounded-xl p-6 sm:p-8 min-h-[420px] sm:min-h-[450px] transition-colors duration-300 hover:bg-white/30 group overflow-hidden`}>
+                 <Card key={idx} className={`relative transform-gpu flex flex-col bg-white/20 backdrop-blur-2xl border border-white/30 shadow-2xl rounded-xl p-6 sm:p-8 min-h-[420px] sm:min-h-[450px] transition-colors duration-300 hover:bg-white/30 group overflow-hidden`}>
                    
                    {/* Operator Cutout */}
                    <div className="absolute top-5 bottom-0 -right-24 sm:-right-5 z-0 pointer-events-none opacity-100 flex items-end justify-end w-[120%] sm:w-[90%]">
