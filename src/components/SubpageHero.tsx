@@ -60,16 +60,17 @@ export default function SubpageHero({ title, subtitle, theme = "dark", imageSrc,
               
               {(imageCaptionName || imageCaptionTitle) && (
                 <div className={`
-                  w-full md:w-auto -mt-20 md:mt-0 pt-24 pb-4 px-6 md:p-0
-                  relative md:absolute md:bottom-8 ${imageCaptionPosition === 'right' ? 'md:right-8 md:left-auto' : 'md:-left-8'}
-                  z-20 text-center md:text-left
+                  w-full md:w-auto -mt-20 md:mt-0 pt-24 pb-4 px-6 md:p-4 
+                  relative md:absolute md:bottom-8 ${imageCaptionPosition === 'right' ? 'md:right-8 md:left-auto' : 'md:-left-16'}
+                  z-20 md:backdrop-blur-md 
+                  md:border border-white/10 md:rounded-xl shadow-2xl text-center md:text-left
                   ${isLight 
-                    ? "bg-gradient-to-t from-slate-50 via-slate-50/95 to-transparent md:bg-none" 
-                    : "bg-gradient-to-t from-[#000d0a] via-[#000d0a]/95 to-transparent md:bg-none"
+                    ? "bg-gradient-to-t from-slate-50 via-slate-50/95 to-transparent md:bg-none md:bg-white/80" 
+                    : "bg-gradient-to-t from-[#000d0a] via-[#000d0a]/95 to-transparent md:bg-none md:bg-[#000d0a]/80"
                   }
                 `}>
-                  {imageCaptionName && <div className="font-display font-bold text-2xl md:text-3xl tracking-tight drop-shadow-md">{imageCaptionName}</div>}
-                  {imageCaptionTitle && <div className="text-[#98cc67] md:text-[#009677] font-bold text-sm md:text-base mt-1 max-w-[280px] mx-auto md:mx-0 leading-snug drop-shadow-sm">{imageCaptionTitle}</div>}
+                  {imageCaptionName && <div className="font-display font-bold text-2xl md:text-xl">{imageCaptionName}</div>}
+                  {imageCaptionTitle && <div className="text-[#98cc67] font-medium text-sm mt-1 max-w-[280px] mx-auto md:mx-0 leading-snug">{imageCaptionTitle}</div>}
                 </div>
               )}
             </div>
