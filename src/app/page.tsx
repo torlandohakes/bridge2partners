@@ -479,10 +479,10 @@ export default function Home() {
                           : `bg-transparent border-transparent ${theme === 'light' ? 'text-[#001b15]/50 hover:bg-[#001b15]/5 hover:text-[#001b15]' : 'text-white/50 hover:bg-white/5 hover:text-white/80'}`
                       }`}
                     >
-                      <span className="block font-display text-base md:text-2xl font-bold mb-0 md:mb-1 whitespace-nowrap">
+                      <span className="block font-display text-base md:text-lg lg:text-2xl font-bold mb-0 md:mb-1 whitespace-nowrap">
                         <EditableText element="span" contentId={`selector_menu_${leader.id}_name`} defaultText={leader.name} isAdmin={isAdmin} value={cmsContent[`selector_menu_${leader.id}_name`]} />
                       </span>
-                      <span className={`hidden md:block font-ui text-xs tracking-widest uppercase font-semibold ${isActive ? '' : 'opacity-70'}`}>
+                      <span className={`hidden md:block font-ui text-[10px] lg:text-xs tracking-widest uppercase font-semibold ${isActive ? '' : 'opacity-70'}`}>
                         <EditableText element="span" contentId={`selector_menu_${leader.id}_title`} defaultText={leader.title} isAdmin={isAdmin} value={cmsContent[`selector_menu_${leader.id}_title`]} />
                       </span>
                     </button>
@@ -542,7 +542,7 @@ export default function Home() {
                           </span>
                         </div>
 
-                        <p className={`text-xl text-center md:text-left md:text-3xl font-light italic leading-tight mb-6 pb-6 border-b ${theme === 'light' ? 'border-[#001b15]/10 text-[#001b15]' : 'border-white/20 text-white'}`}>
+                        <p className={`text-xl text-center md:text-left md:text-2xl lg:text-3xl font-light italic leading-tight mb-4 md:mb-6 pb-4 md:pb-6 border-b ${theme === 'light' ? 'border-[#001b15]/10 text-[#001b15]' : 'border-white/20 text-white'}`}>
                           "<EditableText element="span" contentId={`leader_roster_${activeLeader.id}_quote`} defaultText={activeLeader.quote} isAdmin={isAdmin} value={cmsContent[`leader_roster_${activeLeader.id}_quote`]} />"
                         </p>
                         
@@ -550,8 +550,8 @@ export default function Home() {
                           <ul className="space-y-3 md:space-y-4">
                             {activeLeader.accolades.map((accolade, i) => (
                               <li key={i} className="flex items-start">
-                                <CheckCircle2 className={`w-5 h-5 md:w-6 md:h-6 mr-3 mt-0.5 md:mt-1 flex-shrink-0 ${theme === 'dark' ? 'text-[#98cc67]' : 'text-[#00573f]'}`} />
-                                <span className={`font-ui font-medium text-base md:text-lg ${theme === 'light' ? 'text-[#001b15]/90' : 'text-white/90'}`}>
+                                <CheckCircle2 className={`w-5 h-5 lg:w-6 lg:h-6 mr-3 mt-0.5 md:mt-1 flex-shrink-0 ${theme === 'dark' ? 'text-[#98cc67]' : 'text-[#00573f]'}`} />
+                                <span className={`font-ui font-medium text-sm md:text-base lg:text-lg ${theme === 'light' ? 'text-[#001b15]/90' : 'text-white/90'}`}>
                                   <EditableText element="span" contentId={`leader_roster_${activeLeader.id}_accolade_${i}`} defaultText={accolade} isAdmin={isAdmin} value={cmsContent[`leader_roster_${activeLeader.id}_accolade_${i}`]} />
                                 </span>
                               </li>
