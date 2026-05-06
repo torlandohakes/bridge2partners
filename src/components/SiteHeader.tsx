@@ -46,10 +46,10 @@ export default function SiteHeader() {
           <Link href="/people" className="hidden md:block hover:text-white transition-colors tracking-normal normal-case py-4">
             People
           </Link>
-          <div className="relative group hidden md:block">
-            <span className="flex items-center gap-1 cursor-pointer hover:text-white transition-colors tracking-normal normal-case py-4">Services <ChevronDown className="w-4 h-4 opacity-60 transition-transform group-hover:rotate-180" /></span>
+          <div className="relative group hidden md:block" tabIndex={0}>
+            <span className="flex items-center gap-1 cursor-pointer hover:text-white transition-colors tracking-normal normal-case py-4 outline-none">Services <ChevronDown className="w-4 h-4 opacity-60 transition-transform group-hover:rotate-180 group-focus-within:rotate-180" /></span>
             {/* Invisible bridge to prevent hover loss */}
-            <div className="absolute top-full left-0 pt-2 w-52 opacity-0 translate-y-2 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto transition-all duration-300">
+            <div className="absolute top-full left-0 pt-2 w-52 opacity-0 translate-y-2 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto group-focus-within:opacity-100 group-focus-within:translate-y-0 group-focus-within:pointer-events-auto transition-all duration-300">
               <div className="bg-[#001b15]/90 backdrop-blur-xl border border-white/20 rounded-xl shadow-2xl flex flex-col p-2">
               {[
                 { label: 'Wealth Management', href: '/services/wealth' },
