@@ -723,7 +723,7 @@ export default function Home() {
           <div className="flex items-center gap-4 mb-8">
             <FileText className="w-10 h-10 text-[#98cc67]" />
             <div>
-              <EditableText element="h2" contentId="trust_h2" defaultText="Procurement" isAdmin={isAdmin} value={cmsContent.trust_h2} className={`font-display text-3xl font-bold ${t.textPrimary} transition-colors`} />
+              <EditableText element="h2" contentId="trust_h2_procurement" defaultText="Procurement" isAdmin={isAdmin} value={cmsContent.trust_h2_procurement} className={`font-display text-3xl font-bold ${t.textPrimary} transition-colors`} />
               <EditableText element="p" contentId="trust_p" defaultText="Fast, frictionless vendor onboarding." isAdmin={isAdmin} value={cmsContent.trust_p} className={`${t.textSecondary} transition-colors`} />
             </div>
           </div>
