@@ -35,7 +35,7 @@ export default function SubpageHero({ title, subtitle, theme = "dark", imageSrc,
             <ArrowLeft className="w-4 h-4 mr-2" />
             Back to Home
           </Link>
-          <h1 className="font-display text-4xl sm:text-5xl md:text-5xl lg:text-7xl font-bold mb-6 break-words leading-tight">
+          <h1 className="font-display text-4xl sm:text-5xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-6 leading-tight">
             {title}
           </h1>
           <p className={`font-reading text-xl md:text-2xl leading-relaxed ${imageSrc ? "max-w-xl" : "max-w-3xl"} ${
