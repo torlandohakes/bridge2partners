@@ -466,14 +466,14 @@ export default function Home() {
             <div className="order-2 w-full relative z-10 flex flex-col md:grid md:grid-cols-12 gap-6 md:gap-8 text-left">
               
               {/* Left Column (Selector Menu) */}
-              <div className="order-1 md:order-none md:col-span-4 flex flex-row md:flex-col overflow-x-auto snap-x gap-3 md:gap-4 pb-4 md:pb-0 -mx-6 px-6 md:mx-0 md:px-0 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+              <div className="order-1 md:order-none md:col-span-5 lg:col-span-4 flex flex-row md:flex-col overflow-x-auto snap-x gap-3 md:gap-4 pb-4 md:pb-0 -mx-6 px-6 md:mx-0 md:px-0 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
                 {LEADERSHIP_DATA.map((leader) => {
                   const isActive = activeLeaderId === leader.id;
                   return (
                     <button
                       key={leader.id}
                       onClick={() => setActiveLeaderId(leader.id)}
-                      className={`text-center md:text-left px-5 py-3 md:p-6 rounded-full md:rounded-xl border transition-all duration-300 flex-shrink-0 snap-start w-auto md:w-full ${
+                      className={`text-center md:text-left px-5 py-3 md:px-4 md:py-4 lg:p-6 rounded-full md:rounded-xl border transition-all duration-300 flex-shrink-0 snap-start w-auto md:w-full ${
                         isActive 
                           ? `${theme === 'light' ? 'bg-[#001b15]/5 border-[#001b15]/20 text-[#001b15]' : 'bg-white/20 border-white/50 shadow-lg text-white'}`
                           : `bg-transparent border-transparent ${theme === 'light' ? 'text-[#001b15]/50 hover:bg-[#001b15]/5 hover:text-[#001b15]' : 'text-white/50 hover:bg-white/5 hover:text-white/80'}`
@@ -498,11 +498,11 @@ export default function Home() {
               </div>
 
               {/* Right Column (Dynamic Pedigree Panel) */}
-              <div className="order-2 md:order-none md:col-span-8">
+              <div className="order-2 md:order-none md:col-span-7 lg:col-span-8">
                 {(() => {
                   const activeLeader = LEADERSHIP_DATA.find(l => l.id === activeLeaderId) || LEADERSHIP_DATA[0];
                   return (
-                    <div className={`backdrop-blur-3xl border rounded-3xl md:rounded-2xl overflow-hidden relative min-h-[550px] md:min-h-[500px] p-6 pt-0 md:p-10 flex flex-col justify-end md:justify-center transition-colors duration-500 ${theme === 'light' ? 'bg-gradient-to-t from-[#009677]/5 to-transparent md:bg-none md:bg-[#001b15]/5 border-[#001b15]/20 shadow-xl md:shadow-none' : 'bg-gradient-to-t from-[#009677]/15 to-transparent md:bg-none md:bg-white/10 border-[#009677]/30 md:border-white/30 shadow-inner md:shadow-none'}`}>
+                    <div className={`backdrop-blur-3xl border rounded-3xl md:rounded-2xl overflow-hidden relative min-h-[550px] md:min-h-[500px] p-6 pt-0 md:p-6 lg:p-10 flex flex-col justify-end md:justify-center transition-colors duration-500 ${theme === 'light' ? 'bg-gradient-to-t from-[#009677]/5 to-transparent md:bg-none md:bg-[#001b15]/5 border-[#001b15]/20 shadow-xl md:shadow-none' : 'bg-gradient-to-t from-[#009677]/15 to-transparent md:bg-none md:bg-white/10 border-[#009677]/30 md:border-white/30 shadow-inner md:shadow-none'}`}>
                       
                       {/* Decorative Glowing Orb */}
                       <div className="md:hidden absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-80 h-80 bg-[#98cc67]/15 blur-[80px] rounded-full pointer-events-none"></div>
