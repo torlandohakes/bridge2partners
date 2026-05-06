@@ -101,7 +101,7 @@ export async function POST(request: Request) {
       // Send to Internal Team
       await resend.emails.send({
         from: 'Bridge2Partners Web <notifications@bridge2partners.com>',
-        to: 'hello@bridge2partners.com', // Internal address
+        to: 'torlando.hakes@bridge2partners.com', // Internal address
         subject: `New Call Request: ${name} (${company})`,
         html: internalEmailHtml,
       });
