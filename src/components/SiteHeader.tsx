@@ -48,7 +48,9 @@ export default function SiteHeader() {
           </Link>
           <div className="relative group hidden md:block">
             <span className="flex items-center gap-1 cursor-pointer hover:text-white transition-colors tracking-normal normal-case py-4">Services <ChevronDown className="w-4 h-4 opacity-60 transition-transform group-hover:rotate-180" /></span>
-            <div className="absolute top-[85%] left-0 mt-1 w-52 bg-[#001b15]/90 backdrop-blur-xl border border-white/20 rounded-xl shadow-2xl opacity-0 translate-y-2 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto transition-all duration-300 flex flex-col p-2">
+            {/* Invisible bridge to prevent hover loss */}
+            <div className="absolute top-full left-0 pt-2 w-52 opacity-0 translate-y-2 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto transition-all duration-300">
+              <div className="bg-[#001b15]/90 backdrop-blur-xl border border-white/20 rounded-xl shadow-2xl flex flex-col p-2">
               {[
                 { label: 'Wealth Management', href: '/services/wealth' },
                 { label: 'Commercial Lending', href: '/services/commercial-lending' },
@@ -59,6 +61,7 @@ export default function SiteHeader() {
                   {vertical.label}
                 </Link>
               ))}
+              </div>
             </div>
           </div>
           <Button asChild variant="outline" className="hidden md:flex border-white/20 hover:bg-white/10 text-white font-normal bg-white/5">
