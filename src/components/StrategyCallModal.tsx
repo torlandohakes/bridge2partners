@@ -12,6 +12,9 @@ interface StrategyCallModalProps {
 export default function StrategyCallModal({ isOpen, onClose, theme }: StrategyCallModalProps) {
   const [selectedDate, setSelectedDate] = useState<number | null>(null);
   const [selectedTime, setSelectedTime] = useState<string | null>(null);
+  const [showForm, setShowForm] = useState(false);
+  const [formData, setFormData] = useState({ name: '', email: '', company: '', notes: '' });
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [isConfirmed, setIsConfirmed] = useState(false);
 
   if (!isOpen) return null;
@@ -38,14 +41,43 @@ export default function StrategyCallModal({ isOpen, onClose, theme }: StrategyCa
   const overlayText = theme === 'light' ? 'text-slate-500' : 'text-white/60';
   const divider = theme === 'light' ? 'border-slate-100' : 'border-white/10';
   
-  const handleConfirm = () => {
-    setIsConfirmed(true);
-    setTimeout(() => {
-      setIsConfirmed(false);
-      setSelectedDate(null);
-      setSelectedTime(null);
-      onClose();
-    }, 2500);
+  const handleProceedToForm = () => {
+    setShowForm(true);
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    
+    try {
+      const response = await fetch('/api/schedule-call', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          date: mockDates[selectedDate!].toISOString(),
+          time: selectedTime,
+          ...formData
+        })
+      });
+      
+      if (!response.ok) throw new Error('Failed to schedule call');
+      
+      setIsConfirmed(true);
+      setShowForm(false);
+      
+      setTimeout(() => {
+        setIsConfirmed(false);
+        setSelectedDate(null);
+        setSelectedTime(null);
+        setFormData({ name: '', email: '', company: '', notes: '' });
+        onClose();
+      }, 5000);
+      
+    } catch (error) {
+      console.error(error);
+      alert('There was an issue scheduling your call. Please try again.');
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -92,13 +124,53 @@ export default function StrategyCallModal({ isOpen, onClose, theme }: StrategyCa
           {isConfirmed ? (
              <div className="flex-1 flex flex-col items-center justify-center text-center animate-in fade-in zoom-in duration-500">
                 <CheckCircle2 className="w-20 h-20 text-[#98cc67] mb-6" />
-                <h3 className="font-display font-bold text-3xl mb-2">Meeting Confirmed</h3>
+                <h3 className="font-display font-bold text-3xl mb-2">Tentative Hold Confirmed</h3>
                 <p className={`font-reading text-lg max-w-md ${overlayText}`}>
-                   Your invite for {selectedDate !== null && mockDates[selectedDate].toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' })} at {selectedTime} has been dispatched.
+                   Your request for {selectedDate !== null && mockDates[selectedDate].toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' })} at {selectedTime} has been received. A Managing Partner will review your request and reach out to confirm or propose an alternative time. An .ics file has been dispatched to your email.
                 </p>
              </div>
+          ) : showForm ? (
+            <div className="flex-1 flex flex-col animate-in slide-in-from-right-8 duration-300">
+              <button 
+                onClick={() => setShowForm(false)}
+                className={`flex items-center gap-2 text-sm font-bold mb-6 hover:opacity-100 transition-opacity w-fit ${overlayText}`}
+              >
+                <ArrowRight className="w-4 h-4 rotate-180" /> Back to times
+              </button>
+              
+              <h3 className="font-display font-bold text-2xl mb-2">Finalize Request</h3>
+              <p className={`font-ui text-sm mb-8 ${overlayText}`}>
+                You are requesting a tentative hold for <strong>{mockDates[selectedDate!].toLocaleDateString('en-US', { weekday: 'long', month: 'short', day: 'numeric' })} at {selectedTime}</strong>.
+              </p>
+              
+              <form onSubmit={handleSubmit} className="flex flex-col gap-5 flex-1 overflow-y-auto pr-2 pb-8">
+                <div className="flex flex-col gap-2">
+                  <label className={`font-ui text-xs uppercase tracking-wider font-bold ${overlayText}`}>Full Name *</label>
+                  <input required type="text" value={formData.name} onChange={e => setFormData({...formData, name: e.target.value})} className={`p-4 rounded-xl border focus:outline-none focus:border-[#98cc67] transition-colors ${theme === 'light' ? 'bg-white border-slate-200' : 'bg-black/20 border-white/10'}`} />
+                </div>
+                <div className="flex flex-col gap-2">
+                  <label className={`font-ui text-xs uppercase tracking-wider font-bold ${overlayText}`}>Work Email *</label>
+                  <input required type="email" value={formData.email} onChange={e => setFormData({...formData, email: e.target.value})} className={`p-4 rounded-xl border focus:outline-none focus:border-[#98cc67] transition-colors ${theme === 'light' ? 'bg-white border-slate-200' : 'bg-black/20 border-white/10'}`} />
+                </div>
+                <div className="flex flex-col gap-2">
+                  <label className={`font-ui text-xs uppercase tracking-wider font-bold ${overlayText}`}>Financial Institution / Company *</label>
+                  <input required type="text" value={formData.company} onChange={e => setFormData({...formData, company: e.target.value})} className={`p-4 rounded-xl border focus:outline-none focus:border-[#98cc67] transition-colors ${theme === 'light' ? 'bg-white border-slate-200' : 'bg-black/20 border-white/10'}`} />
+                </div>
+                <div className="flex flex-col gap-2">
+                  <label className={`font-ui text-xs uppercase tracking-wider font-bold ${overlayText}`}>Biggest Transformation Challenge</label>
+                  <textarea rows={3} value={formData.notes} onChange={e => setFormData({...formData, notes: e.target.value})} className={`p-4 rounded-xl border focus:outline-none focus:border-[#98cc67] transition-colors resize-none ${theme === 'light' ? 'bg-white border-slate-200' : 'bg-black/20 border-white/10'}`} />
+                </div>
+                
+                <button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="w-full mt-4 bg-[#98cc67] hover:bg-[#86bb55] disabled:opacity-50 text-[#001b15] font-bold py-4 rounded-xl flex items-center justify-center gap-2 transition-transform hover:scale-[1.02] active:scale-95 shadow-xl"
+                >
+                  {isSubmitting ? 'Processing...' : 'Request Strategy Call'} <ArrowRight className="w-5 h-5" />
+                </button>
+              </form>
+            </div>
           ) : (
-            <>
               <h3 className="font-display font-bold text-2xl mb-8">Select a Date & Time</h3>
               
               <div className="flex flex-col lg:flex-row gap-8">
@@ -157,16 +229,16 @@ export default function StrategyCallModal({ isOpen, onClose, theme }: StrategyCa
 
                      {selectedTime && (
                        <button
-                         onClick={handleConfirm}
+                         onClick={handleProceedToForm}
                          className="w-full mt-8 bg-[#98cc67] hover:bg-[#86bb55] text-[#001b15] font-bold py-4 rounded-xl flex items-center justify-center gap-2 transition-transform hover:scale-105 active:scale-95 shadow-xl animate-in fade-in duration-300"
                        >
-                         Confirm <ArrowRight className="w-5 h-5" />
+                         Next <ArrowRight className="w-5 h-5" />
                        </button>
                      )}
                    </div>
                  )}
               </div>
-            </>
+            </div>
           )}
 
         </div>
