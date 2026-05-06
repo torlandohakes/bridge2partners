@@ -138,7 +138,6 @@ export default function PeoplePage() {
           </div>
         )}
       </div>
-      </div>
     </main>
   );
 }

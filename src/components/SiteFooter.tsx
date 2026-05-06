@@ -88,6 +88,7 @@ export default function SiteFooter() {
       <LoginModal 
         isOpen={showLoginModal} 
         onClose={() => setShowLoginModal(false)} 
+        theme="dark"
       />
 
       <footer className="pt-24 pb-12 px-6 md:px-12 mt-auto bg-transparent relative z-10 w-full">
