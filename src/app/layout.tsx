@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, Public_Sans, Montserrat, Barlow } from "next/font/google";
 import "./globals.css";
+import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 
 const inter = Inter({
@@ -47,6 +48,9 @@ export default function RootLayout({
       className={`${inter.variable} ${publicSans.variable} ${montserrat.variable} ${barlow.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-[#000d0a]">
+        <div className="absolute top-0 left-0 w-full z-[100]">
+          <SiteHeader />
+        </div>
         {children}
         <SiteFooter />
       </body>

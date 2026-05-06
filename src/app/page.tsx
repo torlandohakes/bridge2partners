@@ -14,7 +14,7 @@ import LoginModal from "@/components/LoginModal";
 import EditableText from "@/components/EditableText";
 import EditableButtonText from "@/components/EditableButtonText";
 import EditableImage from "@/components/EditableImage";
-import SiteHeader from "@/components/SiteHeader";
+
 import { auth, db } from "@/lib/firebase";
 import { onAuthStateChanged, signOut, User } from "firebase/auth";
 import { doc, onSnapshot } from "firebase/firestore";
@@ -310,10 +310,6 @@ export default function Home() {
          {/* UI Content Constraint Wrapper */}
          <div className="relative flex flex-col min-h-[140svh] sm:min-h-[100svh] z-10 pb-0">
          
-         {/* Global Site Navigation */}
-         <div className="absolute top-0 left-0 w-full z-[100]">
-           <SiteHeader />
-         </div>
 
          {/* Hero Content Body - Fixed White for Image Legibility */}
          <div className="relative z-10 flex flex-col items-start justify-center min-h-[85svh] sm:min-h-0 sm:flex-1 px-6 md:px-12 w-full max-w-5xl gap-10 sm:gap-6 md:gap-8 mt-8 md:mt-12 text-white pb-12 sm:pb-0">
