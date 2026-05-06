@@ -18,7 +18,7 @@ export default function SubpageHero({ title, subtitle, theme = "dark", imageSrc,
   const isLight = theme === "light";
   
   return (
-    <section className={`relative pt-32 md:pt-40 pb-24 px-6 md:px-12 flex flex-col justify-center overflow-hidden transition-colors duration-500 min-h-[50vh] ${
+    <section className={`relative pt-48 md:pt-56 pb-24 px-6 md:px-12 flex flex-col justify-center overflow-hidden transition-colors duration-500 min-h-[50vh] ${
       isLight ? "bg-slate-50 text-[#001b15]" : "bg-[#000d0a] text-white"
     }`}>
       <div className="absolute top-0 left-0 w-full z-[100]">
@@ -29,7 +29,7 @@ export default function SubpageHero({ title, subtitle, theme = "dark", imageSrc,
         isLight ? "bg-[#00573f]/10" : "bg-[#009677]/[0.15] mix-blend-screen"
       }`} />
 
-      <div className={`max-w-6xl w-full mx-auto relative z-10 flex flex-col md:flex-row gap-8 lg:gap-12 ${imageSrc ? "items-end" : "items-center"}`}>
+      <div className={`max-w-6xl w-full mx-auto relative z-10 flex flex-col md:flex-row gap-8 lg:gap-12 items-center`}>
         <div className={`flex-1 min-w-[50%] lg:min-w-0 ${imageSrc ? "max-w-2xl" : "w-full"}`}>
           <Link href="/" className="inline-flex items-center text-sm font-bold opacity-70 hover:opacity-100 transition-opacity mb-8">
             <ArrowLeft className="w-4 h-4 mr-2" />
