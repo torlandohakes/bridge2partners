@@ -35,7 +35,7 @@ export default function SubpageHero({ title, subtitle, theme = "dark", imageSrc,
             <ArrowLeft className="w-4 h-4 mr-2" />
             Back to Home
           </Link>
-          <h1 className="font-display text-5xl md:text-7xl font-bold mb-6">
+          <h1 className="font-display text-4xl sm:text-5xl md:text-7xl font-bold mb-6 break-words">
             {title}
           </h1>
           <p className={`font-reading text-xl md:text-2xl leading-relaxed ${imageSrc ? "max-w-xl" : "max-w-3xl"} ${
@@ -46,21 +46,31 @@ export default function SubpageHero({ title, subtitle, theme = "dark", imageSrc,
         </div>
 
         {imageSrc && (
-          <div className="flex-1 flex justify-center md:justify-end md:-mb-24 w-full md:w-auto mt-8 md:mt-0 relative z-20">
-            <div className="relative inline-flex">
+          <div className="flex-1 flex justify-center md:justify-end md:-mb-24 w-full md:w-auto mt-12 md:mt-0 relative z-20">
+            <div className="relative flex flex-col items-center md:inline-block w-full md:w-auto">
+              {/* Subtle backglow to anchor the image on mobile */}
+              <div className="absolute bottom-10 w-[80%] aspect-square bg-[#98cc67]/10 rounded-full blur-3xl md:hidden" />
+
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img 
                 src={imageSrc} 
                 alt={imageAlt || "Hero profile"} 
-                className="max-h-[350px] md:max-h-[500px] w-auto object-contain object-bottom drop-shadow-[0_20px_50px_rgba(0,0,0,0.5)] brightness-110"
+                className="relative z-10 max-h-[380px] sm:max-h-[450px] md:max-h-[500px] w-auto object-contain object-bottom drop-shadow-[0_20px_50px_rgba(0,0,0,0.5)] brightness-110"
               />
               
               {(imageCaptionName || imageCaptionTitle) && (
-                <div className={`absolute bottom-8 ${imageCaptionPosition === 'right' ? 'right-4 md:right-8' : '-left-4 md:-left-16'} backdrop-blur-md border p-4 rounded-xl shadow-2xl shrink-0 z-10 animate-fade-in ${
-                  isLight ? "bg-white/80 border-[#00573f]/20" : "bg-[#000d0a]/80 border-white/10"
-                }`}>
-                  {imageCaptionName && <div className="font-display font-bold text-lg">{imageCaptionName}</div>}
-                  {imageCaptionTitle && <div className="text-[#98cc67] text-sm mt-1 max-w-[200px] md:max-w-[260px] leading-snug">{imageCaptionTitle}</div>}
+                <div className={`
+                  w-full md:w-auto -mt-20 md:mt-0 pt-24 pb-4 px-6 md:p-4 
+                  relative md:absolute md:bottom-8 ${imageCaptionPosition === 'right' ? 'md:right-8 md:left-auto' : 'md:-left-16'}
+                  z-20 md:backdrop-blur-md 
+                  md:border border-white/10 md:rounded-xl shadow-2xl text-center md:text-left
+                  ${isLight 
+                    ? "bg-gradient-to-t from-slate-50 via-slate-50/95 to-transparent md:bg-none md:bg-white/80" 
+                    : "bg-gradient-to-t from-[#000d0a] via-[#000d0a]/95 to-transparent md:bg-none md:bg-[#000d0a]/80"
+                  }
+                `}>
+                  {imageCaptionName && <div className="font-display font-bold text-2xl md:text-xl">{imageCaptionName}</div>}
+                  {imageCaptionTitle && <div className="text-[#98cc67] font-medium text-sm mt-1 max-w-[280px] mx-auto md:mx-0 leading-snug">{imageCaptionTitle}</div>}
                 </div>
               )}
             </div>
