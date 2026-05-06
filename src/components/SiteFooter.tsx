@@ -112,7 +112,7 @@ export default function SiteFooter() {
               <Link href="/people" className="hover:text-white transition-colors">People</Link>
               <Link href="/careers" className="hover:text-white transition-colors">Careers</Link>
               <Link href="/privacy" className="hover:text-white transition-colors">Privacy Policy</Link>
-              <Link href="/terms" className="hover:text-white transition-colors">Terms of Service</Link>
+
               {!user && <span onClick={() => setShowLoginModal(true)} className="hover:text-white cursor-pointer transition-colors opacity-50 hover:opacity-100">Admin Login</span>}
             </div>
           </div>
