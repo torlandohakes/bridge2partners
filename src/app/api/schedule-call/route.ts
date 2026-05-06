@@ -100,11 +100,14 @@ export async function POST(request: Request) {
 
       if (clientError) {
         console.error("Failed to send client email via Resend. Is bridge2partners.com verified?", clientError);
+      } else {
+        console.log("Client email sent successfully.");
       }
 
       // Send to Internal Team
       const { error: internalError } = await resend.emails.send({
-        from: 'Bridge2Partners Web <hello@bridge2partners.com>', // Use the same from address to avoid sender issues
+        // Fallback to onboarding@resend.dev if your custom domain isn't verified yet
+        from: 'Bridge2Partners Web <onboarding@resend.dev>', 
         to: 'torlando.hakes@bridge2partners.com', // Internal address
         subject: `New Call Request: ${name} (${company})`,
         html: internalEmailHtml,
@@ -112,6 +115,8 @@ export async function POST(request: Request) {
 
       if (internalError) {
         console.error("Failed to send internal notification via Resend.", internalError);
+      } else {
+        console.log("Internal notification email sent successfully.");
       }
     } else {
       console.log("Mocking email send because RESEND_API_KEY is not configured.");
