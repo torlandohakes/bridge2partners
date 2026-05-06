@@ -171,6 +171,7 @@ export default function StrategyCallModal({ isOpen, onClose, theme }: StrategyCa
               </form>
             </div>
           ) : (
+            <>
               <h3 className="font-display font-bold text-2xl mb-8">Select a Date & Time</h3>
               
               <div className="flex flex-col lg:flex-row gap-8">
@@ -238,7 +239,7 @@ export default function StrategyCallModal({ isOpen, onClose, theme }: StrategyCa
                    </div>
                  )}
               </div>
-            </div>
+            </>
           )}
 
         </div>
