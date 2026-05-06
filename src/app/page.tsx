@@ -723,7 +723,7 @@ export default function Home() {
           <div className="flex items-center gap-4 mb-8">
             <FileText className="w-10 h-10 text-[#98cc67]" />
             <div>
-              <EditableText element="h2" contentId="trust_h2" defaultText="Procurement Documentation" isAdmin={isAdmin} value={cmsContent.trust_h2} className={`font-display text-3xl font-bold ${t.textPrimary} transition-colors`} />
+              <EditableText element="h2" contentId="trust_h2" defaultText="Procurement" isAdmin={isAdmin} value={cmsContent.trust_h2} className={`font-display text-3xl font-bold ${t.textPrimary} transition-colors`} />
               <EditableText element="p" contentId="trust_p" defaultText="Fast, frictionless vendor onboarding." isAdmin={isAdmin} value={cmsContent.trust_p} className={`${t.textSecondary} transition-colors`} />
             </div>
           </div>
@@ -734,7 +734,7 @@ export default function Home() {
               { id: 'procurement_doc_2', text: 'Technology Stack', hash: 'technology-stack' },
               { id: 'procurement_doc_4', text: 'Compliance Standards', hash: 'compliance-standards' },
               { id: 'procurement_doc_5', text: 'Data Security Approach', hash: 'data-security-approach' },
-              { id: 'procurement_doc_3', text: 'Insurance Coverage Limits', hash: 'insurance-coverage-limits' }
+              { id: 'procurement_doc_3', text: 'Insurance Overview', hash: 'insurance-overview' }
             ].map((doc, i) => (
               <Link href={`/procurement#${doc.hash}`} key={i} className={`flex items-center justify-between p-6 ${theme === 'light' ? 'hover:bg-slate-50 border-b border-slate-100' : 'hover:bg-white/5 border-b border-white/5'} last:border-0 cursor-pointer group transition-colors block w-full`}>
                 <EditableText 

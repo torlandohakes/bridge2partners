@@ -63,7 +63,7 @@ export default function SiteHeader() {
           </div>
           <Button asChild variant="outline" className="hidden md:flex border-white/20 hover:bg-white/10 text-white font-normal bg-white/5">
             <Link href="/procurement">
-              <EditableButtonText contentId="nav_btn_1" defaultText="View Procurement Docs" isAdmin={isAdmin} value={cmsContent.nav_btn_1} documentId="home" />
+              <EditableButtonText contentId="nav_btn_1" defaultText="Procurement" isAdmin={isAdmin} value={cmsContent.nav_btn_1} documentId="home" />
             </Link>
           </Button>
           <Button variant="default" onClick={() => setIsStrategyModalOpen(true)} className="hidden md:flex bg-primary/80 backdrop-blur-[10px] border border-white/20 hover:bg-primary/90 text-white font-bold">
