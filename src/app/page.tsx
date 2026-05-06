@@ -452,37 +452,37 @@ export default function Home() {
         <div className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[60vw] h-[40vw] rounded-full blur-[150px] pointer-events-none transition-colors duration-500 ${t.orb3}`} />
         {/* Desktop-Only Glass Card Wrapper */}
         <div className="max-w-7xl mx-auto w-full relative z-10">
-          <div className={`hidden lg:block absolute inset-0 rounded-[4rem] border pointer-events-none z-0 ${theme === 'light' ? 'bg-white/60 backdrop-blur-2xl border-[#001b15]/10 shadow-[0_20px_60px_rgba(0,150,119,0.1)]' : theme === 'medium' ? 'bg-white/20 backdrop-blur-3xl border-white/40 shadow-[0_20px_60px_rgba(255,255,255,0.05)]' : 'bg-white/10 backdrop-blur-2xl border-white/10 shadow-2xl'}`}></div>
+          <div className={`hidden md:block absolute inset-0 rounded-[4rem] border pointer-events-none z-0 ${theme === 'light' ? 'bg-white/60 backdrop-blur-2xl border-[#001b15]/10 shadow-[0_20px_60px_rgba(0,150,119,0.1)]' : theme === 'medium' ? 'bg-white/20 backdrop-blur-3xl border-white/40 shadow-[0_20px_60px_rgba(255,255,255,0.05)]' : 'bg-white/10 backdrop-blur-2xl border-white/10 shadow-2xl'}`}></div>
           
-          <div className="max-w-6xl w-full mx-auto relative z-10 flex flex-col lg:block lg:p-16">
+          <div className="max-w-6xl w-full mx-auto relative z-10 flex flex-col md:block md:p-16">
             
             {/* 1. Header Block */}
-            <div className="order-1 text-left mb-8 lg:mb-16 relative z-10">
+            <div className="order-1 text-left mb-8 md:mb-16 relative z-10">
               <EditableText element="h2" contentId="guide_h2" defaultText="Your modernization is in safe hands." isAdmin={isAdmin} value={cmsContent.guide_h2} className={`font-display text-3xl md:text-4xl font-bold mb-4 ${t.textPrimary} transition-colors`} />
               <EditableText element="p" contentId="guide_p" defaultText="We combine deep banking experience with modern technology expertise. Because we have the ability to operate across strategy, implementation, and execution, your modernization is always in safe hands." isAdmin={isAdmin} value={cmsContent.guide_p} className={`font-reading text-base ${t.textSecondary} max-w-3xl leading-relaxed transition-colors`} />
             </div>
 
             {/* Interactive Pedigree UI Container */}
-            <div className="order-2 w-full relative z-10 flex flex-col lg:grid lg:grid-cols-12 gap-6 lg:gap-8 text-left">
+            <div className="order-2 w-full relative z-10 flex flex-col md:grid md:grid-cols-12 gap-6 md:gap-8 text-left">
               
               {/* Left Column (Selector Menu) */}
-              <div className="order-1 lg:order-none lg:col-span-4 flex flex-row lg:flex-col overflow-x-auto snap-x gap-3 lg:gap-4 pb-4 lg:pb-0 -mx-6 px-6 lg:mx-0 lg:px-0 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+              <div className="order-1 md:order-none md:col-span-4 flex flex-row md:flex-col overflow-x-auto snap-x gap-3 md:gap-4 pb-4 md:pb-0 -mx-6 px-6 md:mx-0 md:px-0 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
                 {LEADERSHIP_DATA.map((leader) => {
                   const isActive = activeLeaderId === leader.id;
                   return (
                     <button
                       key={leader.id}
                       onClick={() => setActiveLeaderId(leader.id)}
-                      className={`text-center lg:text-left px-5 py-3 lg:p-6 rounded-full lg:rounded-xl border transition-all duration-300 flex-shrink-0 snap-start w-auto lg:w-full ${
+                      className={`text-center md:text-left px-5 py-3 md:p-6 rounded-full md:rounded-xl border transition-all duration-300 flex-shrink-0 snap-start w-auto md:w-full ${
                         isActive 
                           ? `${theme === 'light' ? 'bg-[#001b15]/5 border-[#001b15]/20 text-[#001b15]' : 'bg-white/20 border-white/50 shadow-lg text-white'}`
                           : `bg-transparent border-transparent ${theme === 'light' ? 'text-[#001b15]/50 hover:bg-[#001b15]/5 hover:text-[#001b15]' : 'text-white/50 hover:bg-white/5 hover:text-white/80'}`
                       }`}
                     >
-                      <span className="block font-display text-base lg:text-2xl font-bold mb-0 lg:mb-1 whitespace-nowrap">
+                      <span className="block font-display text-base md:text-2xl font-bold mb-0 md:mb-1 whitespace-nowrap">
                         <EditableText element="span" contentId={`selector_menu_${leader.id}_name`} defaultText={leader.name} isAdmin={isAdmin} value={cmsContent[`selector_menu_${leader.id}_name`]} />
                       </span>
-                      <span className={`hidden lg:block font-ui text-xs tracking-widest uppercase font-semibold ${isActive ? '' : 'opacity-70'}`}>
+                      <span className={`hidden md:block font-ui text-xs tracking-widest uppercase font-semibold ${isActive ? '' : 'opacity-70'}`}>
                         <EditableText element="span" contentId={`selector_menu_${leader.id}_title`} defaultText={leader.title} isAdmin={isAdmin} value={cmsContent[`selector_menu_${leader.id}_title`]} />
                       </span>
                     </button>
@@ -490,7 +490,7 @@ export default function Home() {
                 })}
                 
                 {/* Desktop Action Button */}
-                <Link href="/people" className="hidden lg:block mt-4">
+                <Link href="/people" className="hidden md:block mt-4">
                   <Button size="lg" variant="outline" className={`w-full ${t.outlineBtn} py-6 text-lg hover:scale-[1.02] transition-all`}>
                     <EditableButtonText contentId="meet_team_btn" defaultText="Meet Our Full Team" isAdmin={isAdmin} value={cmsContent.meet_team_btn} />
                   </Button>
@@ -498,18 +498,18 @@ export default function Home() {
               </div>
 
               {/* Right Column (Dynamic Pedigree Panel) */}
-              <div className="order-2 lg:order-none lg:col-span-8">
+              <div className="order-2 md:order-none md:col-span-8">
                 {(() => {
                   const activeLeader = LEADERSHIP_DATA.find(l => l.id === activeLeaderId) || LEADERSHIP_DATA[0];
                   return (
-                    <div className={`backdrop-blur-3xl border rounded-3xl lg:rounded-2xl overflow-hidden relative min-h-[550px] lg:min-h-[500px] p-6 pt-0 lg:p-10 flex flex-col justify-end lg:justify-center transition-colors duration-500 ${theme === 'light' ? 'bg-gradient-to-t from-[#009677]/5 to-transparent lg:bg-none lg:bg-[#001b15]/5 border-[#001b15]/20 shadow-xl lg:shadow-none' : 'bg-gradient-to-t from-[#009677]/15 to-transparent lg:bg-none lg:bg-white/10 border-[#009677]/30 lg:border-white/30 shadow-inner lg:shadow-none'}`}>
+                    <div className={`backdrop-blur-3xl border rounded-3xl md:rounded-2xl overflow-hidden relative min-h-[550px] md:min-h-[500px] p-6 pt-0 md:p-10 flex flex-col justify-end md:justify-center transition-colors duration-500 ${theme === 'light' ? 'bg-gradient-to-t from-[#009677]/5 to-transparent md:bg-none md:bg-[#001b15]/5 border-[#001b15]/20 shadow-xl md:shadow-none' : 'bg-gradient-to-t from-[#009677]/15 to-transparent md:bg-none md:bg-white/10 border-[#009677]/30 md:border-white/30 shadow-inner md:shadow-none'}`}>
                       
                       {/* Decorative Glowing Orb */}
-                      <div className="lg:hidden absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-80 h-80 bg-[#98cc67]/15 blur-[80px] rounded-full pointer-events-none"></div>
+                      <div className="md:hidden absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-80 h-80 bg-[#98cc67]/15 blur-[80px] rounded-full pointer-events-none"></div>
 
                       {/* Mobile Background Image (Top fading down) */}
                       <div 
-                        className="lg:hidden absolute top-0 inset-x-0 h-[350px] w-full z-0 pointer-events-none transition-all duration-500"
+                        className="md:hidden absolute top-0 inset-x-0 h-[350px] w-full z-0 pointer-events-none transition-all duration-500"
                         style={{
                           backgroundImage: `url("${activeLeader.imageUrl}")`,
                           backgroundPosition: 'top center',
@@ -522,7 +522,7 @@ export default function Home() {
 
                       {/* Desktop Background Image (Right fading left) */}
                       <div 
-                        className="hidden lg:block absolute inset-y-0 right-0 w-[80%] z-0 pointer-events-none transition-all duration-500"
+                        className="hidden md:block absolute inset-y-0 right-0 w-[80%] z-0 pointer-events-none transition-all duration-500"
                         style={{
                           backgroundImage: `url("${activeLeader.imageUrl}")`,
                           backgroundPosition: 'bottom right',
@@ -534,24 +534,24 @@ export default function Home() {
                       ></div>
 
                       {/* Content Overlay */}
-                      <div className="relative z-10 w-full lg:w-3/5 mt-[280px] lg:mt-0">
+                      <div className="relative z-10 w-full md:w-3/5 mt-[280px] md:mt-0">
                         {/* Mobile Title Injection (Since it's hidden from pill) */}
-                        <div className="lg:hidden mb-2 text-center">
+                        <div className="md:hidden mb-2 text-center">
                           <span className={`font-ui text-sm tracking-widest uppercase font-bold ${theme === 'light' ? 'text-[#009677]' : 'text-[#98cc67]'}`}>
                             <EditableText element="span" contentId={`leader_roster_${activeLeader.id}_title_mobile`} defaultText={activeLeader.title} isAdmin={isAdmin} value={cmsContent[`selector_menu_${activeLeader.id}_title`]} />
                           </span>
                         </div>
 
-                        <p className={`text-xl text-center lg:text-left lg:text-3xl font-light italic leading-tight mb-6 pb-6 border-b ${theme === 'light' ? 'border-[#001b15]/10 text-[#001b15]' : 'border-white/20 text-white'}`}>
+                        <p className={`text-xl text-center md:text-left md:text-3xl font-light italic leading-tight mb-6 pb-6 border-b ${theme === 'light' ? 'border-[#001b15]/10 text-[#001b15]' : 'border-white/20 text-white'}`}>
                           "<EditableText element="span" contentId={`leader_roster_${activeLeader.id}_quote`} defaultText={activeLeader.quote} isAdmin={isAdmin} value={cmsContent[`leader_roster_${activeLeader.id}_quote`]} />"
                         </p>
                         
                         <div className="mb-0">
-                          <ul className="space-y-3 lg:space-y-4">
+                          <ul className="space-y-3 md:space-y-4">
                             {activeLeader.accolades.map((accolade, i) => (
                               <li key={i} className="flex items-start">
-                                <CheckCircle2 className={`w-5 h-5 lg:w-6 lg:h-6 mr-3 mt-0.5 lg:mt-1 flex-shrink-0 ${theme === 'dark' ? 'text-[#98cc67]' : 'text-[#00573f]'}`} />
-                                <span className={`font-ui font-medium text-base lg:text-lg ${theme === 'light' ? 'text-[#001b15]/90' : 'text-white/90'}`}>
+                                <CheckCircle2 className={`w-5 h-5 md:w-6 md:h-6 mr-3 mt-0.5 md:mt-1 flex-shrink-0 ${theme === 'dark' ? 'text-[#98cc67]' : 'text-[#00573f]'}`} />
+                                <span className={`font-ui font-medium text-base md:text-lg ${theme === 'light' ? 'text-[#001b15]/90' : 'text-white/90'}`}>
                                   <EditableText element="span" contentId={`leader_roster_${activeLeader.id}_accolade_${i}`} defaultText={accolade} isAdmin={isAdmin} value={cmsContent[`leader_roster_${activeLeader.id}_accolade_${i}`]} />
                                 </span>
                               </li>
@@ -566,7 +566,7 @@ export default function Home() {
               </div>
 
               {/* Mobile Action Button */}
-              <div className="order-3 lg:hidden mt-4">
+              <div className="order-3 md:hidden mt-4">
                 <Link href="/people">
                   <Button size="lg" variant="outline" className={`w-full ${t.outlineBtn} py-6 text-lg hover:scale-[1.02] transition-all`}>
                     <EditableButtonText contentId="meet_team_btn" defaultText="Meet Our Full Team" isAdmin={isAdmin} value={cmsContent.meet_team_btn} />
