@@ -84,9 +84,9 @@ export async function POST(request: Request) {
 
     if (resend) {
       // Send to Client (TESTING MODE)
-      const { error: clientError } = await resend.emails.send({
+      const { error: clientError, data: clientData } = await resend.emails.send({
         from: 'Bridge2Partners Web <onboarding@resend.dev>', // Sandbox domain
-        to: 'torlando.hakes@bridge2partners.com', // Force to owner address for testing
+        to: 'torlando@craftsmanpainter.com', // Force to owner address for testing
         subject: `[TEST CLIENT EMAIL] Tentative: Strategy Call (${email})`,
         html: clientEmailHtml,
         attachments: [
@@ -99,24 +99,24 @@ export async function POST(request: Request) {
       });
 
       if (clientError) {
-        console.error("Failed to send client email via Resend.", clientError);
+        console.error("Failed to send client email via Resend.", clientError.message);
       } else {
-        console.log("Client email sent successfully.");
+        console.log("Client email sent successfully.", clientData);
       }
 
       // Send to Internal Team
-      const { error: internalError } = await resend.emails.send({
+      const { error: internalError, data: internalData } = await resend.emails.send({
         // Fallback to onboarding@resend.dev if your custom domain isn't verified yet
         from: 'Bridge2Partners Web <onboarding@resend.dev>', 
-        to: 'torlando.hakes@bridge2partners.com', // Internal address
+        to: 'torlando@craftsmanpainter.com', // Internal address
         subject: `New Call Request: ${name} (${company})`,
         html: internalEmailHtml,
       });
 
       if (internalError) {
-        console.error("Failed to send internal notification via Resend.", internalError);
+        console.error("Failed to send internal notification via Resend.", internalError.message);
       } else {
-        console.log("Internal notification email sent successfully.");
+        console.log("Internal notification email sent successfully.", internalData);
       }
     } else {
       console.log("Mocking email send because RESEND_API_KEY is not configured.");

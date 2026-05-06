@@ -37,7 +37,7 @@ export default function ProcurementPage() {
   return (
     <main className="min-h-screen bg-[#000d0a] text-white">
       <SubpageHero 
-        title={<EditableText element="span" contentId="procurement_hero_title" defaultText="Procurement" isAdmin={isAdmin} value={cmsContent.procurement_hero_title} documentId="procurement" />}
+        title={<EditableText element="span" stripNewlines={true} contentId="procurement_hero_title" defaultText="Procurement" isAdmin={isAdmin} value={cmsContent.procurement_hero_title} documentId="procurement" />}
         subtitle={<EditableText element="span" contentId="hero_subtitle" defaultText="Fast, frictionless vendor onboarding. Access all required legal and compliance documents below." isAdmin={isAdmin} value={cmsContent.hero_subtitle} documentId="procurement" />}
         theme="dark" 
         imageSrc="https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2FDOM_alpha.png?alt=media&token=47717353-59db-4f9f-b8a6-4dd70e6520be"
