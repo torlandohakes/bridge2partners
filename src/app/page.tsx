@@ -315,8 +315,8 @@ export default function Home() {
 
          {/* Hero Content Body - Fixed White for Image Legibility */}
          <div className="relative z-10 flex flex-col items-start justify-center min-h-[85svh] sm:min-h-0 sm:flex-1 px-6 md:px-12 w-full max-w-5xl gap-10 sm:gap-6 md:gap-8 mt-8 md:mt-12 text-white pb-12 sm:pb-0">
-           <div className="inline-flex items-center bg-[#001b15]/60 backdrop-blur-md border border-white/10 px-3 py-1.5 sm:px-4 sm:py-2 rounded-full mb-2 shadow-lg">
-             <EditableText element="span" contentId="hero_super" defaultText="FOR BANKING EXECUTIVES FACING DISRUPTION" isAdmin={isAdmin} value={cmsContent.hero_super} className="font-ui text-[9px] sm:text-[10px] md:text-xs text-[#98cc67] uppercase tracking-widest font-bold drop-shadow-sm" />
+           <div className="inline-flex items-center bg-[#001b15]/60 md:bg-transparent backdrop-blur-md md:backdrop-blur-none border border-white/10 md:border-transparent px-3 py-1.5 sm:px-4 sm:py-2 md:p-0 rounded-full mb-2 md:mb-4 shadow-lg md:shadow-none">
+             <EditableText element="span" contentId="hero_super" defaultText="FOR BANKING EXECUTIVES FACING DISRUPTION" isAdmin={isAdmin} value={cmsContent.hero_super} className="font-ui text-[9px] sm:text-[10px] md:text-sm text-[#98cc67] md:text-[#009677] uppercase tracking-widest font-bold drop-shadow-sm" />
            </div>
            
            <EditableText element="h1" contentId="hero_h1" defaultText={"Bank modernization \\nand M&A integrations"} isAdmin={isAdmin} value={cmsContent.hero_h1} className="font-display font-extrabold text-4xl sm:text-5xl md:text-6xl lg:text-[5.5rem] leading-[1.1] sm:leading-[1.05] tracking-tight normal-case drop-shadow-md" />
