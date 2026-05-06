@@ -281,14 +281,16 @@ export default function Home() {
       )}
 
       {/* ================= HERO SECTION ================= */}
-      <div 
-        className={`relative w-full min-h-[140svh] sm:min-h-[110vh] z-10 transition-all duration-700`}
-        style={{ 
-          backgroundImage: `url("${cmsContent.hero_bg || 'https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2Fbridge2partners-hero-1.webp?alt=media&token=bb05e1e4-8f2d-4a75-8880-ddd7bbfa2797'}")`, 
-          backgroundSize: 'cover', 
-          backgroundPosition: 'top'
-        }}
-      >
+      <div className={`relative w-full min-h-[140svh] sm:min-h-[110vh] z-10 transition-all duration-700`}>
+         {/* Background Image Layer */}
+         <div 
+           className="absolute inset-0 w-full h-full z-0"
+           style={{ 
+             backgroundImage: `url("${cmsContent.hero_bg || 'https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2Fbridge2partners-hero-1.webp?alt=media&token=bb05e1e4-8f2d-4a75-8880-ddd7bbfa2797'}")`, 
+             backgroundSize: 'cover', 
+             backgroundPosition: 'top'
+           }}
+         />
          {isAdmin && (
            <div className="absolute top-8 left-8 z-50 flex items-center">
              <EditableImage 
@@ -302,8 +304,8 @@ export default function Home() {
            </div>
          )}
          {/* Contrast Overlay (Gradient) - Top is unconditionally dark for image/nav contrast */}
-         <div className="absolute inset-0 bg-gradient-to-r from-[#001b15]/90 via-[#001b15]/50 to-transparent backdrop-blur-[1px] z-0" />
-         <div className={`absolute inset-x-0 bottom-0 h-[40vh] bg-gradient-to-t ${t.heroOverlayBottom} pointer-events-none transition-colors duration-500 z-0`} />
+         <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-[#001b15]/90 via-[#001b15]/50 to-transparent backdrop-blur-[1px] z-0 transform-gpu" />
+         <div className={`absolute inset-x-0 bottom-0 w-full h-[60%] bg-gradient-to-t ${t.heroOverlayBottom} pointer-events-none transition-colors duration-500 z-0 transform-gpu`} />
 
          {/* UI Content Constraint Wrapper */}
          <div className="relative flex flex-col min-h-[140svh] sm:min-h-[100svh] z-10 pb-0">
