@@ -509,11 +509,11 @@ export default function Home() {
 
                       {/* Mobile Background Image (Top fading down) */}
                       <div 
-                        className="min-[988px]:hidden absolute top-0 inset-x-0 h-[350px] w-full z-0 pointer-events-none transition-all duration-500"
+                        className="min-[988px]:hidden absolute top-0 inset-x-0 h-[400px] w-full z-0 pointer-events-none transition-all duration-500"
                         style={{
                           backgroundImage: `url("${activeLeader.imageUrl}")`,
-                          backgroundPosition: 'top center',
-                          backgroundSize: 'cover',
+                          backgroundPosition: 'bottom center',
+                          backgroundSize: 'contain',
                           backgroundRepeat: 'no-repeat',
                           WebkitMaskImage: 'linear-gradient(to bottom, black 50%, transparent 100%)',
                           maskImage: 'linear-gradient(to bottom, black 50%, transparent 100%)'
