@@ -6,7 +6,6 @@ import EditableText from "@/components/EditableText";
 import { auth, db } from "@/lib/firebase";
 import { onAuthStateChanged } from "firebase/auth";
 import { doc, onSnapshot } from "firebase/firestore";
-import ServiceFooter from "@/components/ServiceFooter";
 import Image from "next/image";
 import Link from "next/link";
 import { TeamMember } from "./data";
@@ -139,12 +138,7 @@ export default function PeoplePage() {
           </div>
         )}
       </div>
-
-      <ServiceFooter 
-        isAdmin={isAdmin} 
-        cmsContent={cmsContent} 
-        documentId="people"
-      />
+      </div>
     </main>
   );
 }

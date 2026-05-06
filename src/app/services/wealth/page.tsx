@@ -3,7 +3,6 @@
 import { useState, useEffect } from "react";
 import SubpageHero from "@/components/SubpageHero";
 import EditableText from "@/components/EditableText";
-import ServiceFooter from "@/components/ServiceFooter";
 import { auth, db } from "@/lib/firebase";
 import { onAuthStateChanged } from "firebase/auth";
 import { doc, onSnapshot } from "firebase/firestore";
@@ -136,8 +135,6 @@ export default function WealthManagementService() {
           </p>
         </div>
       </div>
-      
-      <ServiceFooter isAdmin={isAdmin} cmsContent={cmsContent} documentId="wealth" tag="wealth" />
     </main>
   );
 }

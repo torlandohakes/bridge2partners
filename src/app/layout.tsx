@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, Public_Sans, Montserrat, Barlow } from "next/font/google";
 import "./globals.css";
+import SiteFooter from "@/components/SiteFooter";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -45,7 +46,10 @@ export default function RootLayout({
       suppressHydrationWarning
       className={`${inter.variable} ${publicSans.variable} ${montserrat.variable} ${barlow.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col bg-[#000d0a]">{children}</body>
+      <body className="min-h-full flex flex-col bg-[#000d0a]">
+        {children}
+        <SiteFooter />
+      </body>
     </html>
   );
 }

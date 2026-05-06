@@ -754,36 +754,7 @@ export default function Home() {
 
         </div>
 
-        {/* FINAL CTA & DYNAMIC FOOTER */}
-        <footer className={`pt-24 pb-12 px-6 md:px-12 mt-auto bg-transparent`}>
-          <div className="max-w-6xl mx-auto flex flex-col items-center text-center mb-24">
-            <EditableText element="h2" contentId="footer_cta_h2" defaultText="Ready to stop planning and start executing?" isAdmin={isAdmin} value={cmsContent.footer_cta_h2} className={`font-display text-5xl md:text-6xl font-bold mb-8 ${t.textPrimary} transition-colors`} />
-            <div className="flex flex-col sm:flex-row gap-4">
-              <Button size="lg" onClick={() => setIsStrategyModalOpen(true)} className="bg-primary/80 backdrop-blur-[10px] border border-white/20 hover:bg-primary/90 text-white font-bold px-8">
-                <EditableButtonText contentId="footer_btn_1" defaultText="Schedule a Strategy Call" isAdmin={isAdmin} value={cmsContent.footer_btn_1} />
-              </Button>
-              <Button size="lg" variant="outline" onClick={() => setIsChallengeModalOpen(true)} className={`bg-white text-[#001b15] hover:bg-white/90 font-bold ${theme === 'light' ? 'border border-[#001b15]/10' : 'border-none'}`}>
-                <EditableButtonText contentId="footer_btn_2" defaultText="Generate a Gap Analysis" isAdmin={isAdmin} value={cmsContent.footer_btn_2} />
-              </Button>
-            </div>
-          </div>
 
-          <div className={`max-w-6xl mx-auto border-t ${t.borderBase} pt-12 transition-colors`}>
-            {/* LinkedIn integration hidden temporarily for performance */}
-            {/* <h3 className={`font-ui text-sm ${t.textMuted} uppercase tracking-widest mb-6 font-bold transition-colors`}>Market Momentum</h3>
-            <LinkedInFeed theme={theme} /> */}
-            <div className={`mt-16 flex flex-col md:flex-row items-center justify-between text-xs ${t.textMuted} font-ui transition-colors`}>
-              <span>© 2026 Bridge2Partners. All rights reserved.</span>
-              <div className="flex gap-6 mt-4 md:mt-0">
-                <Link href="/people" className={`hover:${t.textHighlight} cursor-pointer transition-colors`}>People</Link>
-                <Link href="/careers" className={`hover:${t.textHighlight} cursor-pointer transition-colors`}>Careers</Link>
-                <Link href="/privacy" className={`hover:${t.textHighlight} cursor-pointer transition-colors`}>Privacy Policy</Link>
-                <Link href="/terms" className={`hover:${t.textHighlight} cursor-pointer transition-colors`}>Terms of Service</Link>
-                {!user && <span onClick={() => setShowLoginModal(true)} className={`hover:${t.textHighlight} cursor-pointer transition-colors opacity-50 hover:opacity-100`}>Admin Login</span>}
-              </div>
-            </div>
-          </div>
-        </footer>
       </section>
 
       </main>
