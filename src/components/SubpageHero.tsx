@@ -29,13 +29,13 @@ export default function SubpageHero({ title, subtitle, theme = "dark", imageSrc,
         isLight ? "bg-[#00573f]/10" : "bg-[#009677]/[0.15] mix-blend-screen"
       }`} />
 
-      <div className={`max-w-6xl w-full mx-auto relative z-10 flex flex-col md:flex-row gap-12 ${imageSrc ? "items-end" : "items-center"}`}>
-        <div className={`flex-1 ${imageSrc ? "max-w-2xl" : "w-full"}`}>
+      <div className={`max-w-6xl w-full mx-auto relative z-10 flex flex-col md:flex-row gap-8 lg:gap-12 ${imageSrc ? "items-end" : "items-center"}`}>
+        <div className={`flex-1 min-w-[50%] lg:min-w-0 ${imageSrc ? "max-w-2xl" : "w-full"}`}>
           <Link href="/" className="inline-flex items-center text-sm font-bold opacity-70 hover:opacity-100 transition-opacity mb-8">
             <ArrowLeft className="w-4 h-4 mr-2" />
             Back to Home
           </Link>
-          <h1 className="font-display text-4xl sm:text-5xl md:text-7xl font-bold mb-6 break-words">
+          <h1 className="font-display text-4xl sm:text-5xl md:text-5xl lg:text-7xl font-bold mb-6 break-words leading-tight">
             {title}
           </h1>
           <p className={`font-reading text-xl md:text-2xl leading-relaxed ${imageSrc ? "max-w-xl" : "max-w-3xl"} ${
@@ -46,7 +46,7 @@ export default function SubpageHero({ title, subtitle, theme = "dark", imageSrc,
         </div>
 
         {imageSrc && (
-          <div className="flex-1 flex justify-center md:justify-end md:-mb-24 w-full md:w-auto mt-12 md:mt-0 relative z-20">
+          <div className="w-full md:w-[45%] shrink-0 flex justify-center md:justify-end md:-mb-24 mt-12 md:mt-0 relative z-20">
             <div className="relative flex flex-col items-center md:inline-block w-full md:w-auto">
               {/* Subtle backglow to anchor the image on mobile */}
               <div className="absolute bottom-10 w-[80%] aspect-square bg-[#98cc67]/10 rounded-full blur-3xl md:hidden" />
