@@ -83,11 +83,11 @@ export async function POST(request: Request) {
     `;
 
     if (resend) {
-      // Send to Client
+      // Send to Client (TESTING MODE)
       const { error: clientError } = await resend.emails.send({
-        from: 'Bridge2Partners <hello@bridge2partners.com>', // Assuming verified domain
-        to: email,
-        subject: 'Tentative: Bridge2Partners Strategy Call',
+        from: 'Bridge2Partners Web <onboarding@resend.dev>', // Sandbox domain
+        to: 'torlando.hakes@bridge2partners.com', // Force to owner address for testing
+        subject: `[TEST CLIENT EMAIL] Tentative: Strategy Call (${email})`,
         html: clientEmailHtml,
         attachments: [
           {
@@ -99,7 +99,7 @@ export async function POST(request: Request) {
       });
 
       if (clientError) {
-        console.error("Failed to send client email via Resend. Is bridge2partners.com verified?", clientError);
+        console.error("Failed to send client email via Resend.", clientError);
       } else {
         console.log("Client email sent successfully.");
       }
