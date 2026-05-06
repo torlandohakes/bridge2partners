@@ -82,7 +82,7 @@ export default function EditableText({
       dangerouslySetInnerHTML={{ 
         __html: isEditing 
           ? (textRef.current?.innerText || displayText) 
-          : (stripNewlines || element.match(/^h[1-6]$/i) 
+          : (stripNewlines || (typeof Element === 'string' && Element.match(/^h[1-6]$/i)) 
               ? displayText.replace(/\\n|\n|<br\s*\/?>/gi, '') 
               : displayText.replace(/\\n/g, '<br/>'))
       }}
