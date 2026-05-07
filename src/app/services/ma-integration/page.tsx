@@ -3,7 +3,6 @@
 import { useState, useEffect } from "react";
 import SubpageHero from "@/components/SubpageHero";
 import EditableText from "@/components/EditableText";
-import ServiceFooter from "@/components/ServiceFooter";
 import { auth, db } from "@/lib/firebase";
 import { onAuthStateChanged } from "firebase/auth";
 import { doc, onSnapshot } from "firebase/firestore";
@@ -31,7 +30,7 @@ export default function MAIntegrationService() {
       <SubpageHero 
         title={<EditableText element="span" contentId="hero_title" defaultText="M&A Tech Integration" isAdmin={isAdmin} documentId="ma-integration" value={cmsContent.hero_title} />}
         subtitle={<EditableText element="span" contentId="hero_subtitle" defaultText="Execute derisked, post-merger technology integrations across legacy core dependencies." isAdmin={isAdmin} documentId="ma-integration" value={cmsContent.hero_subtitle} />}
-        imageSrc="https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2FUntitled%20(77).png?alt=media&token=361ca2b2-eb78-45c0-8c7a-80f76df8e060"
+        imageSrc="https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2FBob%20Holohan.png?alt=media&token=21c70eb2-4e77-46f6-8fd4-b2878eb15a7e"
         imageAlt="Bob Holohan, Managing Director of M&A and Business Transformation"
         imageCaptionName={<EditableText element="span" contentId="hero_caption_name" defaultText="Bob Holohan" isAdmin={isAdmin} documentId="ma-integration" value={cmsContent.hero_caption_name} />}
         imageCaptionTitle={<EditableText element="span" contentId="hero_caption_title" defaultText="Managing Director of M&A and Business Transformation" isAdmin={isAdmin} documentId="ma-integration" value={cmsContent.hero_caption_title} />}
@@ -136,8 +135,6 @@ export default function MAIntegrationService() {
           </div>
         </div>
       </div>
-
-      <ServiceFooter isAdmin={isAdmin} cmsContent={cmsContent} documentId="ma-integration" tag="mergers" />
     </main>
   );
 }

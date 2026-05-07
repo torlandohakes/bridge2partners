@@ -12,6 +12,7 @@ interface EditableTextProps {
   className?: string;
   value?: string;
   documentId?: string;
+  stripNewlines?: boolean;
 }
 
 export default function EditableText({ 
@@ -21,7 +22,8 @@ export default function EditableText({
   element: Element = 'span',
   className = '',
   value,
-  documentId = 'home'
+  documentId = 'home',
+  stripNewlines = false
 }: EditableTextProps) {
   const [isEditing, setIsEditing] = useState(false);
   const textRef = useRef<HTMLElement>(null);
@@ -76,8 +78,14 @@ export default function EditableText({
       onClick={handleClick}
       onBlur={handleBlur}
       className={`${className} ${adminStyles}`}
-      // dangerouslySetInnerHTML to persist <br/> tags from raw strings
-      dangerouslySetInnerHTML={{ __html: isEditing ? (textRef.current?.innerText || displayText) : displayText.replace(/\\n/g, '<br/>') }}
+      // dangerouslySetInnerHTML to persist <br/> tags from raw strings (except when stripNewlines is true)
+      dangerouslySetInnerHTML={{ 
+        __html: isEditing 
+          ? (textRef.current?.innerText || displayText) 
+          : (stripNewlines || (typeof Element === 'string' && Element.match(/^h[1-6]$/i)) 
+              ? displayText.replace(/\\n|\n|<br\s*\/?>/gi, '') 
+              : displayText.replace(/\\n/g, '<br/>'))
+      }}
     />
   );
 }

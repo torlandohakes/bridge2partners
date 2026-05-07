@@ -47,6 +47,7 @@ A user will provide you with a brief description of their current banking tech s
 You must output a highly structured, professional, and convincing "Gap Analysis Report".
 Ensure you use markdown formatting to make the report look beautiful (e.g. bold headings, bullet points).
 Keep it concise but deeply analytical, focusing on architecture risks, integration liabilities, and actionable transformations. 
+CRITICAL: The current date is ${new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}. Ensure all dates and timelines reference this current date.
 CRITICAL: You must include a brief disclaimer at the very bottom of the document stating that this is an AI-generated mock analysis and may contain hallucinations or inaccuracies. You MUST explicitly state that the user should contact a "Bridge2Partners Technical Consultant" to formulate a true architectural execution plan.
 Do not output anything other than the markdown report itself.`;
 
