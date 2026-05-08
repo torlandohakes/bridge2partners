@@ -7,7 +7,7 @@ import { db } from "@/lib/firebase";
 import Image from "next/image";
 import Link from "next/link";
 import { QRCodeSVG } from "qrcode.react";
-import { Mail, Phone, Calendar, Download, QrCode, X, ChevronLeft } from "lucide-react";
+import { Mail, Phone, Calendar, Download, QrCode, X, ChevronLeft, BadgeCheck, Briefcase } from "lucide-react";
 import { notFound } from "next/navigation";
 
 export default function DigitalBusinessCard({ params }: { params: Promise<{ id: string }> }) {
@@ -95,15 +95,29 @@ export default function DigitalBusinessCard({ params }: { params: Promise<{ id: 
           />
         </div>
 
-        <h1 className="text-3xl font-display font-bold text-white text-center mb-1">
-          {member.name}
-        </h1>
+        <div className="flex items-center gap-2 justify-center mb-1">
+          <h1 className="text-3xl font-display font-bold text-white text-center">
+            {member.name}
+          </h1>
+          <BadgeCheck className="w-6 h-6 text-[#98cc67] flex-shrink-0" />
+        </div>
         <p className="text-[#98cc67] font-ui font-medium text-lg text-center mb-1">
           {member.title}
         </p>
-        <p className="text-white/50 font-ui text-sm uppercase tracking-wider text-center mb-8">
+        <p className="text-white/50 font-ui text-sm uppercase tracking-wider text-center mb-4">
           {member.category}
         </p>
+
+        {/* Expertise Tags */}
+        {member.expertise && member.expertise.length > 0 && (
+          <div className="flex flex-wrap justify-center gap-2 mb-8">
+            {member.expertise.map((skill, index) => (
+              <span key={index} className="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-xs font-ui text-white/80">
+                {skill}
+              </span>
+            ))}
+          </div>
+        )}
 
         {/* Primary CTA */}
         <button 
@@ -130,7 +144,7 @@ export default function DigitalBusinessCard({ params }: { params: Promise<{ id: 
           </a>
           <a href={member.linkedinUrl || '#'} target="_blank" rel="noopener noreferrer" className="flex flex-col items-center gap-2 group">
             <div className="w-14 h-14 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white group-hover:bg-[#98cc67] group-hover:text-[#001b15] group-hover:border-[#98cc67] transition-all">
-              <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+              <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
             </div>
             <span className="text-xs font-ui text-white/50 group-hover:text-white transition-colors">Connect</span>
           </a>
@@ -149,6 +163,29 @@ export default function DigitalBusinessCard({ params }: { params: Promise<{ id: 
             {member.fullBio}
           </p>
         </div>
+
+        {/* Career Highlights Section */}
+        {member.workHistory && member.workHistory.length > 0 && (
+          <div className="w-full bg-white/5 border border-white/10 rounded-2xl p-6 mb-6">
+            <div className="flex items-center gap-2 mb-4">
+              <Briefcase className="w-5 h-5 text-[#98cc67]" />
+              <h3 className="text-white font-display font-bold text-xl">Career Highlights</h3>
+            </div>
+            <div className="space-y-4">
+              {member.workHistory.map((role, index) => (
+                <div key={index} className="flex flex-col">
+                  <span className="text-white font-bold font-sans text-base">{role.company}</span>
+                  {role.title && (
+                    <span className="text-[#98cc67] font-ui text-sm">{role.title}</span>
+                  )}
+                  {role.years && (
+                    <span className="text-white/40 font-ui text-xs mt-0.5">{role.years}</span>
+                  )}
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
 
         {/* Calendar Section (If exists) */}
         {member.calendarUrl && (

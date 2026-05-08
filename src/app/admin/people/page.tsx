@@ -244,6 +244,16 @@ export default function PeopleAdminDashboard() {
 
               <div className="space-y-4 pt-4 border-t border-white/10">
                 <div>
+                  <label className="block text-xs uppercase tracking-wider text-white/50 mb-1">Expertise (Comma separated)</label>
+                  <input 
+                    type="text" 
+                    value={isEditing.expertise?.join(', ') || ''} 
+                    onChange={e => setIsEditing({...isEditing, expertise: e.target.value.split(',').map(s => s.trim()).filter(Boolean)})} 
+                    className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-white focus:outline-none focus:border-[#98cc67]" 
+                    placeholder="M&A, Digital Strategy, Cloud Infrastructure"
+                  />
+                </div>
+                <div>
                   <label className="block text-xs uppercase tracking-wider text-white/50 mb-1">Short Bio (Card Preview)</label>
                   <textarea required rows={2} value={isEditing.bio} onChange={e => setIsEditing({...isEditing, bio: e.target.value})} className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-white focus:outline-none focus:border-[#98cc67] resize-none" />
                 </div>
@@ -251,6 +261,35 @@ export default function PeopleAdminDashboard() {
                   <label className="block text-xs uppercase tracking-wider text-white/50 mb-1">Full Bio (Profile Page)</label>
                   <textarea required rows={4} value={isEditing.fullBio} onChange={e => setIsEditing({...isEditing, fullBio: e.target.value})} className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-white focus:outline-none focus:border-[#98cc67] resize-none" />
                 </div>
+              </div>
+
+              <div className="space-y-4 pt-4 border-t border-white/10">
+                <div className="flex justify-between items-center mb-2">
+                  <h3 className="text-sm font-bold text-white">Career Highlights</h3>
+                  <button type="button" onClick={() => setIsEditing({...isEditing, workHistory: [...(isEditing.workHistory || []), { company: '' }]})} className="text-xs px-2 py-1 bg-[#98cc67]/10 text-[#98cc67] hover:bg-[#98cc67]/20 rounded flex items-center gap-1 transition-colors">
+                    <Plus className="w-3 h-3" /> Add Role
+                  </button>
+                </div>
+                {isEditing.workHistory?.map((role, idx) => (
+                  <div key={idx} className="flex gap-2 items-start">
+                    <input placeholder="Company (e.g. Wells Fargo)" value={role.company} onChange={e => {
+                      const newHistory = [...(isEditing.workHistory || [])];
+                      newHistory[idx].company = e.target.value;
+                      setIsEditing({...isEditing, workHistory: newHistory});
+                    }} className="flex-1 bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-white text-sm focus:outline-none focus:border-[#98cc67]" />
+                    <input placeholder="Title (e.g. Senior VP)" value={role.title || ''} onChange={e => {
+                      const newHistory = [...(isEditing.workHistory || [])];
+                      newHistory[idx].title = e.target.value;
+                      setIsEditing({...isEditing, workHistory: newHistory});
+                    }} className="flex-1 bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-white text-sm focus:outline-none focus:border-[#98cc67]" />
+                    <button type="button" onClick={() => {
+                      const newHistory = isEditing.workHistory?.filter((_, i) => i !== idx);
+                      setIsEditing({...isEditing, workHistory: newHistory});
+                    }} className="p-2 mt-0.5 text-white/30 hover:text-red-400 hover:bg-red-400/10 rounded-lg transition-colors">
+                      <X className="w-4 h-4" />
+                    </button>
+                  </div>
+                ))}
               </div>
 
               <div className="space-y-4 pt-4 border-t border-white/10">

@@ -13,6 +13,8 @@ export type TeamMember = {
   phone?: string;
   calendarUrl?: string;
   expertise?: string[];
+  workHistory?: { company: string; title?: string; years?: string }[];
+  sortOrder?: number;
 };
 
 export const MOCK_TEAM: TeamMember[] = [
@@ -25,7 +27,13 @@ export const MOCK_TEAM: TeamMember[] = [
     fullBio: "A strategic banking executive with a track record of driving innovation across financial institutions. Throughout his career he has held senior leadership roles at City National Bank and Wells Fargo, where he oversaw transformation programs that modernized core platforms, digital channels, and payments systems.",
     imageUrl: "https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2FMichael%20C.png?alt=media&token=eeda6ac0-0f91-4538-acd9-489a8334a7ea",
     linkedinUrl: "https://www.linkedin.com/in/michael-cordas-executive-leadership",
-    email: "michael.cordas@bridge2partners.com"
+    email: "michael.cordas@bridge2partners.com",
+    expertise: ["Core Platforms", "Digital Channels", "Payments Systems"],
+    workHistory: [
+      { company: "City National Bank", title: "Senior Leadership" },
+      { company: "Wells Fargo", title: "Senior Leadership" }
+    ],
+    sortOrder: 1
   },
   {
     id: "chris-caulfield",
@@ -36,7 +44,12 @@ export const MOCK_TEAM: TeamMember[] = [
     fullBio: "An accomplished financial services leader with extensive experience guiding banks and financial institutions through complex digital and operational transformations. As a former Senior Partner at West Monroe, Chris led the firm's Banking practice, specializing in Commercial Banking, Regulatory and Program Management.",
     imageUrl: "https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2FChris%20C.png?alt=media&token=69c281e4-e759-4417-a13b-9ae92973daa9",
     linkedinUrl: "https://www.linkedin.com/in/chris-caulfield-022b409/",
-    email: "chris.caulfield@bridge2partners.com"
+    email: "chris.caulfield@bridge2partners.com",
+    expertise: ["Commercial Banking", "Regulatory", "Program Management"],
+    workHistory: [
+      { company: "West Monroe", title: "Senior Partner" }
+    ],
+    sortOrder: 4
   },
   {
     id: "neil-kjeldsen",
@@ -47,7 +60,9 @@ export const MOCK_TEAM: TeamMember[] = [
     fullBio: "A seasoned technology and banking leader with over 25 years of experience driving transformation across financial services. At Bridge2Partners, Neil blends deep expertise in banking operations, digital strategy, and enterprise technology to deliver measurable business outcomes.",
     imageUrl: "https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2FNeil%20K.png?alt=media&token=8315b88c-95de-4ae4-8171-67274ef8a8ac",
     linkedinUrl: "https://www.linkedin.com/in/neilkjeldsen/",
-    email: "neil.kjeldsen@bridge2partners.com"
+    email: "neil.kjeldsen@bridge2partners.com",
+    expertise: ["Banking Operations", "Digital Strategy", "Enterprise Technology"],
+    sortOrder: 5
   },
   {
     id: "christopher-summers",
@@ -58,7 +73,9 @@ export const MOCK_TEAM: TeamMember[] = [
     fullBio: "Chief Business Officer at Bridge2Partners, specializing in mergers and acquisitions, transaction services, market entry strategy, and large-scale business transformation. Christopher is recognized for aligning business and technology to deliver sustainable results in an evolving financial landscape.",
     imageUrl: "https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2FChris%20S.png?alt=media&token=bc9750bd-8625-4a7b-8538-2a6f78c112f2",
     linkedinUrl: "https://www.linkedin.com/in/christopher-summers-491b02",
-    email: "Christopher.Summers@bridge2partners.com"
+    email: "Christopher.Summers@bridge2partners.com",
+    expertise: ["M&A", "Transaction Services", "Market Entry Strategy"],
+    sortOrder: 6
   },
   {
     id: "kristine-simon",
@@ -69,7 +86,12 @@ export const MOCK_TEAM: TeamMember[] = [
     fullBio: "A banking technology and digital transformation executive with a strong foundation in financial services, including several years at City National Bank. She brings expertise in digital strategy, customer onboarding, data analytics, and platform modernization. Kristine has led initiatives that increased digital adoption, streamlined digital channels, and aligned technology investments with strategic outcomes — driving improved customer experience, reduced service friction, and better use of data to guide product decisions.",
     imageUrl: "https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2FUntitled%20(83).png?alt=media&token=0f0a6e3c-37a0-449f-ac10-a8fa6ad78b0b",
     linkedinUrl: "https://www.linkedin.com/in/kristine-esmaili-simon-b419816/",
-    email: "kristine.simon@bridge2partners.com"
+    email: "kristine.simon@bridge2partners.com",
+    expertise: ["Digital Strategy", "Customer Onboarding", "Data Analytics"],
+    workHistory: [
+      { company: "City National Bank", title: "Executive" }
+    ],
+    sortOrder: 2
   },
   {
     id: "dominick-grillas",
@@ -80,7 +102,13 @@ export const MOCK_TEAM: TeamMember[] = [
     fullBio: "A hands-on thought leader with 25+ years of successful strategic planning, execution and QA/testing of projects and programs that transform organizations and businesses, improve competitive performance, and help banks and financial institutions compete and differentiate. Dominick has a broad range of experience across banking, lending, insurance, and financial services, and with consulting firms such as CapGemini and Wipro.",
     imageUrl: "https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2FDom%20G.png?alt=media&token=4b9631b4-9e8e-4567-b4d0-3cb735adcadf",
     linkedinUrl: "https://www.linkedin.com/in/dominickgrillas",
-    email: "dom.grillas@bridge2partners.com"
+    email: "dom.grillas@bridge2partners.com",
+    expertise: ["Strategic Planning", "QA/Testing"],
+    workHistory: [
+      { company: "CapGemini", title: "Consultant" },
+      { company: "Wipro", title: "Consultant" }
+    ],
+    sortOrder: 7
   },
   {
     id: "kimberly-boroyan",
@@ -91,7 +119,8 @@ export const MOCK_TEAM: TeamMember[] = [
     fullBio: "An accomplished Human Resources leader with over 20 years of experience driving people strategy, organizational development, and cultural transformation. Kimberly has led high-impact initiatives in talent acquisition, leadership development, performance management, employee engagement, and compensation strategy.",
     imageUrl: "https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2FKimberly%20B.png?alt=media&token=c3a7c6d8-1be3-4573-a1ba-d71e6d975467",
     linkedinUrl: "https://www.linkedin.com/in/kimberly-boroyan-shrm-cp-2867567",
-    email: "Kimberly.Boroyan@bridge2partners.com"
+    email: "Kimberly.Boroyan@bridge2partners.com",
+    sortOrder: 3
   },
   {
     id: "aaron-weissberger",
@@ -102,7 +131,13 @@ export const MOCK_TEAM: TeamMember[] = [
     fullBio: "A seasoned executive with over 30 years of experience driving technology-enabled transformation and operational excellence for financial services and technology organizations. With a foundation in Big Four consulting at Ernst & Young and PwC, Aaron has led large-scale initiatives in digital strategy, process optimization, and enterprise technology integration.",
     imageUrl: "https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2FAaron%20W.png?alt=media&token=53d3590a-fd65-46fc-9ba6-2466c0eba115",
     linkedinUrl: "https://www.linkedin.com/in/aaronweissberger/",
-    email: "Aaron.Weissberger@bridge2partners.com"
+    email: "Aaron.Weissberger@bridge2partners.com",
+    expertise: ["Digital Strategy", "Process Optimization", "Enterprise Integration"],
+    workHistory: [
+      { company: "Ernst & Young", title: "Consultant" },
+      { company: "PwC", title: "Consultant" }
+    ],
+    sortOrder: 8
   },
   {
     id: "john-gustav",

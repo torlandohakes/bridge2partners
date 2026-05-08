@@ -14,7 +14,7 @@ import { collection, onSnapshot as onCollectionSnapshot } from "firebase/firesto
 export default function PeoplePage() {
   const [isAdmin, setIsAdmin] = useState(false);
   const [cmsContent, setCmsContent] = useState<Record<string, string>>({});
-  const [activeTab, setActiveTab] = useState<"All" | "Executive Leadership" | "Business Line Leaders" | "Technical Expertise" | "Business Development">("All");
+  const [activeTab, setActiveTab] = useState<"All" | "Executive Leadership" | "Business Line Leaders" | "Technical Expertise" | "Business Development">("Executive Leadership");
 
   const [team, setTeam] = useState<TeamMember[]>([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -46,10 +46,14 @@ export default function PeoplePage() {
         "Business Development": 4
       };
 
-      // Sort team members based on category order
+      // Sort team members based on category order and then by individual sortOrder
       teamData.sort((a, b) => {
-        const orderA = categoryOrder[a.category as keyof typeof categoryOrder] || 99;
-        const orderB = categoryOrder[b.category as keyof typeof categoryOrder] || 99;
+        const catA = categoryOrder[a.category as keyof typeof categoryOrder] || 99;
+        const catB = categoryOrder[b.category as keyof typeof categoryOrder] || 99;
+        if (catA !== catB) return catA - catB;
+        
+        const orderA = a.sortOrder ?? 999;
+        const orderB = b.sortOrder ?? 999;
         return orderA - orderB;
       });
 
@@ -77,7 +81,7 @@ export default function PeoplePage() {
         
         {/* Filtering Tabs */}
         <div className="flex flex-wrap items-center gap-4 mb-16 border-b border-white/10 pb-6">
-          {["All", "Executive Leadership", "Business Line Leaders", "Technical Expertise", "Business Development"].map(tab => (
+          {["Executive Leadership", "Business Line Leaders", "Technical Expertise", "Business Development", "All"].map(tab => (
             <button
               key={tab}
               onClick={() => setActiveTab(tab as any)}
