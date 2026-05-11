@@ -1,5 +1,7 @@
 import { NextResponse } from 'next/server';
 import { Resend } from 'resend';
+import { doc, getDoc } from 'firebase/firestore';
+import { db } from '@/lib/firebase';
 
 // Initialize Resend with fallback for local dev if key is missing
 const resend = process.env.RESEND_API_KEY ? new Resend(process.env.RESEND_API_KEY) : null;
@@ -11,6 +13,17 @@ export async function POST(request: Request) {
 
     if (!name || !email || !date || !time) {
       return NextResponse.json({ error: 'Missing required fields' }, { status: 400 });
+    }
+
+    // Fetch the dynamic sender email from Firestore
+    let senderEmail = 'torlando.hakes@bridge2partners.com'; // Default fallback
+    try {
+      const configSnap = await getDoc(doc(db, 'site-settings', 'email_config'));
+      if (configSnap.exists() && configSnap.data().senderEmail) {
+        senderEmail = configSnap.data().senderEmail;
+      }
+    } catch (e) {
+      console.error('Failed to fetch sender email from Firestore:', e);
     }
 
     // Parse the requested date and time
@@ -85,7 +98,7 @@ export async function POST(request: Request) {
     if (resend) {
       // Send to Client
       const { error: clientError, data: clientData } = await resend.emails.send({
-        from: 'Bridge2Partners <torlando.hakes@bridge2partners.com>',
+        from: `Bridge2Partners <${senderEmail}>`,
         to: email, // Actual client email from the form
         subject: `Tentative: Strategy Call with Bridge2Partners`,
         html: clientEmailHtml,
@@ -106,8 +119,8 @@ export async function POST(request: Request) {
 
       // Send to Internal Team
       const { error: internalError, data: internalData } = await resend.emails.send({
-        from: 'Bridge2Partners <torlando.hakes@bridge2partners.com>', 
-        to: 'torlando.hakes@bridge2partners.com', // Internal address
+        from: `Bridge2Partners <${senderEmail}>`, 
+        to: senderEmail, // Internal address
         subject: `New Call Request: ${name} (${company})`,
         html: internalEmailHtml,
       });

@@ -1,7 +1,10 @@
 'use client';
 
-import React, { useState } from 'react';
-import { X, Calendar as CalendarIcon, Clock, Video, ArrowRight, CheckCircle2 } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { X, Calendar as CalendarIcon, Clock, Video, ArrowRight, CheckCircle2, Save, Loader2 } from 'lucide-react';
+import { auth, db } from '@/lib/firebase';
+import { onAuthStateChanged } from 'firebase/auth';
+import { doc, onSnapshot, setDoc } from 'firebase/firestore';
 
 interface StrategyCallModalProps {
   isOpen: boolean;
@@ -16,6 +19,44 @@ export default function StrategyCallModal({ isOpen, onClose, theme }: StrategyCa
   const [formData, setFormData] = useState({ name: '', email: '', company: '', notes: '' });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isConfirmed, setIsConfirmed] = useState(false);
+
+  const [isAdmin, setIsAdmin] = useState(false);
+  const [adminSenderEmail, setAdminSenderEmail] = useState('');
+  const [isSavingSender, setIsSavingSender] = useState(false);
+
+  useEffect(() => {
+    if (!auth) return;
+    const unsub = onAuthStateChanged(auth, (user) => {
+      setIsAdmin(user !== null);
+    });
+    return () => unsub();
+  }, []);
+
+  useEffect(() => {
+    if (!db || !isAdmin) return;
+    const unsub = onSnapshot(doc(db, 'site-settings', 'email_config'), (docSnap) => {
+      if (docSnap.exists() && docSnap.data().senderEmail) {
+        setAdminSenderEmail(docSnap.data().senderEmail);
+      } else {
+        setAdminSenderEmail('torlando.hakes@bridge2partners.com'); // default
+      }
+    });
+    return () => unsub();
+  }, [isAdmin]);
+
+  const handleSaveSender = async () => {
+    if (!adminSenderEmail) return;
+    setIsSavingSender(true);
+    try {
+      await setDoc(doc(db, 'site-settings', 'email_config'), { senderEmail: adminSenderEmail }, { merge: true });
+      alert('System email configured successfully.');
+    } catch (e) {
+      console.error(e);
+      alert('Failed to save email configuration.');
+    } finally {
+      setIsSavingSender(false);
+    }
+  };
 
   if (!isOpen) return null;
 
@@ -113,6 +154,32 @@ export default function StrategyCallModal({ isOpen, onClose, theme }: StrategyCa
               <p className={`mt-8 font-reading leading-relaxed ${overlayText}`}>
                  Book an immediate technical block with our Senior Partners. We will skip the sales pitch and dive directly into your post-merger integration or legacy architecture constraints.
               </p>
+
+              {isAdmin && (
+                <div className={`mt-8 p-5 rounded-xl border border-dashed ${theme === 'light' ? 'bg-slate-50 border-slate-300' : 'bg-black/40 border-white/20'}`}>
+                  <label className={`block font-ui text-[10px] uppercase tracking-widest mb-2 font-bold flex items-center gap-2 ${theme === 'light' ? 'text-slate-500' : 'text-white/50'}`}>
+                    <span className="w-2 h-2 rounded-full bg-amber-500 animate-pulse"></span> Admin Configuration
+                  </label>
+                  <p className={`text-[10px] mb-3 leading-relaxed ${theme === 'light' ? 'text-slate-600' : 'text-white/60'}`}>
+                    Set the global routing address for automated system emails and internal lead notifications.
+                  </p>
+                  <div className="flex flex-col gap-3">
+                    <input 
+                      type="email" 
+                      value={adminSenderEmail} 
+                      onChange={(e) => setAdminSenderEmail(e.target.value)}
+                      className={`w-full p-2 text-xs rounded-lg border focus:outline-none focus:border-[#98cc67] transition-colors ${theme === 'light' ? 'bg-white border-slate-200 text-slate-900 shadow-inner' : 'bg-white/5 border-white/10 text-white shadow-inner'}`}
+                    />
+                    <button 
+                      onClick={handleSaveSender}
+                      disabled={isSavingSender}
+                      className={`w-full py-2 text-xs font-bold rounded-lg transition-colors flex items-center justify-center shadow-sm hover:scale-[1.02] active:scale-95 ${theme === 'light' ? 'bg-slate-900 hover:bg-slate-800 text-white' : 'bg-white hover:bg-slate-200 text-[#001b15]'}`}
+                    >
+                      {isSavingSender ? <Loader2 className="w-3 h-3 animate-spin" /> : 'Save Configuration'}
+                    </button>
+                  </div>
+                </div>
+              )}
            </div>
         </div>
 

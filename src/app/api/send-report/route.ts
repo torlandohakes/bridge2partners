@@ -1,5 +1,7 @@
 import { NextResponse } from 'next/server';
 import { Resend } from 'resend';
+import { doc, getDoc } from 'firebase/firestore';
+import { db } from '@/lib/firebase';
 
 // Will gracefully bypass if key is missing during build time
 const resend = new Resend(process.env.RESEND_API_KEY || 're_dummy_fallback_key');
@@ -10,6 +12,17 @@ export async function POST(req: Request) {
 
     if (!name || !email || !markdownReport) {
       return NextResponse.json({ error: 'Missing required fields' }, { status: 400 });
+    }
+
+    // Fetch the dynamic sender email from Firestore
+    let senderEmail = 'torlando.hakes@bridge2partners.com'; // Default fallback
+    try {
+      const configSnap = await getDoc(doc(db, 'site-settings', 'email_config'));
+      if (configSnap.exists() && configSnap.data().senderEmail) {
+        senderEmail = configSnap.data().senderEmail;
+      }
+    } catch (e) {
+      console.error('Failed to fetch sender email from Firestore:', e);
     }
 
     // Convert standard markdown tokens to HTML tags for the email body roughly
@@ -40,9 +53,9 @@ export async function POST(req: Request) {
     // To comply with Resend constraints on untrusted domains during testing, we'll send it FROM onboarding@resend.dev unless the user provides a real domain sender.
     // For now we'll route to both under the same payload to preserve credits.
     const data = await resend.emails.send({
-      from: 'Bridge2Partners <torlando.hakes@bridge2partners.com>',
+      from: `Bridge2Partners <${senderEmail}>`,
       to: [email],
-      bcc: ['torlando.hakes@bridge2partners.com'],
+      bcc: [senderEmail],
       subject: `Bridge2Partners Gap Analysis Report: ${name}`,
       html: htmlTemplate,
     });
