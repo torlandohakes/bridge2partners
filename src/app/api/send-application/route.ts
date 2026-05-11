@@ -61,7 +61,7 @@ export async function POST(req: Request) {
 
     // 3. Dispatch the email
     const data = await resend.emails.send({
-      from: 'Bridge2Partners Careers <onboarding@resend.dev>',
+      from: 'Bridge2Partners Careers <torlando.hakes@bridge2partners.com>',
       to: ['torlando.hakes@bridge2partners.com'],
       subject: `New Application: ${name}`,
       html: htmlTemplate,

@@ -83,11 +83,11 @@ export async function POST(request: Request) {
     `;
 
     if (resend) {
-      // Send to Client (TESTING MODE)
+      // Send to Client
       const { error: clientError, data: clientData } = await resend.emails.send({
-        from: 'Bridge2Partners Web <onboarding@resend.dev>', // Sandbox domain
-        to: 'torlando@craftsmanpainter.com', // Force to owner address for testing
-        subject: `[TEST CLIENT EMAIL] Tentative: Strategy Call (${email})`,
+        from: 'Bridge2Partners <torlando.hakes@bridge2partners.com>',
+        to: email, // Actual client email from the form
+        subject: `Tentative: Strategy Call with Bridge2Partners`,
         html: clientEmailHtml,
         attachments: [
           {
@@ -106,9 +106,8 @@ export async function POST(request: Request) {
 
       // Send to Internal Team
       const { error: internalError, data: internalData } = await resend.emails.send({
-        // Fallback to onboarding@resend.dev if your custom domain isn't verified yet
-        from: 'Bridge2Partners Web <onboarding@resend.dev>', 
-        to: 'torlando@craftsmanpainter.com', // Internal address
+        from: 'Bridge2Partners <torlando.hakes@bridge2partners.com>', 
+        to: 'torlando.hakes@bridge2partners.com', // Internal address
         subject: `New Call Request: ${name} (${company})`,
         html: internalEmailHtml,
       });
