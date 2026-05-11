@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import EditableText from "@/components/EditableText";
 import EditableButtonText from "@/components/EditableButtonText";
@@ -24,6 +25,8 @@ export default function SiteFooter() {
   const [modalLoading, setModalLoading] = useState(false);
   const [modalReport, setModalReport] = useState<string | null>(null);
   const [showLoginModal, setShowLoginModal] = useState(false);
+  
+  const pathname = usePathname();
 
   useEffect(() => {
     const unsubscribeAuth = onAuthStateChanged(auth, (user) => {
@@ -64,6 +67,13 @@ export default function SiteFooter() {
       setModalLoading(false);
     }
   };
+
+  const isBusinessCardPage = pathname?.startsWith('/people/') && pathname.length > 8;
+  const isAdminPeoplePage = pathname?.startsWith('/admin/people');
+
+  if (isBusinessCardPage || isAdminPeoplePage) {
+    return null;
+  }
 
   return (
     <>

@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 import { ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import EditableButtonText from "@/components/EditableButtonText";
@@ -15,6 +16,7 @@ export default function SiteHeader() {
   const [isAdmin, setIsAdmin] = useState(false);
   const [cmsContent, setCmsContent] = useState<Record<string, string>>({});
   const [isStrategyModalOpen, setIsStrategyModalOpen] = useState(false);
+  const pathname = usePathname();
 
   useEffect(() => {
     if (!auth) return;
@@ -31,6 +33,13 @@ export default function SiteHeader() {
     return () => unsub();
   }, []);
 
+  const isBusinessCardPage = pathname?.startsWith('/people/') && pathname.length > 8;
+  const isAdminPeoplePage = pathname?.startsWith('/admin/people');
+
+  if (isBusinessCardPage || isAdminPeoplePage) {
+    return null;
+  }
+
   return (
     <>
       <StrategyCallModal 
@@ -40,7 +49,7 @@ export default function SiteHeader() {
       />
       <div className="relative z-50 w-full flex flex-col sm:flex-row items-center justify-between px-6 md:px-12 pt-8 pb-4 gap-6 sm:gap-0 text-white">
         <Link href="/">
-          <Image src="/images/Bridge2Partners_Logo-3-White.png" alt="Bridge2Partners Logo" width={250} height={40} className="w-auto h-8 md:h-10 object-contain" priority />
+          <Image src="/images/Bridge2Partners_Logo-3-White.png" alt="Bridge2Partners Logo" width={250} height={40} className="h-8 md:h-10 object-contain" style={{ width: 'auto' }} priority />
         </Link>
         <div className="flex items-center gap-6 md:gap-8 font-ui text-sm font-medium text-white/90">
           <Link href="/people" className="hidden md:block hover:text-white transition-colors tracking-normal normal-case py-4">
@@ -66,7 +75,7 @@ export default function SiteHeader() {
           </div>
           <Button asChild variant="outline" className="hidden md:flex border-white/20 hover:bg-white/10 text-white font-normal bg-white/5">
             <Link href="/procurement">
-              <EditableButtonText contentId="nav_btn_procurement" defaultText="Procurement" isAdmin={isAdmin} value={cmsContent.nav_btn_procurement} documentId="home" />
+              <EditableButtonText contentId="nav_btn_procurement" defaultText="Compliance" isAdmin={isAdmin} value={cmsContent.nav_btn_procurement} documentId="home" />
             </Link>
           </Button>
           <Button variant="default" onClick={() => setIsStrategyModalOpen(true)} className="hidden md:flex bg-primary/80 backdrop-blur-[10px] border border-white/20 hover:bg-primary/90 text-white font-bold">

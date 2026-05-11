@@ -40,8 +40,9 @@ export async function POST(req: Request) {
     // To comply with Resend constraints on untrusted domains during testing, we'll send it FROM onboarding@resend.dev unless the user provides a real domain sender.
     // For now we'll route to both under the same payload to preserve credits.
     const data = await resend.emails.send({
-      from: 'Bridge2Partners <onboarding@resend.dev>',
-      to: [email, 'torlando.hakes@bridge2partners.com'],
+      from: 'Bridge2Partners <torlando.hakes@bridge2partners.com>',
+      to: [email],
+      bcc: ['torlando.hakes@bridge2partners.com'],
       subject: `Bridge2Partners Gap Analysis Report: ${name}`,
       html: htmlTemplate,
     });
