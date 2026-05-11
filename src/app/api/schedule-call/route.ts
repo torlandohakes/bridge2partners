@@ -110,6 +110,13 @@ export async function POST(request: Request) {
         to: 'torlando.hakes@bridge2partners.com', // Internal address
         subject: `New Call Request: ${name} (${company})`,
         html: internalEmailHtml,
+        attachments: [
+          {
+            filename: 'invite.ics',
+            content: buffer,
+            contentType: 'text/calendar'
+          }
+        ]
       });
 
       if (internalError) {
