@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import { Resend } from 'resend';
-import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
+import { collection, addDoc, serverTimestamp, doc, getDoc } from 'firebase/firestore';
 import { db } from '@/lib/firebase';
 
 // Will gracefully bypass if key is missing during build time
@@ -19,6 +19,17 @@ export async function POST(req: Request) {
 
     if (!name || !email || !linkedin || !resume) {
       return NextResponse.json({ error: 'Missing required fields' }, { status: 400 });
+    }
+
+    // Fetch the dynamic sender email from Firestore
+    let senderEmail = 'torlando.hakes@bridge2partners.com'; // Default fallback
+    try {
+      const configSnap = await getDoc(doc(db, 'site-settings', 'email_config'));
+      if (configSnap.exists() && configSnap.data().senderEmail) {
+        senderEmail = configSnap.data().senderEmail;
+      }
+    } catch (e) {
+      console.error('Failed to fetch sender email from Firestore:', e);
     }
 
     // Convert the File object into a Buffer for the Resend attachment
@@ -61,8 +72,8 @@ export async function POST(req: Request) {
 
     // 3. Dispatch the email
     const data = await resend.emails.send({
-      from: 'Bridge2Partners Careers <torlando.hakes@bridge2partners.com>',
-      to: ['torlando.hakes@bridge2partners.com'],
+      from: `Bridge2Partners Careers <${senderEmail}>`,
+      to: [senderEmail],
       subject: `New Application: ${name}`,
       html: htmlTemplate,
       attachments: [
