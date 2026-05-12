@@ -35,8 +35,9 @@ export default function SiteHeader() {
 
   const isBusinessCardPage = pathname?.startsWith('/people/') && pathname.length > 8;
   const isAdminPeoplePage = pathname?.startsWith('/admin/people');
+  const isHiddenPage = pathname === '/brand' || pathname === '/social-asset-studio';
 
-  if (isBusinessCardPage || isAdminPeoplePage) {
+  if (isBusinessCardPage || isAdminPeoplePage || isHiddenPage) {
     return null;
   }
 
