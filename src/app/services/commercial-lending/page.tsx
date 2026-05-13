@@ -138,17 +138,19 @@ export default function CommercialLendingService() {
         </div>
 
         {/* Tech Partnerships Section */}
-        <div className="max-w-5xl mx-auto pt-8 border-t border-white/10">
-           <h3 className="text-xl font-display font-bold text-center text-white mb-6">
-             <EditableText element="span" contentId="tech_partners_h3" defaultText="Technology Partnerships" isAdmin={isAdmin} documentId="commercial-lending" value={cmsContent.tech_partners_h3} />
-           </h3>
-           <EditableLogoStrip 
-             documentId="commercial-lending"
-             contentId="tech_partners_logos"
-             isAdmin={isAdmin}
-             logos={cmsContent.tech_partners_logos as unknown as string[]}
-           />
-        </div>
+        {(isAdmin || (cmsContent.tech_partners_logos && (cmsContent.tech_partners_logos as unknown as string[]).length > 0)) && (
+          <div className="max-w-5xl mx-auto pt-8 border-t border-white/10">
+             <h3 className="text-xl font-display font-bold text-center text-white mb-6">
+               <EditableText element="span" contentId="tech_partners_h3" defaultText="Technology Partnerships" isAdmin={isAdmin} documentId="commercial-lending" value={cmsContent.tech_partners_h3} />
+             </h3>
+             <EditableLogoStrip 
+               documentId="commercial-lending"
+               contentId="tech_partners_logos"
+               isAdmin={isAdmin}
+               logos={cmsContent.tech_partners_logos as unknown as string[]}
+             />
+          </div>
+        )}
       </div>
     </main>
   );
