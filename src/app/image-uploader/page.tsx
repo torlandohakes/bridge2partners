@@ -1,11 +1,13 @@
 "use client";
 
-import React, { useState, useCallback, useRef } from "react";
-import { UploadCloud, Copy, FileIcon, CheckCircle2, FileText, Database, Archive, Image as ImageIcon } from "lucide-react";
+import React, { useState, useCallback, useRef, useEffect } from "react";
+import { UploadCloud, Copy, FileIcon, CheckCircle2, FileText, Database, Archive, Image as ImageIcon, Loader2 } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { storage } from "@/lib/firebase";
+import { storage, auth } from "@/lib/firebase";
+import { onAuthStateChanged } from "firebase/auth";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+import LoginModal from "@/components/LoginModal";
 
 interface UploadedAsset {
   url: string;
@@ -19,6 +21,16 @@ export default function AssetUploaderPage() {
   const [uploadProgress, setUploadProgress] = useState(0); // overall percentage
   const [uploadedAssets, setUploadedAssets] = useState<UploadedAsset[]>([]);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const [isAdmin, setIsAdmin] = useState<boolean | null>(null); // null = loading
+  const [showLoginModal, setShowLoginModal] = useState(false);
+
+  useEffect(() => {
+    if (!auth) return;
+    const unsub = onAuthStateChanged(auth, (user) => {
+      setIsAdmin(user !== null && user.email === 'torlando.hakes@bridge2partners.com');
+    });
+    return () => unsub();
+  }, []);
 
   const MAX_FILE_SIZE = 50 * 1024 * 1024; // Increased to 50MB for databases/PDFs
 
@@ -151,6 +163,27 @@ export default function AssetUploaderPage() {
       </div>
     );
   };
+
+  if (isAdmin === null) {
+    return <div className="min-h-screen bg-[#000d0a] flex items-center justify-center"><Loader2 className="w-8 h-8 animate-spin text-primary" /></div>;
+  }
+
+  if (isAdmin === false) {
+    return (
+      <div className="min-h-screen bg-[#000d0a] flex items-center justify-center p-8">
+        <div className="text-center">
+          <h1 className="text-2xl font-bold text-white mb-4">Unauthorized Access</h1>
+          <p className="text-white/60 mb-6">You must be an administrator to access the Asset Uploader.</p>
+          <Button onClick={() => setShowLoginModal(true)}>Admin Login</Button>
+        </div>
+        <LoginModal 
+          isOpen={showLoginModal} 
+          onClose={() => setShowLoginModal(false)} 
+          theme="dark" 
+        />
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-slate-50 text-foreground selection:bg-primary/20 relative overflow-hidden py-16 px-6">

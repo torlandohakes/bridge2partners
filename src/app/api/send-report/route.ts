@@ -33,6 +33,12 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: 'Missing required fields' }, { status: 400 });
     }
 
+    // Security Check: ReDoS Prevention
+    const MAX_REPORT_LENGTH = 50000;
+    if (markdownReport.length > MAX_REPORT_LENGTH) {
+      return NextResponse.json({ error: 'Payload too large.' }, { status: 400 });
+    }
+
     // Fetch the dynamic sender email from Firestore
     let senderEmail = 'torlando.hakes@bridge2partners.com'; // Default fallback
     try {
