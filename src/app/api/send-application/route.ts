@@ -120,7 +120,7 @@ export async function POST(req: Request) {
       ]
     });
 
-    if (error) throw new Error(\`Failed to send application: \${error.message}\`);
+    if (error) throw new Error(`Failed to send application: ${error.message}`);
 
     return NextResponse.json({ success: true, data });
 

@@ -87,7 +87,7 @@ export async function POST(req: Request) {
       html: htmlTemplate,
     });
 
-    if (userError) throw new Error(\`Failed to send to user: \${userError.message}\`);
+    if (userError) throw new Error(`Failed to send to user: ${userError.message}`);
 
     // 2. Send copy to Internal Team
     const { error: internalError } = await resend.emails.send({
@@ -97,7 +97,7 @@ export async function POST(req: Request) {
       html: htmlTemplate,
     });
 
-    if (internalError) throw new Error(\`Failed to send to internal team: \${internalError.message}\`);
+    if (internalError) throw new Error(`Failed to send to internal team: ${internalError.message}`);
 
     return NextResponse.json({ success: true, data: userData });
 
