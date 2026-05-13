@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server';
 import { Resend } from 'resend';
 import { doc, getDoc } from 'firebase/firestore';
 import { db } from '@/lib/firebase';
+import { escapeHtml } from '@/lib/utils';
 
 // Will gracefully bypass if key is missing during build time
 const resend = new Resend(process.env.RESEND_API_KEY || 're_dummy_fallback_key');
@@ -43,9 +44,14 @@ export async function POST(req: Request) {
       console.error('Failed to fetch sender email from Firestore:', e);
     }
 
+    const safeName = escapeHtml(name);
+    const safeEmail = escapeHtml(email);
+    const safePhone = escapeHtml(phone);
+
     // Convert standard markdown tokens to HTML tags for the email body roughly
     // Using a simple regex since 'marked' wasn't natively installed above to keep it minimal and dependency-free
-    let htmlReport = markdownReport
+    let safeMarkdownReport = escapeHtml(markdownReport);
+    let htmlReport = safeMarkdownReport
       .replace(/^### (.*$)/gim, '<h3>$1</h3>')
       .replace(/^## (.*$)/gim, '<h2>$1</h2>')
       .replace(/^# (.*$)/gim, '<h1>$1</h1>')
@@ -57,9 +63,9 @@ export async function POST(req: Request) {
 
     const htmlTemplate = `
       <div style="font-family: sans-serif; max-w-4xl; margin: 0 auto; color: #111;">
-        <h2>Gap Analysis Report for ${name}</h2>
-        <p><strong>Email:</strong> ${email}</p>
-        <p><strong>Phone:</strong> ${phone || 'Not provided'}</p>
+        <h2>Gap Analysis Report for ${safeName}</h2>
+        <p><strong>Email:</strong> ${safeEmail}</p>
+        <p><strong>Phone:</strong> ${safePhone || 'Not provided'}</p>
         <hr style="border: 1px solid #eaeaea; margin: 20px 0;" />
         <div style="background: #fdfdfd; padding: 20px; border-radius: 8px; border: 1px solid #eaeaea;">
           ${htmlReport}
@@ -67,14 +73,19 @@ export async function POST(req: Request) {
       </div>
     `;
 
-    // Dispatch 1: Send to the user who requested the report (Using the generic standard sender if domain not verified, but usually users use hello@)
-    // To comply with Resend constraints on untrusted domains during testing, we'll send it FROM onboarding@resend.dev unless the user provides a real domain sender.
-    // For now we'll route to both under the same payload to preserve credits.
+    // Dispatch 1: Send to the user who requested the report
     const data = await resend.emails.send({
       from: `Bridge2Partners <${senderEmail}>`,
       to: [email],
-      bcc: [senderEmail],
       subject: `Bridge2Partners Gap Analysis Report: ${name}`,
+      html: htmlTemplate,
+    });
+
+    // 2. Send copy to Internal Team
+    const { error: internalError } = await resend.emails.send({
+      from: `Bridge2Partners Analysis <${senderEmail}>`,
+      to: senderEmail,
+      subject: `New Gap Analysis Generated for ${safeName}`,
       html: htmlTemplate,
     });
 

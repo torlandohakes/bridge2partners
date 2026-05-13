@@ -31,7 +31,7 @@ export default function SiteFooter() {
   useEffect(() => {
     const unsubscribeAuth = onAuthStateChanged(auth, (user) => {
       setUser(user);
-      setIsAdmin(!!user);
+      setIsAdmin(user !== null && user.email === 'torlando.hakes@bridge2partners.com');
     });
 
     const docRef = doc(db, 'site-content', 'home');
