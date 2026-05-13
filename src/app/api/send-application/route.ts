@@ -107,7 +107,7 @@ export async function POST(req: Request) {
     `;
 
     // 3. Dispatch the email
-    const data = await resend.emails.send({
+    const { data, error } = await resend.emails.send({
       from: `Bridge2Partners Careers <${senderEmail}>`,
       to: [senderEmail],
       subject: `New Application: ${safeName}`,
@@ -119,6 +119,8 @@ export async function POST(req: Request) {
         }
       ]
     });
+
+    if (error) throw new Error(\`Failed to send application: \${error.message}\`);
 
     return NextResponse.json({ success: true, data });
 
