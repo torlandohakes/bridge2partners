@@ -29,6 +29,16 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: 'Prompt is required' }, { status: 400 });
     }
 
+    // Security Check: Token Exhaustion Prevention
+    if (prompt.length > 2000) {
+      return NextResponse.json({ error: 'Prompt exceeds maximum allowed length of 2000 characters.' }, { status: 400 });
+    }
+    
+    // Security Check: Payload Size Exhaustion
+    if (currentSlides && JSON.stringify(currentSlides).length > 50000) {
+       return NextResponse.json({ error: 'Current slides payload is too large.' }, { status: 400 });
+    }
+
     const model = genAI.getGenerativeModel({ 
       model: 'gemini-2.5-flash',
       generationConfig: { responseMimeType: 'application/json' }
