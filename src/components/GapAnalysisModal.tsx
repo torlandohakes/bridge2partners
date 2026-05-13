@@ -4,8 +4,6 @@ import React, { useState } from 'react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import { ShieldAlert, X, Loader2, FileText, Send, CheckCircle2 } from 'lucide-react';
-import { db } from '../lib/firebase';
-import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
 
 interface GapAnalysisModalProps {
   isOpen: boolean;
@@ -31,16 +29,23 @@ export default function GapAnalysisModal({ isOpen, onClose, reportMarkdown, isLo
     setEmailError('');
 
     try {
-      if (!db) throw new Error("Firestore not initialized. Verify Firebase config.");
-      
-      await addDoc(collection(db, 'gap-analysis-leads'), {
-        name,
-        email,
-        phone: phone || null,
-        markdownReport: reportMarkdown,
-        status: 'new',
-        createdAt: serverTimestamp()
+      const response = await fetch('/api/send-report', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name,
+          email,
+          phone,
+          markdownReport: reportMarkdown
+        }),
       });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || 'Failed to send report.');
+      }
 
       setEmailSuccess(true);
     } catch (err: any) {
