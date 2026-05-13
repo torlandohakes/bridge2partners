@@ -156,7 +156,7 @@ export default function Home() {
   // Authentication State
   const [user, setUser] = useState<User | null>(null);
   const [showLoginModal, setShowLoginModal] = useState(false);
-  const isAdmin = user !== null;
+  const isAdmin = user !== null && user.email === 'torlando.hakes@bridge2partners.com';
 
   // Real-time CMS State
   const [cmsContent, setCmsContent] = useState<Record<string, string>>({});
@@ -174,7 +174,6 @@ export default function Home() {
     if (!auth) return;
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       setUser(user);
-      setIsAdmin(user !== null && user.email === 'torlando.hakes@bridge2partners.com');
     });
     return () => unsubscribe();
   }, []);
