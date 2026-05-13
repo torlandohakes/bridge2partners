@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import SubpageHero from "@/components/SubpageHero";
 import EditableText from "@/components/EditableText";
+import EditableLogoStrip from "@/components/EditableLogoStrip";
 
 import { auth, db } from "@/lib/firebase";
 import { onAuthStateChanged } from "firebase/auth";
@@ -134,6 +135,19 @@ export default function CommercialLendingService() {
           <div className="break-inside-avoid">
             <EditableText element="span" contentId="explainer_p_2" defaultText="By streamlining your commercial lending infrastructure, you drastically reduce time-to-decision, enabling your relationship managers to win more deals and grow their portfolios. Without this rigorous alignment, you risk frustrating your best clients with sluggish approvals, burning out your underwriting teams with manual rework, and ultimately losing highly profitable commercial relationships to more agile competitors." isAdmin={isAdmin} documentId="commercial-lending" value={cmsContent.explainer_p_2} />
           </div>
+        </div>
+
+        {/* Tech Partnerships Section */}
+        <div className="max-w-5xl mx-auto pt-8 border-t border-white/10">
+           <h3 className="text-xl font-display font-bold text-center text-white mb-6">
+             <EditableText element="span" contentId="tech_partners_h3" defaultText="Technology Partnerships" isAdmin={isAdmin} documentId="commercial-lending" value={cmsContent.tech_partners_h3} />
+           </h3>
+           <EditableLogoStrip 
+             documentId="commercial-lending"
+             contentId="tech_partners_logos"
+             isAdmin={isAdmin}
+             logos={cmsContent.tech_partners_logos as unknown as string[]}
+           />
         </div>
       </div>
     </main>

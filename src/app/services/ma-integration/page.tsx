@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import SubpageHero from "@/components/SubpageHero";
 import EditableText from "@/components/EditableText";
+import EditableLogoStrip from "@/components/EditableLogoStrip";
 import { auth, db } from "@/lib/firebase";
 import { onAuthStateChanged } from "firebase/auth";
 import { doc, onSnapshot } from "firebase/firestore";
@@ -133,6 +134,19 @@ export default function MAIntegrationService() {
           <div className="break-inside-avoid">
             <EditableText element="span" contentId="explainer_p_2" defaultText="By integrating successfully, you achieve seamless business continuity—meaning no 'broken' transitions. We engineer a technology roadmap that actively supports the new, larger organization rather than hindering it, leading to the accelerated realization of synergies and benefits. Without this rigorous execution framework, you face delayed ROI, massive operational drag that frustrates your employees, and a potential loss of financial control during the critical first 90 days. We ensure your merger is treated as a strategic catalyst, not just an IT survival exercise." isAdmin={isAdmin} documentId="ma-integration" value={cmsContent.explainer_p_2} />
           </div>
+        </div>
+
+        {/* Tech Partnerships Section */}
+        <div className="max-w-5xl mx-auto pt-8 border-t border-white/10">
+           <h3 className="text-xl font-display font-bold text-center text-white mb-6">
+             <EditableText element="span" contentId="tech_partners_h3" defaultText="Technology Partnerships" isAdmin={isAdmin} documentId="ma-integration" value={cmsContent.tech_partners_h3} />
+           </h3>
+           <EditableLogoStrip 
+             documentId="ma-integration"
+             contentId="tech_partners_logos"
+             isAdmin={isAdmin}
+             logos={cmsContent.tech_partners_logos as unknown as string[]}
+           />
         </div>
       </div>
     </main>
