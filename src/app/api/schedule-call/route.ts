@@ -6,8 +6,26 @@ import { db } from '@/lib/firebase';
 // Initialize Resend with fallback for local dev if key is missing
 const resend = process.env.RESEND_API_KEY ? new Resend(process.env.RESEND_API_KEY) : null;
 
+const rateLimitMap = new Map<string, { count: number, resetTime: number }>();
+const RATE_LIMIT = 5; // Max 5 requests per IP
+const WINDOW_MS = 60 * 1000; // 1 minute window
+
 export async function POST(request: Request) {
   try {
+    const ip = request.headers.get('x-forwarded-for') || 'unknown-ip';
+    
+    // Rate Limiting Logic
+    const now = Date.now();
+    const clientRecord = rateLimitMap.get(ip);
+    
+    if (clientRecord && now < clientRecord.resetTime) {
+      if (clientRecord.count >= RATE_LIMIT) {
+        return NextResponse.json({ error: 'Too many requests. Please try again later.' }, { status: 429 });
+      }
+      clientRecord.count++;
+    } else {
+      rateLimitMap.set(ip, { count: 1, resetTime: now + WINDOW_MS });
+    }
     const data = await request.json();
     const { name, email, company, notes, date, time } = data;
 
