@@ -27,12 +27,26 @@ export default function EditableLogoStrip({
     if (!e.target.files || e.target.files.length === 0) return;
 
     const files = Array.from(e.target.files);
+    
+    // Security Validation: Ensure 5MB max size and correct MIME type
+    const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5MB
+    const validFiles = files.filter(f => f.size <= MAX_FILE_SIZE && f.type.startsWith('image/'));
+
+    if (validFiles.length < files.length) {
+      alert(`Some files were skipped. Ensure files are images and under 5MB.`);
+    }
+
+    if (validFiles.length === 0) {
+      if (fileInputRef.current) fileInputRef.current.value = "";
+      return;
+    }
+
     setIsUploading(true);
 
     const newUrls: string[] = [];
 
     try {
-      for (const file of files) {
+      for (const file of validFiles) {
         // Upload to Firebase Storage
         const fileRef = ref(storage, `images/logos/${Date.now()}_${file.name}`);
         const uploadTask = uploadBytesResumable(fileRef, file);

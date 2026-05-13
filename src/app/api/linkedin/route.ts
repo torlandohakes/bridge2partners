@@ -1,6 +1,25 @@
 import { NextResponse } from 'next/server';
 
+const rateLimitMap = new Map<string, { count: number, resetTime: number }>();
+const RATE_LIMIT = 10; // Max 10 requests per IP per minute
+const WINDOW_MS = 60 * 1000; // 1 minute window
+
 export async function GET(request: Request) {
+  const ip = request.headers.get('x-forwarded-for') || 'unknown-ip';
+  
+  // Rate Limiting Logic
+  const now = Date.now();
+  const clientRecord = rateLimitMap.get(ip);
+  
+  if (clientRecord && now < clientRecord.resetTime) {
+    if (clientRecord.count >= RATE_LIMIT) {
+      return NextResponse.json({ error: 'Too many requests.' }, { status: 429 });
+    }
+    clientRecord.count++;
+  } else {
+    rateLimitMap.set(ip, { count: 1, resetTime: now + WINDOW_MS });
+  }
+
   const { searchParams } = new URL(request.url);
   const tag = searchParams.get('tag')?.toLowerCase();
 
