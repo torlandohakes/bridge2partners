@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import SubpageHero from "@/components/SubpageHero";
 import EditableText from "@/components/EditableText";
+import EditableLogoStrip from "@/components/EditableLogoStrip";
 import { auth, db } from "@/lib/firebase";
 import { onAuthStateChanged } from "firebase/auth";
 import { doc, onSnapshot } from "firebase/firestore";
@@ -133,6 +134,19 @@ export default function TreasuryService() {
           <div className="break-inside-avoid">
             <EditableText element="span" contentId="explainer_p_2" defaultText="Our approach drastically shortens onboarding times, allowing clients to generate transaction revenue faster with a 'Single Pane of Glass' view that replaces manual rekeying. We empower your Operations and Treasury teams to deliver an 'Apple-like' client experience. Without this alignment, you risk fractured trust, operational burnout, and losing your competitive advantage as fintechs continue to 'eat the banks' lunch.'" isAdmin={isAdmin} documentId="treasury" value={cmsContent.explainer_p_2} />
           </div>
+        </div>
+
+        {/* Tech Partnerships Section */}
+        <div className="max-w-5xl mx-auto pt-8 border-t border-white/10">
+           <h3 className="text-xl font-display font-bold text-center text-white mb-6">
+             <EditableText element="span" contentId="tech_partners_h3" defaultText="Technology Partnerships" isAdmin={isAdmin} documentId="treasury" value={cmsContent.tech_partners_h3} />
+           </h3>
+           <EditableLogoStrip 
+             documentId="treasury"
+             contentId="tech_partners_logos"
+             isAdmin={isAdmin}
+             logos={cmsContent.tech_partners_logos as unknown as string[]}
+           />
         </div>
       </div>
     </main>
