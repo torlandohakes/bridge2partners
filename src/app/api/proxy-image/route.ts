@@ -8,6 +8,23 @@ export async function GET(request: Request) {
     return new NextResponse('Missing url parameter', { status: 400 });
   }
 
+  // SSRF Protection: Restrict allowed domains
+  const ALLOWED_DOMAINS = [
+    'firebasestorage.googleapis.com',
+    'cdn.prod.website-files.com',
+    'lh3.googleusercontent.com'
+  ];
+
+  try {
+    const parsedUrl = new URL(url);
+    if (!ALLOWED_DOMAINS.includes(parsedUrl.hostname)) {
+      console.warn(`Blocked SSRF attempt to fetch from unauthorized domain: ${parsedUrl.hostname}`);
+      return new NextResponse('Forbidden: Domain not allowed', { status: 403 });
+    }
+  } catch (error) {
+    return new NextResponse('Invalid url parameter', { status: 400 });
+  }
+
   try {
     const res = await fetch(url);
     if (!res.ok) throw new Error(`Failed to fetch image: ${res.statusText}`);
