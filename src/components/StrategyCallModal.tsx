@@ -26,9 +26,7 @@ export default function StrategyCallModal({ isOpen, onClose, theme }: StrategyCa
 
   useEffect(() => {
     if (!auth) return;
-    const unsub = onAuthStateChanged(auth, (user) => {
-      setIsAdmin(user !== null);
-    });
+    const unsub = onAuthStateChanged(auth, (user) => setIsAdmin(user !== null && user.email === 'torlando.hakes@bridge2partners.com'));
     return () => unsub();
   }, []);
 
