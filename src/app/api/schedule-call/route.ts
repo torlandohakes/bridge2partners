@@ -143,6 +143,7 @@ export async function POST(request: Request) {
 
       if (clientError) {
         console.error("Failed to send client email via Resend.", clientError.message);
+        throw new Error(`Failed to send to client: ${clientError.message}`);
       } else {
         console.log("Client email sent successfully.", clientData);
       }
@@ -157,17 +158,19 @@ export async function POST(request: Request) {
 
       if (internalError) {
         console.error("Failed to send internal notification via Resend.", internalError.message);
+        throw new Error(`Failed to send to internal team: ${internalError.message}`);
       } else {
-        console.log("Internal notification email sent successfully.", internalData);
+        console.log("Internal notification sent successfully.", internalData);
       }
+
+      return NextResponse.json({ success: true });
     } else {
       console.log("Mocking email send because RESEND_API_KEY is not configured.");
       console.log("Client Email:", clientEmailHtml);
       console.log("Internal Email:", internalEmailHtml);
       console.log("ICS Attachment length:", buffer.length);
+      return NextResponse.json({ success: true });
     }
-
-    return NextResponse.json({ success: true });
 
   } catch (error) {
     console.error('Error scheduling call:', error);
