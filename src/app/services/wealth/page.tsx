@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import SubpageHero from "@/components/SubpageHero";
 import EditableText from "@/components/EditableText";
+import EditableLogoStrip from "@/components/EditableLogoStrip";
 import { auth, db } from "@/lib/firebase";
 import { onAuthStateChanged } from "firebase/auth";
 import { doc, onSnapshot } from "firebase/firestore";
@@ -133,6 +134,19 @@ export default function WealthManagementService() {
           <p className="break-inside-avoid">
             <EditableText element="span" contentId="explainer_p_2" defaultText="We back up our strategic expertise with a deep bench of cross-industry technical talent to ensure the job gets done right the first time. By executing rapidly and flawlessly, FAs become highly productive and loyal, the firm captures more wallet share, and you become the undisputed champion of a seamless, modern client experience—avoiding the severe professional consequences of a botched implementation." isAdmin={isAdmin} documentId="wealth" value={cmsContent.explainer_p_2} />
           </p>
+        </div>
+
+        {/* Tech Partnerships Section */}
+        <div className="max-w-5xl mx-auto pt-8 border-t border-white/10">
+           <h3 className="text-xl font-display font-bold text-center text-white mb-6">
+             <EditableText element="span" contentId="tech_partners_h3" defaultText="Technology Partnerships" isAdmin={isAdmin} documentId="wealth" value={cmsContent.tech_partners_h3} />
+           </h3>
+           <EditableLogoStrip 
+             documentId="wealth"
+             contentId="tech_partners_logos"
+             isAdmin={isAdmin}
+             logos={cmsContent.tech_partners_logos as unknown as string[]}
+           />
         </div>
       </div>
     </main>
