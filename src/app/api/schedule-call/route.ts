@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server';
 import { Resend } from 'resend';
 import { doc, getDoc } from 'firebase/firestore';
 import { db } from '@/lib/firebase';
+import { escapeHtml } from '@/lib/utils';
 
 // Initialize Resend with fallback for local dev if key is missing
 const resend = process.env.RESEND_API_KEY ? new Resend(process.env.RESEND_API_KEY) : null;
@@ -32,6 +33,12 @@ export async function POST(request: Request) {
     if (!name || !email || !date || !time) {
       return NextResponse.json({ error: 'Missing required fields' }, { status: 400 });
     }
+
+    // Sanitize user inputs to prevent HTML injection
+    const safeName = escapeHtml(name);
+    const safeEmail = escapeHtml(email);
+    const safeCompany = escapeHtml(company);
+    const safeNotes = escapeHtml(notes);
 
     // Fetch the dynamic sender email from Firestore
     let senderEmail = 'torlando.hakes@bridge2partners.com'; // Default fallback
@@ -103,12 +110,17 @@ export async function POST(request: Request) {
     `;
 
     const internalEmailHtml = `
-      <h2>New Strategy Call Request</h2>
-      <p><strong>Name:</strong> ${name}</p>
-      <p><strong>Email:</strong> ${email}</p>
-      <p><strong>Company:</strong> ${company || 'N/A'}</p>
-      <p><strong>Requested Time:</strong> ${dateString} at ${time}</p>
-      <p><strong>Notes:</strong> ${notes || 'None provided'}</p>
+      <div style="font-family: sans-serif; max-w-600px; margin: 0 auto; color: #111;">
+        <h2 style="color: #00573f;">New Strategy Call Scheduled</h2>
+        <p>A new strategy call has been requested.</p>
+        <div style="background: #fdfdfd; padding: 20px; border-radius: 8px; border: 1px solid #eaeaea; margin-bottom: 20px;">
+          <p><strong>Name:</strong> ${safeName}</p>
+          <p><strong>Email:</strong> <a href="mailto:${safeEmail}">${safeEmail}</a></p>
+          <p><strong>Company:</strong> ${safeCompany || 'Not provided'}</p>
+          <p><strong>Notes:</strong> ${safeNotes || 'None'}</p>
+          <p><strong>Requested Date:</strong> ${dateString}</p>
+          <p><strong>Requested Time:</strong> ${time}</p>
+        </div>
       <br/>
       <p><em>Action Required: Please review and reach out to the client to confirm or reschedule.</em></p>
     `;
@@ -139,7 +151,7 @@ export async function POST(request: Request) {
       const { error: internalError, data: internalData } = await resend.emails.send({
         from: `Bridge2Partners <${senderEmail}>`, 
         to: senderEmail, // Internal address
-        subject: `New Call Request: ${name} (${company})`,
+        subject: `New Call Request: ${safeName} (${safeCompany})`,
         html: internalEmailHtml,
         attachments: [
           {

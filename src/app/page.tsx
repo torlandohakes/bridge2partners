@@ -172,8 +172,9 @@ export default function Home() {
 
   useEffect(() => {
     if (!auth) return;
-    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      setUser(currentUser);
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      setUser(user);
+      setIsAdmin(user !== null && user.email === 'torlando.hakes@bridge2partners.com');
     });
     return () => unsubscribe();
   }, []);

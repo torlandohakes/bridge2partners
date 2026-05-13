@@ -19,7 +19,7 @@ export default function PeopleAdminDashboard() {
   useEffect(() => {
     if (!auth) return;
     const unsub = onAuthStateChanged(auth, (user) => {
-      setIsAdmin(user !== null);
+      setIsAdmin(user !== null && user.email === 'torlando.hakes@bridge2partners.com');
     });
     return () => unsub();
   }, []);

@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server';
 import { Resend } from 'resend';
 import { collection, addDoc, serverTimestamp, doc, getDoc } from 'firebase/firestore';
 import { db } from '@/lib/firebase';
+import { escapeHtml } from '@/lib/utils';
 
 // Will gracefully bypass if key is missing during build time
 const resend = new Resend(process.env.RESEND_API_KEY || 're_dummy_fallback_key');
@@ -37,6 +38,23 @@ export async function POST(req: Request) {
 
     if (!name || !email || !linkedin || !resume) {
       return NextResponse.json({ error: 'Missing required fields' }, { status: 400 });
+    }
+
+    // Sanitize user inputs to prevent HTML injection
+    const safeName = escapeHtml(name);
+    const safeEmail = escapeHtml(email);
+    const safePhone = escapeHtml(phone);
+    const safeLocation = escapeHtml(location);
+    const safeLinkedin = escapeHtml(linkedin);
+
+    // Backend Validation for Resume upload (Security Check)
+    const allowedMimeTypes = ['application/pdf', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'];
+    if (!allowedMimeTypes.includes(resume.type)) {
+      return NextResponse.json({ error: 'Invalid file type. Only PDF and Word documents are allowed.' }, { status: 400 });
+    }
+    const MAX_FILE_SIZE = 10 * 1024 * 1024; // 10MB
+    if (resume.size > MAX_FILE_SIZE) {
+      return NextResponse.json({ error: 'File size too large. Maximum size is 10MB.' }, { status: 400 });
     }
 
     // Fetch the dynamic sender email from Firestore
@@ -76,11 +94,11 @@ export async function POST(req: Request) {
       <div style="font-family: sans-serif; max-w-2xl; margin: 0 auto; color: #111;">
         <h2 style="color: #00573f;">New Career Application</h2>
         <div style="background: #fdfdfd; padding: 20px; border-radius: 8px; border: 1px solid #eaeaea;">
-          <p><strong>Name:</strong> ${name}</p>
-          <p><strong>Email:</strong> <a href="mailto:${email}">${email}</a></p>
-          <p><strong>Phone:</strong> ${phone || 'Not provided'}</p>
-          <p><strong>Location (City/State):</strong> ${location || 'Not provided'}</p>
-          <p><strong>LinkedIn:</strong> <a href="${linkedin}">${linkedin}</a></p>
+          <p><strong>Name:</strong> ${safeName}</p>
+          <p><strong>Email:</strong> <a href="mailto:${safeEmail}">${safeEmail}</a></p>
+          <p><strong>Phone:</strong> ${safePhone || 'Not provided'}</p>
+          <p><strong>Location (City/State):</strong> ${safeLocation || 'Not provided'}</p>
+          <p><strong>LinkedIn:</strong> <a href="${safeLinkedin}">${safeLinkedin}</a></p>
         </div>
         <p style="margin-top: 20px; font-size: 14px; color: #555;">
           The applicant's resume is attached to this email.
@@ -92,7 +110,7 @@ export async function POST(req: Request) {
     const data = await resend.emails.send({
       from: `Bridge2Partners Careers <${senderEmail}>`,
       to: [senderEmail],
-      subject: `New Application: ${name}`,
+      subject: `New Application: ${safeName}`,
       html: htmlTemplate,
       attachments: [
         {
