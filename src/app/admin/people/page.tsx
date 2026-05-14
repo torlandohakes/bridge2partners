@@ -6,7 +6,7 @@ import { onAuthStateChanged } from "firebase/auth";
 import { collection, onSnapshot, doc, setDoc, deleteDoc, getDocs } from "firebase/firestore";
 import { TeamMember, MOCK_TEAM } from "@/app/people/data";
 import Image from "next/image";
-import { Trash2, Edit2, Plus, Upload, Loader2, Save, X } from "lucide-react";
+import { Trash2, Edit2, Plus, Upload, Loader2, Save, X, EyeOff, QrCode } from "lucide-react";
 import LoginModal from "@/components/LoginModal";
 
 export default function PeopleAdminDashboard() {
@@ -154,7 +154,7 @@ export default function PeopleAdminDashboard() {
             </button>
             <button 
               onClick={() => setIsEditing({
-                id: '', name: '', title: '', category: 'Executive Leadership', bio: '', fullBio: '', imageUrl: ''
+                id: '', name: '', title: '', category: 'Executive Leadership', bio: '', fullBio: '', imageUrl: '', showOnPeoplePage: true, hasDigitalBusinessCard: true
               })}
               className="px-4 py-2 bg-[#98cc67] hover:bg-white text-[#001b15] rounded-lg flex items-center gap-2 font-bold transition-colors"
             >
@@ -178,6 +178,18 @@ export default function PeopleAdminDashboard() {
                 <span className="inline-block mt-1 text-[10px] uppercase tracking-wider bg-white/10 px-2 py-0.5 rounded text-white/70">
                   {member.category}
                 </span>
+                <div className="flex gap-2 mt-2">
+                  {member.showOnPeoplePage === false && (
+                    <span className="flex items-center gap-1 text-[10px] uppercase tracking-wider bg-red-500/20 text-red-400 px-2 py-0.5 rounded" title="Hidden from People Page">
+                      <EyeOff className="w-3 h-3" /> Hidden
+                    </span>
+                  )}
+                  {member.hasDigitalBusinessCard === false && (
+                    <span className="flex items-center gap-1 text-[10px] uppercase tracking-wider bg-orange-500/20 text-orange-400 px-2 py-0.5 rounded" title="No Digital Business Card">
+                      <QrCode className="w-3 h-3 line-through opacity-70" /> No Card
+                    </span>
+                  )}
+                </div>
               </div>
               <div className="flex gap-2 shrink-0">
                 <button onClick={() => setIsEditing(member)} className="p-2 text-white/50 hover:text-white hover:bg-white/10 rounded-lg transition-colors">
@@ -239,6 +251,37 @@ export default function PeopleAdminDashboard() {
                       <option>Business Development</option>
                     </select>
                   </div>
+                </div>
+              </div>
+
+              <div className="space-y-4 pt-4 border-t border-white/10">
+                <h3 className="text-sm font-bold text-white mb-2">Visibility Settings</h3>
+                <div className="flex flex-col gap-3">
+                  <label className="flex items-center gap-2 cursor-pointer group">
+                    <div className={`w-5 h-5 rounded flex items-center justify-center transition-colors ${isEditing.showOnPeoplePage !== false ? 'bg-[#98cc67]' : 'bg-white/10 group-hover:bg-white/20'}`}>
+                      {isEditing.showOnPeoplePage !== false && <span className="text-[#001b15] text-sm font-bold">✓</span>}
+                    </div>
+                    <span className="text-white/80 text-sm">Show on Public "Our People" Page</span>
+                    <input 
+                      type="checkbox" 
+                      className="hidden" 
+                      checked={isEditing.showOnPeoplePage !== false} 
+                      onChange={e => setIsEditing({...isEditing, showOnPeoplePage: e.target.checked})} 
+                    />
+                  </label>
+                  
+                  <label className="flex items-center gap-2 cursor-pointer group">
+                    <div className={`w-5 h-5 rounded flex items-center justify-center transition-colors ${isEditing.hasDigitalBusinessCard !== false ? 'bg-[#98cc67]' : 'bg-white/10 group-hover:bg-white/20'}`}>
+                      {isEditing.hasDigitalBusinessCard !== false && <span className="text-[#001b15] text-sm font-bold">✓</span>}
+                    </div>
+                    <span className="text-white/80 text-sm">Enable Digital Business Card Profile</span>
+                    <input 
+                      type="checkbox" 
+                      className="hidden" 
+                      checked={isEditing.hasDigitalBusinessCard !== false} 
+                      onChange={e => setIsEditing({...isEditing, hasDigitalBusinessCard: e.target.checked})} 
+                    />
+                  </label>
                 </div>
               </div>
 
