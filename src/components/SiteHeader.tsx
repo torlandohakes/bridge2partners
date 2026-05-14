@@ -52,11 +52,11 @@ export default function SiteHeader() {
         <Link href="/">
           <Image src="/images/Bridge2Partners_Logo-3-White.png" alt="Bridge2Partners Logo" width={250} height={40} className="h-8 md:h-10 object-contain" style={{ width: 'auto' }} priority />
         </Link>
-        <div className="flex items-center gap-6 md:gap-8 font-ui text-sm font-medium text-white/90">
-          <Link href="/people" className="hidden md:block hover:text-white transition-colors tracking-normal normal-case py-4">
+        <div className="flex items-center gap-6 lg:gap-8 font-ui text-sm font-medium text-white/90">
+          <Link href="/people" className="hidden lg:block hover:text-white transition-colors tracking-normal normal-case py-4">
             People
           </Link>
-          <div className="relative group hidden md:block" tabIndex={0}>
+          <div className="relative group hidden lg:block" tabIndex={0}>
             <span className="flex items-center gap-1 cursor-pointer hover:text-white transition-colors tracking-normal normal-case py-4 outline-none">Services <ChevronDown className="w-4 h-4 opacity-60 transition-transform group-hover:rotate-180 group-focus-within:rotate-180" /></span>
             {/* Invisible bridge to prevent hover loss */}
             <div className="absolute top-full left-0 pt-2 w-52 opacity-0 translate-y-2 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto group-focus-within:opacity-100 group-focus-within:translate-y-0 group-focus-within:pointer-events-auto transition-all duration-300">
@@ -74,12 +74,12 @@ export default function SiteHeader() {
               </div>
             </div>
           </div>
-          <Button asChild variant="outline" className="hidden md:flex border-white/20 hover:bg-white/10 text-white font-normal bg-white/5">
+          <Button asChild variant="outline" className="hidden lg:flex border-white/20 hover:bg-white/10 text-white font-normal bg-white/5">
             <Link href="/procurement">
               <EditableButtonText contentId="nav_btn_procurement" defaultText="Compliance" isAdmin={isAdmin} value={cmsContent.nav_btn_procurement} documentId="home" />
             </Link>
           </Button>
-          <Button variant="default" onClick={() => setIsStrategyModalOpen(true)} className="hidden md:flex bg-primary/80 backdrop-blur-[10px] border border-white/20 hover:bg-primary/90 text-white font-bold">
+          <Button variant="default" onClick={() => setIsStrategyModalOpen(true)} className="hidden lg:flex bg-primary/80 backdrop-blur-[10px] border border-white/20 hover:bg-primary/90 text-white font-bold">
             <EditableButtonText contentId="nav_btn_2" defaultText="Schedule a Strategy Call" isAdmin={isAdmin} value={cmsContent.nav_btn_2} documentId="home" />
           </Button>
         </div>
