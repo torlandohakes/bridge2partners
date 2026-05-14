@@ -63,7 +63,7 @@ export default function PeoplePage() {
     return () => unsub();
   }, []);
 
-  const filteredTeam = team.filter(member => activeTab === "All" || member.category === activeTab);
+  const filteredTeam = team.filter(member => (activeTab === "All" || member.category === activeTab) && member.showOnPeoplePage !== false);
 
   return (
     <main className="min-h-screen bg-[#000d0a] text-white">

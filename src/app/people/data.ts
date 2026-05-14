@@ -15,6 +15,8 @@ export type TeamMember = {
   expertise?: string[];
   workHistory?: { company: string; title?: string; years?: string }[];
   sortOrder?: number;
+  showOnPeoplePage?: boolean;
+  hasDigitalBusinessCard?: boolean;
 };
 
 export const MOCK_TEAM: TeamMember[] = [
