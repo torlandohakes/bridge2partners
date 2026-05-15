@@ -3,6 +3,7 @@
 import React, { useState, useRef } from 'react';
 import { db } from '../lib/firebase';
 import { doc, setDoc } from 'firebase/firestore';
+import cmsBackup from '@/data/cms-backup.json';
 
 interface EditableButtonTextProps {
   contentId: string;
@@ -25,7 +26,11 @@ export default function EditableButtonText({
   const textRef = useRef<HTMLSpanElement>(null);
   const timerRef = useRef<NodeJS.Timeout | null>(null);
 
-  const displayText = value || defaultText;
+  // Intercept the hardcoded defaultText with the central JSON backup if it exists
+  const backupData = (cmsBackup as Record<string, Record<string, string>>)[documentId];
+  const activeDefaultText = backupData?.[contentId] !== undefined ? backupData[contentId] : defaultText;
+
+  const displayText = value || activeDefaultText;
 
   const handleMouseDown = (e: React.MouseEvent | React.TouchEvent) => {
     if (!isAdmin || isEditing) return;

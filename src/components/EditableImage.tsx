@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { Pencil, Loader2 } from 'lucide-react';
 import { db, uploadToFirebase } from '../lib/firebase';
 import { doc, setDoc } from 'firebase/firestore';
+import cmsBackup from '@/data/cms-backup.json';
 
 interface EditableImageProps {
   contentId: string;
@@ -19,14 +20,19 @@ interface EditableImageProps {
   sizes?: string;
   priority?: boolean;
   triggerOnly?: boolean;
+  documentId?: string;
 }
 
 export default function EditableImage(props: EditableImageProps) {
-  const { contentId, defaultSrc, isAdmin, value, alt, ...imageProps } = props;
+  const { contentId, defaultSrc, isAdmin, value, alt, documentId = 'home', ...imageProps } = props;
   const [isUploading, setIsUploading] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  const displaySrc = value || defaultSrc;
+  // Intercept the hardcoded defaultSrc with the central JSON backup if it exists
+  const backupData = (cmsBackup as Record<string, Record<string, string>>)[documentId];
+  const activeDefaultSrc = backupData?.[contentId] !== undefined ? backupData[contentId] : defaultSrc;
+
+  const displaySrc = value || activeDefaultSrc;
 
   const MAX_FILE_SIZE = 15 * 1024 * 1024; // 15MB
 
