@@ -3,6 +3,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { db } from '../lib/firebase';
 import { doc, updateDoc, setDoc, getDoc } from 'firebase/firestore';
+import cmsBackup from '@/data/cms-backup.json';
 
 interface EditableTextProps {
   contentId: string;
@@ -28,8 +29,12 @@ export default function EditableText({
   const [isEditing, setIsEditing] = useState(false);
   const textRef = useRef<HTMLElement>(null);
 
+  // Intercept the hardcoded defaultText with the central JSON backup if it exists
+  const backupData = (cmsBackup as Record<string, Record<string, string>>)[documentId];
+  const activeDefaultText = backupData?.[contentId] !== undefined ? backupData[contentId] : defaultText;
+
   // Fallback to default if no database value exists yet
-  const displayText = value || defaultText;
+  const displayText = value || activeDefaultText;
 
   const handleBlur = async () => {
     setIsEditing(false);
