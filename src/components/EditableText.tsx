@@ -30,7 +30,7 @@ export default function EditableText({
   const textRef = useRef<HTMLElement>(null);
 
   // Intercept the hardcoded defaultText with the central JSON backup if it exists
-  const backupData = (cmsBackup as Record<string, Record<string, string>>)[documentId];
+  const backupData = (cmsBackup as Record<string, Record<string, any>>)[documentId];
   const activeDefaultText = backupData?.[contentId] !== undefined ? backupData[contentId] : defaultText;
 
   // Fallback to default if no database value exists yet

@@ -27,7 +27,7 @@ export default function EditableButtonText({
   const timerRef = useRef<NodeJS.Timeout | null>(null);
 
   // Intercept the hardcoded defaultText with the central JSON backup if it exists
-  const backupData = (cmsBackup as Record<string, Record<string, string>>)[documentId];
+  const backupData = (cmsBackup as Record<string, Record<string, any>>)[documentId];
   const activeDefaultText = backupData?.[contentId] !== undefined ? backupData[contentId] : defaultText;
 
   const displayText = value || activeDefaultText;

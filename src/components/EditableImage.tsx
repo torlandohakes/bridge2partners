@@ -29,7 +29,7 @@ export default function EditableImage(props: EditableImageProps) {
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   // Intercept the hardcoded defaultSrc with the central JSON backup if it exists
-  const backupData = (cmsBackup as Record<string, Record<string, string>>)[documentId];
+  const backupData = (cmsBackup as Record<string, Record<string, any>>)[documentId];
   const activeDefaultSrc = backupData?.[contentId] !== undefined ? backupData[contentId] : defaultSrc;
 
   const displaySrc = value || activeDefaultSrc;
