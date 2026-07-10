@@ -107,7 +107,7 @@ const LEADERSHIP_DATA = [
     id: 'cordas',
     name: 'Michael Cordas',
     title: 'Chief Executive Officer',
-    imageUrl: 'https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2FMichael%20Cordas%20B2P.png?alt=media&token=a733e89a-1323-409e-b8c6-aef101e34019',
+    imageUrl: '/images/leadership_portrait_1.png',
     quote: "Digital transformation isn't about buying software; it is about institutional survival. We architect change that boards can bank on.",
     accolades: ['Former Managing Director, Global Banking', 'Architected $2B+ in M&A transitions'],
     clientFocus: ['Commerce Bank', 'Comerica']
@@ -116,7 +116,7 @@ const LEADERSHIP_DATA = [
     id: 'caulfield',
     name: '[First Name] Caulfield',
     title: 'Chief Operating Officer',
-    imageUrl: 'https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2FChris%20Caulfield%20B2P.png?alt=media&token=8cdfa742-4b68-4a90-a5ca-2fdd27bb7028',
+    imageUrl: '/images/leadership_portrait_2.png',
     quote: "Execution is where budgets go to die. We embed with your teams to ensure operational continuity from day one to sign-off.",
     accolades: ['Operational Lead on 50+ Core Migrations', 'Specialist in Risk Mitigation'],
     clientFocus: ['Glacier Bank']
@@ -125,7 +125,7 @@ const LEADERSHIP_DATA = [
     id: 'simon',
     name: 'Kristine Simon',
     title: 'Chief Digital Officer',
-    imageUrl: 'https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2FKristine%20Simon%20B2P.png?alt=media&token=9befb2de-3db1-4f95-bc8f-20012d525406',
+    imageUrl: '/images/leadership_portrait_3.png',
     quote: "Legacy debt is the anchor slowing down commercial lending. We cut the anchor without sinking the ship.",
     accolades: ['Former Head of Digital, Top 20 Bank', 'Led FIS/Fiserv unified tech stack overhauls'],
     clientFocus: ['Fifth Third', 'Commerce Bank']
@@ -134,7 +134,7 @@ const LEADERSHIP_DATA = [
     id: 'summers',
     name: 'Christopher Summers',
     title: 'Managing partner',
-    imageUrl: 'https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2FChristopher%20Summers%20B2P%20Cutout.png?alt=media&token=b1ebc9e8-08a5-4ba8-8e48-7fad149d6ae2',
+    imageUrl: '/images/leadership_portrait_4.png',
     quote: "I've audited 40 post-merger integrations. 90% of them failed because they treated it as an IT ticket, not a change management crisis.",
     accolades: ['40+ Post-Merger Integration Audits', 'Enterprise Change Management Specialist'],
     clientFocus: ['First National Bank', 'Banking Consortia']
@@ -286,7 +286,7 @@ export default function Home() {
          <div 
            className="absolute inset-0 w-full h-full z-0"
            style={{ 
-             backgroundImage: `url("${cmsContent.hero_bg || 'https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2Fbridge2partners-hero-1.webp?alt=media&token=bb05e1e4-8f2d-4a75-8880-ddd7bbfa2797'}")`, 
+             backgroundImage: `url("${cmsContent.hero_bg || '/images/hero_bg.jpg'}")`, 
              backgroundSize: 'cover', 
              backgroundPosition: 'top'
            }}
@@ -295,7 +295,7 @@ export default function Home() {
            <div className="absolute top-8 left-8 z-50 flex items-center">
              <EditableImage 
                contentId="hero_bg" 
-               defaultSrc="https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2Fbridge2partners-hero-1.webp?alt=media&token=bb05e1e4-8f2d-4a75-8880-ddd7bbfa2797" 
+               defaultSrc="/images/hero_bg.jpg" 
                isAdmin={isAdmin} 
                value={cmsContent.hero_bg} 
                alt="Hero Background" 
@@ -403,7 +403,7 @@ export default function Home() {
                 <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-[#98cc67]/20 blur-[80px] rounded-full"></div>
               </div>
               <div className={`absolute inset-0 lg:inset-auto lg:inset-y-0 lg:-right-10 lg:-left-[100%]`}>
-                <EditableImage contentId="problem_img" defaultSrc="https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2FChristopher%20Summers%20B2P%20Cutout.png?alt=media&token=b1ebc9e8-08a5-4ba8-8e48-7fad149d6ae2" isAdmin={isAdmin} value={cmsContent.problem_img} alt="Christopher Summers B2P" fill sizes="(max-width: 1024px) 100vw, 50vw" className={`object-contain object-bottom lg:object-right-bottom transition-all duration-500 ${theme === 'light' ? '' : theme === 'medium' ? 'drop-shadow-[0_15px_25px_rgba(0,0,0,0.25)]' : 'drop-shadow-[0_30px_45px_rgba(0,0,0,0.5)]'}`} />
+                <EditableImage contentId="problem_img" defaultSrc="/images/leadership_portrait_4.png" isAdmin={isAdmin} value={cmsContent.problem_img} alt="Christopher Summers B2P" fill sizes="(max-width: 1024px) 100vw, 50vw" className={`object-contain object-bottom lg:object-right-bottom transition-all duration-500 ${theme === 'light' ? '' : theme === 'medium' ? 'drop-shadow-[0_15px_25px_rgba(0,0,0,0.25)]' : 'drop-shadow-[0_30px_45px_rgba(0,0,0,0.5)]'}`} />
               </div>
               
               {/* Quote Block (Docked inside card on mobile, floating on desktop) */}
@@ -593,10 +593,10 @@ export default function Home() {
             
             <div className="grid grid-cols-1 xl:grid-cols-2 gap-6 lg:gap-8">
               {[
-                { cta: "Explore Wealth Management", link: "/services/wealth", eyebrow: "Led by John Gustav, CFA", avatar: "https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2FJohn%20Gustav.png?alt=media&token=34dcdf7d-49b5-45a3-bc50-85a7ae83b798", icon: <Landmark className={`w-8 h-8 ${theme === 'dark' ? 'text-[#98cc67]' : 'text-[#00573f]'} mb-2`} />, title: "Wealth", desc: "Align technology with business goals to accelerate platform modernization." },
-                { cta: "Explore Commercial Lending", link: "/services/commercial-lending", eyebrow: "Led by Shane Williams", avatar: "https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2FUntitled%20(78).png?alt=media&token=51dedfc2-9786-4d4a-a9cf-cfaf389fe979", icon: <Handshake className={`w-8 h-8 ${theme === 'dark' ? 'text-[#98cc67]' : 'text-[#00573f]'} mb-2`} />, title: "Commercial", desc: "Streamline commercial lending workflows and modernize infrastructure." },
-                { cta: "Explore M&A Integration", link: "/services/ma-integration", eyebrow: "Led by Bob Holohan", avatar: "https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2FBob%20Holohan.png?alt=media&token=21c70eb2-4e77-46f6-8fd4-b2878eb15a7e", icon: <Zap className={`w-8 h-8 ${theme === 'dark' ? 'text-[#98cc67]' : 'text-[#00573f]'} mb-2`} />, title: "M&A", desc: "Execute derisked, post-merger technology integrations." },
-                { cta: "Explore Treasury Operations", link: "/services/treasury", eyebrow: "Led by Linda Weber", avatar: "https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2FUntitled%20(76).png?alt=media&token=292094e1-53b4-43ee-94cf-841c3a139fe7", icon: <ShieldCheck className={`w-8 h-8 ${theme === 'dark' ? 'text-[#98cc67]' : 'text-[#00573f]'} mb-2`} />, title: "Treasury", desc: "Modernize payments and treasury operations for immediate ROI." }
+                { cta: "Explore Wealth Management", link: "/services/wealth", eyebrow: "Led by John Gustav, CFA", avatar: "/images/leadership_portrait_1.png", icon: <Landmark className={`w-8 h-8 ${theme === 'dark' ? 'text-[#98cc67]' : 'text-[#00573f]'} mb-2`} />, title: "Wealth", desc: "Align technology with business goals to accelerate platform modernization." },
+                { cta: "Explore Commercial Lending", link: "/services/commercial-lending", eyebrow: "Led by Shane Williams", avatar: "/images/leadership_portrait_2.png", icon: <Handshake className={`w-8 h-8 ${theme === 'dark' ? 'text-[#98cc67]' : 'text-[#00573f]'} mb-2`} />, title: "Commercial", desc: "Streamline commercial lending workflows and modernize infrastructure." },
+                { cta: "Explore M&A Integration", link: "/services/ma-integration", eyebrow: "Led by Bob Holohan", avatar: "/images/leadership_portrait_3.png", icon: <Zap className={`w-8 h-8 ${theme === 'dark' ? 'text-[#98cc67]' : 'text-[#00573f]'} mb-2`} />, title: "M&A", desc: "Execute derisked, post-merger technology integrations." },
+                { cta: "Explore Treasury Operations", link: "/services/treasury", eyebrow: "Led by Linda Weber", avatar: "/images/leadership_portrait_4.png", icon: <ShieldCheck className={`w-8 h-8 ${theme === 'dark' ? 'text-[#98cc67]' : 'text-[#00573f]'} mb-2`} />, title: "Treasury", desc: "Modernize payments and treasury operations for immediate ROI." }
               ].map((item, idx) => (
                  <Card key={idx} className={`relative transform-gpu flex flex-col bg-white/20 backdrop-blur-2xl border border-white/30 shadow-2xl rounded-xl p-6 sm:p-8 min-h-[420px] sm:min-h-[450px] transition-colors duration-300 hover:bg-white/30 group overflow-hidden`}>
                    

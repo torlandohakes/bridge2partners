@@ -34,10 +34,10 @@ export default function SiteHeader() {
   }, []);
 
   const isBusinessCardPage = pathname?.startsWith('/people/') && pathname.length > 8;
-  const isAdminPeoplePage = pathname?.startsWith('/admin/people');
+  const isAdminPage = pathname?.startsWith('/admin');
   const isHiddenPage = pathname?.startsWith('/brand') || pathname?.startsWith('/social-asset-studio');
 
-  if (isBusinessCardPage || isAdminPeoplePage || isHiddenPage) {
+  if (isBusinessCardPage || isAdminPage || isHiddenPage) {
     return null;
   }
 
@@ -48,13 +48,24 @@ export default function SiteHeader() {
         onClose={() => setIsStrategyModalOpen(false)}
         theme="dark"
       />
-      <div className="relative z-50 w-full flex flex-col sm:flex-row items-center justify-between px-6 md:px-12 pt-8 pb-4 gap-6 sm:gap-0 text-white">
+      <div className="relative z-50 w-full flex flex-col sm:flex-row items-center justify-between px-6 md:px-12 pt-6 pb-5 gap-6 sm:gap-0 text-white transition-all duration-300">
+        {/* Subtle Glassmorphic Background with bottom fade out mask */}
+        <div 
+          className="absolute inset-0 -z-10 bg-gradient-to-b from-[#001b15]/80 via-[#001b15]/30 to-transparent backdrop-blur-md"
+          style={{
+            maskImage: "linear-gradient(to bottom, rgba(0,0,0,1) 50%, rgba(0,0,0,0) 100%)",
+            WebkitMaskImage: "linear-gradient(to bottom, rgba(0,0,0,1) 50%, rgba(0,0,0,0) 100%)",
+          }}
+        />
         <Link href="/">
           <Image src="/images/Bridge2Partners_Logo-3-White.png" alt="Bridge2Partners Logo" width={250} height={40} className="h-8 md:h-10 object-contain" style={{ width: 'auto' }} priority />
         </Link>
         <div className="flex items-center gap-6 lg:gap-8 font-ui text-sm font-medium text-white/90">
           <Link href="/people" className="hidden lg:block hover:text-white transition-colors tracking-normal normal-case py-4">
             People
+          </Link>
+          <Link href="/insights" className="hidden lg:block hover:text-white transition-colors tracking-normal normal-case py-4">
+            Insights
           </Link>
           <div className="relative group hidden lg:block" tabIndex={0}>
             <span className="flex items-center gap-1 cursor-pointer hover:text-white transition-colors tracking-normal normal-case py-4 outline-none">Services <ChevronDown className="w-4 h-4 opacity-60 transition-transform group-hover:rotate-180 group-focus-within:rotate-180" /></span>

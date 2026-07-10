@@ -69,10 +69,10 @@ export default function SiteFooter() {
   };
 
   const isBusinessCardPage = pathname?.startsWith('/people/') && pathname.length > 8;
-  const isAdminPeoplePage = pathname?.startsWith('/admin/people');
+  const isAdminPage = pathname?.startsWith('/admin');
   const isHiddenPage = pathname?.startsWith('/brand') || pathname?.startsWith('/social-asset-studio');
 
-  if (isBusinessCardPage || isAdminPeoplePage || isHiddenPage) {
+  if (isBusinessCardPage || isAdminPage || isHiddenPage) {
     return null;
   }
 
@@ -122,6 +122,7 @@ export default function SiteFooter() {
             <span>© 2026 Bridge2Partners. All rights reserved.</span>
             <div className="flex gap-6 mt-4 md:mt-0">
               <Link href="/people" className="hover:text-white transition-colors">People</Link>
+              <Link href="/insights" className="hover:text-white transition-colors">Insights</Link>
               <Link href="/careers" className="hover:text-white transition-colors">Careers</Link>
               <Link href="/privacy" className="hover:text-white transition-colors">Privacy Policy</Link>
 

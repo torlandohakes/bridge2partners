@@ -10,6 +10,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { TeamMember } from "./data";
 import { collection, onSnapshot as onCollectionSnapshot } from "firebase/firestore";
+import { getLocalFallbackImage } from "@/lib/imageFallback";
 
 export default function PeoplePage() {
   const [isAdmin, setIsAdmin] = useState(false);
@@ -71,7 +72,7 @@ export default function PeoplePage() {
         title={<EditableText element="span" contentId="hero_title" defaultText="Our People" isAdmin={isAdmin} value={cmsContent.hero_title} documentId="people" />}
         subtitle={<EditableText element="span" contentId="hero_subtitle" defaultText="We are operators, not just advisors. Meet the team driving transformation across tier-1 financial institutions." isAdmin={isAdmin} value={cmsContent.hero_subtitle} documentId="people" />}
         theme="dark" 
-        imageSrc="https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2FChristopher%20Summers%20B2P%20Cutout.png?alt=media&token=b1ebc9e8-08a5-4ba8-8e48-7fad149d6ae2"
+        imageSrc="/images/leadership_portrait_4.png"
         imageAlt="Christopher Summers, Managing Partner"
         imageCaptionName={<EditableText element="span" contentId="hero_caption_name" defaultText="Christopher Summers" isAdmin={isAdmin} value={cmsContent.hero_caption_name} documentId="people" />}
         imageCaptionTitle={<EditableText element="span" contentId="hero_caption_title" defaultText="Managing Partner" isAdmin={isAdmin} value={cmsContent.hero_caption_title} documentId="people" />}
@@ -108,7 +109,7 @@ export default function PeoplePage() {
                 <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80%] h-[80%] bg-[#98cc67]/10 rounded-full blur-3xl group-hover:bg-[#98cc67]/20 transition-colors"></div>
                 
                 <Image 
-                  src={member.imageUrl} 
+                  src={getLocalFallbackImage(member.imageUrl, member.id)} 
                   alt={member.name}
                   unoptimized
                   fill

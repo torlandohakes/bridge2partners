@@ -6,6 +6,7 @@ import { Pencil, Loader2 } from 'lucide-react';
 import { db, uploadToFirebase } from '../lib/firebase';
 import { doc, setDoc } from 'firebase/firestore';
 import cmsBackup from '@/data/cms-backup.json';
+import { getLocalFallbackImage } from '@/lib/imageFallback';
 
 interface EditableImageProps {
   contentId: string;
@@ -32,7 +33,7 @@ export default function EditableImage(props: EditableImageProps) {
   const backupData = (cmsBackup as Record<string, Record<string, any>>)[documentId];
   const activeDefaultSrc = backupData?.[contentId] !== undefined ? backupData[contentId] : defaultSrc;
 
-  const displaySrc = value || activeDefaultSrc;
+  const displaySrc = getLocalFallbackImage(value || activeDefaultSrc, contentId);
 
   const MAX_FILE_SIZE = 15 * 1024 * 1024; // 15MB
 

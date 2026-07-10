@@ -17,7 +17,11 @@ export async function GET(request: Request) {
 
   try {
     const parsedUrl = new URL(url);
-    if (!ALLOWED_DOMAINS.includes(parsedUrl.hostname)) {
+    const isAllowed = ALLOWED_DOMAINS.includes(parsedUrl.hostname) || 
+                      parsedUrl.hostname.endsWith('.licdn.com') || 
+                      parsedUrl.hostname === 'licdn.com';
+                      
+    if (!isAllowed) {
       console.warn(`Blocked SSRF attempt to fetch from unauthorized domain: ${parsedUrl.hostname}`);
       return new NextResponse('Forbidden: Domain not allowed', { status: 403 });
     }
