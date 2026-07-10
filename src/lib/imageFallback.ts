@@ -24,11 +24,16 @@ export function getLocalFallbackImage(src: string, memberIdOrContentId?: string)
     if (id.includes('simon')) return '/images/leadership_portrait_3.png';
     if (id.includes('summers')) return '/images/leadership_portrait_4.png';
     
-    // Check other team members (e.g. John Gustav, Bob Holohan, Shane Williams, Linda Weber)
+    // Check other team members (e.g. John Gustav, Bob Holohan, Shane Williams, Linda Weber, Neil Kjeldsen, Tony Lockard, Raechelle Freeman, Liza Anne DeJulio, Teuta Naghshineh)
     if (id.includes('gustav')) return '/images/leadership_portrait_1.png';
     if (id.includes('williams')) return '/images/leadership_portrait_2.png';
     if (id.includes('holohan')) return '/images/leadership_portrait_3.png';
     if (id.includes('weber')) return '/images/leadership_portrait_4.png';
+    if (id.includes('kjeldsen')) return '/images/leadership_portrait_2.png';
+    if (id.includes('lockard')) return '/images/leadership_portrait_1.png';
+    if (id.includes('freeman')) return '/images/leadership_portrait_3.png';
+    if (id.includes('dejulio')) return '/images/leadership_portrait_4.png';
+    if (id.includes('naghshineh')) return '/images/leadership_portrait_4.png';
     
     // Default fallback headshot silhouette for people
     return '/images/silhouette.svg';
