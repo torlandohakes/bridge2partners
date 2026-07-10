@@ -24,6 +24,10 @@ export async function GET(req: Request) {
     let senderEmail = 'torlando.hakes@bridge2partners.com'; // Verified domain fallback
     let customSubjectLine = '';
     let isPaused = false;
+    let filterDays = 15;
+    let maxPosts = 15;
+    let excludedPostIds: string[] = [];
+
     try {
       const configSnap = await getDoc(doc(db, 'site-settings', 'newsletter_config'));
       if (configSnap.exists()) {
@@ -36,6 +40,15 @@ export async function GET(req: Request) {
         }
         if (configData.paused === true) {
           isPaused = true;
+        }
+        if (configData.filterDays !== undefined) {
+          filterDays = Number(configData.filterDays);
+        }
+        if (configData.maxPosts !== undefined) {
+          maxPosts = Number(configData.maxPosts);
+        }
+        if (configData.excludedPostIds !== undefined) {
+          excludedPostIds = configData.excludedPostIds;
         }
       } else {
         // Fallback to email_config if newsletter_config doesn't exist yet
@@ -63,13 +76,12 @@ export async function GET(req: Request) {
       : baseUrl;
 
     // 1. Fetch latest LinkedIn posts from local API (cached & validated)
-    const linkedinRes = await fetch(`${baseUrl}/api/linkedin?count=25`);
+    const linkedinRes = await fetch(`${baseUrl}/api/linkedin?count=50`);
     if (!linkedinRes.ok) {
       throw new Error(`Failed to fetch LinkedIn feed from API. Status: ${linkedinRes.status}`);
     }
     const linkedinData = await linkedinRes.json();
     const rawPosts = linkedinData.posts || [];
-    const fifteenDaysAgo = Date.now() - 15 * 24 * 60 * 60 * 1000;
     
     // Sort posts initially by timestamp descending (newest first)
     const sortedRawPosts = [...rawPosts].sort((a: any, b: any) => {
@@ -79,13 +91,17 @@ export async function GET(req: Request) {
     });
 
     const periodPosts = sortedRawPosts.filter((post: any) => {
+      // Exclude explicitly deselected updates
+      if (excludedPostIds.includes(post.id)) return false;
+
       const postTime = typeof post.timestamp === 'number' ? post.timestamp : new Date(post.timestamp).getTime();
-      return postTime >= fifteenDaysAgo;
+      const rangeMs = filterDays * 24 * 60 * 60 * 1000;
+      return postTime >= (Date.now() - rangeMs);
     });
 
     const articles = periodPosts.filter((p: any) => p.isArticle);
     const regularPosts = periodPosts.filter((p: any) => !p.isArticle);
-    const posts = [...articles, ...regularPosts].slice(0, 15);
+    const posts = [...articles, ...regularPosts].slice(0, maxPosts);
 
     if (posts.length === 0) {
       return NextResponse.json({ success: true, message: 'No posts from the preceding period found. Digest skipped.' });

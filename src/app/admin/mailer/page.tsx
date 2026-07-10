@@ -28,6 +28,9 @@ interface NewsletterConfig {
   senderEmail: string;
   subjectLine?: string;
   paused?: boolean;
+  filterDays?: number;
+  maxPosts?: number;
+  excludedPostIds?: string[];
 }
 
 export default function MailerAdminDashboard() {
@@ -48,7 +51,10 @@ export default function MailerAdminDashboard() {
     timeOfDay: '09:00',
     senderEmail: 'torlando.hakes@bridge2partners.com',
     subjectLine: '',
-    paused: false
+    paused: false,
+    filterDays: 15,
+    maxPosts: 15,
+    excludedPostIds: []
   });
   const [savingConfig, setSavingConfig] = useState(false);
   const [configSuccess, setConfigSuccess] = useState(false);
@@ -113,7 +119,7 @@ export default function MailerAdminDashboard() {
     const fetchPosts = async () => {
       setLoadingPosts(true);
       try {
-        const res = await fetch("/api/linkedin?count=15");
+        const res = await fetch("/api/linkedin?count=50");
         if (res.ok) {
           const data = await res.json();
           setPosts(data.posts || []);
@@ -145,6 +151,25 @@ export default function MailerAdminDashboard() {
       await deleteDoc(doc(db, "subscribers", subId));
     } catch (err) {
       console.error("Failed to delete subscriber:", err);
+    }
+  };
+
+  const handleTogglePost = async (postId: string) => {
+    if (!postId) return;
+    const currentExcluded = config.excludedPostIds || [];
+    let newExcluded: string[];
+    if (currentExcluded.includes(postId)) {
+      newExcluded = currentExcluded.filter(id => id !== postId);
+    } else {
+      newExcluded = [...currentExcluded, postId];
+    }
+    setConfig(prev => ({ ...prev, excludedPostIds: newExcluded }));
+    if (db) {
+      try {
+        await setDoc(doc(db, "site-settings", "newsletter_config"), { excludedPostIds: newExcluded }, { merge: true });
+      } catch (err) {
+        console.error("Failed to save post exclusion to Firestore:", err);
+      }
     }
   };
 
@@ -243,11 +268,18 @@ export default function MailerAdminDashboard() {
       return timeB - timeA;
     });
 
-    // 2. Filter posts by time duration
+    const filterDays = config.filterDays ?? 15;
+    const maxPosts = config.maxPosts ?? 15;
+    const excludedPostIds = config.excludedPostIds ?? [];
+
+    // 2. Filter posts by time duration and exclusion
     const periodPosts = sortedPosts.filter(post => {
+      // Filter out explicitly excluded posts
+      if (excludedPostIds.includes(post.id)) return false;
+
       if (!filterLastWeek) return true;
       const postTime = typeof post.timestamp === 'number' ? post.timestamp : new Date(post.timestamp).getTime();
-      const rangeMs = 15 * 24 * 60 * 60 * 1000;
+      const rangeMs = filterDays * 24 * 60 * 60 * 1000;
       const limitDate = Date.now() - rangeMs;
       return postTime >= limitDate;
     });
@@ -256,8 +288,8 @@ export default function MailerAdminDashboard() {
     const articles = periodPosts.filter(p => p.isArticle);
     const regularPosts = periodPosts.filter(p => !p.isArticle);
     
-    return [...articles, ...regularPosts].slice(0, 15);
-  }, [posts, filterLastWeek, config.frequency]);
+    return [...articles, ...regularPosts].slice(0, maxPosts);
+  }, [posts, filterLastWeek, config.filterDays, config.maxPosts, config.excludedPostIds]);
 
   // Fetch dynamic AI-generated subject line via Gemini endpoint
   useEffect(() => {
@@ -878,24 +910,77 @@ export default function MailerAdminDashboard() {
 
                 {/* Collapsible Filter Constraints Drawer */}
                 {showFilterSettings && (
-                  <div className="bg-white border border-slate-200 shadow-sm rounded-2xl p-6 animate-in fade-in slide-in-from-top-2 duration-200">
-                    <h3 className="font-display font-bold text-sm text-slate-800 mb-3 uppercase tracking-wider text-[10px]">Filter Constraints</h3>
-                    <label className="flex items-center justify-between cursor-pointer group">
-                      <div className="flex flex-col pr-4">
-                        <span className="text-xs font-semibold text-slate-700">
-                          Preceding period only (15 days)
-                        </span>
-                        <span className="text-[10px] text-slate-400 mt-0.5">
-                          Suppress updates older than 15 days from the email
-                        </span>
+                  <div className="bg-white border border-slate-200 shadow-sm rounded-2xl p-6 animate-in fade-in slide-in-from-top-2 duration-200 flex flex-col gap-5">
+                    <div>
+                      <h3 className="font-display font-bold text-sm text-slate-800 mb-1 uppercase tracking-wider text-[10px]">Filter Constraints</h3>
+                      <p className="text-[10px] text-slate-400">Configure how LinkedIn posts are filtered and selected for the automatic campaigns.</p>
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-2 border-t border-slate-100">
+                      {/* Column 1: Time Window Toggle */}
+                      <div className="flex items-center justify-between group bg-slate-50 border border-slate-150 rounded-xl p-4">
+                        <div className="flex flex-col pr-4">
+                          <span className="text-xs font-semibold text-slate-700">
+                            Apply Time Lookback
+                          </span>
+                          <span className="text-[9px] text-slate-400 mt-0.5">
+                            Suppress updates older than Lookback Period
+                          </span>
+                        </div>
+                        <button 
+                          type="button"
+                          onClick={() => setFilterLastWeek(!filterLastWeek)}
+                          className="text-[#00573f] focus:outline-none flex-shrink-0"
+                        >
+                          {filterLastWeek ? <ToggleRight className="w-10 h-10" /> : <ToggleLeft className="w-10 h-10 text-slate-300" />}
+                        </button>
                       </div>
-                      <button 
-                        onClick={() => setFilterLastWeek(!filterLastWeek)}
-                        className="text-[#00573f] focus:outline-none"
-                      >
-                        {filterLastWeek ? <ToggleRight className="w-10 h-10" /> : <ToggleLeft className="w-10 h-10 text-slate-300" />}
-                      </button>
-                    </label>
+
+                      {/* Column 2: Lookback Days */}
+                      <div className="flex flex-col justify-center gap-1.5 bg-slate-50 border border-slate-150 rounded-xl p-4">
+                        <span className="text-xs font-semibold text-slate-700">Lookback Period (Days)</span>
+                        <div className="flex items-center gap-2">
+                          <input 
+                            type="number"
+                            min="1"
+                            max="365"
+                            value={config.filterDays ?? 15}
+                            disabled={!filterLastWeek}
+                            onChange={async (e) => {
+                              const val = parseInt(e.target.value) || 15;
+                              setConfig(prev => ({ ...prev, filterDays: val }));
+                              if (db) {
+                                await setDoc(doc(db, "site-settings", "newsletter_config"), { filterDays: val }, { merge: true });
+                              }
+                            }}
+                            className="w-full max-w-[100px] bg-white border border-slate-200 rounded-xl px-3 py-1.5 text-xs font-semibold text-slate-700 focus:outline-none focus:border-[#00573f] shadow-inner disabled:bg-slate-100 disabled:text-slate-400"
+                          />
+                          <span className="text-[10px] text-slate-400 font-semibold">days</span>
+                        </div>
+                      </div>
+
+                      {/* Column 3: Max Posts Capping */}
+                      <div className="flex flex-col justify-center gap-1.5 bg-slate-50 border border-slate-150 rounded-xl p-4">
+                        <span className="text-xs font-semibold text-slate-700">Max Updates Capping</span>
+                        <div className="flex items-center gap-2">
+                          <input 
+                            type="number"
+                            min="1"
+                            max="50"
+                            value={config.maxPosts ?? 15}
+                            onChange={async (e) => {
+                              const val = parseInt(e.target.value) || 15;
+                              setConfig(prev => ({ ...prev, maxPosts: val }));
+                              if (db) {
+                                await setDoc(doc(db, "site-settings", "newsletter_config"), { maxPosts: val }, { merge: true });
+                              }
+                            }}
+                            className="w-full max-w-[100px] bg-white border border-slate-200 rounded-xl px-3 py-1.5 text-xs font-semibold text-slate-700 focus:outline-none focus:border-[#00573f] shadow-inner"
+                          />
+                          <span className="text-[10px] text-slate-400 font-semibold">posts</span>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 )}
                 {/* Upcoming Campaign Metadata (Horizontal 3-column row) */}
@@ -1000,33 +1085,112 @@ export default function MailerAdminDashboard() {
                     onClick={() => setShowIncludedPosts(!showIncludedPosts)}
                     className="w-full flex items-center justify-between px-6 py-3.5 text-xs font-bold text-slate-700 hover:bg-slate-50 transition-colors focus:outline-none"
                   >
-                    <span>List Included LinkedIn Updates ({filteredPosts.length})</span>
+                    <span>List & Select LinkedIn Updates ({filteredPosts.length} Included / {posts.length} Total Candidates)</span>
                     <ChevronRight className={`w-4 h-4 text-slate-400 transition-transform ${showIncludedPosts ? 'rotate-90' : ''}`} />
                   </button>
                   
                   {showIncludedPosts && (
-                    <div className="border-t border-slate-200 p-6 bg-slate-50 flex flex-col gap-3">
-                      {filteredPosts.length > 0 ? (
+                    <div className="border-t border-slate-200 p-6 bg-slate-50 flex flex-col gap-4">
+                      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-[11px] text-slate-500 font-semibold px-1 pb-3 border-b border-slate-200">
+                        <span>Select updates to include in campaign dispatch. By default, all updates are selected.</span>
+                        <div className="flex items-center gap-3 flex-shrink-0">
+                          <button 
+                            type="button"
+                            onClick={async () => {
+                              setConfig(prev => ({ ...prev, excludedPostIds: [] }));
+                              if (db) {
+                                await setDoc(doc(db, "site-settings", "newsletter_config"), { excludedPostIds: [] }, { merge: true });
+                              }
+                            }}
+                            className="text-[#00573f] hover:underline"
+                          >
+                            Select All
+                          </button>
+                          <span className="text-slate-300">|</span>
+                          <button 
+                            type="button"
+                            onClick={async () => {
+                              const allIds = posts.map(p => p.id).filter(Boolean);
+                              setConfig(prev => ({ ...prev, excludedPostIds: allIds }));
+                              if (db) {
+                                await setDoc(doc(db, "site-settings", "newsletter_config"), { excludedPostIds: allIds }, { merge: true });
+                              }
+                            }}
+                            className="text-slate-500 hover:underline"
+                          >
+                            Deselect All
+                          </button>
+                        </div>
+                      </div>
+
+                      {posts.length > 0 ? (
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                          {filteredPosts.map((post, idx) => (
-                            <div key={idx} className="bg-white border border-slate-200 rounded-xl p-4 flex flex-col gap-1 text-[11px] hover:border-slate-350 transition-all">
-                              <div className="flex justify-between items-center text-[9px] text-slate-400 font-medium">
-                                <span className="font-bold text-[#00573f]">Post #{idx + 1}</span>
-                                <span>{post.date}</span>
+                          {posts.map((post, idx) => {
+                            const isExcluded = (config.excludedPostIds || []).includes(post.id);
+                            const postTime = typeof post.timestamp === 'number' ? post.timestamp : new Date(post.timestamp).getTime();
+                            const rangeMs = (config.filterDays ?? 15) * 24 * 60 * 60 * 1000;
+                            const isWithinRange = !filterLastWeek || (postTime >= Date.now() - rangeMs);
+                            const isIncluded = !isExcluded && isWithinRange && filteredPosts.some(p => p.id === post.id);
+
+                            return (
+                              <div 
+                                key={idx} 
+                                onClick={() => handleTogglePost(post.id)}
+                                className={`bg-white border rounded-xl p-4 flex flex-col gap-2.5 text-[11px] hover:border-slate-350 hover:shadow-sm transition-all cursor-pointer select-none ${
+                                  isIncluded ? 'border-[#00573f]/30 ring-1 ring-[#00573f]/5' : 'border-slate-200 opacity-75'
+                                }`}
+                              >
+                                <div className="flex justify-between items-start gap-2">
+                                  <div className="flex items-center gap-2">
+                                    <input 
+                                      type="checkbox"
+                                      checked={!isExcluded}
+                                      onChange={() => {}} // handled by parent onClick
+                                      className="rounded border-slate-300 text-[#00573f] focus:ring-[#00573f] cursor-pointer"
+                                    />
+                                    <span className="font-bold text-[#00573f]">Update #{idx + 1}</span>
+                                  </div>
+                                  <span className="text-[9px] text-slate-400 font-medium">{post.date}</span>
+                                </div>
+
+                                <p className="text-slate-600 line-clamp-3 leading-relaxed font-sans">{post.text}</p>
+                                
+                                <div className="flex justify-between items-center gap-2 pt-2.5 border-t border-slate-100 mt-auto">
+                                  <div className="flex gap-2 text-[9px] text-slate-400 font-bold">
+                                    <span>👍 {post.likes}</span>
+                                    <span>💬 {post.comments}</span>
+                                  </div>
+
+                                  {isIncluded && (
+                                    <span className="px-2 py-0.5 rounded-full text-[8px] font-bold bg-green-50 text-green-700 border border-green-250">
+                                      Included
+                                    </span>
+                                  )}
+                                  {isExcluded && (
+                                    <span className="px-2 py-0.5 rounded-full text-[8px] font-bold bg-slate-100 text-slate-500 border border-slate-200">
+                                      Excluded
+                                    </span>
+                                  )}
+                                  {!isExcluded && !isWithinRange && (
+                                    <span className="px-2 py-0.5 rounded-full text-[8px] font-bold bg-amber-50 text-amber-700 border border-amber-200">
+                                      Out of Range
+                                    </span>
+                                  )}
+                                  {!isExcluded && isWithinRange && !isIncluded && (
+                                    <span className="px-2 py-0.5 rounded-full text-[8px] font-bold bg-blue-50 text-blue-700 border border-blue-200">
+                                      Capped Limit
+                                    </span>
+                                  )}
+                                </div>
                               </div>
-                              <p className="text-slate-600 line-clamp-3 mt-1 leading-relaxed font-sans">{post.text}</p>
-                              <div className="flex gap-2 text-[9px] text-slate-400 mt-2 font-bold pt-2 border-t border-slate-100">
-                                <span>👍 {post.likes} reactions</span>
-                                <span>💬 {post.comments} comments</span>
-                              </div>
-                            </div>
-                          ))}
+                            );
+                          })}
                         </div>
                       ) : (
                         <div className="bg-amber-50 border border-amber-200 rounded-xl p-4 text-center max-w-md mx-auto">
-                          <p className="text-xs text-amber-700 font-semibold">⚠️ No updates from preceding week</p>
+                          <p className="text-xs text-amber-700 font-semibold">⚠️ No updates found</p>
                           <p className="text-[10px] text-amber-600 mt-1">
-                            No posts were published in the last 7 days. Change the filter rules to include older posts.
+                            No posts were fetched from LinkedIn. Please verify the LinkedIn integration status.
                           </p>
                         </div>
                       )}
