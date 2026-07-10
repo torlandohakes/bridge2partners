@@ -37,7 +37,10 @@ export default function PeoplePage() {
   useEffect(() => {
     if (!db) return;
     const unsub = onCollectionSnapshot(collection(db, 'team'), (snapshot) => {
-      const teamData = snapshot.docs.map(doc => ({ ...doc.data() } as TeamMember));
+      const teamData = snapshot.docs.map(doc => ({ 
+        id: doc.id,
+        ...doc.data() 
+      } as TeamMember));
       
       // Define correct order for categories
       const categoryOrder = {

@@ -27,7 +27,10 @@ export default function DigitalBusinessCard({ params }: { params: Promise<{ id: 
         const docRef = doc(db, 'team', id);
         const docSnap = await getDoc(docRef);
         if (docSnap.exists()) {
-          const data = docSnap.data() as TeamMember;
+          const data = {
+            id: docSnap.id,
+            ...docSnap.data()
+          } as TeamMember;
           if (data.hasDigitalBusinessCard === false) {
             setMember(null);
           } else {
