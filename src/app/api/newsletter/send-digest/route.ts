@@ -154,13 +154,16 @@ export async function GET(req: Request) {
       return timeB - timeA;
     });
 
+    const nowInPacific = new Date(new Date().toLocaleString("en-US", { timeZone: "America/Los_Angeles" }));
+    nowInPacific.setHours(0, 0, 0, 0);
+    const limitDate = nowInPacific.getTime() - filterDays * 24 * 60 * 60 * 1000;
+
     const periodPosts = sortedRawPosts.filter((post: any) => {
       // Exclude explicitly deselected updates
       if (excludedPostIds.includes(post.id)) return false;
 
       const postTime = typeof post.timestamp === 'number' ? post.timestamp : new Date(post.timestamp).getTime();
-      const rangeMs = filterDays * 24 * 60 * 60 * 1000;
-      return postTime >= (Date.now() - rangeMs);
+      return postTime >= limitDate;
     });
 
     const articles = periodPosts.filter((p: any) => p.isArticle);

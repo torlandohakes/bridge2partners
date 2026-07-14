@@ -273,14 +273,16 @@ export default function MailerAdminDashboard() {
     const maxPosts = config.maxPosts ?? 15;
     const excludedPostIds = config.excludedPostIds ?? [];
 
+    const nowInPacific = new Date(new Date().toLocaleString("en-US", { timeZone: "America/Los_Angeles" }));
+    nowInPacific.setHours(0, 0, 0, 0);
+    const limitDate = nowInPacific.getTime() - filterDays * 24 * 60 * 60 * 1000;
+
     // 2. Filter posts by time duration and exclusion
     const periodPosts = sortedPosts.filter(post => {
       // Filter out explicitly excluded posts
       if (excludedPostIds.includes(post.id)) return false;
 
       const postTime = typeof post.timestamp === 'number' ? post.timestamp : new Date(post.timestamp).getTime();
-      const rangeMs = filterDays * 24 * 60 * 60 * 1000;
-      const limitDate = Date.now() - rangeMs;
       return postTime >= limitDate;
     });
 
@@ -1120,8 +1122,11 @@ export default function MailerAdminDashboard() {
                           {posts.map((post, idx) => {
                             const isExcluded = (config.excludedPostIds || []).includes(post.id);
                             const postTime = typeof post.timestamp === 'number' ? post.timestamp : new Date(post.timestamp).getTime();
-                            const rangeMs = (config.filterDays ?? 15) * 24 * 60 * 60 * 1000;
-                            const isWithinRange = postTime >= Date.now() - rangeMs;
+                            const isWithinRange = (() => {
+                              const limit = new Date(new Date().toLocaleString("en-US", { timeZone: "America/Los_Angeles" }));
+                              limit.setHours(0, 0, 0, 0);
+                              return postTime >= limit.getTime() - (config.filterDays ?? 15) * 24 * 60 * 60 * 1000;
+                            })();
                             const isIncluded = !isExcluded && isWithinRange && filteredPosts.some(p => p.id === post.id);
 
                             return (
