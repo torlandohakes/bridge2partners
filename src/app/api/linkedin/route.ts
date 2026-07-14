@@ -368,7 +368,7 @@ export async function GET(request: Request) {
             imageUrl = `/api/proxy-image?url=${encodeURIComponent(rawImageUrl)}`;
           }
 
-          const postDate = formatLinkedInDate(el.createdAt || el.publishedAt);
+           const postDate = formatLinkedInDate(el.publishedAt || el.createdAt);
           const isArticle = el.content?.reference?.id?.startsWith('urn:li:linkedInArticle:') || el.content?.article !== undefined;
           
           let likesCount = Math.floor(Math.random() * 30) + 10;
@@ -391,7 +391,7 @@ export async function GET(request: Request) {
             author: "Bridge2Partners",
             authorSub: COMPANY_TAGLINE,
             date: postDate,
-            timestamp: el.createdAt || el.publishedAt || Date.now(),
+            timestamp: el.publishedAt || el.createdAt || Date.now(),
             text: cleanLinkedInText(rawText),
             likes: likesCount,
             comments: commentsCount,
