@@ -9,9 +9,29 @@ export async function GET(req: Request) {
   try {
     const { searchParams } = new URL(req.url);
     const secret = searchParams.get('secret');
+    const testChallengeParam = searchParams.get('testChallenge');
+    let isAuthorized = false;
+
+    if (secret && (secret === process.env.NEWSLETTER_SECRET || secret === process.env.RESEND_API_KEY)) {
+      isAuthorized = true;
+    } else if (testChallengeParam) {
+      // Fetch the config to check the challenge
+      const configSnap = await getDoc(doc(db, 'site-settings', 'newsletter_config'));
+      if (configSnap.exists()) {
+        const configData = configSnap.data();
+        const storedChallenge = configData.testChallenge;
+        const storedCreatedAt = configData.testChallengeCreatedAt;
+
+        // Verify challenge matches and is not expired (older than 60 seconds)
+        if (storedChallenge && storedChallenge === testChallengeParam && storedCreatedAt && (Date.now() - storedCreatedAt < 60000)) {
+          isAuthorized = true;
+          console.log("Authorization bypassed via secure Firestore testChallenge handshake.");
+        }
+      }
+    }
 
     // Security Check: prevent random triggers of email digests
-    if (!secret || (secret !== process.env.NEWSLETTER_SECRET && secret !== process.env.RESEND_API_KEY)) {
+    if (!isAuthorized) {
       return NextResponse.json({ error: 'Unauthorized key.' }, { status: 401 });
     }
 

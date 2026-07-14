@@ -73,6 +73,13 @@ export default function MailerAdminDashboard() {
   const [showScheduleSettings, setShowScheduleSettings] = useState(false);
   const [showFilterSettings, setShowFilterSettings] = useState(false);
   const [showIncludedPosts, setShowIncludedPosts] = useState(false);
+  
+  // Test Send State
+  const [showTestSettings, setShowTestSettings] = useState(false);
+  const [testRecipientEmail, setTestRecipientEmail] = useState("torlando.hakes@bridge2partners.com");
+  const [sendingTest, setSendingTest] = useState(false);
+  const [testSuccess, setTestSuccess] = useState<string | null>(null);
+  const [testError, setTestError] = useState<string | null>(null);
 
   // Authentication Check
   useEffect(() => {
@@ -208,6 +215,46 @@ export default function MailerAdminDashboard() {
       console.error("Failed to save newsletter configurations:", err);
     } finally {
       setSavingConfig(false);
+    }
+  };
+
+  // Handle manual test email dispatches using Firestore challenge verification
+  const handleSendTestEmail = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!testRecipientEmail || !db) return;
+    setSendingTest(true);
+    setTestSuccess(null);
+    setTestError(null);
+
+    try {
+      // 1. Generate unique random challenge token
+      const challenge = Math.random().toString(36).substring(2) + Date.now().toString(36);
+      
+      // 2. Save challenge locally in Firestore config
+      await setDoc(doc(db, 'site-settings', 'newsletter_config'), {
+        testChallenge: challenge,
+        testChallengeCreatedAt: Date.now()
+      }, { merge: true });
+
+      // 3. Trigger dispatch API with challenge token
+      const res = await fetch(`/api/newsletter/send-digest?testChallenge=${challenge}&testEmail=${encodeURIComponent(testRecipientEmail)}`);
+      const data = await res.json();
+
+      if (res.ok && data.success) {
+        setTestSuccess(`Test email sent successfully to ${testRecipientEmail}!`);
+        // 4. Reset challenge variables
+        await setDoc(doc(db, 'site-settings', 'newsletter_config'), {
+          testChallenge: null,
+          testChallengeCreatedAt: null
+        }, { merge: true });
+      } else {
+        setTestError(data.error || data.message || "Failed to send test email.");
+      }
+    } catch (err: any) {
+      console.error("Test email failed:", err);
+      setTestError(err.message || "An unexpected error occurred.");
+    } finally {
+      setSendingTest(false);
     }
   };
 
@@ -734,6 +781,18 @@ export default function MailerAdminDashboard() {
                       <Eye className="w-3.5 h-3.5" />
                       <span>Filter Rules</span>
                     </button>
+                    
+                    <button 
+                      onClick={() => setShowTestSettings(!showTestSettings)}
+                      className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold transition-all border ${
+                        showTestSettings 
+                          ? 'bg-[#00573f] text-white border-transparent shadow-sm' 
+                          : 'bg-white text-slate-700 border-slate-200 hover:bg-slate-50'
+                      }`}
+                    >
+                      <Mail className="w-3.5 h-3.5" />
+                      <span>Send Test Email</span>
+                    </button>
                   </div>
 
                   <div className="flex items-center gap-4">
@@ -977,6 +1036,63 @@ export default function MailerAdminDashboard() {
                     </div>
                   </div>
                 )}
+
+                {/* Collapsible Test Settings Drawer */}
+                {showTestSettings && (
+                  <div className="bg-white border border-slate-200 shadow-sm rounded-2xl p-6 animate-in fade-in slide-in-from-top-2 duration-200 flex flex-col gap-4">
+                    <div>
+                      <h3 className="font-display font-bold text-sm text-slate-800 mb-1 uppercase tracking-wider text-[10px]">Send Test Email</h3>
+                      <p className="text-[10px] text-slate-400">Trigger a manual test dispatch of the current newsletter configuration and selected candidates to a test recipient.</p>
+                    </div>
+
+                    <form onSubmit={handleSendTestEmail} className="flex flex-col sm:flex-row items-end gap-4 border-t border-slate-100 pt-4">
+                      <div className="flex-1 w-full">
+                        <label className="block text-[10px] font-bold font-ui text-slate-500 mb-1.5 uppercase">Recipient Email Address</label>
+                        <input 
+                          type="email"
+                          required
+                          value={testRecipientEmail}
+                          onChange={(e) => setTestRecipientEmail(e.target.value)}
+                          placeholder="recipient@example.com"
+                          className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-xs text-slate-700 focus:outline-none focus:border-[#00573f]"
+                        />
+                      </div>
+                      
+                      <button 
+                        type="submit"
+                        disabled={sendingTest}
+                        className="w-full sm:w-auto bg-[#00573f] hover:bg-[#003d2b] text-white font-bold font-ui text-xs px-6 py-3 rounded-xl transition-all flex items-center justify-center gap-2 disabled:opacity-50 shadow-sm whitespace-nowrap"
+                      >
+                        {sendingTest ? (
+                          <>
+                            <Loader2 className="w-3.5 h-3.5 animate-spin" />
+                            <span>Sending...</span>
+                          </>
+                        ) : (
+                          <>
+                            <Mail className="w-3.5 h-3.5" />
+                            <span>Send Test</span>
+                          </>
+                        )}
+                      </button>
+                    </form>
+
+                    {testSuccess && (
+                      <div className="text-xs font-bold text-emerald-600 bg-emerald-50 border border-emerald-250 rounded-xl px-4 py-2 animate-fade-in flex items-center gap-1.5">
+                        <CheckCircle2 className="w-4 h-4" />
+                        <span>{testSuccess}</span>
+                      </div>
+                    )}
+
+                    {testError && (
+                      <div className="text-xs font-bold text-red-600 bg-red-50 border border-red-250 rounded-xl px-4 py-2 animate-fade-in flex items-center gap-1.5">
+                        <span className="w-4 h-4 flex items-center justify-center border border-red-300 rounded-full font-bold text-[9px]">!</span>
+                        <span>{testError}</span>
+                      </div>
+                    )}
+                  </div>
+                )}
+
                 {/* Upcoming Campaign Metadata (Horizontal 3-column row) */}
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                   
