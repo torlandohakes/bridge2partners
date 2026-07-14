@@ -26,6 +26,7 @@ interface NewsletterConfig {
   dayOfWeek: string;
   timeOfDay: string;
   senderEmail: string;
+  senderName?: string;
   subjectLine?: string;
   paused?: boolean;
   filterDays?: number;
@@ -50,6 +51,7 @@ export default function MailerAdminDashboard() {
     dayOfWeek: '1st & 15th',
     timeOfDay: '09:00',
     senderEmail: 'torlando.hakes@bridge2partners.com',
+    senderName: 'Bridge2Partners Insights',
     subjectLine: '',
     paused: false,
     filterDays: 15,
@@ -66,7 +68,6 @@ export default function MailerAdminDashboard() {
 
   // Preview State
   const [previewMode, setPreviewMode] = useState<'desktop' | 'mobile'>('desktop');
-  const [filterLastWeek, setFilterLastWeek] = useState(true);
   const [posts, setPosts] = useState<any[]>([]);
   const [loadingPosts, setLoadingPosts] = useState(false);
   const [showScheduleSettings, setShowScheduleSettings] = useState(false);
@@ -104,7 +105,7 @@ export default function MailerAdminDashboard() {
       try {
         const configDoc = await getDoc(doc(db, "site-settings", "newsletter_config"));
         if (configDoc.exists()) {
-          setConfig(configDoc.data() as NewsletterConfig);
+          setConfig(prev => ({ ...prev, ...configDoc.data() as NewsletterConfig }));
         }
       } catch (err) {
         console.error("Failed to load newsletter settings:", err);
@@ -277,7 +278,6 @@ export default function MailerAdminDashboard() {
       // Filter out explicitly excluded posts
       if (excludedPostIds.includes(post.id)) return false;
 
-      if (!filterLastWeek) return true;
       const postTime = typeof post.timestamp === 'number' ? post.timestamp : new Date(post.timestamp).getTime();
       const rangeMs = filterDays * 24 * 60 * 60 * 1000;
       const limitDate = Date.now() - rangeMs;
@@ -289,7 +289,7 @@ export default function MailerAdminDashboard() {
     const regularPosts = periodPosts.filter(p => !p.isArticle);
     
     return [...articles, ...regularPosts].slice(0, maxPosts);
-  }, [posts, filterLastWeek, config.filterDays, config.maxPosts, config.excludedPostIds]);
+  }, [posts, config.filterDays, config.maxPosts, config.excludedPostIds]);
 
   // Fetch dynamic AI-generated subject line via Gemini endpoint
   useEffect(() => {
@@ -763,7 +763,7 @@ export default function MailerAdminDashboard() {
                       Schedule Configuration
                     </h3>
 
-                    <form onSubmit={handleSaveConfig} className="grid grid-cols-1 md:grid-cols-4 gap-4 items-end">
+                    <form onSubmit={handleSaveConfig} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4 items-end">
                       <div>
                         <label className="block text-[10px] font-bold font-ui text-slate-500 mb-1.5 uppercase">Dispatch Frequency</label>
                         <select 
@@ -816,6 +816,18 @@ export default function MailerAdminDashboard() {
                         </select>
                       </div>
 
+                      <div>
+                        <label className="block text-[10px] font-bold font-ui text-slate-500 mb-1.5 uppercase">Sender Name</label>
+                        <input 
+                          type="text"
+                          value={config.senderName || ''}
+                          onChange={(e) => setConfig(prev => ({ ...prev, senderName: e.target.value }))}
+                          required
+                          placeholder="e.g. Bridge2Partners Insights"
+                          className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-xs text-slate-700 focus:outline-none focus:border-[#00573f]"
+                        />
+                      </div>
+
                        <div>
                         <label className="block text-[10px] font-bold font-ui text-slate-500 mb-1.5 uppercase">Sender Address</label>
                         <input 
@@ -829,7 +841,7 @@ export default function MailerAdminDashboard() {
 
 
 
-                      <div className="md:col-span-4 flex items-center justify-between bg-slate-50 border border-slate-200 rounded-2xl p-4 mt-2">
+                      <div className="md:col-span-2 lg:col-span-5 flex items-center justify-between bg-slate-50 border border-slate-200 rounded-2xl p-4 mt-2">
                         <div>
                           <h4 className="text-xs font-bold text-slate-700 uppercase tracking-wider flex items-center gap-1.5">
                             {config.paused ? (
@@ -873,9 +885,9 @@ export default function MailerAdminDashboard() {
                         </button>
                       </div>
 
-                      <div className="md:col-span-4 flex items-center justify-between gap-4 mt-2 pt-4 border-t border-slate-100">
+                      <div className="md:col-span-2 lg:col-span-5 flex items-center justify-between gap-4 mt-2 pt-4 border-t border-slate-100">
                         {configSuccess ? (
-                          <div className="flex items-center gap-1.5 text-xs font-bold text-emerald-600 bg-emerald-50 border border-emerald-200 rounded-xl px-4 py-2 animate-fade-in">
+                          <div className="flex items-center gap-1.5 text-xs font-bold text-emerald-600 bg-emerald-50 border border-emerald-250 rounded-xl px-4 py-2 animate-fade-in">
                             <CheckCircle2 className="w-4 h-4" />
                             <span>Schedule settings saved successfully!</span>
                           </div>
@@ -916,27 +928,8 @@ export default function MailerAdminDashboard() {
                       <p className="text-[10px] text-slate-400">Configure how LinkedIn posts are filtered and selected for the automatic campaigns.</p>
                     </div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-2 border-t border-slate-100">
-                      {/* Column 1: Time Window Toggle */}
-                      <div className="flex items-center justify-between group bg-slate-50 border border-slate-150 rounded-xl p-4">
-                        <div className="flex flex-col pr-4">
-                          <span className="text-xs font-semibold text-slate-700">
-                            Apply Time Lookback
-                          </span>
-                          <span className="text-[9px] text-slate-400 mt-0.5">
-                            Suppress updates older than Lookback Period
-                          </span>
-                        </div>
-                        <button 
-                          type="button"
-                          onClick={() => setFilterLastWeek(!filterLastWeek)}
-                          className="text-[#00573f] focus:outline-none flex-shrink-0"
-                        >
-                          {filterLastWeek ? <ToggleRight className="w-10 h-10" /> : <ToggleLeft className="w-10 h-10 text-slate-300" />}
-                        </button>
-                      </div>
-
-                      {/* Column 2: Lookback Days */}
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-2 border-t border-slate-100">
+                      {/* Column 1: Lookback Days */}
                       <div className="flex flex-col justify-center gap-1.5 bg-slate-50 border border-slate-150 rounded-xl p-4">
                         <span className="text-xs font-semibold text-slate-700">Lookback Period (Days)</span>
                         <div className="flex items-center gap-2">
@@ -945,7 +938,6 @@ export default function MailerAdminDashboard() {
                             min="1"
                             max="365"
                             value={config.filterDays ?? 15}
-                            disabled={!filterLastWeek}
                             onChange={async (e) => {
                               const val = parseInt(e.target.value) || 15;
                               setConfig(prev => ({ ...prev, filterDays: val }));
@@ -953,13 +945,13 @@ export default function MailerAdminDashboard() {
                                 await setDoc(doc(db, "site-settings", "newsletter_config"), { filterDays: val }, { merge: true });
                               }
                             }}
-                            className="w-full max-w-[100px] bg-white border border-slate-200 rounded-xl px-3 py-1.5 text-xs font-semibold text-slate-700 focus:outline-none focus:border-[#00573f] shadow-inner disabled:bg-slate-100 disabled:text-slate-400"
+                            className="w-full max-w-[100px] bg-white border border-slate-200 rounded-xl px-3 py-1.5 text-xs font-semibold text-slate-700 focus:outline-none focus:border-[#00573f] shadow-inner"
                           />
                           <span className="text-[10px] text-slate-400 font-semibold">days</span>
                         </div>
                       </div>
 
-                      {/* Column 3: Max Posts Capping */}
+                      {/* Column 2: Max Updates Capping */}
                       <div className="flex flex-col justify-center gap-1.5 bg-slate-50 border border-slate-150 rounded-xl p-4">
                         <span className="text-xs font-semibold text-slate-700">Max Updates Capping</span>
                         <div className="flex items-center gap-2">
@@ -1129,7 +1121,7 @@ export default function MailerAdminDashboard() {
                             const isExcluded = (config.excludedPostIds || []).includes(post.id);
                             const postTime = typeof post.timestamp === 'number' ? post.timestamp : new Date(post.timestamp).getTime();
                             const rangeMs = (config.filterDays ?? 15) * 24 * 60 * 60 * 1000;
-                            const isWithinRange = !filterLastWeek || (postTime >= Date.now() - rangeMs);
+                            const isWithinRange = postTime >= Date.now() - rangeMs;
                             const isIncluded = !isExcluded && isWithinRange && filteredPosts.some(p => p.id === post.id);
 
                             return (

@@ -1,0 +1,16 @@
+name: Scheduled Newsletter Dispatch
+
+on:
+  schedule:
+    # Runs daily at the top of the hour at 8:00 AM and 9:00 AM Pacific Time (accounting for PDT/PST shifts)
+    - cron: '0 15,16,17 * * *'
+  workflow_dispatch:
+    # Allows manual trigger from the GitHub Actions tab in the repo UI
+
+jobs:
+  dispatch_newsletter:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger Send Digest Endpoint
+        run: |
+          curl -s -f -X GET "https://bridge2partners-production.web.app/api/newsletter/send-digest?secret=${{ secrets.RESEND_API_KEY }}"

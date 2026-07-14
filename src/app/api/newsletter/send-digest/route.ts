@@ -22,6 +22,10 @@ export async function GET(req: Request) {
 
     // Fetch the newsletter config and dynamic sender email from Firestore site config
     let senderEmail = 'torlando.hakes@bridge2partners.com'; // Verified domain fallback
+    let senderName = 'Bridge2Partners Insights'; // Default display name
+    let frequency = '1st_15th';
+    let dayOfWeek = '1st & 15th';
+    let timeOfDay = '09:00';
     let customSubjectLine = '';
     let isPaused = false;
     let filterDays = 15;
@@ -34,6 +38,18 @@ export async function GET(req: Request) {
         const configData = configSnap.data();
         if (configData.senderEmail) {
           senderEmail = configData.senderEmail;
+        }
+        if (configData.senderName) {
+          senderName = configData.senderName;
+        }
+        if (configData.frequency) {
+          frequency = configData.frequency;
+        }
+        if (configData.dayOfWeek) {
+          dayOfWeek = configData.dayOfWeek;
+        }
+        if (configData.timeOfDay) {
+          timeOfDay = configData.timeOfDay;
         }
         if (configData.subjectLine) {
           customSubjectLine = configData.subjectLine.trim();
@@ -56,12 +72,60 @@ export async function GET(req: Request) {
         if (emailConfigSnap.exists() && emailConfigSnap.data().senderEmail) {
           senderEmail = emailConfigSnap.data().senderEmail;
         }
+        if (emailConfigSnap.exists() && emailConfigSnap.data().senderName) {
+          senderName = emailConfigSnap.data().senderName;
+        }
       }
     } catch (e) {
       console.error('Failed to fetch newsletter config from Firestore:', e);
     }
 
     const testEmail = searchParams.get('testEmail');
+    const force = searchParams.get('force') === 'true';
+    const bypassSchedule = force || !!testEmail;
+
+    if (!bypassSchedule) {
+      const nowInPacific = new Date(new Date().toLocaleString("en-US", { timeZone: "America/Los_Angeles" }));
+      
+      // Validate Hour
+      const [targetHourStr] = timeOfDay.split(':');
+      const targetHour = parseInt(targetHourStr, 10) || 9;
+      const currentHour = nowInPacific.getHours();
+      
+      if (currentHour !== targetHour) {
+        console.log(`Schedule check failed: current hour ${currentHour} does not match target hour ${targetHour}.`);
+        return NextResponse.json({ success: true, message: `Hour check failed (Current: ${currentHour}:00, Target: ${targetHour}:00). Dispatch skipped.` });
+      }
+
+      // Validate Date/Day based on frequency
+      const dayOfMonth = nowInPacific.getDate();
+      const currentDayOfWeek = nowInPacific.toLocaleDateString("en-US", { weekday: 'long' });
+
+      if (frequency === '1st_15th') {
+        if (dayOfMonth !== 1 && dayOfMonth !== 15) {
+          console.log(`Schedule check failed: day of month is ${dayOfMonth}, target is 1st or 15th.`);
+          return NextResponse.json({ success: true, message: `Date check failed (Current day of month: ${dayOfMonth}, Target: 1st or 15th). Dispatch skipped.` });
+        }
+      } else if (frequency === 'weekly') {
+        if (currentDayOfWeek !== dayOfWeek) {
+          console.log(`Schedule check failed: day of week is ${currentDayOfWeek}, target is ${dayOfWeek}.`);
+          return NextResponse.json({ success: true, message: `Day check failed (Current: ${currentDayOfWeek}, Target: ${dayOfWeek}). Dispatch skipped.` });
+        }
+      } else if (frequency === 'biweekly') {
+        const isFirstWeek = dayOfMonth >= 1 && dayOfMonth <= 7;
+        const isThirdWeek = dayOfMonth >= 15 && dayOfMonth <= 21;
+        if (currentDayOfWeek !== dayOfWeek || (!isFirstWeek && !isThirdWeek)) {
+          console.log(`Schedule check failed: bi-weekly check (day: ${dayOfMonth}, dayOfWeek: ${currentDayOfWeek}), target is ${dayOfWeek} on 1st/3rd week.`);
+          return NextResponse.json({ success: true, message: `Bi-weekly check failed. Dispatch skipped.` });
+        }
+      } else if (frequency === 'monthly') {
+        const isFirstWeek = dayOfMonth >= 1 && dayOfMonth <= 7;
+        if (currentDayOfWeek !== dayOfWeek || !isFirstWeek) {
+          console.log(`Schedule check failed: monthly check (day: ${dayOfMonth}, dayOfWeek: ${currentDayOfWeek}), target is first ${dayOfWeek} of month.`);
+          return NextResponse.json({ success: true, message: `Monthly check failed. Dispatch skipped.` });
+        }
+      }
+    }
 
     if (isPaused && !testEmail) {
       console.log("Newsletter delivery is currently paused by admin. Execution aborted.");
@@ -403,7 +467,7 @@ export async function GET(req: Request) {
       `;
  
       return resend.emails.send({
-        from: `Bridge2Partners Insights <${senderEmail}>`,
+        from: `${senderName} <${senderEmail}>`,
         to: sub.email,
         subject: subject,
         html: emailHtml
