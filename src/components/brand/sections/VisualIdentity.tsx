@@ -206,7 +206,10 @@ export function VisualIdentity() {
                   <div className="w-full sm:w-1/3 shrink-0 flex flex-col">
                     <code className="text-xs font-mono font-bold text-primary bg-primary/10 px-2 py-1 rounded inline-block w-fit mb-2">"{token}"</code>
                   </div>
-                  <div className="flex-1 w-full bg-[url(resolveStorageUrl('https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2FBridge2Partners_Brand_Logo_v7.webp?alt=media'))] bg-cover bg-center rounded-md relative overflow-hidden flex items-center justify-center p-6 border border-black/5 min-h-[120px]">
+                  <div 
+                    className="flex-1 w-full bg-cover bg-center rounded-md relative overflow-hidden flex items-center justify-center p-6 border border-black/5 min-h-[120px]"
+                    style={{ backgroundImage: `url(${resolveStorageUrl('https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2FBridge2Partners_Brand_Logo_v7.webp?alt=media')})` }}
+                  >
                      {/* Overlay for contrast against image */}
                      <div className="absolute inset-0 bg-[#001b15]/40" />
                      <div className={cn("w-full relative z-10 flex items-center justify-center min-h-[80px]", twClass)}>

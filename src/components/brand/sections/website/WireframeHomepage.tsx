@@ -12,7 +12,7 @@ export function WireframeHomepage() {
         <div 
           className="relative overflow-hidden flex flex-col rounded-lg shadow-sm border border-neutral/10 transition-all hover:scale-[1.01] min-h-[400px]"
           style={{ 
-            backgroundImage: 'url(resolveStorageUrl("https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2Fbridge2partners-hero-1.webp?alt=media&token=bb05e1e4-8f2d-4a75-8880-ddd7bbfa2797"))', 
+            backgroundImage: `url(${resolveStorageUrl("https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2Fbridge2partners-hero-1.webp?alt=media&token=bb05e1e4-8f2d-4a75-8880-ddd7bbfa2797")})`, 
             backgroundSize: 'cover', 
             backgroundPosition: 'center' 
           }}
