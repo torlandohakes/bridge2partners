@@ -156,7 +156,7 @@ export async function GET(req: Request) {
     const { protocol, host } = new URL(req.url);
     const baseUrl = `${protocol}//${host}`;
     const emailBaseUrl = (host.includes('localhost') || host.includes('127.0.0.1')) 
-      ? 'https://bridge2partners-production.web.app' 
+      ? 'https://bridge2partners-prod.web.app' 
       : baseUrl;
 
     // 1. Fetch latest LinkedIn posts from local API (cached & validated)
