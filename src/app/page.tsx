@@ -403,7 +403,7 @@ export default function Home() {
                 <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-[#98cc67]/20 blur-[80px] rounded-full"></div>
               </div>
               <div className={`absolute inset-0 lg:inset-auto lg:inset-y-0 lg:-right-10 lg:-left-[100%]`}>
-                <EditableImage contentId="problem_img" defaultSrc="/images/leadership_portrait_4.png" isAdmin={isAdmin} value={cmsContent.problem_img} alt="Christopher Summers B2P" fill sizes="(max-width: 1024px) 100vw, 50vw" className={`object-contain object-bottom lg:object-right-bottom transition-all duration-500 ${theme === 'light' ? '' : theme === 'medium' ? 'drop-shadow-[0_15px_25px_rgba(0,0,0,0.25)]' : 'drop-shadow-[0_30px_45px_rgba(0,0,0,0.5)]'}`} />
+                 <EditableImage contentId="problem_img" defaultSrc="https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2FChristopher%20Summers%20B2P%20Cutout.png?alt=media&token=b1ebc9e8-08a5-4ba8-8e48-7fad149d6ae2" isAdmin={isAdmin} value={cmsContent.problem_img} alt="Christopher Summers B2P" fill sizes="(max-width: 1024px) 100vw, 50vw" className={`object-contain object-bottom lg:object-right-bottom transition-all duration-500 ${theme === 'light' ? '' : theme === 'medium' ? 'drop-shadow-[0_15px_25px_rgba(0,0,0,0.25)]' : 'drop-shadow-[0_30px_45px_rgba(0,0,0,0.5)]'}`} />
               </div>
               
               {/* Quote Block (Docked inside card on mobile, floating on desktop) */}
@@ -602,7 +602,7 @@ export default function Home() {
                    
                    {/* Operator Cutout */}
                    <div className="absolute top-5 bottom-0 -right-24 sm:-right-5 z-0 pointer-events-none opacity-100 flex items-end justify-end w-[120%] sm:w-[90%]">
-                     <EditableImage contentId={`value_card_${idx}_cutout`} defaultSrc={item.avatar} isAdmin={isAdmin} value={cmsContent[`value_card_${idx}_cutout`]} alt="Operator Portrait" fill sizes="(max-width: 768px) 400px, 400px" className="object-contain object-right-bottom drop-shadow-2xl" />
+                      <EditableImage contentId={`value_card_${idx}_avatar`} defaultSrc={item.avatar} isAdmin={isAdmin} value={cmsContent[`value_card_${idx}_avatar`]} alt="Operator Portrait" fill sizes="(max-width: 768px) 400px, 400px" className="object-contain object-right-bottom drop-shadow-2xl" />
                    </div>
 
                    {/* Mobile Text Legibility Overlay (Radial Mask) */}
