@@ -10,6 +10,7 @@ import { QRCodeSVG } from "qrcode.react";
 import { Mail, Phone, Calendar, Download, QrCode, X, ChevronLeft, BadgeCheck, Briefcase } from "lucide-react";
 import { notFound } from "next/navigation";
 import { getLocalFallbackImage } from "@/lib/imageFallback";
+import { resolveStorageUrl } from "@/lib/utils";
 
 export default function DigitalBusinessCard({ params }: { params: Promise<{ id: string }> }) {
   const { id } = use(params);
@@ -94,7 +95,7 @@ export default function DigitalBusinessCard({ params }: { params: Promise<{ id: 
       <div className="w-full max-w-md px-6 flex flex-col items-center mt-4 z-10">
         <div className="relative w-48 h-48 rounded-full overflow-hidden border-4 border-white/10 bg-[#001b15]/80 mb-6 drop-shadow-2xl">
           <Image 
-            src={getLocalFallbackImage(member.imageUrl, member.id)} 
+            src={resolveStorageUrl(getLocalFallbackImage(member.imageUrl, member.id))} 
             alt={member.name}
             unoptimized
             fill

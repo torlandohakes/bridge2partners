@@ -1,4 +1,5 @@
 import React from 'react';
+import { resolveStorageUrl } from "@/lib/utils";
 import { useState, useRef } from "react";
 import { toPng } from 'html-to-image';
 import { 
@@ -53,7 +54,7 @@ export const getPitchSlides = (slideCopies: string[], customBg: string | null) =
              className="absolute inset-0 w-full h-full object-cover object-right opacity-50 mix-blend-luminosity z-0" 
            />
          ) : (
-           <img src="https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2Fbridge2partners-hero-1.webp?alt=media&token=bb05e1e4-8f2d-4a75-8880-ddd7bbfa2797" className="absolute inset-0 w-full h-full object-cover object-right opacity-50 mix-blend-luminosity z-0" />
+           <img src={resolveStorageUrl("https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2Fbridge2partners-hero-1.webp?alt=media&token=bb05e1e4-8f2d-4a75-8880-ddd7bbfa2797")} className="absolute inset-0 w-full h-full object-cover object-right opacity-50 mix-blend-luminosity z-0" />
          )}
 
 
@@ -85,7 +86,7 @@ export const getPitchSlides = (slideCopies: string[], customBg: string | null) =
          {/* Custom Slide Anchors */}
          <div className="absolute bottom-[3cqw] left-[4cqw] flex items-center gap-[1cqw] z-20">
            <img 
-             src={'https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2FBridge2Partners_Favicon.png?alt=media&token=8281d312-5968-4fa1-9e37-347481934b95'}
+             src={resolveStorageUrl('https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2FBridge2Partners_Favicon.png?alt=media&token=8281d312-5968-4fa1-9e37-347481934b95')}
              alt="B2P Logo" 
              className="w-[2.5cqw] h-[2.5cqw] rounded-[0.5cqw] opacity-90 shadow-[0_0_15px_rgba(152,204,103,0.2)]"
            />
@@ -150,7 +151,7 @@ export const getPitchSlides = (slideCopies: string[], customBg: string | null) =
          {/* Custom Slide Anchors */}
          <div className="absolute bottom-[3cqw] left-[4cqw] flex items-center gap-[1cqw] z-20">
            <img 
-             src={'https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2FBridge2Partners_Favicon.png?alt=media&token=8281d312-5968-4fa1-9e37-347481934b95'}
+             src={resolveStorageUrl('https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2FBridge2Partners_Favicon.png?alt=media&token=8281d312-5968-4fa1-9e37-347481934b95')}
              alt="B2P Logo" 
              className="w-[2.5cqw] h-[2.5cqw] rounded-[0.5cqw] opacity-90 shadow-[0_0_15px_rgba(152,204,103,0.2)]"
            />
@@ -211,7 +212,7 @@ export const getPitchSlides = (slideCopies: string[], customBg: string | null) =
          {/* Custom Slide Anchors */}
          <div className="absolute bottom-[2cqw] left-[4cqw] flex items-center gap-[1cqw] z-30">
            <img 
-             src={'https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2FBridge2Partners_Favicon.png?alt=media&token=8281d312-5968-4fa1-9e37-347481934b95'}
+             src={resolveStorageUrl('https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2FBridge2Partners_Favicon.png?alt=media&token=8281d312-5968-4fa1-9e37-347481934b95')}
              alt="B2P Logo" 
              className="w-[2cqw] h-[2cqw] rounded-[0.4cqw] opacity-90 shadow-[0_0_15px_rgba(152,204,103,0.2)]"
            />
@@ -288,7 +289,7 @@ export const getPitchSlides = (slideCopies: string[], customBg: string | null) =
          {/* Custom Slide Anchors */}
          <div className="absolute bottom-[2cqw] left-[4cqw] flex items-center gap-[1cqw] z-30">
            <img 
-             src={'https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2FBridge2Partners_Favicon.png?alt=media&token=8281d312-5968-4fa1-9e37-347481934b95'}
+             src={resolveStorageUrl('https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2FBridge2Partners_Favicon.png?alt=media&token=8281d312-5968-4fa1-9e37-347481934b95')}
              alt="B2P Logo" 
              className="w-[2cqw] h-[2cqw] rounded-[0.4cqw] opacity-90 shadow-[0_0_15px_rgba(152,204,103,0.2)]"
            />
@@ -382,7 +383,7 @@ export const getPitchSlides = (slideCopies: string[], customBg: string | null) =
          {/* Custom Slide Anchors */}
          <div className="absolute bottom-[2cqw] left-[4cqw] flex items-center gap-[1cqw] z-30">
            <img 
-             src={'https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2FBridge2Partners_Favicon.png?alt=media&token=8281d312-5968-4fa1-9e37-347481934b95'}
+             src={resolveStorageUrl('https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2FBridge2Partners_Favicon.png?alt=media&token=8281d312-5968-4fa1-9e37-347481934b95')}
              alt="B2P Logo" 
              className="w-[2cqw] h-[2cqw] rounded-[0.4cqw] opacity-90 shadow-[0_0_15px_rgba(152,204,103,0.2)]"
            />
@@ -441,7 +442,7 @@ export const getPitchSlides = (slideCopies: string[], customBg: string | null) =
          {/* Custom Slide Anchors */}
          <div className="absolute bottom-[2cqw] left-[4cqw] flex items-center gap-[1cqw] z-30">
            <img 
-             src={'https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2FBridge2Partners_Favicon.png?alt=media&token=8281d312-5968-4fa1-9e37-347481934b95'}
+             src={resolveStorageUrl('https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2FBridge2Partners_Favicon.png?alt=media&token=8281d312-5968-4fa1-9e37-347481934b95')}
              alt="B2P Logo" 
              className="w-[2cqw] h-[2cqw] rounded-[0.4cqw] opacity-90 shadow-[0_0_15px_rgba(152,204,103,0.2)]"
            />
@@ -472,7 +473,7 @@ export const getPitchSlides = (slideCopies: string[], customBg: string | null) =
              className="absolute inset-0 w-full h-full object-cover object-right opacity-50 mix-blend-luminosity z-0" 
            />
          ) : (
-           <img src="https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2Fbridge2partners-hero-1.webp?alt=media&token=bb05e1e4-8f2d-4a75-8880-ddd7bbfa2797" className="absolute inset-0 w-full h-full object-cover object-right opacity-50 mix-blend-luminosity z-0" />
+           <img src={resolveStorageUrl("https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2Fbridge2partners-hero-1.webp?alt=media&token=bb05e1e4-8f2d-4a75-8880-ddd7bbfa2797")} className="absolute inset-0 w-full h-full object-cover object-right opacity-50 mix-blend-luminosity z-0" />
          )}
 
          {/* Organic Cinematic Background Overlay with Darker 50% solid overlay */}
@@ -505,7 +506,7 @@ export const getPitchSlides = (slideCopies: string[], customBg: string | null) =
          {/* Standard Logo Anchor Bottom Left */}
          <div className="absolute bottom-[2cqw] left-[4cqw] flex items-center gap-[1cqw] z-30">
            <img 
-             src={'https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2FBridge2Partners_Favicon.png?alt=media&token=8281d312-5968-4fa1-9e37-347481934b95'}
+             src={resolveStorageUrl('https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2FBridge2Partners_Favicon.png?alt=media&token=8281d312-5968-4fa1-9e37-347481934b95')}
              alt="B2P Logo" 
              className="w-[2.5cqw] h-[2.5cqw] rounded-[0.5cqw] opacity-90 shadow-[0_0_15px_rgba(152,204,103,0.2)]"
            />
@@ -529,7 +530,7 @@ export const getPitchSlides = (slideCopies: string[], customBg: string | null) =
     slideContent: (
       <div className="w-full h-full bg-[#001b15] relative flex flex-col items-center justify-center overflow-hidden z-30">
          <div className="flex flex-col items-center justify-center">
-           <img src={'https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2FBridge2Partners%20Logo-3-White.png?alt=media&token=0a8d7276-834f-4ff8-971d-63f079efb214'} alt="B2P Brand Logo" className="w-[24cqw] object-contain drop-shadow-sm" />
+           <img src={resolveStorageUrl('https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2FBridge2Partners%20Logo-3-White.png?alt=media&token=0a8d7276-834f-4ff8-971d-63f079efb214')} alt="B2P Brand Logo" className="w-[24cqw] object-contain drop-shadow-sm" />
          </div>
       </div>
     )
@@ -552,7 +553,7 @@ export const getPitchSlides = (slideCopies: string[], customBg: string | null) =
            {/* Custom Slide Anchors */}
            <div className="absolute bottom-[2cqw] left-[3cqw] flex items-center gap-[1cqw]">
              <img 
-               src={'https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2FBridge2Partners_Favicon.png?alt=media&token=8281d312-5968-4fa1-9e37-347481934b95'}
+               src={resolveStorageUrl('https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2FBridge2Partners_Favicon.png?alt=media&token=8281d312-5968-4fa1-9e37-347481934b95')}
                alt="B2P Logo" 
                className="w-[2cqw] h-[2cqw] object-contain opacity-50 contrast-200 grayscale"
              />
@@ -610,7 +611,7 @@ export const getPitchSlides = (slideCopies: string[], customBg: string | null) =
            </div>
            <div className="absolute bottom-[2cqw] left-[3cqw] flex items-center gap-[1cqw]">
              <img 
-               src={'https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2FBridge2Partners_Favicon.png?alt=media&token=8281d312-5968-4fa1-9e37-347481934b95'}
+               src={resolveStorageUrl('https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2FBridge2Partners_Favicon.png?alt=media&token=8281d312-5968-4fa1-9e37-347481934b95')}
                alt="B2P Logo" 
                className="w-[2cqw] h-[2cqw] object-contain opacity-50 contrast-200 grayscale"
              />
@@ -661,7 +662,7 @@ export const getPitchSlides = (slideCopies: string[], customBg: string | null) =
            </div>
            <div className="absolute bottom-[2cqw] left-[3cqw] flex items-center gap-[1cqw]">
              <img 
-               src={'https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2FBridge2Partners_Favicon.png?alt=media&token=8281d312-5968-4fa1-9e37-347481934b95'}
+               src={resolveStorageUrl('https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2FBridge2Partners_Favicon.png?alt=media&token=8281d312-5968-4fa1-9e37-347481934b95')}
                alt="B2P Logo" 
                className="w-[2cqw] h-[2cqw] object-contain opacity-50 contrast-200 grayscale"
              />
@@ -701,7 +702,7 @@ export const getPitchSlides = (slideCopies: string[], customBg: string | null) =
              <span className="font-ui text-[1.2cqw] uppercase tracking-[0.3em] font-bold text-neutral-400 b2p-narrative-text transition-opacity duration-300">CASE STUDY</span>
            </div>
            <div className="absolute bottom-[2cqw] left-[3cqw] flex items-center gap-[1cqw]">
-             <img src={'https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2FBridge2Partners_Favicon.png?alt=media&token=8281d312-5968-4fa1-9e37-347481934b95'} alt="B2P Logo" className="w-[2cqw] h-[2cqw] object-contain opacity-50 contrast-200 grayscale" />
+             <img src={resolveStorageUrl('https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2FBridge2Partners_Favicon.png?alt=media&token=8281d312-5968-4fa1-9e37-347481934b95')} alt="B2P Logo" className="w-[2cqw] h-[2cqw] object-contain opacity-50 contrast-200 grayscale" />
              <span className="font-ui text-[0.9cqw] text-neutral-400/80 tracking-widest uppercase font-bold b2p-narrative-text transition-opacity duration-300">Bridge2Partners</span>
            </div>
          </div>
@@ -744,7 +745,7 @@ export const getPitchSlides = (slideCopies: string[], customBg: string | null) =
              <span className="font-ui text-[1.2cqw] uppercase tracking-[0.3em] font-bold text-neutral-400 b2p-narrative-text transition-opacity duration-300">CASE STUDY</span>
            </div>
            <div className="absolute bottom-[2cqw] left-[3cqw] flex items-center gap-[1cqw]">
-             <img src={'https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2FBridge2Partners_Favicon.png?alt=media&token=8281d312-5968-4fa1-9e37-347481934b95'} alt="B2P Logo" className="w-[2cqw] h-[2cqw] object-contain opacity-50 contrast-200 grayscale" />
+             <img src={resolveStorageUrl('https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2FBridge2Partners_Favicon.png?alt=media&token=8281d312-5968-4fa1-9e37-347481934b95')} alt="B2P Logo" className="w-[2cqw] h-[2cqw] object-contain opacity-50 contrast-200 grayscale" />
              <span className="font-ui text-[0.9cqw] text-neutral-400/80 tracking-widest uppercase font-bold b2p-narrative-text transition-opacity duration-300">Bridge2Partners</span>
            </div>
          </div>
@@ -787,7 +788,7 @@ export const getPitchSlides = (slideCopies: string[], customBg: string | null) =
              <span className="font-ui text-[1.2cqw] uppercase tracking-[0.3em] font-bold text-neutral-400 b2p-narrative-text transition-opacity duration-300">CASE STUDY</span>
            </div>
            <div className="absolute bottom-[2cqw] left-[3cqw] flex items-center gap-[1cqw]">
-             <img src={'https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2FBridge2Partners_Favicon.png?alt=media&token=8281d312-5968-4fa1-9e37-347481934b95'} alt="B2P Logo" className="w-[2cqw] h-[2cqw] object-contain opacity-50 contrast-200 grayscale" />
+             <img src={resolveStorageUrl('https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2FBridge2Partners_Favicon.png?alt=media&token=8281d312-5968-4fa1-9e37-347481934b95')} alt="B2P Logo" className="w-[2cqw] h-[2cqw] object-contain opacity-50 contrast-200 grayscale" />
              <span className="font-ui text-[0.9cqw] text-neutral-400/80 tracking-widest uppercase font-bold b2p-narrative-text transition-opacity duration-300">Bridge2Partners</span>
            </div>
          </div>
@@ -830,7 +831,7 @@ export const getPitchSlides = (slideCopies: string[], customBg: string | null) =
              <span className="font-ui text-[1.2cqw] uppercase tracking-[0.3em] font-bold text-neutral-400 b2p-narrative-text transition-opacity duration-300">CASE STUDY</span>
            </div>
            <div className="absolute bottom-[2cqw] left-[3cqw] flex items-center gap-[1cqw]">
-             <img src={'https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2FBridge2Partners_Favicon.png?alt=media&token=8281d312-5968-4fa1-9e37-347481934b95'} alt="B2P Logo" className="w-[2cqw] h-[2cqw] object-contain opacity-50 contrast-200 grayscale" />
+             <img src={resolveStorageUrl('https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2FBridge2Partners_Favicon.png?alt=media&token=8281d312-5968-4fa1-9e37-347481934b95')} alt="B2P Logo" className="w-[2cqw] h-[2cqw] object-contain opacity-50 contrast-200 grayscale" />
              <span className="font-ui text-[0.9cqw] text-neutral-400/80 tracking-widest uppercase font-bold b2p-narrative-text transition-opacity duration-300">Bridge2Partners</span>
            </div>
          </div>

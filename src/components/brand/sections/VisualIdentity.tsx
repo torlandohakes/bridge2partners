@@ -1,4 +1,5 @@
 import { HelpCircle, CheckCircle, AlertTriangle, XCircle, Download } from "lucide-react";
+import { resolveStorageUrl } from "@/lib/utils";
 import { colors, typographyColors, shapeVariants, layouts } from "@/lib/design-tokens";
 import { cn } from "@/lib/utils";
 
@@ -27,7 +28,7 @@ export function VisualIdentity() {
                {/* Left Column (Light Mode) */}
                <div className="flex flex-col gap-2">
                  <div className="bg-white p-6 rounded-lg flex items-center justify-center border border-primary/10 shadow-sm min-h-[140px]">
-                   <img src="https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2FBridge2Partners_Brand_Logo_v7.webp?alt=media&token=a90040bc-3446-408d-8794-cab07568de66" alt="Bridge2Partners Primary Logo" className="w-full max-w-[160px] h-auto object-contain" />
+                   <img src={resolveStorageUrl("https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2FBridge2Partners_Brand_Logo_v7.webp?alt=media&token=a90040bc-3446-408d-8794-cab07568de66")} alt="Bridge2Partners Primary Logo" className="w-full max-w-[160px] h-auto object-contain" />
                  </div>
                  <a href="/images/Bridge2Partners_Brand_Logo_v7.webp" download className="flex items-center justify-center gap-2 text-xs font-medium text-muted-foreground hover:text-primary transition-colors py-2 bg-neutral/5 rounded-md border border-primary/10">
                    <Download className="w-3.5 h-3.5" /> Primary
@@ -37,7 +38,7 @@ export function VisualIdentity() {
                {/* Right Column (Dark/Glass Mode) */}
                <div className="flex flex-col gap-2">
                  <div className="bg-[#005642] p-6 rounded-lg flex items-center justify-center border border-primary/20 shadow-inner min-h-[140px]">
-                   <img src="https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2FBridge2Partners%20Logo-3-White.png?alt=media&token=0a8d7276-834f-4ff8-971d-63f079efb214" alt="Bridge2Partners Reversed Logo" className="w-full max-w-[160px] h-auto object-contain" />
+                   <img src={resolveStorageUrl("https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2FBridge2Partners%20Logo-3-White.png?alt=media&token=0a8d7276-834f-4ff8-971d-63f079efb214")} alt="Bridge2Partners Reversed Logo" className="w-full max-w-[160px] h-auto object-contain" />
                  </div>
                  <a href="/images/Bridge2Partners_Logo-3-White.png" download className="flex items-center justify-center gap-2 text-xs font-medium text-muted-foreground hover:text-primary transition-colors py-2 bg-neutral/5 rounded-md border border-primary/10">
                    <Download className="w-3.5 h-3.5" /> Reversed
@@ -59,7 +60,7 @@ export function VisualIdentity() {
                 <a href="/icon-brand.png" download className="flex items-center justify-center gap-2 text-xs font-medium text-muted-foreground hover:text-primary transition-colors px-3 bg-neutral/5 rounded border border-primary/10 outline-none focus-visible:ring-2 focus-visible:ring-primary/50 h-10">
                   <Download className="w-3.5 h-3.5" /> Icon Mark
                 </a>
-                <a href="https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2FBridge2Partners%20Logo-2-Black.png?alt=media&token=8bc5af5c-85fb-4782-acf5-73f9db67f1f8" download target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-2 text-xs font-medium text-muted-foreground hover:text-foreground transition-colors px-3 bg-neutral/5 rounded border border-primary/10 outline-none focus-visible:ring-2 focus-visible:ring-primary/50 h-10">
+                <a href={resolveStorageUrl("https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2FBridge2Partners%20Logo-2-Black.png?alt=media&token=8bc5af5c-85fb-4782-acf5-73f9db67f1f8")} download target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-2 text-xs font-medium text-muted-foreground hover:text-foreground transition-colors px-3 bg-neutral/5 rounded border border-primary/10 outline-none focus-visible:ring-2 focus-visible:ring-primary/50 h-10">
                   <Download className="w-3.5 h-3.5" /> Black Version (PNG)
                 </a>
               </div>
@@ -205,7 +206,7 @@ export function VisualIdentity() {
                   <div className="w-full sm:w-1/3 shrink-0 flex flex-col">
                     <code className="text-xs font-mono font-bold text-primary bg-primary/10 px-2 py-1 rounded inline-block w-fit mb-2">"{token}"</code>
                   </div>
-                  <div className="flex-1 w-full bg-[url('https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2FBridge2Partners_Brand_Logo_v7.webp?alt=media')] bg-cover bg-center rounded-md relative overflow-hidden flex items-center justify-center p-6 border border-black/5 min-h-[120px]">
+                  <div className="flex-1 w-full bg-[url(resolveStorageUrl('https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2FBridge2Partners_Brand_Logo_v7.webp?alt=media'))] bg-cover bg-center rounded-md relative overflow-hidden flex items-center justify-center p-6 border border-black/5 min-h-[120px]">
                      {/* Overlay for contrast against image */}
                      <div className="absolute inset-0 bg-[#001b15]/40" />
                      <div className={cn("w-full relative z-10 flex items-center justify-center min-h-[80px]", twClass)}>

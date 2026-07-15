@@ -1,3 +1,4 @@
+import { resolveStorageUrl } from "@/lib/utils";
 export type TeamMemberCategory = "Executive Leadership" | "Business Line Leaders" | "Technical Expertise" | "Business Development";
 
 export type TeamMember = {
@@ -27,7 +28,7 @@ export const MOCK_TEAM: TeamMember[] = [
     category: "Executive Leadership",
     bio: "A strategic banking executive with a track record of driving innovation across financial institutions.",
     fullBio: "A strategic banking executive with a track record of driving innovation across financial institutions. Throughout his career he has held senior leadership roles at City National Bank and Wells Fargo, where he oversaw transformation programs that modernized core platforms, digital channels, and payments systems.",
-    imageUrl: "https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2FMichael%20C.png?alt=media&token=eeda6ac0-0f91-4538-acd9-489a8334a7ea",
+    imageUrl: resolveStorageUrl("https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2FMichael%20C.png?alt=media&token=eeda6ac0-0f91-4538-acd9-489a8334a7ea"),
     linkedinUrl: "https://www.linkedin.com/in/michael-cordas-executive-leadership",
     email: "michael.cordas@bridge2partners.com",
     expertise: ["Core Platforms", "Digital Channels", "Payments Systems"],
@@ -44,7 +45,7 @@ export const MOCK_TEAM: TeamMember[] = [
     category: "Executive Leadership",
     bio: "Accomplished financial services leader with extensive experience guiding banks through complex transformations.",
     fullBio: "An accomplished financial services leader with extensive experience guiding banks and financial institutions through complex digital and operational transformations. As a former Senior Partner at West Monroe, Chris led the firm's Banking practice, specializing in Commercial Banking, Regulatory and Program Management.",
-    imageUrl: "https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2FChris%20C.png?alt=media&token=69c281e4-e759-4417-a13b-9ae92973daa9",
+    imageUrl: resolveStorageUrl("https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2FChris%20C.png?alt=media&token=69c281e4-e759-4417-a13b-9ae92973daa9"),
     linkedinUrl: "https://www.linkedin.com/in/chris-caulfield-022b409/",
     email: "chris.caulfield@bridge2partners.com",
     expertise: ["Commercial Banking", "Regulatory", "Program Management"],
@@ -60,7 +61,7 @@ export const MOCK_TEAM: TeamMember[] = [
     category: "Executive Leadership",
     bio: "Seasoned technology and banking leader with over 25 years of experience driving transformation.",
     fullBio: "A seasoned technology and banking leader with over 25 years of experience driving transformation across financial services. At Bridge2Partners, Neil blends deep expertise in banking operations, digital strategy, and enterprise technology to deliver measurable business outcomes.",
-    imageUrl: "https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2FNeil%20K.png?alt=media&token=8315b88c-95de-4ae4-8171-67274ef8a8ac",
+    imageUrl: resolveStorageUrl("https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2FNeil%20K.png?alt=media&token=8315b88c-95de-4ae4-8171-67274ef8a8ac"),
     linkedinUrl: "https://www.linkedin.com/in/neilkjeldsen/",
     email: "neil.kjeldsen@bridge2partners.com",
     expertise: ["Banking Operations", "Digital Strategy", "Enterprise Technology"],
@@ -73,7 +74,7 @@ export const MOCK_TEAM: TeamMember[] = [
     category: "Executive Leadership",
     bio: "Specializing in M&A, transaction services, market entry strategy, and large-scale transformation.",
     fullBio: "Chief Business Officer at Bridge2Partners, specializing in mergers and acquisitions, transaction services, market entry strategy, and large-scale business transformation. Christopher is recognized for aligning business and technology to deliver sustainable results in an evolving financial landscape.",
-    imageUrl: "https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2FChris%20S.png?alt=media&token=bc9750bd-8625-4a7b-8538-2a6f78c112f2",
+    imageUrl: resolveStorageUrl("https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2FChris%20S.png?alt=media&token=bc9750bd-8625-4a7b-8538-2a6f78c112f2"),
     linkedinUrl: "https://www.linkedin.com/in/christopher-summers-491b02",
     email: "Christopher.Summers@bridge2partners.com",
     expertise: ["M&A", "Transaction Services", "Market Entry Strategy"],
@@ -86,7 +87,7 @@ export const MOCK_TEAM: TeamMember[] = [
     category: "Executive Leadership",
     bio: "Banking technology and digital transformation executive with a strong foundation in financial services.",
     fullBio: "A banking technology and digital transformation executive with a strong foundation in financial services, including several years at City National Bank. She brings expertise in digital strategy, customer onboarding, data analytics, and platform modernization. Kristine has led initiatives that increased digital adoption, streamlined digital channels, and aligned technology investments with strategic outcomes — driving improved customer experience, reduced service friction, and better use of data to guide product decisions.",
-    imageUrl: "https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2FUntitled%20(83).png?alt=media&token=0f0a6e3c-37a0-449f-ac10-a8fa6ad78b0b",
+    imageUrl: resolveStorageUrl("https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2FUntitled%20(83).png?alt=media&token=0f0a6e3c-37a0-449f-ac10-a8fa6ad78b0b"),
     linkedinUrl: "https://www.linkedin.com/in/kristine-esmaili-simon-b419816/",
     email: "kristine.simon@bridge2partners.com",
     expertise: ["Digital Strategy", "Customer Onboarding", "Data Analytics"],
@@ -102,7 +103,7 @@ export const MOCK_TEAM: TeamMember[] = [
     category: "Executive Leadership",
     bio: "Hands-on thought leader with 25+ years of successful strategic planning, execution and QA/testing.",
     fullBio: "A hands-on thought leader with 25+ years of successful strategic planning, execution and QA/testing of projects and programs that transform organizations and businesses, improve competitive performance, and help banks and financial institutions compete and differentiate. Dominick has a broad range of experience across banking, lending, insurance, and financial services, and with consulting firms such as CapGemini and Wipro.",
-    imageUrl: "https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2FDom%20G.png?alt=media&token=4b9631b4-9e8e-4567-b4d0-3cb735adcadf",
+    imageUrl: resolveStorageUrl("https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2FDom%20G.png?alt=media&token=4b9631b4-9e8e-4567-b4d0-3cb735adcadf"),
     linkedinUrl: "https://www.linkedin.com/in/dominickgrillas",
     email: "dom.grillas@bridge2partners.com",
     expertise: ["Strategic Planning", "QA/Testing"],
@@ -119,7 +120,7 @@ export const MOCK_TEAM: TeamMember[] = [
     category: "Executive Leadership",
     bio: "Accomplished Human Resources leader with over 20 years of experience driving people strategy.",
     fullBio: "An accomplished Human Resources leader with over 20 years of experience driving people strategy, organizational development, and cultural transformation. Kimberly has led high-impact initiatives in talent acquisition, leadership development, performance management, employee engagement, and compensation strategy.",
-    imageUrl: "https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2FKimberly%20B.png?alt=media&token=c3a7c6d8-1be3-4573-a1ba-d71e6d975467",
+    imageUrl: resolveStorageUrl("https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2FKimberly%20B.png?alt=media&token=c3a7c6d8-1be3-4573-a1ba-d71e6d975467"),
     linkedinUrl: "https://www.linkedin.com/in/kimberly-boroyan-shrm-cp-2867567",
     email: "Kimberly.Boroyan@bridge2partners.com",
     sortOrder: 3
@@ -131,7 +132,7 @@ export const MOCK_TEAM: TeamMember[] = [
     category: "Executive Leadership",
     bio: "Over 30 years of experience driving technology-enabled transformation and operational excellence.",
     fullBio: "A seasoned executive with over 30 years of experience driving technology-enabled transformation and operational excellence for financial services and technology organizations. With a foundation in Big Four consulting at Ernst & Young and PwC, Aaron has led large-scale initiatives in digital strategy, process optimization, and enterprise technology integration.",
-    imageUrl: "https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2FAaron%20W.png?alt=media&token=53d3590a-fd65-46fc-9ba6-2466c0eba115",
+    imageUrl: resolveStorageUrl("https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2FAaron%20W.png?alt=media&token=53d3590a-fd65-46fc-9ba6-2466c0eba115"),
     linkedinUrl: "https://www.linkedin.com/in/aaronweissberger/",
     email: "Aaron.Weissberger@bridge2partners.com",
     expertise: ["Digital Strategy", "Process Optimization", "Enterprise Integration"],
@@ -148,7 +149,7 @@ export const MOCK_TEAM: TeamMember[] = [
     category: "Business Line Leaders",
     bio: "Brings close to 30 years of experience in banking, capital markets, and wealth management strategy.",
     fullBio: "John leads Bridge2Partners' Financial Services practice, bringing close to 30 years of experience in banking, capital markets, wealth management, and asset management strategy and transformation. He was previously a Partner and Head of US Financial Services at Sia Partners, where he also led the Cross Business Strategy and Transformation practice; he joined Sia through its 2019 acquisition of Gartland & Mellina Group (GMG), a financial-services management consulting firm where he was a Managing Partner. His prior work has centered on operational strategy, large-scale program management, middle/back-office outsourcing, and technology-enabled solutions across operational resilience, FinTech, ESG/Climate Risk, LIBOR transition, and Market Data Solutions for retail banks, private banks, brokerages, mutual funds, and asset managers. He also holds the Chartered Financial Analyst (CFA) designation.",
-    imageUrl: "https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2FJohn%20Gustav.png?alt=media&token=34dcdf7d-49b5-45a3-bc50-85a7ae83b798",
+    imageUrl: resolveStorageUrl("https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2FJohn%20Gustav.png?alt=media&token=34dcdf7d-49b5-45a3-bc50-85a7ae83b798"),
     linkedinUrl: "https://www.linkedin.com/in/johngustav/",
     email: "John.Gustav@bridge2partners.com"
   },
@@ -159,7 +160,7 @@ export const MOCK_TEAM: TeamMember[] = [
     category: "Business Line Leaders",
     bio: "Seasoned banking and digital solutions leader driving large-scale business transformation programs.",
     fullBio: "A seasoned banking and digital solutions leader with extensive experience driving large-scale business transformation programs across both the Commercial and Retail sides.",
-    imageUrl: "https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2FBob%20Holohan.png?alt=media&token=21c70eb2-4e77-46f6-8fd4-b2878eb15a7e",
+    imageUrl: resolveStorageUrl("https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2FBob%20Holohan.png?alt=media&token=21c70eb2-4e77-46f6-8fd4-b2878eb15a7e"),
     linkedinUrl: "https://www.linkedin.com/in/robertholohan/",
     email: "Robert.Holohan@bridge2partners.com"
   },
@@ -170,7 +171,7 @@ export const MOCK_TEAM: TeamMember[] = [
     category: "Business Line Leaders",
     bio: "Specializes in navigating complex, large-scale transformation projects in Commercial Lending.",
     fullBio: "Shane brings over 25 years of experience in Investment Banking and Management Consulting to Bridge2Partners. As the lead for our Capital Markets and Commercial Lending practice, Shane specializes in navigating complex, large-scale transformation projects.",
-    imageUrl: "https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2FUntitled%20(81).png?alt=media&token=82b816d1-2b05-4f15-b6c9-d9f41c25a8a6",
+    imageUrl: resolveStorageUrl("https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2FUntitled%20(81).png?alt=media&token=82b816d1-2b05-4f15-b6c9-d9f41c25a8a6"),
     linkedinUrl: "https://www.linkedin.com/in/shanecwilliams/",
     email: "Shane.Williams@bridge2partners.com"
   },
@@ -181,7 +182,7 @@ export const MOCK_TEAM: TeamMember[] = [
     category: "Business Line Leaders",
     bio: "Leads Bridge2Partners' Treasury Management & Payments practice with a 30-year career as a builder.",
     fullBio: "Linda leads Bridge2Partners' Treasury Management & Payments practice, drawing on a 30-year career as a builder and operator at the intersection of banking and technology. She built some of the first consumer online banking platforms in the United States at CoreStates Financial Corp, where she served as SVP, Systems and Technology (1995–1998) and became the youngest woman ever promoted to SVP at the bank — earning a cover feature in American Banker for her internet-banking work. Earlier in her career she was a credit risk manager in the card division at Chase Manhattan, and she has since held leadership roles at Fiserv, American Management Systems, and eCharge Corp, in addition to founding two startups. Her advisory work today focuses on payments modernization and treasury transformation for banks.",
-    imageUrl: "https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2FUntitled%20(82).png?alt=media&token=76a8e68d-54f4-4546-a592-b94aeff51c64",
+    imageUrl: resolveStorageUrl("https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2FUntitled%20(82).png?alt=media&token=76a8e68d-54f4-4546-a592-b94aeff51c64"),
     linkedinUrl: "https://www.linkedin.com/in/lindaaweber/",
     email: "Linda.Weber@bridge2partners.com"
   },
@@ -192,7 +193,7 @@ export const MOCK_TEAM: TeamMember[] = [
     category: "Technical Expertise",
     bio: "Deep expertise in digital transformation, IT solution delivery, and quality engineering.",
     fullBio: "A senior technology and banking leader with deep expertise in digital transformation, IT solution delivery, and quality engineering for financial institutions. Krithika helps banks accelerate digital adoption through an innovative 'Ideation to Adoption' framework, leveraging productized solutions to ensure measurable business outcomes. Her leadership focuses on core banking modernization, DevOps-enabled quality engineering, and customer-centric technology strategies.",
-    imageUrl: "https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2FKrithika%20K.png?alt=media&token=d9b15470-1296-46b4-bdf2-2b04ccf906b2",
+    imageUrl: resolveStorageUrl("https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2FKrithika%20K.png?alt=media&token=d9b15470-1296-46b4-bdf2-2b04ccf906b2"),
     linkedinUrl: "https://www.linkedin.com/in/krithikaakumar/",
     email: "Krithika.Kumar@bridge2partners.com"
   },
@@ -214,7 +215,7 @@ export const MOCK_TEAM: TeamMember[] = [
     category: "Technical Expertise",
     bio: "Executive technologist with deep experience in application development and systems integration.",
     fullBio: "An executive technologist with deep experience in banking and financial services technology, particularly in application development, systems integration, and digital transformation. Tony has guided banks through modernization of legacy systems, API-enabled architectures, and migration to scalable platforms.",
-    imageUrl: "https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2FAnthony%20L.png?alt=media&token=c8185d06-27f7-49a5-b3b3-a1d3825c25fd",
+    imageUrl: resolveStorageUrl("https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2FAnthony%20L.png?alt=media&token=c8185d06-27f7-49a5-b3b3-a1d3825c25fd"),
     linkedinUrl: "https://www.linkedin.com/in/ahlockard/",
     email: "Tony.Lockard@bridge2partners.com"
   },
@@ -258,7 +259,7 @@ export const MOCK_TEAM: TeamMember[] = [
     category: "Business Development",
     bio: "Seasoned banking and fintech leader with decades of experience.",
     fullBio: "A seasoned banking and fintech leader with decades of experience as both a banking operations executive and a FinTech delivery and enterprise client partner.",
-    imageUrl: "https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2FLiza%20Anne.png?alt=media&token=07bbe10c-96fe-4381-815f-ff6c7e58e1d0",
+    imageUrl: resolveStorageUrl("https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2FLiza%20Anne.png?alt=media&token=07bbe10c-96fe-4381-815f-ff6c7e58e1d0"),
     linkedinUrl: "https://www.linkedin.com/in/lizaannesdejulio",
     email: "LizaAnne.DeJulio@bridge2partners.com"
   },

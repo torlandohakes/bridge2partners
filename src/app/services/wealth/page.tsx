@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { resolveStorageUrl } from "@/lib/utils";
 import SubpageHero from "@/components/SubpageHero";
 import EditableText from "@/components/EditableText";
 import EditableLogoStrip from "@/components/EditableLogoStrip";
@@ -31,7 +32,7 @@ export default function WealthManagementService() {
       <SubpageHero 
         title={<EditableText element="span" contentId="hero_title" defaultText="Wealth Management Analytics" isAdmin={isAdmin} documentId="wealth" value={cmsContent.hero_title} />}
         subtitle={<EditableText element="span" contentId="hero_subtitle" defaultText="Align technology with business goals to accelerate platform modernization and deepen client relationships." isAdmin={isAdmin} documentId="wealth" value={cmsContent.hero_subtitle} />}
-        imageSrc="https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2FJohn%20Gustav.png?alt=media&token=34dcdf7d-49b5-45a3-bc50-85a7ae83b798"
+        imageSrc={resolveStorageUrl("https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2FJohn%20Gustav.png?alt=media&token=34dcdf7d-49b5-45a3-bc50-85a7ae83b798")}
         imageAlt="John Gustav, Head of Financial Services"
         imageCaptionName={<EditableText element="span" contentId="hero_caption_name" defaultText="John Gustav" isAdmin={isAdmin} documentId="wealth" value={cmsContent.hero_caption_name} />}
         imageCaptionTitle={<EditableText element="span" contentId="hero_caption_title" defaultText="Head of Financial Services" isAdmin={isAdmin} documentId="wealth" value={cmsContent.hero_caption_title} />}

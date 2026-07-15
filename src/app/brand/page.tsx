@@ -1,6 +1,7 @@
 "use client";
 
 import { useSearchParams } from "next/navigation";
+import { resolveStorageUrl } from "@/lib/utils";
 import { Suspense } from "react";
 import Image from "next/image";
 import { SidebarNav } from "@/components/brand/SidebarNav";
@@ -45,7 +46,7 @@ export default function BrandDashboard() {
       <header className="static w-full shrink-0 h-[64px] border-b border-neutral/10 flex items-center px-4 md:px-6">
          <div className="flex items-center gap-4 w-full">
            <img 
-              src="https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2FBridge2Partners_Brand_Logo_v7.webp?alt=media&token=a90040bc-3446-408d-8794-cab07568de66" 
+              src={resolveStorageUrl("https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2FBridge2Partners_Brand_Logo_v7.webp?alt=media&token=a90040bc-3446-408d-8794-cab07568de66")} 
               alt="Bridge2Partners Logo" 
               className="h-6 md:h-8 w-auto object-contain drop-shadow-[0_2px_4px_rgba(0,0,0,0.05)]" 
            />

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { resolveStorageUrl } from "@/lib/utils";
 import SubpageHero from "@/components/SubpageHero";
 import EditableText from "@/components/EditableText";
 import EditableLogoStrip from "@/components/EditableLogoStrip";
@@ -32,7 +33,7 @@ export default function CommercialLendingService() {
       <SubpageHero 
         title={<EditableText element="span" contentId="hero_title" defaultText="Commercial Lending Automation" isAdmin={isAdmin} documentId="commercial-lending" value={cmsContent.hero_title} />}
         subtitle={<EditableText element="span" contentId="hero_subtitle" defaultText="Streamline commercial lending workflows and modernize infrastructure for faster loan origination." isAdmin={isAdmin} documentId="commercial-lending" value={cmsContent.hero_subtitle} />}
-        imageSrc="https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2FUntitled%20(78).png?alt=media&token=51dedfc2-9786-4d4a-a9cf-cfaf389fe979"
+        imageSrc={resolveStorageUrl("https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2FUntitled%20(78).png?alt=media&token=51dedfc2-9786-4d4a-a9cf-cfaf389fe979")}
         imageAlt="Shane Williams, Head of Capital Markets and Commercial Lending"
         imageCaptionName={<EditableText element="span" contentId="hero_caption_name" defaultText="Shane Williams" isAdmin={isAdmin} documentId="commercial-lending" value={cmsContent.hero_caption_name} />}
         imageCaptionTitle={<EditableText element="span" contentId="hero_caption_title" defaultText="Head of Capital Markets and Commercial Lending" isAdmin={isAdmin} documentId="commercial-lending" value={cmsContent.hero_caption_title} />}

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { resolveStorageUrl } from "@/lib/utils";
 import SubpageHero from "@/components/SubpageHero";
 import EditableText from "@/components/EditableText";
 import { auth, db } from "@/lib/firebase";
@@ -40,7 +41,7 @@ export default function ProcurementPage() {
         title={<EditableText element="span" stripNewlines={true} contentId="procurement_hero_title" defaultText="Compliance Standards" isAdmin={isAdmin} value={cmsContent.procurement_hero_title} documentId="procurement" />}
         subtitle={<EditableText element="span" contentId="hero_subtitle" defaultText="Fast, frictionless vendor onboarding. Access all required legal and compliance documents below." isAdmin={isAdmin} value={cmsContent.hero_subtitle} documentId="procurement" />}
         theme="dark" 
-        imageSrc="https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2FDOM_alpha.png?alt=media&token=47717353-59db-4f9f-b8a6-4dd70e6520be"
+        imageSrc={resolveStorageUrl("https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2FDOM_alpha.png?alt=media&token=47717353-59db-4f9f-b8a6-4dd70e6520be")}
         imageAlt="Dominick Grillas, Chief Administrative Officer"
         imageCaptionName={<EditableText element="span" contentId="hero_caption_name" defaultText="Dominick Grillas" isAdmin={isAdmin} value={cmsContent.hero_caption_name} documentId="procurement" />}
         imageCaptionTitle={<EditableText element="span" contentId="hero_caption_title" defaultText="Chief Administrative Officer" isAdmin={isAdmin} value={cmsContent.hero_caption_title} documentId="procurement" />}

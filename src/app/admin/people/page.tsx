@@ -8,6 +8,7 @@ import { TeamMember, MOCK_TEAM } from "@/app/people/data";
 import Image from "next/image";
 import { Trash2, Edit2, Plus, Upload, Loader2, Save, X, EyeOff, QrCode } from "lucide-react";
 import LoginModal from "@/components/LoginModal";
+import { resolveStorageUrl } from "@/lib/utils";
 
 export default function PeopleAdminDashboard() {
   const [isAdmin, setIsAdmin] = useState(false);
@@ -169,7 +170,7 @@ export default function PeopleAdminDashboard() {
             <div key={member.id} className="bg-white/5 border border-white/10 rounded-xl p-5 flex gap-4 items-center">
               <div className="w-16 h-16 rounded-full bg-white/10 overflow-hidden relative shrink-0">
                 {member.imageUrl && (
-                  <Image src={member.imageUrl} alt={member.name} fill className="object-cover" unoptimized />
+                  <Image src={resolveStorageUrl(member.imageUrl)} alt={member.name} fill className="object-cover" unoptimized />
                 )}
               </div>
               <div className="flex-grow min-w-0">
@@ -220,7 +221,7 @@ export default function PeopleAdminDashboard() {
                 <div className="w-32 flex flex-col items-center gap-3">
                   <div className="w-32 h-32 rounded-xl bg-white/5 border border-white/10 relative overflow-hidden flex items-center justify-center group">
                     {isEditing.imageUrl ? (
-                      <Image src={isEditing.imageUrl} alt="Preview" fill className="object-cover" unoptimized />
+                      <Image src={resolveStorageUrl(isEditing.imageUrl)} alt="Preview" fill className="object-cover" unoptimized />
                     ) : (
                       <Upload className="w-8 h-8 text-white/30" />
                     )}

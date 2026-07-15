@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { resolveStorageUrl } from "@/lib/utils";
 import SubpageHero from "@/components/SubpageHero";
 import EditableText from "@/components/EditableText";
 import EditableLogoStrip from "@/components/EditableLogoStrip";
@@ -31,7 +32,7 @@ export default function TreasuryService() {
       <SubpageHero 
         title={<EditableText element="span" contentId="hero_title" defaultText="Treasury & Payments" isAdmin={isAdmin} documentId="treasury" value={cmsContent.hero_title} />}
         subtitle={<EditableText element="span" contentId="hero_subtitle" defaultText="Modernize payments and treasury operations for immediate ROI without core replacement." isAdmin={isAdmin} documentId="treasury" value={cmsContent.hero_subtitle} />}
-        imageSrc="https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2FUntitled%20(76).png?alt=media&token=292094e1-53b4-43ee-94cf-841c3a139fe7"
+        imageSrc={resolveStorageUrl("https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2FUntitled%20(76).png?alt=media&token=292094e1-53b4-43ee-94cf-841c3a139fe7")}
         imageAlt="Linda Weber, Managing Director, Treasury Management & Payments Practice Leader"
         imageCaptionName={<EditableText element="span" contentId="hero_caption_name" defaultText="Linda Weber" isAdmin={isAdmin} documentId="treasury" value={cmsContent.hero_caption_name} />}
         imageCaptionTitle={<EditableText element="span" contentId="hero_caption_title" defaultText="Managing Director, Treasury Management & Payments Practice Leader" isAdmin={isAdmin} documentId="treasury" value={cmsContent.hero_caption_title} />}

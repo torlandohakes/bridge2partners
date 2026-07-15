@@ -1,4 +1,5 @@
 import React from 'react';
+import { resolveStorageUrl } from "@/lib/utils";
 import { ArrowRight } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { colors, typographyColors, shapeVariants, layouts, imageStyles, buttonStyles } from '@/lib/design-tokens';
@@ -145,15 +146,15 @@ export function LinkedInCarouselTemplate({ slide, aspectRatio, onUpdate }: Linke
     const brandMarkSize = slide.brandMarkSize || 'md';
     const brandMarkOpacity = slide.brandMarkOpacity || '80';
 
-    let logoUrl = 'https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2FBridge2Partners_Brand_Logo_v7.webp?alt=media&token=a90040bc-3446-408d-8794-cab07568de66'; // Primary Logo (Color)
+    let logoUrl = resolveStorageUrl('https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2FBridge2Partners_Brand_Logo_v7.webp?alt=media&token=a90040bc-3446-408d-8794-cab07568de66'); // Primary Logo (Color)
     
     if (wmColorToken === 'text-light') {
-      logoUrl = 'https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2FBridge2Partners%20Logo-3-White.png?alt=media&token=0a8d7276-834f-4ff8-971d-63f079efb214';
+      logoUrl = resolveStorageUrl('https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2FBridge2Partners%20Logo-3-White.png?alt=media&token=0a8d7276-834f-4ff8-971d-63f079efb214');
     } else if (wmColorToken === 'text-dark') {
-      logoUrl = 'https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2FBridge2Partners%20Logo-2-Black.png?alt=media&token=8bc5af5c-85fb-4782-acf5-73f9db67f1f8';
+      logoUrl = resolveStorageUrl('https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2FBridge2Partners%20Logo-2-Black.png?alt=media&token=8bc5af5c-85fb-4782-acf5-73f9db67f1f8');
     }
 
-    const iconUrl = 'https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2FBridge2Partners_Favicon.png?alt=media&token=8281d312-5968-4fa1-9e37-347481934b95';
+    const iconUrl = resolveStorageUrl('https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2FBridge2Partners_Favicon.png?alt=media&token=8281d312-5968-4fa1-9e37-347481934b95');
 
     const safeLogoUrl = `/api/proxy-image?url=${encodeURIComponent(logoUrl)}`;
     const safeIconUrl = `/api/proxy-image?url=${encodeURIComponent(iconUrl)}`;

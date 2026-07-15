@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useMemo } from "react";
+import { resolveStorageUrl } from "@/lib/utils";
 import { auth, db } from "@/lib/firebase";
 import { onAuthStateChanged } from "firebase/auth";
 import { collection, onSnapshot, doc, setDoc, getDoc, updateDoc, deleteDoc } from "firebase/firestore";
@@ -672,7 +673,7 @@ export default function MailerAdminDashboard() {
           <div className="flex flex-col gap-6">
             <div className="mb-2">
               <img 
-                 src="https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2FBridge2Partners_Brand_Logo_v7.webp?alt=media&token=a90040bc-3446-408d-8794-cab07568de66" 
+                 src={resolveStorageUrl("https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2FBridge2Partners_Brand_Logo_v7.webp?alt=media&token=a90040bc-3446-408d-8794-cab07568de66")} 
                  alt="Bridge2Partners Logo" 
                  className="h-6 w-auto object-contain" 
               />
