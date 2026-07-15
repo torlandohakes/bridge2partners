@@ -76,10 +76,10 @@ export default function PeoplePage() {
         title={<EditableText element="span" contentId="hero_title" defaultText="Our People" isAdmin={isAdmin} value={cmsContent.hero_title} documentId="people" />}
         subtitle={<EditableText element="span" contentId="hero_subtitle" defaultText="We are operators, not just advisors. Meet the team driving transformation across tier-1 financial institutions." isAdmin={isAdmin} value={cmsContent.hero_subtitle} documentId="people" />}
         theme="dark" 
-        imageSrc="/images/leadership_portrait_4.png"
-        imageAlt="Christopher Summers, Managing Partner"
+        imageSrc={resolveStorageUrl("https://firebasestorage.googleapis.com/v0/b/bridge2partners-staging.firebasestorage.app/o/images%2FChristopher%20Summers%20B2P%20Cutout.png?alt=media&token=b1ebc9e8-08a5-4ba8-8e48-7fad149d6ae2")}
+        imageAlt="Christopher Summers, Chief Business Officer"
         imageCaptionName={<EditableText element="span" contentId="hero_caption_name" defaultText="Christopher Summers" isAdmin={isAdmin} value={cmsContent.hero_caption_name} documentId="people" />}
-        imageCaptionTitle={<EditableText element="span" contentId="hero_caption_title" defaultText="Managing Partner" isAdmin={isAdmin} value={cmsContent.hero_caption_title} documentId="people" />}
+        imageCaptionTitle={<EditableText element="span" contentId="hero_caption_title" defaultText="Chief Business Officer" isAdmin={isAdmin} value={cmsContent.hero_caption_title} documentId="people" />}
       />
 
       <div className="max-w-7xl mx-auto px-6 py-24 relative z-10">
