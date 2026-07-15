@@ -160,7 +160,7 @@ export async function GET(request: Request) {
   const tag = searchParams.get('tag')?.toLowerCase();
 
   const token = process.env.LINKEDIN_ACCESS_TOKEN;
-  const orgUrn = process.env.LINKEDIN_ORG_URN;
+  const orgUrn = process.env.LINKEDIN_ORG_URN || '80920020';
 
   const MOCK_FEED = [
     {

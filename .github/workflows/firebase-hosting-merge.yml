@@ -27,7 +27,7 @@ jobs:
           echo "GEMINI_API_KEY=${{ secrets.GOOGLE_AI_API_B2P }}" > .env
           echo "RESEND_API_KEY=${{ secrets.RESEND_API_KEY }}" >> .env
           echo "LINKEDIN_ACCESS_TOKEN=${{ secrets.LINKEDIN_ACCESS_TOKEN }}" >> .env
-          echo "LINKEDIN_ORG_URN=${{ secrets.LINKEDIN_ORG_URN }}" >> .env
+          echo "LINKEDIN_ORG_URN=80920020" >> .env
           echo "NEXT_PUBLIC_FIREBASE_API_KEY=AIzaSyC_3MVmr-TDM-2Xf_6FZRWRFfgg4UmQAm4" >> .env.production
           echo "NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=bridge2partners-staging.firebaseapp.com" >> .env.production
           echo "NEXT_PUBLIC_FIREBASE_PROJECT_ID=bridge2partners-staging" >> .env.production
