@@ -293,7 +293,7 @@ export async function GET(req: Request) {
           <tr>
             <td width="44" valign="top">
               <div style="width: 40px; height: 40px; border-radius: 4px; overflow: hidden; background-color: #ffffff; border: 1px solid rgba(255, 255, 255, 0.1);">
-                <img src="${emailBaseUrl}/images/Bridge2Partners_Logo-3-White.png" alt="Bridge2Partners" width="40" height="40" style="display: block; object-fit: cover;" />
+                <img src="${emailBaseUrl}/images/B2P_LI_LOGO_Primary.webp" alt="Bridge2Partners" width="40" height="40" style="display: block; object-fit: cover;" />
               </div>
             </td>
             <td style="padding-left: 12px;" valign="top">
