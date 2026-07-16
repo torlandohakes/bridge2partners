@@ -159,17 +159,38 @@ export async function GET(req: Request) {
       ? 'https://bridge2partners-prod.web.app' 
       : baseUrl;
 
-    // 1. Fetch latest LinkedIn posts from Firestore
+    // 1. Fetch latest LinkedIn posts from the live API (fail-safe)
     let rawPosts: any[] = [];
     try {
-      const postsSnap = await getDocs(collection(db, 'linkedin_posts'));
-      rawPosts = postsSnap.docs.map(doc => ({
-        id: doc.id,
-        ...doc.data()
-      }));
+      const apiRes = await fetch(`${baseUrl}/api/linkedin?count=50`);
+      if (apiRes.ok) {
+        const apiData = await apiRes.json();
+        const apiPosts = apiData.posts || [];
+        
+        // 2. Try to resolve each post with its cached Firestore version (for permanent images)
+        try {
+          const postsSnap = await getDocs(collection(db, 'linkedin_posts'));
+          const storedMap = new Map(postsSnap.docs.map(doc => [doc.id, doc.data()]));
+          rawPosts = apiPosts.map((post: any) => {
+            const stored = storedMap.get(post.id);
+            return stored ? { ...post, ...stored } : post;
+          });
+        } catch (dbErr) {
+          console.warn('Failed to query Firestore cache, using raw API posts:', dbErr);
+          rawPosts = apiPosts;
+        }
+      } else {
+        throw new Error(`API returned status ${apiRes.status}`);
+      }
     } catch (e: any) {
-      console.error('Failed to fetch posts from Firestore:', e);
-      throw new Error(`Failed to fetch LinkedIn posts: ${e.message}`);
+      console.error('Failed to fetch live posts, trying Firestore fallback:', e);
+      // Fallback to Firestore only if API fetch fails completely
+      try {
+        const postsSnap = await getDocs(collection(db, 'linkedin_posts'));
+        rawPosts = postsSnap.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+      } catch (dbErr) {
+        console.error('Firestore fallback failed:', dbErr);
+      }
     }
     
     // Sort posts initially by timestamp descending (newest first)
