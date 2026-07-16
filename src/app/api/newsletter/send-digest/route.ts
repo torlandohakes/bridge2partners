@@ -260,9 +260,23 @@ export async function GET(req: Request) {
     const regularCards = posts.filter((p: any) => !p.isArticle);
 
     const renderCard = (post: any) => {
-      const imageUrl = post.imageUrl 
-        ? (post.imageUrl.startsWith('/') ? `${emailBaseUrl}${post.imageUrl}` : post.imageUrl)
-        : '';
+      let imageUrl = '';
+      if (post.imageUrl) {
+        if (post.imageUrl.includes('/api/proxy-image')) {
+          // For email clients, extract the raw LinkedIn CDN URL so it bypasses Vercel proxy limitations
+          try {
+            const urlObj = new URL(post.imageUrl, emailBaseUrl);
+            const rawUrl = urlObj.searchParams.get('url');
+            imageUrl = rawUrl || post.imageUrl;
+          } catch (e) {
+            imageUrl = post.imageUrl;
+          }
+        } else if (post.imageUrl.startsWith('/')) {
+          imageUrl = `${emailBaseUrl}${post.imageUrl}`;
+        } else {
+          imageUrl = post.imageUrl;
+        }
+      }
         
       const { headline, body } = getPostHeadlineAndBody(post.text);
       const cleanedBody = body
@@ -279,7 +293,7 @@ export async function GET(req: Request) {
           <tr>
             <td width="44" valign="top">
               <div style="width: 40px; height: 40px; border-radius: 4px; overflow: hidden; background-color: #ffffff; border: 1px solid rgba(255, 255, 255, 0.1);">
-                <img src="${emailBaseUrl}/images/B2P_LI_LOGO_Primary.webp" alt="Bridge2Partners" width="40" height="40" style="display: block; object-fit: cover;" />
+                <img src="${emailBaseUrl}/images/Bridge2Partners_Logo-3-White.png" alt="Bridge2Partners" width="40" height="40" style="display: block; object-fit: cover;" />
               </div>
             </td>
             <td style="padding-left: 12px;" valign="top">
@@ -313,11 +327,9 @@ export async function GET(req: Request) {
         <!-- Engagement Indicators and Call To Actions -->
         <table border="0" cellpadding="0" cellspacing="0" width="100%">
           <tr>
-            <td style="font-family: 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 11px; color: rgba(255, 255, 255, 0.4); font-weight: bold; vertical-align: middle;">
-              <img src="${emailBaseUrl}/images/icon_like.svg" width="12" height="12" style="display: inline-block; vertical-align: middle; margin-right: 4px; opacity: 0.4;" alt="likes" />
-              <span style="vertical-align: middle; margin-right: 12px; font-weight: normal; color: rgba(255, 255, 255, 0.4);">${post.likes}</span>
-              <img src="${emailBaseUrl}/images/icon_comment.svg" width="12" height="12" style="display: inline-block; vertical-align: middle; margin-right: 4px; opacity: 0.4;" alt="comments" />
-              <span style="vertical-align: middle; font-weight: normal; color: rgba(255, 255, 255, 0.4);">${post.comments}</span>
+            <td style="font-family: 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 12px; color: rgba(255, 255, 255, 0.4); vertical-align: middle;">
+              <span style="margin-right: 12px; color: rgba(255, 255, 255, 0.4);">👍 ${post.likes}</span>
+              <span style="color: rgba(255, 255, 255, 0.4);">💬 ${post.comments}</span>
             </td>
             <td align="right">
               <a href="${post.link}" target="_blank" style="display: inline-block; background-color: #98cc67; color: #001b15; text-decoration: none; padding: 8px 16px; border-radius: 50px; font-family: 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 11px; font-weight: bold;">
