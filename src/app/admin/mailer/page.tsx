@@ -178,9 +178,14 @@ export default function MailerAdminDashboard() {
           const data = await res.json();
           const apiPosts = data.posts || [];
           
-          // 2. Fetch existing posts from Firestore
-          const storedSnap = await getDocs(collection(db, "linkedin_posts"));
-          const storedMap = new Map(storedSnap.docs.map(doc => [doc.id, doc.data()]));
+          // 2. Fetch existing posts from Firestore (safely caught)
+          let storedMap = new Map();
+          try {
+            const storedSnap = await getDocs(collection(db, "linkedin_posts"));
+            storedMap = new Map(storedSnap.docs.map(doc => [doc.id, doc.data()]));
+          } catch (dbErr) {
+            console.warn("[AutoSync] Failed to query Firestore cache (permissions block):", dbErr);
+          }
           
           // 3. Resolve each post: use Firestore if synced, otherwise load temp and trigger sync
           const resolvedPosts = await Promise.all(apiPosts.map(async (post: any) => {
