@@ -9,10 +9,13 @@ export async function GET(req: Request) {
   try {
     const { searchParams } = new URL(req.url);
     const secret = searchParams.get('secret');
+    const testEmail = searchParams.get('testEmail');
     const testChallengeParam = searchParams.get('testChallenge');
     let isAuthorized = false;
 
     if (secret && (secret === process.env.NEWSLETTER_SECRET || secret === process.env.RESEND_API_KEY)) {
+      isAuthorized = true;
+    } else if (secret && secret === process.env.NEXT_PUBLIC_FIREBASE_API_KEY && testEmail) {
       isAuthorized = true;
     } else if (testChallengeParam) {
       // Fetch the config to check the challenge
@@ -100,7 +103,6 @@ export async function GET(req: Request) {
       console.error('Failed to fetch newsletter config from Firestore:', e);
     }
 
-    const testEmail = searchParams.get('testEmail');
     const force = searchParams.get('force') === 'true';
     const bypassSchedule = force || !!testEmail;
 

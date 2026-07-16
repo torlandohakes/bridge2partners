@@ -299,35 +299,22 @@ export default function MailerAdminDashboard() {
     }
   };
 
-  // Handle manual test email dispatches using Firestore challenge verification
+  // Handle manual test email dispatches using API key verification
   const handleSendTestEmail = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!testRecipientEmail || !db) return;
+    if (!testRecipientEmail) return;
     setSendingTest(true);
     setTestSuccess(null);
     setTestError(null);
 
     try {
-      // 1. Generate unique random challenge token
-      const challenge = Math.random().toString(36).substring(2) + Date.now().toString(36);
-      
-      // 2. Save challenge locally in Firestore config
-      await setDoc(doc(db, 'site-settings', 'newsletter_config'), {
-        testChallenge: challenge,
-        testChallengeCreatedAt: Date.now()
-      }, { merge: true });
-
-      // 3. Trigger dispatch API with challenge token
-      const res = await fetch(`/api/newsletter/send-digest?testChallenge=${challenge}&testEmail=${encodeURIComponent(testRecipientEmail)}`);
+      const apiKey = process.env.NEXT_PUBLIC_FIREBASE_API_KEY || "";
+      // Trigger dispatch API with public Firebase API key secret
+      const res = await fetch(`/api/newsletter/send-digest?secret=${encodeURIComponent(apiKey)}&testEmail=${encodeURIComponent(testRecipientEmail)}`);
       const data = await res.json();
 
       if (res.ok && data.success) {
         setTestSuccess(`Test email sent successfully to ${testRecipientEmail}!`);
-        // 4. Reset challenge variables
-        await setDoc(doc(db, 'site-settings', 'newsletter_config'), {
-          testChallenge: null,
-          testChallengeCreatedAt: null
-        }, { merge: true });
       } else {
         setTestError(data.error || data.message || "Failed to send test email.");
       }
