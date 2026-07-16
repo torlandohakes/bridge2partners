@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useMemo } from "react";
 import { resolveStorageUrl } from "@/lib/utils";
-import { auth, db } from "@/lib/firebase";
+import { auth, db, uploadToFirebase } from "@/lib/firebase";
 import { onAuthStateChanged } from "firebase/auth";
 import { collection, onSnapshot, doc, setDoc, getDoc, updateDoc, deleteDoc } from "firebase/firestore";
 import Image from "next/image";
@@ -82,6 +82,12 @@ export default function MailerAdminDashboard() {
   const [testSuccess, setTestSuccess] = useState<string | null>(null);
   const [testError, setTestError] = useState<string | null>(null);
 
+  // Import LinkedIn Post State
+  const [importUrl, setImportUrl] = useState("");
+  const [importingPost, setImportingPost] = useState(false);
+  const [importError, setImportError] = useState<string | null>(null);
+  const [importSuccess, setImportSuccess] = useState<string | null>(null);
+
   // Authentication Check
   useEffect(() => {
     if (!auth) return;
@@ -122,24 +128,24 @@ export default function MailerAdminDashboard() {
     fetchConfig();
   }, [isAdmin]);
 
-  // Fetch LinkedIn Posts for preview
+  // Fetch LinkedIn Posts from Firestore real-time snapshot
   useEffect(() => {
-    if (!isAdmin) return;
-    const fetchPosts = async () => {
-      setLoadingPosts(true);
-      try {
-        const res = await fetch("/api/linkedin?count=50");
-        if (res.ok) {
-          const data = await res.json();
-          setPosts(data.posts || []);
-        }
-      } catch (err) {
-        console.error("Failed to fetch posts:", err);
-      } finally {
-        setLoadingPosts(false);
-      }
-    };
-    fetchPosts();
+    if (!isAdmin || !db) return;
+    setLoadingPosts(true);
+    const unsub = onSnapshot(collection(db, "linkedin_posts"), (snapshot) => {
+      const postsList = snapshot.docs.map(doc => ({
+        id: doc.id,
+        ...doc.data()
+      }));
+      // Sort by timestamp descending
+      postsList.sort((a: any, b: any) => (b.timestamp || 0) - (a.timestamp || 0));
+      setPosts(postsList);
+      setLoadingPosts(false);
+    }, (err) => {
+      console.error("Failed to sync posts from Firestore:", err);
+      setLoadingPosts(false);
+    });
+    return () => unsub();
   }, [isAdmin]);
 
   // Handle subscriber edit actions
@@ -179,6 +185,82 @@ export default function MailerAdminDashboard() {
       } catch (err) {
         console.error("Failed to save post exclusion to Firestore:", err);
       }
+    }
+  };
+
+  const handleImportLinkedInPost = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!importUrl.trim()) return;
+    
+    setImportingPost(true);
+    setImportError(null);
+    setImportSuccess(null);
+    
+    try {
+      // 1. Scrape the post details
+      const res = await fetch(`/api/linkedin/scrape-post?url=${encodeURIComponent(importUrl.trim())}`);
+      if (!res.ok) {
+        const errData = await res.json();
+        throw new Error(errData.error || "Scraping failed");
+      }
+      
+      const data = await res.json();
+      if (!data.success || !data.post) {
+        throw new Error("Failed to parse post details");
+      }
+      
+      const scraped = data.post;
+      let finalImageUrl = "";
+      
+      // 2. Download and upload image to Firebase Storage if present
+      if (scraped.imageUrl) {
+        try {
+          const imgRes = await fetch(`/api/proxy-image?url=${encodeURIComponent(scraped.imageUrl)}`);
+          if (!imgRes.ok) throw new Error("Failed to download image from proxy");
+          const blob = await imgRes.blob();
+          const file = new File([blob], `${scraped.id}.png`, { type: blob.type || 'image/png' });
+          finalImageUrl = await uploadToFirebase(file, 'linkedin-posts');
+        } catch (imgErr) {
+          console.warn("Failed to store image, falling back to scraped URL:", imgErr);
+          finalImageUrl = scraped.imageUrl; // fallback
+        }
+      }
+      
+      // 3. Save post record to Firestore
+      if (db) {
+        const postDocRef = doc(db, "linkedin_posts", scraped.id);
+        const postData = {
+          id: scraped.id,
+          text: scraped.text,
+          imageUrl: finalImageUrl,
+          link: scraped.link,
+          likes: scraped.likes,
+          comments: scraped.comments,
+          shares: scraped.shares,
+          timestamp: scraped.timestamp,
+          date: scraped.date,
+          isArticle: scraped.isArticle,
+          importedAt: Date.now()
+        };
+        await setDoc(postDocRef, postData);
+        setImportSuccess(`Successfully imported post!`);
+        setImportUrl("");
+      }
+    } catch (err: any) {
+      console.error("Import error:", err);
+      setImportError(err.message || "An unexpected error occurred during import.");
+    } finally {
+      setImportingPost(false);
+    }
+  };
+
+  const handleDeletePost = async (e: React.MouseEvent, postId: string) => {
+    e.stopPropagation(); // prevent toggle selection when clicking delete
+    if (!db || !confirm("Are you sure you want to delete this imported update?")) return;
+    try {
+      await deleteDoc(doc(db, "linkedin_posts", postId));
+    } catch (err) {
+      console.error("Failed to delete post:", err);
     }
   };
 
@@ -1190,6 +1272,56 @@ export default function MailerAdminDashboard() {
 
                 </div>
 
+                {/* Import LinkedIn Update Card */}
+                <div className="bg-white border border-slate-200 shadow-sm rounded-2xl p-6">
+                  <h3 className="font-display font-bold text-sm text-slate-800 mb-2 flex items-center gap-2">
+                    <Plus className="w-4 h-4 text-[#00573f]" />
+                    Import LinkedIn Update
+                  </h3>
+                  <p className="text-[10px] text-slate-400 mb-4 leading-normal">
+                    Enter the URL of a public LinkedIn post from your company page (e.g. <code>https://www.linkedin.com/feed/update/urn:li:activity:...</code>). The system will scrape the content, download the cover image, and save it persistently to your newsletter candidate list.
+                  </p>
+
+                  <form onSubmit={handleImportLinkedInPost} className="flex gap-3">
+                    <input 
+                      type="url"
+                      placeholder="Paste LinkedIn post URL here..."
+                      value={importUrl}
+                      onChange={(e) => setImportUrl(e.target.value)}
+                      disabled={importingPost}
+                      className="flex-1 bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-xs text-slate-700 focus:outline-none focus:border-[#00573f] disabled:opacity-60"
+                    />
+                    <button 
+                      type="submit"
+                      disabled={importingPost || !importUrl.trim()}
+                      className="bg-[#00573f] hover:bg-[#004733] text-white text-xs font-bold px-5 py-2.5 rounded-xl transition-all shadow-sm flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed flex-shrink-0"
+                    >
+                      {importingPost ? (
+                        <>
+                          <Loader2 className="w-3.5 h-3.5 animate-spin" />
+                          <span>Importing...</span>
+                        </>
+                      ) : (
+                        <>
+                          <Plus className="w-3.5 h-3.5" />
+                          <span>Import Post</span>
+                        </>
+                      )}
+                    </button>
+                  </form>
+
+                  {importError && (
+                    <p className="text-[10px] text-red-600 mt-2.5 font-semibold leading-relaxed">
+                      ❌ {importError}
+                    </p>
+                  )}
+                  {importSuccess && (
+                    <p className="text-[10px] text-[#00573f] mt-2.5 font-semibold leading-relaxed">
+                      ✅ {importSuccess}
+                    </p>
+                  )}
+                </div>
+
                 {/* Collapsible Included Updates Accordion */}
                 <div className="border border-slate-200 bg-white rounded-2xl overflow-hidden">
                   <button 
@@ -1264,7 +1396,17 @@ export default function MailerAdminDashboard() {
                                     />
                                     <span className="font-bold text-[#00573f]">Update #{idx + 1}</span>
                                   </div>
-                                  <span className="text-[9px] text-slate-400 font-medium">{post.date}</span>
+                                  <div className="flex items-center gap-2">
+                                    <span className="text-[9px] text-slate-400 font-medium">{post.date}</span>
+                                    <button 
+                                      type="button"
+                                      onClick={(e) => handleDeletePost(e, post.id)}
+                                      className="p-1 rounded text-slate-405 hover:text-slate-700 hover:bg-slate-100 transition-colors focus:outline-none"
+                                      title="Delete Post"
+                                    >
+                                      <Trash2 className="w-3.5 h-3.5" />
+                                    </button>
+                                  </div>
                                 </div>
 
                                 <p className="text-slate-600 line-clamp-3 leading-relaxed font-sans">{post.text}</p>

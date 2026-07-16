@@ -159,13 +159,18 @@ export async function GET(req: Request) {
       ? 'https://bridge2partners-prod.web.app' 
       : baseUrl;
 
-    // 1. Fetch latest LinkedIn posts from local API (cached & validated)
-    const linkedinRes = await fetch(`${baseUrl}/api/linkedin?count=50`);
-    if (!linkedinRes.ok) {
-      throw new Error(`Failed to fetch LinkedIn feed from API. Status: ${linkedinRes.status}`);
+    // 1. Fetch latest LinkedIn posts from Firestore
+    let rawPosts: any[] = [];
+    try {
+      const postsSnap = await getDocs(collection(db, 'linkedin_posts'));
+      rawPosts = postsSnap.docs.map(doc => ({
+        id: doc.id,
+        ...doc.data()
+      }));
+    } catch (e: any) {
+      console.error('Failed to fetch posts from Firestore:', e);
+      throw new Error(`Failed to fetch LinkedIn posts: ${e.message}`);
     }
-    const linkedinData = await linkedinRes.json();
-    const rawPosts = linkedinData.posts || [];
     
     // Sort posts initially by timestamp descending (newest first)
     const sortedRawPosts = [...rawPosts].sort((a: any, b: any) => {
