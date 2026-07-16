@@ -293,7 +293,7 @@ export async function GET(req: Request) {
           <tr>
             <td width="44" valign="top">
               <div style="width: 40px; height: 40px; border-radius: 4px; overflow: hidden; background-color: #ffffff; border: 1px solid rgba(255, 255, 255, 0.1);">
-                <img src="${emailBaseUrl}/images/B2P_LI_LOGO_Primary.webp" alt="Bridge2Partners" width="40" height="40" style="display: block; object-fit: cover;" />
+                <img src="${emailBaseUrl}/images/B2P_LI_LOGO_Primary.webp" alt="Bridge2Partners" width="40" height="40" style="display: block; object-fit: cover; border: 0; outline: none; text-decoration: none; font-family: 'Inter', sans-serif; font-size: 9px; color: rgba(255, 255, 255, 0.4); text-align: center;" />
               </div>
             </td>
             <td style="padding-left: 12px;" valign="top">
@@ -347,7 +347,7 @@ export async function GET(req: Request) {
             ${imageUrl ? `
               <div style="width: 100%; overflow: hidden; background-color: #050e0c; border-bottom: 1px solid rgba(255, 255, 255, 0.1);">
                 <a href="${post.link}" target="_blank">
-                  <img src="${imageUrl}" alt="Article Cover" style="width: 100%; height: auto; display: block; object-fit: cover;" />
+                  <img src="${imageUrl}" alt="Featured Article Media (Click 'Load Images' to view)" style="width: 100%; height: auto; display: block; object-fit: cover; border: 0; outline: none; text-decoration: none; font-family: 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 11px; color: rgba(255, 255, 255, 0.4); text-align: center; line-height: 1.4;" />
                 </a>
               </div>
             ` : ''}
@@ -367,7 +367,7 @@ export async function GET(req: Request) {
             ${imageUrl ? `
               <div style="margin-bottom: 20px; border-radius: 8px; overflow: hidden; border: 1px solid rgba(255, 255, 255, 0.05); background-color: #050e0c;">
                 <a href="${post.link}" target="_blank">
-                  <img src="${imageUrl}" alt="LinkedIn Update Attachment" style="width: 100%; aspect-ratio: 1 / 1; display: block; object-fit: cover;" />
+                  <img src="${imageUrl}" alt="LinkedIn Update Media (Click 'Load Images' to view)" style="width: 100%; aspect-ratio: 1 / 1; display: block; object-fit: cover; border: 0; outline: none; text-decoration: none; font-family: 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 11px; color: rgba(255, 255, 255, 0.4); text-align: center; line-height: 1.4;" />
                 </a>
               </div>
             ` : ''}
