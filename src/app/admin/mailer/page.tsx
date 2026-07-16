@@ -4,7 +4,7 @@ import { useState, useEffect, useMemo } from "react";
 import { resolveStorageUrl } from "@/lib/utils";
 import { auth, db, uploadToFirebase } from "@/lib/firebase";
 import { onAuthStateChanged } from "firebase/auth";
-import { collection, onSnapshot, doc, setDoc, getDoc, updateDoc, deleteDoc } from "firebase/firestore";
+import { collection, onSnapshot, doc, setDoc, getDoc, updateDoc, deleteDoc, getDocs } from "firebase/firestore";
 import Image from "next/image";
 import { 
   Mail, Users, Calendar, Search, ShieldCheck, 
@@ -82,12 +82,6 @@ export default function MailerAdminDashboard() {
   const [testSuccess, setTestSuccess] = useState<string | null>(null);
   const [testError, setTestError] = useState<string | null>(null);
 
-  // Import LinkedIn Post State
-  const [importUrl, setImportUrl] = useState("");
-  const [importingPost, setImportingPost] = useState(false);
-  const [importError, setImportError] = useState<string | null>(null);
-  const [importSuccess, setImportSuccess] = useState<string | null>(null);
-
   // Authentication Check
   useEffect(() => {
     if (!auth) return;
@@ -128,24 +122,89 @@ export default function MailerAdminDashboard() {
     fetchConfig();
   }, [isAdmin]);
 
-  // Fetch LinkedIn Posts from Firestore real-time snapshot
+  // Fetch LinkedIn Posts & Trigger Silent Background Sync
   useEffect(() => {
     if (!isAdmin || !db) return;
-    setLoadingPosts(true);
-    const unsub = onSnapshot(collection(db, "linkedin_posts"), (snapshot) => {
-      const postsList = snapshot.docs.map(doc => ({
-        id: doc.id,
-        ...doc.data()
-      }));
-      // Sort by timestamp descending
-      postsList.sort((a: any, b: any) => (b.timestamp || 0) - (a.timestamp || 0));
-      setPosts(postsList);
-      setLoadingPosts(false);
-    }, (err) => {
-      console.error("Failed to sync posts from Firestore:", err);
-      setLoadingPosts(false);
-    });
-    return () => unsub();
+    
+    const triggerBackgroundSync = async (post: any) => {
+      try {
+        console.log(`[AutoSync] Syncing post to Firestore: ${post.id}`);
+        let finalImageUrl = "";
+        
+        if (post.imageUrl) {
+          const proxyUrl = post.imageUrl.startsWith("http") 
+            ? `/api/proxy-image?url=${encodeURIComponent(post.imageUrl)}`
+            : post.imageUrl;
+            
+          const imgRes = await fetch(proxyUrl);
+          if (imgRes.ok) {
+            const blob = await imgRes.blob();
+            const file = new File([blob], `${post.id}.png`, { type: blob.type || "image/png" });
+            finalImageUrl = await uploadToFirebase(file, "linkedin-posts");
+            console.log(`[AutoSync] Stored image successfully for post ${post.id}: ${finalImageUrl}`);
+          }
+        }
+        
+        const postDocRef = doc(db, "linkedin_posts", post.id);
+        await setDoc(postDocRef, {
+          id: post.id,
+          text: post.text || "",
+          imageUrl: finalImageUrl || post.imageUrl || "",
+          link: post.link || "",
+          likes: post.likes ?? 0,
+          comments: post.comments ?? 0,
+          shares: post.shares ?? 0,
+          timestamp: post.timestamp || Date.now(),
+          date: post.date || "Recent Update",
+          isArticle: post.isArticle ?? false,
+          importedAt: Date.now()
+        });
+        
+        setPosts(prev => prev.map(p => p.id === post.id ? { 
+          ...p, 
+          imageUrl: finalImageUrl || post.imageUrl || "" 
+        } : p));
+      } catch (err) {
+        console.error(`[AutoSync] Error background syncing post ${post.id}:`, err);
+      }
+    };
+
+    const fetchPosts = async () => {
+      setLoadingPosts(true);
+      try {
+        // 1. Fetch latest updates from dynamic LinkedIn API connection
+        const res = await fetch("/api/linkedin?count=50");
+        if (res.ok) {
+          const data = await res.json();
+          const apiPosts = data.posts || [];
+          
+          // 2. Fetch existing posts from Firestore
+          const storedSnap = await getDocs(collection(db, "linkedin_posts"));
+          const storedMap = new Map(storedSnap.docs.map(doc => [doc.id, doc.data()]));
+          
+          // 3. Resolve each post: use Firestore if synced, otherwise load temp and trigger sync
+          const resolvedPosts = await Promise.all(apiPosts.map(async (post: any) => {
+            const stored = storedMap.get(post.id);
+            if (stored) {
+              return { ...post, ...stored };
+            } else {
+              triggerBackgroundSync(post);
+              return post;
+            }
+          }));
+          
+          // Sort resolved posts by timestamp descending
+          resolvedPosts.sort((a: any, b: any) => (b.timestamp || 0) - (a.timestamp || 0));
+          setPosts(resolvedPosts);
+        }
+      } catch (err) {
+        console.error("Failed to fetch posts:", err);
+      } finally {
+        setLoadingPosts(false);
+      }
+    };
+
+    fetchPosts();
   }, [isAdmin]);
 
   // Handle subscriber edit actions
@@ -185,72 +244,6 @@ export default function MailerAdminDashboard() {
       } catch (err) {
         console.error("Failed to save post exclusion to Firestore:", err);
       }
-    }
-  };
-
-  const handleImportLinkedInPost = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!importUrl.trim()) return;
-    
-    setImportingPost(true);
-    setImportError(null);
-    setImportSuccess(null);
-    
-    try {
-      // 1. Scrape the post details
-      const res = await fetch(`/api/linkedin/scrape-post?url=${encodeURIComponent(importUrl.trim())}`);
-      if (!res.ok) {
-        const errData = await res.json();
-        throw new Error(errData.error || "Scraping failed");
-      }
-      
-      const data = await res.json();
-      if (!data.success || !data.post) {
-        throw new Error("Failed to parse post details");
-      }
-      
-      const scraped = data.post;
-      let finalImageUrl = "";
-      
-      // 2. Download and upload image to Firebase Storage if present
-      if (scraped.imageUrl) {
-        try {
-          const imgRes = await fetch(`/api/proxy-image?url=${encodeURIComponent(scraped.imageUrl)}`);
-          if (!imgRes.ok) throw new Error("Failed to download image from proxy");
-          const blob = await imgRes.blob();
-          const file = new File([blob], `${scraped.id}.png`, { type: blob.type || 'image/png' });
-          finalImageUrl = await uploadToFirebase(file, 'linkedin-posts');
-        } catch (imgErr) {
-          console.warn("Failed to store image, falling back to scraped URL:", imgErr);
-          finalImageUrl = scraped.imageUrl; // fallback
-        }
-      }
-      
-      // 3. Save post record to Firestore
-      if (db) {
-        const postDocRef = doc(db, "linkedin_posts", scraped.id);
-        const postData = {
-          id: scraped.id,
-          text: scraped.text,
-          imageUrl: finalImageUrl,
-          link: scraped.link,
-          likes: scraped.likes,
-          comments: scraped.comments,
-          shares: scraped.shares,
-          timestamp: scraped.timestamp,
-          date: scraped.date,
-          isArticle: scraped.isArticle,
-          importedAt: Date.now()
-        };
-        await setDoc(postDocRef, postData);
-        setImportSuccess(`Successfully imported post!`);
-        setImportUrl("");
-      }
-    } catch (err: any) {
-      console.error("Import error:", err);
-      setImportError(err.message || "An unexpected error occurred during import.");
-    } finally {
-      setImportingPost(false);
     }
   };
 
@@ -1272,55 +1265,7 @@ export default function MailerAdminDashboard() {
 
                 </div>
 
-                {/* Import LinkedIn Update Card */}
-                <div className="bg-white border border-slate-200 shadow-sm rounded-2xl p-6">
-                  <h3 className="font-display font-bold text-sm text-slate-800 mb-2 flex items-center gap-2">
-                    <Plus className="w-4 h-4 text-[#00573f]" />
-                    Import LinkedIn Update
-                  </h3>
-                  <p className="text-[10px] text-slate-400 mb-4 leading-normal">
-                    Enter the URL of a public LinkedIn post from your company page (e.g. <code>https://www.linkedin.com/feed/update/urn:li:activity:...</code>). The system will scrape the content, download the cover image, and save it persistently to your newsletter candidate list.
-                  </p>
 
-                  <form onSubmit={handleImportLinkedInPost} className="flex gap-3">
-                    <input 
-                      type="url"
-                      placeholder="Paste LinkedIn post URL here..."
-                      value={importUrl}
-                      onChange={(e) => setImportUrl(e.target.value)}
-                      disabled={importingPost}
-                      className="flex-1 bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-xs text-slate-700 focus:outline-none focus:border-[#00573f] disabled:opacity-60"
-                    />
-                    <button 
-                      type="submit"
-                      disabled={importingPost || !importUrl.trim()}
-                      className="bg-[#00573f] hover:bg-[#004733] text-white text-xs font-bold px-5 py-2.5 rounded-xl transition-all shadow-sm flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed flex-shrink-0"
-                    >
-                      {importingPost ? (
-                        <>
-                          <Loader2 className="w-3.5 h-3.5 animate-spin" />
-                          <span>Importing...</span>
-                        </>
-                      ) : (
-                        <>
-                          <Plus className="w-3.5 h-3.5" />
-                          <span>Import Post</span>
-                        </>
-                      )}
-                    </button>
-                  </form>
-
-                  {importError && (
-                    <p className="text-[10px] text-red-600 mt-2.5 font-semibold leading-relaxed">
-                      ❌ {importError}
-                    </p>
-                  )}
-                  {importSuccess && (
-                    <p className="text-[10px] text-[#00573f] mt-2.5 font-semibold leading-relaxed">
-                      ✅ {importSuccess}
-                    </p>
-                  )}
-                </div>
 
                 {/* Collapsible Included Updates Accordion */}
                 <div className="border border-slate-200 bg-white rounded-2xl overflow-hidden">
