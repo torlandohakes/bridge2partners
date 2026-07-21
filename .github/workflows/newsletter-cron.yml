@@ -13,4 +13,4 @@ jobs:
     steps:
       - name: Trigger Send Digest Endpoint
         run: |
-          curl -s -f -X GET "https://bridge2partners-production.web.app/api/newsletter/send-digest?secret=${{ secrets.RESEND_API_KEY }}"
+          curl -s -f -X GET "https://bridge2partners-prod.web.app/api/newsletter/send-digest?secret=${{ secrets.RESEND_API_KEY }}"
