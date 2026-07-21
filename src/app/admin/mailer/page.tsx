@@ -516,7 +516,7 @@ export default function MailerAdminDashboard() {
           <tr>
             <td width="44" valign="top">
               <div style="width: 40px; height: 40px; border-radius: 4px; overflow: hidden; background-color: #ffffff; border: 1px solid rgba(255, 255, 255, 0.1);">
-                <img src="${baseUrl}/images/B2P_LI_LOGO_Primary.webp" alt="Logo" width="40" height="40" style="display: block; object-fit: cover;" />
+                <img src="${baseUrl}/images/B2P_LI_LOGO_Primary.png" alt="Logo" width="40" height="40" style="display: block; object-fit: cover; border-radius: 4px;" />
               </div>
             </td>
             <td style="padding-left: 12px;" valign="top">
@@ -565,36 +565,48 @@ export default function MailerAdminDashboard() {
       if (post.isArticle) {
         return `
           <!-- Article Card (Image on Top) -->
-          <div style="background-color: #0b1a16; border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 16px; overflow: hidden; margin-bottom: 24px; text-align: left;">
+          <table border="0" cellpadding="0" cellspacing="0" width="100%" style="background-color: #0b1a16; border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 16px; overflow: hidden; margin-bottom: 24px; border-collapse: separate;">
             ${imageUrl ? `
-              <div style="width: 100%; overflow: hidden; background-color: #050e0c; border-bottom: 1px solid rgba(255, 255, 255, 0.1);">
-                <a href="${post.link}" target="_blank">
-                  <img src="${imageUrl}" alt="Article Cover" style="width: 100%; height: auto; display: block; object-fit: cover;" />
-                </a>
-              </div>
+              <tr>
+                <td style="padding: 0; background-color: #050e0c; border-bottom: 1px solid rgba(255, 255, 255, 0.1);">
+                  <a href="${post.link}" target="_blank">
+                    <img src="${imageUrl}" alt="Article Cover" width="100%" style="width: 100%; max-width: 100%; height: auto; display: block; object-fit: cover; border-top-left-radius: 15px; border-top-right-radius: 15px;" />
+                  </a>
+                </td>
+              </tr>
             ` : ''}
-            <div style="padding: 24px;">
-              ${authorHeaderHtml}
-              ${contentHtml}
-              ${footerHtml}
-            </div>
-          </div>
+            <tr>
+              <td style="padding: 24px; text-align: left;">
+                ${authorHeaderHtml}
+                ${contentHtml}
+                ${footerHtml}
+              </td>
+            </tr>
+          </table>
         `;
       } else {
         return `
           <!-- Regular Post Card (Image on Bottom) -->
-          <div style="background-color: #0b1a16; border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 16px; padding: 24px; margin-bottom: 24px; text-align: left;">
-            ${authorHeaderHtml}
-            ${contentHtml}
-            ${imageUrl ? `
-              <div style="margin-bottom: 20px; border-radius: 8px; overflow: hidden; border: 1px solid rgba(255, 255, 255, 0.05); background-color: #050e0c;">
-                <a href="${post.link}" target="_blank">
-                  <img src="${imageUrl}" alt="LinkedIn Update Attachment" style="width: 100%; aspect-ratio: 1 / 1; display: block; object-fit: cover;" />
-                </a>
-              </div>
-            ` : ''}
-            ${footerHtml}
-          </div>
+          <table border="0" cellpadding="0" cellspacing="0" width="100%" style="background-color: #0b1a16; border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 16px; overflow: hidden; margin-bottom: 24px; border-collapse: separate;">
+            <tr>
+              <td style="padding: 24px; text-align: left;">
+                ${authorHeaderHtml}
+                ${contentHtml}
+                ${imageUrl ? `
+                  <table border="0" cellpadding="0" cellspacing="0" width="100%" style="margin-bottom: 20px; border-radius: 8px; overflow: hidden; border: 1px solid rgba(255, 255, 255, 0.05); background-color: #050e0c; border-collapse: separate;">
+                    <tr>
+                      <td style="padding: 0;">
+                        <a href="${post.link}" target="_blank">
+                          <img src="${imageUrl}" alt="LinkedIn Update Attachment" width="100%" style="width: 100%; max-width: 100%; height: auto; display: block; object-fit: cover; border-radius: 8px;" />
+                        </a>
+                      </td>
+                    </tr>
+                  </table>
+                ` : ''}
+                ${footerHtml}
+              </td>
+            </tr>
+          </table>
         `;
       }
     };

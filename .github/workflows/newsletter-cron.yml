@@ -2,8 +2,8 @@ name: Scheduled Newsletter Dispatch
 
 on:
   schedule:
-    # Runs daily at the top of the hour at 8:00 AM and 9:00 AM Pacific Time (accounting for PDT/PST shifts)
-    - cron: '0 15,16,17 * * *'
+    # Runs on the 1st and 15th of the month at the top of the hour at 8:00 AM, 9:00 AM, and 10:00 AM Pacific Time (accounting for PDT/PST shifts)
+    - cron: '0 15,16,17 1,15 * *'
   workflow_dispatch:
     # Allows manual trigger from the GitHub Actions tab in the repo UI
 
